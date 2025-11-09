@@ -1,0 +1,3 @@
+# Ignore agent docs and all Markdown
+AGENTS.md
+*.md
