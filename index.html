@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snugs.ai - Your 24/7 AI Parenting Expert Coming Soon</title>
     <meta name="description" content="Meet Snugs - your AI-powered parenting companion that understands YOU and your baby's needs through real-time audio and video analysis.">
+    <link rel="canonical" href="https://snugs.ai">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Snugs.ai — Your 24/7 AI Parenting Expert">
+    <meta property="og:description" content="Meet Snugs — your AI-powered parenting companion. Join the waitlist.">
+    <meta property="og:url" content="https://snugs.ai">
+    <meta property="og:image" content="https://snugs.ai/og/snugs-og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Snugs.ai — Your 24/7 AI Parenting Expert">
+    <meta name="twitter:description" content="Meet Snugs — your AI-powered parenting companion. Join the waitlist.">
+    <meta name="twitter:image" content="https://snugs.ai/og/snugs-og.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @keyframes float {
@@ -205,6 +219,64 @@
             </form>
 
             <p id="form-message" class="mt-4 text-orange-100 hidden"></p>
+
+            <!-- Join Count Badge (hidden until loaded) -->
+            <div id="join-count" class="mt-6 hidden">
+                <div class="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 text-orange-50 text-sm backdrop-blur-sm">
+                    <span aria-hidden="true">🌟</span>
+                    <span>Already <span id="join-count-number" class="font-bold">0</span> parents joined</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Share Ribbon -->
+        <div class="mt-6 slide-up delay-4">
+            <div class="bg-white rounded-3xl p-6 shadow-lg border border-orange-100">
+                <p class="text-gray-700 text-center mb-4">
+                    Love Snugs.ai? Share it on your favorite platform!
+                </p>
+                <div class="flex flex-wrap items-center justify-center gap-3">
+                    <a href="#" data-platform="facebook" aria-label="Share on Facebook" title="Share on Facebook"
+                       class="group w-11 h-11 rounded-full border border-[#1877F2]/30 flex items-center justify-center hover:bg-[#1877F2] hover:border-[#1877F2] transition-colors">
+                        <img src="https://cdn.simpleicons.org/facebook/1877F2" alt="Facebook" class="w-6 h-6 transition filter group-hover:brightness-0 group-hover:invert" loading="lazy" decoding="async" />
+                    </a>
+                    <a href="#" data-platform="reddit" aria-label="Share on Reddit" title="Share on Reddit"
+                       class="group w-11 h-11 rounded-full border border-[#FF4500]/30 flex items-center justify-center hover:bg-[#FF4500] hover:border-[#FF4500] transition-colors">
+                        <img src="https://cdn.simpleicons.org/reddit/FF4500" alt="Reddit" class="w-6 h-6 transition filter group-hover:brightness-0 group-hover:invert" loading="lazy" decoding="async" />
+                    </a>
+                    <a href="#" data-platform="instagram" aria-label="Share on Instagram" title="Share on Instagram"
+                       class="group w-11 h-11 rounded-full border border-[#E4405F]/30 flex items-center justify-center hover:bg-[#E4405F] hover:border-[#E4405F] transition-colors">
+                        <img src="https://cdn.simpleicons.org/instagram/E4405F" alt="Instagram" class="w-6 h-6 transition filter group-hover:brightness-0 group-hover:invert" loading="lazy" decoding="async" />
+                    </a>
+                    <a href="#" data-platform="tiktok" aria-label="Share on TikTok" title="Share on TikTok"
+                       class="group w-11 h-11 rounded-full border border-neutral-800/30 flex items-center justify-center hover:bg-black hover:border-black transition-colors">
+                        <img src="https://cdn.simpleicons.org/tiktok/000000" alt="TikTok" class="w-6 h-6 transition filter group-hover:brightness-0 group-hover:invert" loading="lazy" decoding="async" />
+                    </a>
+                    <a href="#" data-platform="whatsapp" aria-label="Share on WhatsApp" title="Share on WhatsApp"
+                       class="group w-11 h-11 rounded-full border border-[#25D366]/30 flex items-center justify-center hover:bg-[#25D366] hover:border-[#25D366] transition-colors">
+                        <img src="https://cdn.simpleicons.org/whatsapp/25D366" alt="WhatsApp" class="w-6 h-6 transition filter group-hover:brightness-0 group-hover:invert" loading="lazy" decoding="async" />
+                    </a>
+                    <a href="#" data-platform="linkedin" aria-label="Share on LinkedIn" title="Share on LinkedIn"
+                       class="group w-11 h-11 rounded-full border border-[#0A66C2]/30 flex items-center justify-center text-[#0A66C2] hover:bg-[#0A66C2] hover:border-[#0A66C2] hover:text-white transition-colors">
+                        <svg viewBox="0 0 24 24" class="w-6 h-6" fill="currentColor" aria-hidden="true" shape-rendering="geometricPrecision">
+                            <path d="M22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.226.792 24 1.771 24h20.454C23.2 24 24 23.226 24 22.271V1.729C24 .774 23.2 0 22.225 0zM7.06 20.452H3.56V9h3.5v11.452zM5.31 7.433a2.03 2.03 0 110-4.06 2.03 2.03 0 010 4.06zM20.45 20.452h-3.5v-5.569c0-1.33-.025-3.036-1.85-3.036-1.85 0-2.134 1.445-2.134 2.938v5.667h-3.5V9h3.36v1.561h.047c.468-.887 1.612-1.823 3.318-1.823 3.55 0 4.26 2.338 4.26 5.377v6.337z"/>
+                        </svg>
+                    </a>
+                    <a href="#" data-platform="x" aria-label="Share on X" title="Share on X"
+                       class="group w-11 h-11 rounded-full border border-neutral-800/30 flex items-center justify-center hover:bg-black hover:border-black transition-colors">
+                        <img src="https://cdn.simpleicons.org/x/000000" alt="X" class="w-6 h-6 transition filter group-hover:brightness-0 group-hover:invert" loading="lazy" decoding="async" />
+                    </a>
+                </div>
+                <p class="text-xs text-gray-500 mt-3 text-center">
+                    Tip: Instagram and TikTok don’t support pre-filled posts. We copy the text for you—just paste and share.
+                </p>
+                <div class="mt-4 flex justify-center">
+                    <a href="/og/snugs-og.png" download class="inline-flex items-center gap-2 rounded-full bg-orange-100 text-orange-700 px-4 py-2 text-sm font-medium hover:bg-orange-200 transition-colors">
+                        <span aria-hidden="true">⬇️</span>
+                        <span>Download share image (1200×630)</span>
+                    </a>
+                </div>
+            </div>
         </div>
 
         <!-- Footer -->
@@ -221,7 +293,7 @@
     <!-- Google Sheets Integration -->
     <script>
         // Replace with your Google Apps Script Web App URL
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxOnCkULN6qScX6ZQbIRJ5RnMJ2Yh1Zo31rgYphD4z2tQtXDE1QMDPCMyI6WM8W3bZ6wA/exec';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyAzdrz5vxqzop2idoYZpKxgbETQUM3G35b0YXO6GXfasHeDhj2DrlBxDmSWa27ERtOeA/exec';
 
         document.getElementById('waitlist-form').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -260,6 +332,113 @@
                 submitBtn.textContent = 'Join Waitlist';
             }
         });
+
+        // Join count loader (expects ?action=count JSON)
+        (async function loadJoinCount() {
+            try {
+                const COUNT_API_URL = `${GOOGLE_SCRIPT_URL}?action=count`;
+                const res = await fetch(COUNT_API_URL, { headers: { 'Accept': 'application/json' }, cache: 'no-store' });
+                if (!res.ok) throw new Error('bad status');
+                const data = await res.json();
+                const n = typeof data.count === 'number' ? data.count : parseInt(data.count, 10);
+                if (!isNaN(n) && n > 0) {
+                    const el = document.getElementById('join-count');
+                    const num = document.getElementById('join-count-number');
+                    if (el && num) {
+                        num.textContent = n.toLocaleString();
+                        el.classList.remove('hidden');
+                    }
+                }
+            } catch (_) {
+                // Silently ignore; badge stays hidden
+            }
+        })();
+
+        // Share ribbon handlers with UTM params
+        (function() {
+            const FALLBACK_SHARE_URL = 'https://snugs.ai'; // production URL
+            const isLocal = location.protocol === 'file:' || ['localhost', '127.0.0.1'].includes(location.hostname);
+            const pageUrl = isLocal ? FALLBACK_SHARE_URL : (location.origin + location.pathname);
+            const baseText = 'Snugs.ai is coming soon — your 24/7 AI parenting expert. Join the waitlist:';
+            const compose = (u) => `${baseText} ${u}`;
+            const withUtm = (url, source) => {
+                try {
+                    const u = new URL(url);
+                    u.searchParams.set('utm_source', source);
+                    u.searchParams.set('utm_medium', 'social');
+                    u.searchParams.set('utm_campaign', 'waitlist');
+                    return u.toString();
+                } catch (_) {
+                    return url;
+                }
+            };
+
+            const utm = {
+                x: withUtm(pageUrl, 'x'),
+                facebook: withUtm(pageUrl, 'facebook'),
+                reddit: withUtm(pageUrl, 'reddit'),
+                linkedin: withUtm(pageUrl, 'linkedin'),
+                whatsapp: withUtm(pageUrl, 'whatsapp'),
+                tiktok: withUtm(pageUrl, 'tiktok'),
+                instagram: withUtm(pageUrl, 'instagram')
+            };
+
+            const messages = {
+                x: `Snugs.ai – 24/7 AI parenting expert. Join: ${utm.x} #Parenting #AI`,
+                facebook: `Snugs.ai is coming soon — your 24/7 AI parenting expert. Join the waitlist: ${utm.facebook}`,
+                redditTitle: 'Snugs.ai – Your 24/7 AI Parenting Expert',
+                linkedin: `Excited about Snugs.ai — a 24/7 AI parenting expert. Join the waitlist: ${utm.linkedin}`,
+                whatsapp: `Check this out: Snugs.ai — 24/7 AI parenting expert. Waitlist: ${utm.whatsapp}`,
+                instagram: `Snugs.ai — 24/7 AI parenting expert. Join the waitlist: ${utm.instagram}`,
+                tiktok: `Snugs.ai — 24/7 AI parenting expert. Join the waitlist: ${utm.tiktok}`
+            };
+
+            const links = {
+                x: `https://x.com/intent/post?text=${encodeURIComponent(messages.x)}`,
+                facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(utm.facebook)}`,
+                reddit: `https://www.reddit.com/submit?url=${encodeURIComponent(utm.reddit)}&title=${encodeURIComponent(messages.redditTitle)}`,
+                linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(utm.linkedin)}`,
+                whatsapp: `https://api.whatsapp.com/send?text=${encodeURIComponent(messages.whatsapp)}`
+            };
+
+            document.querySelectorAll('[data-platform]').forEach(el => {
+                el.addEventListener('click', function(ev) {
+                    ev.preventDefault();
+                    const p = el.getAttribute('data-platform');
+                    if (p === 'instagram') {
+                        const msg = messages.instagram;
+                        if (navigator.clipboard && navigator.clipboard.writeText) {
+                            navigator.clipboard.writeText(msg).then(() => {
+                                alert('Share text copied. Paste in Instagram to post!');
+                                window.open('https://www.instagram.com/', '_blank', 'noopener');
+                            }).catch(() => {
+                                window.open('https://www.instagram.com/', '_blank', 'noopener');
+                            });
+                        } else {
+                            window.open('https://www.instagram.com/', '_blank', 'noopener');
+                        }
+                        return;
+                    }
+                    if (p === 'tiktok') {
+                        const msg = messages.tiktok;
+                        if (navigator.clipboard && navigator.clipboard.writeText) {
+                            navigator.clipboard.writeText(msg).then(() => {
+                                alert('Share text copied. Paste in TikTok to post!');
+                                window.open('https://www.tiktok.com/upload?lang=en', '_blank', 'noopener');
+                            }).catch(() => {
+                                window.open('https://www.tiktok.com/upload?lang=en', '_blank', 'noopener');
+                            });
+                        } else {
+                            window.open('https://www.tiktok.com/upload?lang=en', '_blank', 'noopener');
+                        }
+                        return;
+                    }
+                    const shareUrl = links[p];
+                    if (shareUrl) window.open(shareUrl, '_blank', 'noopener');
+                });
+            });
+        })();
     </script>
-</body>
+  </body>
 </html>
+
