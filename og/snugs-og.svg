@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 200 200">
+  <defs>
+    <style>
+      .teddy-ear { fill: #92400e; }
+      .teddy-body { fill: #b45309; }
+      .teddy-belly { fill: #d97706; }
+      .teddy-face { fill: #c2410c; }
+      .teddy-eye { fill: #1f2937; }
+      .teddy-nose { fill: #78350f; }
+      .teddy-ai-badge { fill: #ea580c; }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="200" height="200" fill="#fff7ed"/>
+  <!-- Ears -->
+  <ellipse class="teddy-ear" cx="60" cy="50" rx="25" ry="30"/>
+  <ellipse class="teddy-ear" cx="140" cy="50" rx="25" ry="30"/>
+  <!-- Head -->
+  <circle class="teddy-body" cx="100" cy="80" r="45"/>
+  <ellipse class="teddy-belly" cx="100" cy="95" rx="28" ry="25"/>
+  <!-- Eyes -->
+  <circle class="teddy-eye" cx="85" cy="75" r="6"/>
+  <circle class="teddy-eye" cx="115" cy="75" r="6"/>
+  <circle fill="white" cx="87" cy="73" r="2"/>
+  <circle fill="white" cx="117" cy="73" r="2"/>
+  <!-- Nose and Mouth -->
+  <ellipse class="teddy-nose" cx="100" cy="90" rx="6" ry="5"/>
+  <path d="M 95 95 Q 100 100 105 95" stroke="#78350f" stroke-width="2" fill="none"/>
+  <!-- Body -->
+  <ellipse class="teddy-body" cx="100" cy="145" rx="40" ry="50"/>
+  <ellipse class="teddy-belly" cx="100" cy="150" rx="25" ry="35"/>
+  <!-- Arms -->
+  <ellipse class="teddy-body" cx="65" cy="140" rx="15" ry="25" transform="rotate(-20 65 140)"/>
+  <ellipse class="teddy-body" cx="135" cy="140" rx="15" ry="25" transform="rotate(20 135 140)"/>
+  <!-- Bottom Paws/Feet -->
+  <ellipse class="teddy-body" cx="80" cy="185" rx="18" ry="12"/>
+  <ellipse class="teddy-body" cx="120" cy="185" rx="18" ry="12"/>
+  <!-- Paw Pads - Left Foot -->
+  <ellipse class="teddy-belly" cx="80" cy="185" rx="10" ry="6"/>
+  <circle class="teddy-nose" cx="75" cy="180" r="2"/>
+  <circle class="teddy-nose" cx="80" cy="179" r="2"/>
+  <circle class="teddy-nose" cx="85" cy="180" r="2"/>
+  <!-- Paw Pads - Right Foot -->
+  <ellipse class="teddy-belly" cx="120" cy="185" rx="10" ry="6"/>
+  <circle class="teddy-nose" cx="115" cy="180" r="2"/>
+  <circle class="teddy-nose" cx="120" cy="179" r="2"/>
+  <circle class="teddy-nose" cx="125" cy="180" r="2"/>
+  <!-- AI Badge -->
+  <circle class="teddy-ai-badge" cx="130" cy="160" r="18"/>
+  <text x="130" y="165" text-anchor="middle" fill="white" font-size="14" font-weight="bold" font-family="Arial">AI</text>
+</svg>
