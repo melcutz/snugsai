@@ -457,9 +457,9 @@
                     })
                 });
 
-                // Show success message + visuals
-                message.textContent = '🎉 You\'re in! We\'ll send early access updates soon. Expect a confirmation in 5–10 minutes; please check spam. We\'ll follow up with a timeline and next steps.';
-                message.classList.remove('hidden');
+                // Show success visuals only (avoid duplicate text)
+                message.textContent = '';
+                message.classList.add('hidden');
                 const successBadge = document.getElementById('cta-success');
                 const confetti = document.getElementById('cta-confetti');
                 const btn = document.getElementById('submit-btn');
