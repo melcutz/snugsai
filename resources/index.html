@@ -16,62 +16,232 @@
   <meta name="twitter:description" content="Guides to help you: calm crying, decode cues, improve sleep." />
   <meta name="twitter:image" content="https://snugs.ai/og/snugs-og.jpg" />
   <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#EA580C">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'display': ['"Crimson Pro"', 'Georgia', 'serif'],
+            'sans': ['"DM Sans"', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
   <style>
-    @keyframes slideUp { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: translateY(0);} }
-    .slide-up { animation: slideUp 0.6s ease-out forwards; opacity: 0; }
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes blob {
+      0%, 100% {
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        transform: rotate(0deg) scale(1);
+      }
+      25% {
+        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+        transform: rotate(90deg) scale(1.05);
+      }
+      50% {
+        border-radius: 50% 60% 30% 60% / 30% 50% 70% 40%;
+        transform: rotate(180deg) scale(1);
+      }
+      75% {
+        border-radius: 60% 40% 60% 30% / 70% 30% 60% 50%;
+        transform: rotate(270deg) scale(1.05);
+      }
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .animate-fadeInUp {
+      animation: fadeInUp 0.8s ease-out forwards;
+      opacity: 0;
+    }
+
+    .animate-fadeIn {
+      animation: fadeIn 0.6s ease-out forwards;
+      opacity: 0;
+    }
+
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+    .delay-400 { animation-delay: 0.4s; }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+    }
+
+    .soft-shadow {
+      box-shadow:
+        0 2px 8px rgba(234, 88, 12, 0.04),
+        0 8px 24px rgba(234, 88, 12, 0.08),
+        0 16px 56px rgba(234, 88, 12, 0.08);
+    }
+
+    .gradient-warm {
+      background: linear-gradient(135deg,
+        #fff7ed 0%,
+        #ffedd5 25%,
+        #fed7aa 50%,
+        #ffedd5 75%,
+        #fff7ed 100%);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+    }
+
+    .blob-decoration {
+      position: absolute;
+      mix-blend-mode: multiply;
+      filter: blur(40px);
+      opacity: 0.3;
+      animation: blob 20s ease-in-out infinite;
+    }
+
+    .resource-card {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .resource-card:hover {
+      transform: translateY(-4px);
+    }
   </style>
 </head>
-<body class="bg-gradient-to-br from-orange-50 via-amber-50 to-orange-100 min-h-screen overflow-x-hidden">
-  <div class="container mx-auto px-4 py-8 md:py-16 max-w-6xl">
-    <header class="text-center mb-10 slide-up">
+<body class="gradient-warm min-h-screen overflow-x-hidden relative">
+
+  <!-- Decorative blobs -->
+  <div class="blob-decoration w-96 h-96 bg-orange-400 rounded-full" style="top: -10%; right: -5%; animation-delay: 0s;"></div>
+  <div class="blob-decoration w-80 h-80 bg-orange-300 rounded-full" style="bottom: 10%; left: -8%; animation-delay: 5s;"></div>
+
+  <div class="container mx-auto px-4 py-8 md:py-16 max-w-6xl relative z-10">
+    <header class="text-center mb-16 md:mb-20 animate-fadeIn">
       <a href="/" class="inline-block focus:outline-none focus:ring-4 focus:ring-orange-300 rounded">
-        <h1 class="text-4xl md:text-6xl font-bold text-orange-600 mb-1">Snugs<span class="text-orange-500">.ai</span></h1>
+        <h1 class="text-5xl md:text-7xl font-bold text-orange-600 mb-3 font-display">Snugs<span class="text-orange-500">.ai</span></h1>
       </a>
-      <p class="text-orange-700 text-sm md:text-base tracking-wider">PARENTING RESOURCES</p>
+      <div class="h-1 w-32 bg-gradient-to-r from-transparent via-orange-400 to-transparent mx-auto mb-3"></div>
+      <p class="text-orange-700 text-xs md:text-sm tracking-[0.3em] uppercase font-semibold">Parenting Resources</p>
     </header>
 
-    <main class="slide-up bg-white/80 backdrop-blur rounded-3xl shadow-xl p-6 md:p-10">
-      <div class="rounded-2xl bg-orange-100 text-orange-900 px-4 py-3 text-sm mb-6" role="note">
-        Not medical advice. For emergencies call your local emergency number.
-      </div>
+    <main class="animate-fadeInUp delay-100">
+      <div class="glass-card rounded-[3rem] soft-shadow p-8 md:p-12 mb-8">
+        <div class="rounded-2xl bg-orange-100 border-2 border-orange-200 text-orange-900 px-6 py-4 text-sm md:text-base mb-8 flex items-start gap-3" role="note">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 mt-0.5">
+            <circle cx="12" cy="12" r="10" stroke="#ea580c" stroke-width="2" fill="none"/>
+            <path d="M12 8V12M12 16H12.01" stroke="#ea580c" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <span>Not medical advice. For emergencies call your local emergency number.</span>
+        </div>
 
-      <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6">Featured Guides</h2>
+        <h2 class="text-3xl md:text-4xl font-display font-bold text-gray-800 mb-8">Featured Guides</h2>
 
-      <div class="grid md:grid-cols-2 gap-6">
-        <a href="/resources/calm-a-crying-baby.html" class="block rounded-2xl bg-white border border-orange-100 p-6 shadow hover:shadow-md transition focus:outline-none focus:ring-4 focus:ring-orange-300">
-          <h3 class="text-xl font-semibold text-gray-800 mb-2">Calm a Crying Baby: 7 Steps</h3>
-          <p class="text-gray-600 text-sm">A quick, evidence‑informed checklist to soothe safely and spot red flags.</p>
-        </a>
-        <a href="/resources/newborn-sleep-schedule-weeks-1-12.html" class="block rounded-2xl bg-white border border-orange-100 p-6 shadow hover:shadow-md transition focus:outline-none focus:ring-4 focus:ring-orange-300">
-          <h3 class="text-xl font-semibold text-gray-800 mb-2">Newborn Sleep Schedule: Weeks 1–12</h3>
-          <p class="text-gray-600 text-sm">Age‑by‑week wake windows, nap counts, and gentle routine ideas.</p>
-        </a>
-        <a href="/resources/hunger-vs-tired-cues.html" class="block rounded-2xl bg-white border border-orange-100 p-6 shadow hover:shadow-md transition focus:outline-none focus:ring-4 focus:ring-orange-300">
-          <h3 class="text-xl font-semibold text-gray-800 mb-2">Hunger vs. Tired Cues</h3>
-          <p class="text-gray-600 text-sm">Decode common signals and avoid overtired or overfeeding cycles.</p>
-        </a>
-        <a href="/resources/safe-swaddling-how-to.html" class="block rounded-2xl bg-white border border-orange-100 p-6 shadow hover:shadow-md transition focus:outline-none focus:ring-4 focus:ring-orange-300">
-          <h3 class="text-xl font-semibold text-gray-800 mb-2">Safe Swaddling: When, How, and When to Stop</h3>
-          <p class="text-gray-600 text-sm">Safety principles, step‑by‑step how‑to, and signs to transition.</p>
-        </a>
-      </div>
+        <div class="grid md:grid-cols-2 gap-6">
+          <a href="/resources/calm-a-crying-baby.html" class="resource-card block rounded-3xl bg-white border-2 border-orange-100 p-8 soft-shadow hover:border-orange-200 focus:outline-none focus:ring-4 focus:ring-orange-300">
+            <div class="flex items-start gap-4 mb-4">
+              <div class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="white" stroke-width="2"/>
+                  <path d="M8 14C8 14 9.5 16 12 16C14.5 16 16 14 16 14M9 9H9.01M15 9H15.01" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="flex-1">
+                <h3 class="text-xl font-display font-semibold text-gray-800 mb-2">Calm a Crying Baby: 7 Steps</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">A quick, evidence‑informed checklist to soothe safely and spot red flags.</p>
+              </div>
+            </div>
+          </a>
 
-      <div class="mt-8 text-sm text-gray-600">
-        Last reviewed <time datetime="2025-11-09">Nov 9, 2025</time>. Sources: AAP, CDC, WHO.
+          <a href="/resources/newborn-sleep-schedule-weeks-1-12.html" class="resource-card block rounded-3xl bg-white border-2 border-orange-100 p-8 soft-shadow hover:border-orange-200 focus:outline-none focus:ring-4 focus:ring-orange-300">
+            <div class="flex items-start gap-4 mb-4">
+              <div class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="white" stroke-width="2" fill="white" opacity="0.9"/>
+                </svg>
+              </div>
+              <div class="flex-1">
+                <h3 class="text-xl font-display font-semibold text-gray-800 mb-2">Newborn Sleep Schedule: Weeks 1–12</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">Age‑by‑week wake windows, nap counts, and gentle routine ideas.</p>
+              </div>
+            </div>
+          </a>
+
+          <a href="/resources/hunger-vs-tired-cues.html" class="resource-card block rounded-3xl bg-white border-2 border-orange-100 p-8 soft-shadow hover:border-orange-200 focus:outline-none focus:ring-4 focus:ring-orange-300">
+            <div class="flex items-start gap-4 mb-4">
+              <div class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="12" r="3" stroke="white" stroke-width="2" fill="white"/>
+                  <path d="M12 5V3M12 21V19M19 12H21M3 12H5M17 7L18.5 5.5M5.5 18.5L7 17M7 7L5.5 5.5M18.5 18.5L17 17" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="flex-1">
+                <h3 class="text-xl font-display font-semibold text-gray-800 mb-2">Hunger vs. Tired Cues</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">Decode common signals and avoid overtired or overfeeding cycles.</p>
+              </div>
+            </div>
+          </a>
+
+          <a href="/resources/safe-swaddling-how-to.html" class="resource-card block rounded-3xl bg-white border-2 border-orange-100 p-8 soft-shadow hover:border-orange-200 focus:outline-none focus:ring-4 focus:ring-orange-300">
+            <div class="flex items-start gap-4 mb-4">
+              <div class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 11V6L15 6V11M9 11L6 13V18C6 18.5523 6.44772 19 7 19H17C17.5523 19 18 18.5523 18 18V13L15 11M9 11H15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="12" cy="15" r="1.5" fill="white"/>
+                </svg>
+              </div>
+              <div class="flex-1">
+                <h3 class="text-xl font-display font-semibold text-gray-800 mb-2">Safe Swaddling: When, How, and When to Stop</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">Safety principles, step‑by‑step how‑to, and signs to transition.</p>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="mt-10 text-sm text-gray-600 text-center">
+          Last reviewed <time datetime="2025-11-09">Nov 9, 2025</time>. Sources: AAP, CDC, WHO.
+        </div>
       </div>
     </main>
 
-    <footer class="text-center mt-12 text-gray-600">
-      <p class="mb-2">© 2025 Snugs.ai</p>
-      <div class="flex justify-center gap-6 text-sm">
-        <a href="/" class="hover:text-orange-600 transition-colors">Home</a>
-        <a href="/privacy.html" class="hover:text-orange-600 transition-colors">Privacy</a>
-        <a href="/terms.html" class="hover:text-orange-600 transition-colors">Terms</a>
-        <a href="/contact.html" class="hover:text-orange-600 transition-colors">Contact</a>
+    <footer class="text-center pt-12 pb-8 text-gray-600">
+      <p class="mb-4 text-base">© 2025 Snugs.ai — Powered by AI, Built with Love</p>
+      <div class="flex flex-wrap justify-center gap-6 text-sm">
+        <a href="/" class="hover:text-orange-600 transition-colors font-medium">Home</a>
+        <a href="/privacy.html" class="hover:text-orange-600 transition-colors font-medium">Privacy</a>
+        <a href="/terms.html" class="hover:text-orange-600 transition-colors font-medium">Terms</a>
+        <a href="/contact.html" class="hover:text-orange-600 transition-colors font-medium">Contact</a>
       </div>
     </footer>
   </div>

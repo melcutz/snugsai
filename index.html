@@ -20,6 +20,9 @@
     <meta name="twitter:description" content="Decode cries, reduce anxiety, and sleep better with AI‑powered insights.">
      <meta name="twitter:image" content="https://snugs.ai/og/snugs-og.jpg">
     <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="manifest" href="/site.webmanifest">
@@ -52,317 +55,595 @@
       ]
     }
     </script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'display': ['"Crimson Pro"', 'Georgia', 'serif'],
+                        'sans': ['"DM Sans"', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
+        :root {
+            --orange-50: #fff7ed;
+            --orange-100: #ffedd5;
+            --orange-200: #fed7aa;
+            --orange-300: #fdba74;
+            --orange-400: #fb923c;
+            --orange-500: #f97316;
+            --orange-600: #ea580c;
+            --orange-700: #c2410c;
+            --orange-800: #9a3412;
+            --orange-900: #7c2d12;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+        }
+
+        * {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: 'DM Sans', system-ui, sans-serif;
+        }
+
         @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(-5deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
         }
 
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(234, 88, 12, 0.3); }
-            50% { box-shadow: 0 0 40px rgba(234, 88, 12, 0.6); }
+        @keyframes pulse-soft {
+            0%, 100% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
         }
 
-        @keyframes sparkle {
-            0%, 100% { opacity: 0; transform: scale(0); }
-            50% { opacity: 1; transform: scale(1); }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        .teddy-bear {
-            animation: float 3s ease-in-out infinite;
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
-        .ai-glow {
-            animation: pulse-glow 2s ease-in-out infinite;
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
         }
 
-        .sparkle {
-            animation: sparkle 1.5s ease-in-out infinite;
+        @keyframes blob {
+            0%, 100% {
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+                transform: rotate(0deg) scale(1);
+            }
+            25% {
+                border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+                transform: rotate(90deg) scale(1.05);
+            }
+            50% {
+                border-radius: 50% 60% 30% 60% / 30% 50% 70% 40%;
+                transform: rotate(180deg) scale(1);
+            }
+            75% {
+                border-radius: 60% 40% 60% 30% / 70% 30% 60% 50%;
+                transform: rotate(270deg) scale(1.05);
+            }
         }
 
-        .slide-up {
-            animation: slideUp 0.8s ease-out forwards;
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease-out forwards;
             opacity: 0;
         }
 
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
-        .delay-3 { animation-delay: 0.6s; }
-        .delay-4 { animation-delay: 0.8s; }
+        .animate-fadeIn {
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
 
-        /* Teddy Bear SVG Styling */
-        .teddy-ear { fill: #92400e; }
-        .teddy-body { fill: #b45309; }
-        .teddy-belly { fill: #d97706; }
-        .teddy-face { fill: #c2410c; }
-        .teddy-eye { fill: #1f2937; }
-        .teddy-nose { fill: #78350f; }
-        .teddy-ai-badge { fill: #ea580c; }
+        .animate-scaleIn {
+            animation: scaleIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+        .delay-700 { animation-delay: 0.7s; }
+        .delay-800 { animation-delay: 0.8s; }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .soft-shadow {
+            box-shadow:
+                0 2px 8px rgba(234, 88, 12, 0.04),
+                0 8px 24px rgba(234, 88, 12, 0.08),
+                0 16px 56px rgba(234, 88, 12, 0.08);
+        }
+
+        .deep-shadow {
+            box-shadow:
+                0 4px 16px rgba(234, 88, 12, 0.08),
+                0 12px 32px rgba(234, 88, 12, 0.12),
+                0 24px 64px rgba(234, 88, 12, 0.12);
+        }
+
+        .gradient-warm {
+            background: linear-gradient(135deg,
+                #fff7ed 0%,
+                #ffedd5 25%,
+                #fed7aa 50%,
+                #ffedd5 75%,
+                #fff7ed 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .blob-decoration {
+            position: absolute;
+            mix-blend-mode: multiply;
+            filter: blur(40px);
+            opacity: 0.3;
+            animation: blob 20s ease-in-out infinite;
+        }
+
+        .teddy-float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .pulse-ring {
+            animation: pulse-soft 3s ease-in-out infinite;
+        }
+
+        .feature-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .shimmer {
+            background: linear-gradient(90deg,
+                transparent 0%,
+                rgba(255, 255, 255, 0.4) 50%,
+                transparent 100%);
+            background-size: 1000px 100%;
+        }
+
+        .shimmer-active {
+            animation: shimmer 2s infinite;
+        }
+
+        .btn-primary {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-primary:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .badge-float {
+            animation: float 3s ease-in-out infinite;
+            animation-delay: 1s;
+        }
+
+        .social-icon {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .social-icon:hover {
+            transform: translateY(-4px) scale(1.1);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--orange-50);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--orange-300);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--orange-400);
+        }
     </style>
 </head>
-<body class="bg-gradient-to-br from-orange-50 via-amber-50 to-orange-100 min-h-screen overflow-x-hidden">
+<body class="gradient-warm min-h-screen overflow-x-hidden relative">
+
+    <!-- Decorative blobs -->
+    <div class="blob-decoration w-96 h-96 bg-orange-400 rounded-full" style="top: -10%; right: -5%; animation-delay: 0s;"></div>
+    <div class="blob-decoration w-80 h-80 bg-orange-300 rounded-full" style="bottom: 10%; left: -8%; animation-delay: 5s;"></div>
+    <div class="blob-decoration w-72 h-72 bg-orange-200 rounded-full" style="top: 40%; right: 5%; animation-delay: 10s;"></div>
 
     <!-- Main Container -->
-    <div class="container mx-auto px-4 py-8 md:py-16 max-w-6xl">
+    <div class="container mx-auto px-4 py-8 md:py-16 max-w-7xl relative z-10">
 
         <!-- Header -->
-        <header class="text-center mb-12 slide-up">
+        <header class="text-center mb-16 md:mb-24 animate-fadeIn">
             <div class="inline-block">
-                <h1 class="text-5xl md:text-7xl font-bold text-orange-600 mb-2">
+                <h1 class="text-6xl md:text-8xl font-bold text-orange-600 mb-3 font-display">
                     Snugs<span class="text-orange-500">.ai</span>
                 </h1>
-                <p class="text-orange-700 text-sm md:text-base tracking-wider">YOUR 24/7 AI PARENTING EXPERT</p>
+                <div class="h-1 w-32 bg-gradient-to-r from-transparent via-orange-400 to-transparent mx-auto mb-3"></div>
+                <p class="text-orange-700 text-xs md:text-sm tracking-[0.3em] uppercase font-semibold">Your 24/7 AI Parenting Expert</p>
             </div>
         </header>
 
-        <!-- Hero Section with Animated Teddy -->
-        <div class="flex flex-col md:flex-row items-center justify-center gap-12 mb-16">
-
-            <!-- Animated Teddy Bear -->
-            <div class="relative slide-up delay-1">
-                <div class="teddy-bear relative">
-                    <!-- AI Sparkles -->
-                    <div class="absolute -top-4 -right-4 w-3 h-3 bg-orange-400 rounded-full sparkle"></div>
-                    <div class="absolute -top-8 right-8 w-2 h-2 bg-amber-400 rounded-full sparkle" style="animation-delay: 0.3s;"></div>
-                    <div class="absolute -bottom-4 -left-4 w-3 h-3 bg-orange-300 rounded-full sparkle" style="animation-delay: 0.6s;"></div>
-
-                    <!-- Teddy Bear SVG -->
-                    <svg width="280" height="280" viewBox="0 0 200 200" class="ai-glow rounded-full">
-                        <!-- Ears -->
-                        <ellipse class="teddy-ear" cx="60" cy="50" rx="25" ry="30"/>
-                        <ellipse class="teddy-ear" cx="140" cy="50" rx="25" ry="30"/>
-                        
-                        <!-- Head -->
-                        <circle class="teddy-body" cx="100" cy="80" r="45"/>
-                        <ellipse class="teddy-belly" cx="100" cy="95" rx="28" ry="25"/>
-                        
-                        <!-- Eyes -->
-                        <circle class="teddy-eye" cx="85" cy="75" r="6"/>
-                        <circle class="teddy-eye" cx="115" cy="75" r="6"/>
-                        <circle fill="white" cx="87" cy="73" r="2"/>
-                        <circle fill="white" cx="117" cy="73" r="2"/>
-                        
-                        <!-- Nose and Mouth -->
-                        <ellipse class="teddy-nose" cx="100" cy="90" rx="6" ry="5"/>
-                        <path d="M 95 95 Q 100 100 105 95" stroke="#78350f" stroke-width="2" fill="none"/>
-                        
-                        <!-- Body -->
-                        <ellipse class="teddy-body" cx="100" cy="145" rx="40" ry="50"/>
-                        <ellipse class="teddy-belly" cx="100" cy="150" rx="25" ry="35"/>
-                        
-                        <!-- Arms -->
-                        <ellipse class="teddy-body" cx="65" cy="140" rx="15" ry="25" transform="rotate(-20 65 140)"/>
-                        <ellipse class="teddy-body" cx="135" cy="140" rx="15" ry="25" transform="rotate(20 135 140)"/>
-                        
-                        <!-- Bottom Paws/Feet -->
-                        <ellipse class="teddy-body" cx="80" cy="185" rx="18" ry="12"/>
-                        <ellipse class="teddy-body" cx="120" cy="185" rx="18" ry="12"/>
-                        
-                        <!-- Paw Pads - Left Foot -->
-                        <ellipse class="teddy-belly" cx="80" cy="185" rx="10" ry="6"/>
-                        <circle class="teddy-nose" cx="75" cy="180" r="2"/>
-                        <circle class="teddy-nose" cx="80" cy="179" r="2"/>
-                        <circle class="teddy-nose" cx="85" cy="180" r="2"/>
-                        
-                        <!-- Paw Pads - Right Foot -->
-                        <ellipse class="teddy-belly" cx="120" cy="185" rx="10" ry="6"/>
-                        <circle class="teddy-nose" cx="115" cy="180" r="2"/>
-                        <circle class="teddy-nose" cx="120" cy="179" r="2"/>
-                        <circle class="teddy-nose" cx="125" cy="180" r="2"/>
-                        
-                        <!-- AI Badge -->
-                        <circle class="teddy-ai-badge" cx="130" cy="160" r="18"/>
-                        <text x="130" y="165" text-anchor="middle" fill="white" font-size="14" font-weight="bold" font-family="Arial">AI</text>
-                    </svg>
-                </div>
-
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-                    <div class="w-64 h-64 border-2 border-orange-300 rounded-full animate-ping opacity-20"></div>
-                </div>
-            </div>
+        <!-- Hero Section -->
+        <div class="grid lg:grid-cols-2 gap-16 items-center mb-24 md:mb-32">
 
             <!-- Hero Text -->
-            <div class="text-center md:text-left max-w-lg">
-                <div class="slide-up delay-2 mb-4">
-                    <div class="flex flex-col md:flex-row md:items-center md:gap-4">
-                        <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-2 md:mb-0">Coming Soon</h2>
-                        <div class="flex items-center gap-3">
-                            <a href="#" aria-label="App Store (coming soon)" title="App Store (coming soon)" class="inline-flex items-center gap-2 rounded-xl bg-black text-white px-3 py-2 shadow hover:opacity-90 focus:outline-none focus:ring-4 focus:ring-black/40 pointer-events-none select-none">
-                                <img src="https://cdn.simpleicons.org/apple/ffffff" alt="" width="18" height="18" loading="lazy" decoding="async" />
-                                <span class="text-xs leading-none">Download on the App Store</span>
-                            </a>
-                            <a href="#" aria-label="Google Play (coming soon)" title="Google Play (coming soon)" class="inline-flex items-center gap-2 rounded-xl bg-white text-gray-800 border border-gray-300 px-3 py-2 shadow hover:bg-gray-50 focus:outline-none focus:ring-4 focus:ring-gray-300 pointer-events-none select-none">
-                                <img src="https://cdn.simpleicons.org/googleplay/34A853" alt="" width="18" height="18" loading="lazy" decoding="async" />
-                                <span class="text-xs leading-none">Get it on Google Play</span>
-                            </a>
-                        </div>
+            <div class="order-2 lg:order-1">
+                <div class="animate-fadeInUp delay-100">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-md rounded-full border border-orange-200/50 mb-6 soft-shadow">
+                        <span class="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></span>
+                        <span class="text-sm font-medium text-orange-700">Coming Soon</span>
                     </div>
                 </div>
-                <p class="text-xl md:text-2xl text-gray-700 mb-6 slide-up delay-3 leading-relaxed">
-                    Meet <span class="font-bold text-orange-600">Snugs</span>, your AI-powered parenting companion that
-                    <span class="text-orange-600 font-semibold">understands</span> YOU and your baby's needs through real-time chat, audio and video analysis.
+
+                <h2 class="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-gray-800 mb-6 leading-[1.1] animate-fadeInUp delay-200">
+                    Meet your<br/>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 via-orange-500 to-orange-600">AI companion</span><br/>
+                    for parenting
+                </h2>
+
+                <p class="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed animate-fadeInUp delay-300 font-light">
+                    Snugs understands you and your baby through real-time chat, audio, and video analysis—bringing calm to the chaos of early parenting.
                 </p>
 
-                <div class="flex flex-wrap gap-3 mb-8 slide-up delay-4 justify-center md:justify-start">
-                    <span class="px-4 py-2 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">🎥 Real-time Video</span>
-                    <span class="px-4 py-2 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">🎤 Audio Analysis</span>
-                    <span class="px-4 py-2 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">🧠 AI-Powered</span>
-                    <span class="px-4 py-2 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">💡 Expert Advice</span>
+                <div class="flex flex-wrap gap-3 mb-8 animate-fadeInUp delay-400">
+                    <div class="px-5 py-3 bg-white/80 backdrop-blur-sm rounded-full border border-orange-100 flex items-center gap-2 soft-shadow">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="2" y="6" width="20" height="12" rx="2" stroke="#ea580c" stroke-width="2" fill="#fed7aa"/>
+                            <circle cx="18" cy="12" r="3" fill="#ea580c"/>
+                            <path d="M7 10L11 12L7 14V10Z" fill="#ea580c"/>
+                        </svg>
+                        <span class="text-sm font-medium text-gray-700">Real-time Video</span>
+                    </div>
+                    <div class="px-5 py-3 bg-white/80 backdrop-blur-sm rounded-full border border-orange-100 flex items-center gap-2 soft-shadow">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="9" y="2" width="6" height="14" rx="3" stroke="#ea580c" stroke-width="2" fill="#fed7aa"/>
+                            <path d="M12 16V19M8 19H16" stroke="#ea580c" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M6 10C6 8 7 6 9 6M18 10C18 8 17 6 15 6" stroke="#ea580c" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <span class="text-sm font-medium text-gray-700">Audio Analysis</span>
+                    </div>
+                    <div class="px-5 py-3 bg-white/80 backdrop-blur-sm rounded-full border border-orange-100 flex items-center gap-2 soft-shadow">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C12 2 8 4 8 8C8 10 9 11 10 11.5C10.5 12 11 13 11 14V16M13 14V16M11 16H13M13 11.5C14 11 15 10 15 8C15 4 12 2 12 2Z" stroke="#ea580c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="#fed7aa"/>
+                            <circle cx="8" cy="14" r="1.5" fill="#ea580c"/>
+                            <circle cx="16" cy="14" r="1.5" fill="#ea580c"/>
+                            <path d="M11 18H13C13 19.1046 12.1046 20 11 20H13C14.1046 20 15 20.8954 15 22H9C9 20.8954 9.89543 20 11 20Z" fill="#ea580c"/>
+                        </svg>
+                        <span class="text-sm font-medium text-gray-700">AI-Powered</span>
+                    </div>
+                </div>
+
+                <!-- App Store and Google Play badges - commented out until launch -->
+                <!--
+                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 animate-fadeInUp delay-500">
+                    <a href="#" aria-label="App Store (coming soon)" title="App Store (coming soon)" class="inline-flex items-center gap-3 rounded-2xl bg-gray-900 text-white px-5 py-3.5 soft-shadow hover:bg-gray-800 transition-all duration-300 pointer-events-none select-none opacity-50">
+                        <img src="https://cdn.simpleicons.org/apple/ffffff" alt="" width="24" height="24" loading="lazy" decoding="async" />
+                        <div class="text-left">
+                            <div class="text-xs opacity-80">Download on the</div>
+                            <div class="text-base font-semibold">App Store</div>
+                        </div>
+                    </a>
+                    <a href="#" aria-label="Google Play (coming soon)" title="Google Play (coming soon)" class="inline-flex items-center gap-3 rounded-2xl bg-white text-gray-900 border-2 border-gray-200 px-5 py-3.5 soft-shadow hover:border-gray-300 transition-all duration-300 pointer-events-none select-none opacity-50">
+                        <img src="https://cdn.simpleicons.org/googleplay/34A853" alt="" width="24" height="24" loading="lazy" decoding="async" />
+                        <div class="text-left">
+                            <div class="text-xs opacity-70">Get it on</div>
+                            <div class="text-base font-semibold">Google Play</div>
+                        </div>
+                    </a>
+                </div>
+                -->
+            </div>
+
+            <!-- Animated Teddy Bear -->
+            <div class="order-1 lg:order-2 relative flex items-center justify-center animate-scaleIn delay-300">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="w-64 h-64 md:w-80 md:h-80 bg-gradient-to-br from-orange-200 to-orange-300 rounded-full blur-3xl opacity-40 pulse-ring"></div>
+                </div>
+
+                <div class="relative teddy-float">
+                    <!-- Sparkle decorations -->
+                    <div class="absolute -top-8 -right-8 w-4 h-4 bg-orange-400 rounded-full animate-pulse" style="animation-delay: 0.3s;"></div>
+                    <div class="absolute -top-12 right-12 w-3 h-3 bg-orange-300 rounded-full animate-pulse" style="animation-delay: 0.6s;"></div>
+                    <div class="absolute -bottom-8 -left-8 w-5 h-5 bg-orange-500 rounded-full animate-pulse" style="animation-delay: 0.9s;"></div>
+                    <div class="absolute bottom-12 -left-12 w-3 h-3 bg-orange-200 rounded-full animate-pulse" style="animation-delay: 1.2s;"></div>
+
+                    <!-- Teddy Bear PNG with enhanced styling -->
+                    <div class="relative">
+                        <img
+                            src="/og/icon-512.png"
+                            alt="Snugs AI Teddy Bear"
+                            width="400"
+                            height="400"
+                            class="drop-shadow-2xl"
+                            style="filter: drop-shadow(0 20px 40px rgba(234, 88, 12, 0.3));"
+                            loading="eager"
+                        />
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Outcomes Strip -->
-        <div class="slide-up delay-3 mb-12">
-          <div class="grid sm:grid-cols-3 gap-6">
-            <div class="bg-white rounded-2xl p-5 shadow border border-orange-100 flex items-start gap-3">
-              <div class="text-3xl" aria-hidden="true">🌙</div>
-              <div>
-                <h3 class="text-lg font-semibold text-gray-800">Sleep better</h3>
-                <p class="text-gray-600 text-sm">Guidance to build soothing, consistent routines.</p>
-              </div>
+        <div class="mb-24 md:mb-32 animate-fadeInUp delay-600">
+            <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
+                <div class="glass-card rounded-3xl p-8 soft-shadow feature-card">
+                    <div class="w-16 h-16 mb-4 flex items-center justify-center">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="24" cy="24" r="22" fill="#fed7aa" opacity="0.5"/>
+                            <path d="M24 8C15.163 8 8 15.163 8 24C8 32.837 15.163 40 24 40C32.837 40 40 32.837 40 24C40 15.163 32.837 8 24 8Z" fill="#fdba74"/>
+                            <path d="M24 10C16.268 10 10 16.268 10 24C10 31.732 16.268 38 24 38C31.732 38 38 31.732 38 24C38 16.268 31.732 10 24 10Z" fill="#fb923c"/>
+                            <path d="M30 18C28 16 26 15 24 15C22 15 20 16 18 18" stroke="#ea580c" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="18" cy="22" r="1.5" fill="#ea580c"/>
+                            <circle cx="30" cy="22" r="1.5" fill="#ea580c"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-display font-semibold text-gray-800 mb-3">Sleep better</h3>
+                    <p class="text-gray-600 leading-relaxed">Build soothing, consistent routines with guidance that adapts to your baby's needs.</p>
+                </div>
+                <div class="glass-card rounded-3xl p-8 soft-shadow feature-card">
+                    <div class="w-16 h-16 mb-4 flex items-center justify-center">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="24" cy="24" r="18" stroke="#fb923c" stroke-width="3" fill="#fed7aa"/>
+                            <circle cx="24" cy="24" r="12" stroke="#ea580c" stroke-width="2.5" fill="none"/>
+                            <circle cx="24" cy="24" r="6" fill="#ea580c"/>
+                            <path d="M24 6V2M24 46V42M42 24H46M2 24H6M37.5 37.5L40.5 40.5M7.5 7.5L10.5 10.5M37.5 10.5L40.5 7.5M7.5 40.5L10.5 37.5" stroke="#fb923c" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-display font-semibold text-gray-800 mb-3">Decode cries</h3>
+                    <p class="text-gray-600 leading-relaxed">Real-time analysis helps you identify what your baby needs, faster than ever.</p>
+                </div>
+                <div class="glass-card rounded-3xl p-8 soft-shadow feature-card">
+                    <div class="w-16 h-16 mb-4 flex items-center justify-center">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M24 4C24 4 14 8 14 18C14 24 17 27 20 28C21 29 22 31 22 34V40H26V34C26 31 27 29 28 28C31 27 34 24 34 18C34 8 24 4 24 4Z" fill="#fed7aa" stroke="#fb923c" stroke-width="2"/>
+                            <ellipse cx="24" cy="42" rx="6" ry="2" fill="#ea580c"/>
+                            <circle cx="20" cy="16" r="2" fill="#ea580c"/>
+                            <circle cx="28" cy="16" r="2" fill="#ea580c"/>
+                            <path d="M20 22C20 22 22 24 24 24C26 24 28 22 28 22" stroke="#ea580c" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-display font-semibold text-gray-800 mb-3">Reduce anxiety</h3>
+                    <p class="text-gray-600 leading-relaxed">24/7 expert guidance brings confidence and calm to your parenting journey.</p>
+                </div>
             </div>
-            <div class="bg-white rounded-2xl p-5 shadow border border-orange-100 flex items-start gap-3">
-              <div class="text-3xl" aria-hidden="true">🔍</div>
-              <div>
-                <h3 class="text-lg font-semibold text-gray-800">Decode cries</h3>
-                <p class="text-gray-600 text-sm">Real‑time cues help identify needs faster.</p>
-              </div>
-            </div>
-            <div class="bg-white rounded-2xl p-5 shadow border border-orange-100 flex items-start gap-3">
-              <div class="text-3xl" aria-hidden="true">🧘</div>
-              <div>
-                <h3 class="text-lg font-semibold text-gray-800">Reduce anxiety</h3>
-                <p class="text-gray-600 text-sm">24/7 guidance increases confidence and calm.</p>
-              </div>
-            </div>
-          </div>
         </div>
 
-        <!-- Features Grid -->
-        <div class="grid md:grid-cols-3 gap-8 mb-16">
-            <div class="bg-white rounded-2xl p-6 shadow-lg slide-up delay-1 hover:shadow-xl transition-shadow">
-                <div class="text-4xl mb-4">👂</div>
-                <h3 class="text-xl font-bold text-gray-800 mb-2">Understands You and Your Baby</h3>
-                <p class="text-gray-600">Advanced AI analyzes your own behavior, anxiety, tone, sentiment and your loved one's cries, expressions, and movements to tell you exactly what your baby needs and how you can help.</p>
+        <!-- Features Section -->
+        <div class="mb-24 md:mb-32">
+            <div class="text-center mb-16 animate-fadeInUp delay-100">
+                <h2 class="text-4xl md:text-5xl font-display font-bold text-gray-800 mb-4">How Snugs helps you</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Advanced AI that truly understands both you and your baby</p>
             </div>
 
-            <div class="bg-white rounded-2xl p-6 shadow-lg slide-up delay-2 hover:shadow-xl transition-shadow">
-                <div class="text-4xl mb-4">⏰</div>
-                <h3 class="text-xl font-bold text-gray-800 mb-2">24/7 Support</h3>
-                <p class="text-gray-600">Get instant expert guidance anytime, anywhere because babies don't follow schedules.</p>
-            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass-card rounded-3xl p-8 soft-shadow feature-card animate-fadeInUp delay-200">
+                    <div class="w-16 h-16 bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 18C6 18 6 12 11 8C14 6 17 6 18 6C19 6 22 6 25 8C30 12 30 18 30 18" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                            <path d="M8 18C8 18 8 24 11 27C13 29 15 30 18 30C21 30 23 29 25 27C28 24 28 18 28 18" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                            <circle cx="18" cy="18" r="8" fill="white" opacity="0.9"/>
+                            <path d="M14 16L16 18L20 14" stroke="#ea580c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-display font-semibold text-gray-800 mb-4">Understands you both</h3>
+                    <p class="text-gray-600 leading-relaxed">Advanced AI analyzes your behavior, tone, and sentiment alongside your baby's cries, expressions, and movements—telling you exactly what they need and how you can help.</p>
+                </div>
 
-            <div class="bg-white rounded-2xl p-6 shadow-lg slide-up delay-3 hover:shadow-xl transition-shadow">
-                <div class="text-4xl mb-4">📊</div>
-                <h3 class="text-xl font-bold text-gray-800 mb-2">Personalized Insights</h3>
-                <p class="text-gray-600">Track patterns and get age-appropriate advice tailored to your baby's development stage.</p>
+                <div class="glass-card rounded-3xl p-8 soft-shadow feature-card animate-fadeInUp delay-300">
+                    <div class="w-16 h-16 bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="18" cy="18" r="14" stroke="white" stroke-width="2.5" fill="none"/>
+                            <circle cx="18" cy="18" r="2" fill="white"/>
+                            <path d="M18 10V6M18 30V26M26 18H30M6 18H10" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                            <path d="M18 18L24 12" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-display font-semibold text-gray-800 mb-4">Always available</h3>
+                    <p class="text-gray-600 leading-relaxed">Get instant expert guidance anytime, anywhere—because babies don't follow schedules, and neither do we.</p>
+                </div>
+
+                <div class="glass-card rounded-3xl p-8 soft-shadow feature-card animate-fadeInUp delay-400">
+                    <div class="w-16 h-16 bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="4" y="8" width="28" height="22" rx="2" stroke="white" stroke-width="2.5" fill="none"/>
+                            <path d="M4 14H32" stroke="white" stroke-width="2.5"/>
+                            <rect x="9" y="19" width="4" height="8" rx="1" fill="white"/>
+                            <rect x="16" y="21" width="4" height="6" rx="1" fill="white"/>
+                            <rect x="23" y="17" width="4" height="10" rx="1" fill="white"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-display font-semibold text-gray-800 mb-4">Personalized insights</h3>
+                    <p class="text-gray-600 leading-relaxed">Track patterns over time and receive age-appropriate advice tailored to your baby's unique development stage.</p>
+                </div>
             </div>
         </div>
 
         <!-- CTA Section -->
-        <div class="bg-gradient-to-r from-orange-500 to-orange-600 rounded-3xl p-8 md:p-12 text-center text-white shadow-2xl slide-up delay-4">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">Be the First to Know</h2>
-            <p class="text-lg md:text-xl mb-8 text-orange-50">Join the waitlist and get early access when we launch</p>
+        <div class="relative mb-16 animate-scaleIn delay-500">
+            <div class="absolute inset-0 bg-gradient-to-br from-orange-500 via-orange-600 to-orange-700 rounded-[3rem] blur-xl opacity-20"></div>
+            <div class="relative bg-gradient-to-br from-orange-500 to-orange-600 rounded-[3rem] p-12 md:p-16 text-center text-white deep-shadow overflow-hidden">
 
-            <!-- GOOGLE SHEETS FORM - Replace YOUR_SCRIPT_URL -->
-            <form id="waitlist-form" class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
-                <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    placeholder="Enter your email"
-                    required
-                    class="flex-1 px-6 py-4 rounded-full text-gray-800 text-lg focus:outline-none focus:ring-4 focus:ring-orange-300"
-                >
-                <button
-                    type="submit"
-                    id="submit-btn"
-                    class="px-8 py-4 bg-white text-orange-600 font-bold rounded-full hover:bg-orange-50 transition-colors text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-transform"
-                >
-                    Join Waitlist
-                </button>
+                <!-- Decorative elements -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl opacity-10"></div>
+                <div class="absolute bottom-0 left-0 w-48 h-48 bg-orange-400 rounded-full blur-3xl opacity-20"></div>
 
-            </form>
+                <div class="relative z-10">
+                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">Be the first to know</h2>
+                    <p class="text-xl md:text-2xl mb-10 text-orange-50 max-w-2xl mx-auto font-light">Join our waitlist and get early access when we launch</p>
 
-            <p id="form-message" class="mt-4 text-orange-100 hidden" aria-live="polite" role="status"></p>
+                    <!-- Waitlist Form -->
+                    <form id="waitlist-form" class="max-w-2xl mx-auto">
+                        <div class="flex flex-col sm:flex-row gap-4 mb-6">
+                            <input
+                                type="email"
+                                name="email"
+                                id="email"
+                                placeholder="Enter your email address"
+                                required
+                                class="flex-1 px-8 py-5 rounded-full text-gray-800 text-lg focus:outline-none focus:ring-4 focus:ring-white/30 transition-all shadow-lg font-medium"
+                            >
+                            <button
+                                type="submit"
+                                id="submit-btn"
+                                class="btn-primary px-10 py-5 bg-white text-orange-600 font-bold rounded-full hover:bg-orange-50 transition-all text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-white/30"
+                            >
+                                Join Waitlist
+                            </button>
+                        </div>
+                    </form>
 
-            <!-- Success visuals: badge + confetti -->
-            <div id="cta-success" class="mt-4 hidden">
-                <div class="inline-flex items-center gap-2 rounded-full bg-orange-600 text-white px-4 py-2 text-sm shadow-md">
-                    <span aria-hidden="true">✅</span>
-                    <span>You're in! We'll email early access details soon. Expect a confirmation in 5–10 minutes; please check spam.</span>
-                </div>
-            </div>
-            <div id="cta-confetti" class="relative h-0 hidden" aria-hidden="true">
-                <div class="absolute left-1/2 -translate-x-1/2 -top-6">
-                    <span class="inline-block w-2 h-2 bg-orange-400 rounded-full sparkle" style="animation-delay:0.0s; margin-left:-64px"></span>
-                    <span class="inline-block w-3 h-3 bg-amber-400 rounded-full sparkle" style="animation-delay:0.15s; margin-left:-24px"></span>
-                    <span class="inline-block w-2 h-2 bg-orange-300 rounded-full sparkle" style="animation-delay:0.3s; margin-left:16px"></span>
-                    <span class="inline-block w-2 h-2 bg-amber-500 rounded-full sparkle" style="animation-delay:0.45s; margin-left:56px"></span>
-                    <span class="inline-block w-1.5 h-1.5 bg-orange-500 rounded-full sparkle" style="animation-delay:0.6s; margin-left:-40px"></span>
-                    <span class="inline-block w-1.5 h-1.5 bg-amber-300 rounded-full sparkle" style="animation-delay:0.75s; margin-left:36px"></span>
-                </div>
-            </div>
+                    <p id="form-message" class="mt-4 text-orange-100 hidden" aria-live="polite" role="status"></p>
 
-            <!-- Join Count Badge (hidden until loaded) -->
-            <div id="join-count" class="mt-6 hidden">
-                <div class="inline-flex items-center gap-2 rounded-full bg-orange-700 text-white px-4 py-2 text-sm shadow-md">
-                    <span aria-hidden="true">🌟</span>
-                    <span>Already <span id="join-count-number" class="font-bold">0</span> parents joined</span>
+                    <!-- Success visuals -->
+                    <div id="cta-success" class="mt-6 hidden">
+                        <div class="inline-flex items-center gap-3 rounded-full bg-white/20 backdrop-blur-md text-white px-6 py-4 text-base shadow-lg border border-white/30">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10" fill="#10b981" stroke="white" stroke-width="2"/>
+                                <path d="M8 12L11 15L16 9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span class="font-medium">You're in! We'll email early access details soon. Check your inbox in 5-10 minutes (and spam folder).</span>
+                        </div>
+                    </div>
+
+                    <!-- Join Count Badge -->
+                    <div id="join-count" class="mt-8 hidden">
+                        <div class="inline-flex items-center gap-3 rounded-full bg-white/20 backdrop-blur-md text-white px-6 py-3 text-base shadow-lg border border-white/30 badge-float">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M10 2L12.09 7.26L17.18 7.27L13.09 10.44L15.18 15.73L10 12.27L4.82 15.73L6.91 10.44L2.82 7.27L7.91 7.26L10 2Z" fill="#fbbf24" stroke="white" stroke-width="1"/>
+                            </svg>
+                            <span><span id="join-count-number" class="font-bold">0</span> parents already joined</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Share Ribbon -->
-        <div class="mt-6 slide-up delay-4">
-            <div class="bg-white rounded-3xl p-6 shadow-lg border border-orange-100">
-                <p class="text-gray-700 text-center mb-4">
-                    Love Snugs.ai? Share it on your favorite platform!
-                </p>
-                <div class="flex flex-wrap items-center justify-center gap-3">
+        <!-- Share Section -->
+        <div class="mb-24 animate-fadeInUp delay-600">
+            <div class="glass-card rounded-[3rem] p-10 md:p-12 soft-shadow">
+                <div class="text-center mb-8">
+                    <h3 class="text-2xl md:text-3xl font-display font-semibold text-gray-800 mb-3">Share the love</h3>
+                    <p class="text-gray-600 text-lg">Help other parents discover Snugs</p>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-center gap-4 mb-6">
                     <a href="#" data-platform="facebook" aria-label="Share on Facebook" title="Share on Facebook"
-                       class="group w-11 h-11 rounded-full border border-[#1877F2]/30 flex items-center justify-center hover:bg-[#1877F2] hover:border-[#1877F2] transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1877F2] focus:ring-offset-white">
-                        <img src="https://cdn.simpleicons.org/facebook/1877F2" alt="Facebook" class="w-6 h-6 transition filter group-hover:brightness-0 group-hover:invert" loading="lazy" decoding="async" />
+                       class="social-icon w-14 h-14 rounded-2xl border-2 border-[#1877F2]/20 bg-white flex items-center justify-center hover:bg-[#1877F2] hover:border-[#1877F2] transition-all shadow-md focus:outline-none focus:ring-4 focus:ring-[#1877F2]/30 group">
+                        <img src="https://cdn.simpleicons.org/facebook/1877F2" alt="Facebook" class="w-7 h-7 transition filter group-hover:brightness-0 group-hover:invert" loading="lazy" decoding="async" />
                     </a>
                     <a href="#" data-platform="reddit" aria-label="Share on Reddit" title="Share on Reddit"
-                       class="group w-11 h-11 rounded-full border border-[#FF4500]/30 flex items-center justify-center hover:bg-[#FF4500] hover:border-[#FF4500] transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF4500] focus:ring-offset-white">
-                        <img src="https://cdn.simpleicons.org/reddit/FF4500" alt="Reddit" class="w-6 h-6 transition filter group-hover:brightness-0 group-hover:invert" loading="lazy" decoding="async" />
+                       class="social-icon w-14 h-14 rounded-2xl border-2 border-[#FF4500]/20 bg-white flex items-center justify-center hover:bg-[#FF4500] hover:border-[#FF4500] transition-all shadow-md focus:outline-none focus:ring-4 focus:ring-[#FF4500]/30 group">
+                        <img src="https://cdn.simpleicons.org/reddit/FF4500" alt="Reddit" class="w-7 h-7 transition filter group-hover:brightness-0 group-hover:invert" loading="lazy" decoding="async" />
                     </a>
                     <a href="#" data-platform="instagram" aria-label="Share on Instagram" title="Share on Instagram"
-                       class="group w-11 h-11 rounded-full border border-[#E4405F]/30 flex items-center justify-center hover:bg-[#E4405F] hover:border-[#E4405F] transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#E4405F] focus:ring-offset-white">
-                        <img src="https://cdn.simpleicons.org/instagram/E4405F" alt="Instagram" class="w-6 h-6 transition filter group-hover:brightness-0 group-hover:invert" loading="lazy" decoding="async" />
+                       class="social-icon w-14 h-14 rounded-2xl border-2 border-[#E4405F]/20 bg-white flex items-center justify-center hover:bg-[#E4405F] hover:border-[#E4405F] transition-all shadow-md focus:outline-none focus:ring-4 focus:ring-[#E4405F]/30 group">
+                        <img src="https://cdn.simpleicons.org/instagram/E4405F" alt="Instagram" class="w-7 h-7 transition filter group-hover:brightness-0 group-hover:invert" loading="lazy" decoding="async" />
                     </a>
                     <a href="#" data-platform="tiktok" aria-label="Share on TikTok" title="Share on TikTok"
-                       class="group w-11 h-11 rounded-full border border-neutral-800/30 flex items-center justify-center hover:bg-black hover:border-black transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black focus:ring-offset-white">
-                        <img src="https://cdn.simpleicons.org/tiktok/000000" alt="TikTok" class="w-6 h-6 transition filter group-hover:brightness-0 group-hover:invert" loading="lazy" decoding="async" />
+                       class="social-icon w-14 h-14 rounded-2xl border-2 border-neutral-800/20 bg-white flex items-center justify-center hover:bg-black hover:border-black transition-all shadow-md focus:outline-none focus:ring-4 focus:ring-black/30 group">
+                        <img src="https://cdn.simpleicons.org/tiktok/000000" alt="TikTok" class="w-7 h-7 transition filter group-hover:brightness-0 group-hover:invert" loading="lazy" decoding="async" />
                     </a>
                     <a href="#" data-platform="whatsapp" aria-label="Share on WhatsApp" title="Share on WhatsApp"
-                       class="group w-11 h-11 rounded-full border border-[#25D366]/30 flex items-center justify-center hover:bg-[#25D366] hover:border-[#25D366] transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#25D366] focus:ring-offset-white">
-                        <img src="https://cdn.simpleicons.org/whatsapp/25D366" alt="WhatsApp" class="w-6 h-6 transition filter group-hover:brightness-0 group-hover:invert" loading="lazy" decoding="async" />
+                       class="social-icon w-14 h-14 rounded-2xl border-2 border-[#25D366]/20 bg-white flex items-center justify-center hover:bg-[#25D366] hover:border-[#25D366] transition-all shadow-md focus:outline-none focus:ring-4 focus:ring-[#25D366]/30 group">
+                        <img src="https://cdn.simpleicons.org/whatsapp/25D366" alt="WhatsApp" class="w-7 h-7 transition filter group-hover:brightness-0 group-hover:invert" loading="lazy" decoding="async" />
                     </a>
                     <a href="#" data-platform="linkedin" aria-label="Share on LinkedIn" title="Share on LinkedIn"
-                       class="group w-11 h-11 rounded-full border border-[#0A66C2]/30 flex items-center justify-center text-[#0A66C2] hover:bg-[#0A66C2] hover:border-[#0A66C2] hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0A66C2] focus:ring-offset-white">
-                        <svg viewBox="0 0 24 24" class="w-6 h-6" fill="currentColor" aria-hidden="true" shape-rendering="geometricPrecision">
+                       class="social-icon w-14 h-14 rounded-2xl border-2 border-[#0A66C2]/20 bg-white flex items-center justify-center text-[#0A66C2] hover:bg-[#0A66C2] hover:border-[#0A66C2] hover:text-white transition-all shadow-md focus:outline-none focus:ring-4 focus:ring-[#0A66C2]/30">
+                        <svg viewBox="0 0 24 24" class="w-7 h-7" fill="currentColor" aria-hidden="true">
                             <path d="M22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.226.792 24 1.771 24h20.454C23.2 24 24 23.226 24 22.271V1.729C24 .774 23.2 0 22.225 0zM7.06 20.452H3.56V9h3.5v11.452zM5.31 7.433a2.03 2.03 0 110-4.06 2.03 2.03 0 010 4.06zM20.45 20.452h-3.5v-5.569c0-1.33-.025-3.036-1.85-3.036-1.85 0-2.134 1.445-2.134 2.938v5.667h-3.5V9h3.36v1.561h.047c.468-.887 1.612-1.823 3.318-1.823 3.55 0 4.26 2.338 4.26 5.377v6.337z"/>
                         </svg>
                     </a>
                     <a href="#" data-platform="x" aria-label="Share on X" title="Share on X"
-                       class="group w-11 h-11 rounded-full border border-neutral-800/30 flex items-center justify-center hover:bg-black hover:border-black transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black focus:ring-offset-white">
-                        <img src="https://cdn.simpleicons.org/x/000000" alt="X" class="w-6 h-6 transition filter group-hover:brightness-0 group-hover:invert" loading="lazy" decoding="async" />
+                       class="social-icon w-14 h-14 rounded-2xl border-2 border-neutral-800/20 bg-white flex items-center justify-center hover:bg-black hover:border-black transition-all shadow-md focus:outline-none focus:ring-4 focus:ring-black/30 group">
+                        <img src="https://cdn.simpleicons.org/x/000000" alt="X" class="w-7 h-7 transition filter group-hover:brightness-0 group-hover:invert" loading="lazy" decoding="async" />
                     </a>
                 </div>
-                <p class="text-xs text-gray-500 mt-3 text-center">
-                    Tip: Instagram and TikTok don’t support pre-filled posts. We copy the text for you—just paste and share.
+
+                <p class="text-sm text-gray-500 text-center mb-4">
+                    Tip: Instagram and TikTok don't support pre-filled posts—we'll copy the text for you to paste.
                 </p>
-                <div class="mt-4 flex justify-center">
-                    <a href="/og/snugs-og.jpg" download class="inline-flex items-center gap-2 rounded-full bg-orange-100 text-orange-700 px-4 py-2 text-sm font-medium hover:bg-orange-200 transition-colors">
-                        <span aria-hidden="true">⬇️</span>
+
+                <div class="flex justify-center">
+                    <a href="/og/snugs-og.jpg" download class="inline-flex items-center gap-3 rounded-full bg-orange-100 text-orange-700 px-6 py-3 text-sm font-semibold hover:bg-orange-200 transition-all soft-shadow hover:shadow-md">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M8 2V11M8 11L5 8M8 11L11 8" stroke="#ea580c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 11V13C2 13.5523 2.44772 14 3 14H13C13.5523 14 14 13.5523 14 13V11" stroke="#ea580c" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
                         <span>Download share image (1200×630)</span>
                     </a>
                 </div>
@@ -370,72 +651,73 @@
         </div>
 
         <!-- FAQ Section -->
-        <section aria-labelledby="faq-heading" class="mt-12 slide-up">
-          <div class="bg-white rounded-3xl shadow-lg border border-orange-100 p-6 md:p-10">
-            <h2 id="faq-heading" class="text-2xl md:text-3xl font-bold text-gray-800 mb-6">Frequently Asked Questions</h2>
+        <section aria-labelledby="faq-heading" class="mb-24 animate-fadeInUp delay-700">
+            <div class="glass-card rounded-[3rem] p-10 md:p-12 soft-shadow">
+                <h2 id="faq-heading" class="text-3xl md:text-4xl font-display font-bold text-gray-800 mb-10 text-center">Frequently asked questions</h2>
 
-            <div class="space-y-4">
-              <details class="group border border-orange-100 rounded-2xl p-4">
-                <summary class="cursor-pointer list-none flex items-center justify-between gap-3">
-                  <span class="text-lg font-semibold text-gray-800">Is Snugs medical advice or for emergencies?</span>
-                  <span class="text-orange-600 transition-transform group-open:rotate-180" aria-hidden="true">▾</span>
-                </summary>
-                <div class="mt-3 text-gray-600">
-                  Snugs.ai provides informational guidance only and is not a substitute for professional medical, psychological, or safety advice. If you believe your child or anyone is in danger, call your local emergency number immediately.
-                </div>
-              </details>
+                <div class="space-y-5 max-w-3xl mx-auto">
+                    <details class="group border-2 border-orange-100 rounded-3xl p-6 hover:border-orange-200 transition-all bg-white/50">
+                        <summary class="cursor-pointer list-none flex items-center justify-between gap-4">
+                            <span class="text-lg md:text-xl font-semibold text-gray-800">Is Snugs medical advice or for emergencies?</span>
+                            <span class="text-orange-600 transition-transform group-open:rotate-180 text-2xl flex-shrink-0" aria-hidden="true">▾</span>
+                        </summary>
+                        <div class="mt-4 text-gray-600 leading-relaxed text-base md:text-lg">
+                            Snugs.ai provides informational guidance only and is not a substitute for professional medical, psychological, or safety advice. If you believe your child or anyone is in danger, call your local emergency number immediately.
+                        </div>
+                    </details>
 
-              <details class="group border border-orange-100 rounded-2xl p-4">
-                <summary class="cursor-pointer list-none flex items-center justify-between gap-3">
-                  <span class="text-lg font-semibold text-gray-800">How do you use my data?</span>
-                  <span class="text-orange-600 transition-transform group-open:rotate-180" aria-hidden="true">▾</span>
-                </summary>
-                <div class="mt-3 text-gray-600">
-                  Today, we collect limited information (like your email) to manage the waitlist and respond to inquiries. If features process audio/video, we will clearly explain what’s used, how it’s processed, and provide controls. See our <a href="/privacy.html" class="text-orange-700 underline">Privacy Policy</a> for details.
-                </div>
-              </details>
+                    <details class="group border-2 border-orange-100 rounded-3xl p-6 hover:border-orange-200 transition-all bg-white/50">
+                        <summary class="cursor-pointer list-none flex items-center justify-between gap-4">
+                            <span class="text-lg md:text-xl font-semibold text-gray-800">How do you use my data?</span>
+                            <span class="text-orange-600 transition-transform group-open:rotate-180 text-2xl flex-shrink-0" aria-hidden="true">▾</span>
+                        </summary>
+                        <div class="mt-4 text-gray-600 leading-relaxed text-base md:text-lg">
+                            Today, we collect limited information (like your email) to manage the waitlist and respond to inquiries. If features process audio/video, we will clearly explain what's used, how it's processed, and provide controls. See our <a href="/privacy.html" class="text-orange-700 underline hover:text-orange-800 font-medium">Privacy Policy</a> for details.
+                        </div>
+                    </details>
 
-              <details class="group border border-orange-100 rounded-2xl p-4">
-                <summary class="cursor-pointer list-none flex items-center justify-between gap-3">
-                  <span class="text-lg font-semibold text-gray-800">Pricing and launch timing</span>
-                  <span class="text-orange-600 transition-transform group-open:rotate-180" aria-hidden="true">▾</span>
-                </summary>
-                <div class="mt-3 text-gray-600">
-                  We’re preparing early access and will share pricing before launch. Join the waitlist to get priority invites and updates. We’ll email details as soon as we open access.
-                </div>
-              </details>
+                    <details class="group border-2 border-orange-100 rounded-3xl p-6 hover:border-orange-200 transition-all bg-white/50">
+                        <summary class="cursor-pointer list-none flex items-center justify-between gap-4">
+                            <span class="text-lg md:text-xl font-semibold text-gray-800">Pricing and launch timing</span>
+                            <span class="text-orange-600 transition-transform group-open:rotate-180 text-2xl flex-shrink-0" aria-hidden="true">▾</span>
+                        </summary>
+                        <div class="mt-4 text-gray-600 leading-relaxed text-base md:text-lg">
+                            We're preparing early access and will share pricing before launch. Join the waitlist to get priority invites and updates. We'll email details as soon as we open access.
+                        </div>
+                    </details>
 
-              <details class="group border border-orange-100 rounded-2xl p-4">
-                <summary class="cursor-pointer list-none flex items-center justify-between gap-3">
-                  <span class="text-lg font-semibold text-gray-800">Which devices are supported?</span>
-                  <span class="text-orange-600 transition-transform group-open:rotate-180" aria-hidden="true">▾</span>
-                </summary>
-                <div class="mt-3 text-gray-600">
-                  The website supports modern browsers on desktop and mobile. For AI features that use camera/microphone, you’ll need a compatible device and to grant permissions. We aim to support recent iOS and Android versions and the latest Chrome, Safari, and Edge.
+                    <details class="group border-2 border-orange-100 rounded-3xl p-6 hover:border-orange-200 transition-all bg-white/50">
+                        <summary class="cursor-pointer list-none flex items-center justify-between gap-4">
+                            <span class="text-lg md:text-xl font-semibold text-gray-800">Which devices are supported?</span>
+                            <span class="text-orange-600 transition-transform group-open:rotate-180 text-2xl flex-shrink-0" aria-hidden="true">▾</span>
+                        </summary>
+                        <div class="mt-4 text-gray-600 leading-relaxed text-base md:text-lg">
+                            The website supports modern browsers on desktop and mobile. For AI features that use camera/microphone, you'll need a compatible device and to grant permissions. We aim to support recent iOS and Android versions and the latest Chrome, Safari, and Edge.
+                        </div>
+                    </details>
                 </div>
-              </details>
             </div>
-          </div>
         </section>
 
         <!-- Footer -->
-        <footer class="text-center mt-16 text-gray-600">
-            <p class="mb-2">© 2025 Snugs.ai - Powered by AI, Built with Love</p>
-            <div class="flex justify-center gap-6 text-sm">
-                <a href="/resources/" class="hover:text-orange-600 transition-colors">Resources</a>
-                <a href="/privacy.html" class="hover:text-orange-600 transition-colors">Privacy</a>
-                <a href="/terms.html" class="hover:text-orange-600 transition-colors">Terms</a>
-                <a href="/contact.html" class="hover:text-orange-600 transition-colors">Contact</a>
+        <footer class="text-center pt-12 pb-8 text-gray-600">
+            <p class="mb-4 text-base">© 2025 Snugs.ai — Powered by AI, Built with Love</p>
+            <div class="flex flex-wrap justify-center gap-6 text-sm">
+                <a href="/resources/" class="hover:text-orange-600 transition-colors font-medium">Resources</a>
+                <a href="/privacy.html" class="hover:text-orange-600 transition-colors font-medium">Privacy</a>
+                <a href="/terms.html" class="hover:text-orange-600 transition-colors font-medium">Terms</a>
+                <a href="/contact.html" class="hover:text-orange-600 transition-colors font-medium">Contact</a>
             </div>
         </footer>
     </div>
 
+    <!-- Toast for notifications -->
+    <div id="toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-sm px-6 py-3 rounded-full shadow-2xl hidden z-50" role="status" aria-live="polite"></div>
+
     <!-- Google Sheets Integration -->
     <script>
-        // Replace with your Google Apps Script Web App URL
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyAzdrz5vxqzop2idoYZpKxgbETQUM3G35b0YXO6GXfasHeDhj2DrlBxDmSWa27ERtOeA/exec';
-        
-        // Inline toast (aria-live) helper
+
         function showToast(text, timeout = 3000) {
             try {
                 const t = document.getElementById('toast');
@@ -456,14 +738,13 @@
             const submitBtn = document.getElementById('submit-btn');
             const message = document.getElementById('form-message');
 
-            // Disable button during submission
             submitBtn.disabled = true;
             submitBtn.textContent = 'Joining...';
 
             try {
                 const response = await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
-                    mode: 'no-cors', // Important for Google Apps Script
+                    mode: 'no-cors',
                     headers: {
                         'Content-Type': 'application/json',
                     },
@@ -473,21 +754,16 @@
                     })
                 });
 
-                // Show success visuals only (avoid duplicate text)
                 message.textContent = '';
                 message.classList.add('hidden');
                 const successBadge = document.getElementById('cta-success');
-                const confetti = document.getElementById('cta-confetti');
-                const btn = document.getElementById('submit-btn');
                 if (successBadge) successBadge.classList.remove('hidden');
-                if (confetti) {
-                    confetti.classList.remove('hidden');
-                    setTimeout(() => confetti.classList.add('hidden'), 4000);
-                }
-                if (btn) {
-                    btn.classList.add('ring-4','ring-white/60','scale-105');
-                    setTimeout(()=>{ btn.classList.remove('ring-4','ring-white/60','scale-105'); }, 1200);
-                }
+
+                submitBtn.classList.add('shimmer', 'shimmer-active');
+                setTimeout(() => {
+                    submitBtn.classList.remove('shimmer-active');
+                }, 2000);
+
                 document.getElementById('email').value = '';
 
             } catch (error) {
@@ -499,7 +775,6 @@
             }
         });
 
-        // Join count loader (expects ?action=count JSON)
         (async function loadJoinCount() {
             try {
                 const COUNT_API_URL = `${GOOGLE_SCRIPT_URL}?action=count`;
@@ -515,18 +790,15 @@
                         el.classList.remove('hidden');
                     }
                 }
-            } catch (_) {
-                // Silently ignore; badge stays hidden
-            }
+            } catch (_) {}
         })();
 
-        // Share ribbon handlers with UTM params
         (function() {
-            const FALLBACK_SHARE_URL = 'https://snugs.ai'; // production URL
+            const FALLBACK_SHARE_URL = 'https://snugs.ai';
             const isLocal = location.protocol === 'file:' || ['localhost', '127.0.0.1'].includes(location.hostname);
             const pageUrl = isLocal ? FALLBACK_SHARE_URL : (location.origin + location.pathname);
             const baseText = 'Snugs.ai is coming soon — your 24/7 AI parenting expert. Join the waitlist:';
-            const compose = (u) => `${baseText} ${u}`;
+
             const withUtm = (url, source) => {
                 try {
                     const u = new URL(url);
@@ -607,7 +879,5 @@
             });
         })();
     </script>
-    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-sm px-4 py-2 rounded-full shadow-lg hidden" role="status" aria-live="polite"></div>
-  </body>
+</body>
 </html>
-

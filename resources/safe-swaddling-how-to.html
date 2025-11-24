@@ -4,16 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Safe Swaddling: When, How, and When to Stop | Snugs.ai</title>
-  <meta name="description" content="Safety principles, step‑by‑step how‑to, and signs it’s time to stop swaddling." />
+  <meta name="description" content="Safety principles, step‑by‑step how‑to, and signs it's time to stop swaddling." />
   <link rel="canonical" href="https://snugs.ai/resources/safe-swaddling-how-to.html" />
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Safe Swaddling: When, How, and When to Stop | Snugs.ai" />
-  <meta property="og:description" content="Safety principles, step‑by‑step how‑to, and signs it’s time to stop swaddling." />
+  <meta property="og:description" content="Safety principles, step‑by‑step how‑to, and signs it's time to stop swaddling." />
   <meta property="og:url" content="https://snugs.ai/resources/safe-swaddling-how-to.html" />
   <meta property="og:image" content="https://snugs.ai/og/snugs-og.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Safe Swaddling: When, How, and When to Stop | Snugs.ai" />
-  <meta name="twitter:description" content="Safety principles, step‑by‑step how‑to, and signs it’s time to stop swaddling." />
+  <meta name="twitter:description" content="Safety principles, step‑by‑step how‑to, and signs it's time to stop swaddling." />
   <meta name="twitter:image" content="https://snugs.ai/og/snugs-og.jpg" />
   <script type="application/ld+json">
   {
@@ -30,7 +30,7 @@
       {
         "@type": "Article",
         "headline": "Safe Swaddling: When, How, and When to Stop",
-        "description": "Safety principles, step‑by‑step how‑to, and signs it’s time to stop swaddling.",
+        "description": "Safety principles, step‑by‑step how‑to, and signs it's time to stop swaddling.",
         "mainEntityOfPage": {"@type": "WebPage", "@id": "https://snugs.ai/resources/safe-swaddling-how-to.html"},
         "author": {"@type": "Organization", "name": "Snugs.ai", "url": "https://snugs.ai"},
         "publisher": {"@type": "Organization", "name": "Snugs.ai", "logo": {"@type": "ImageObject", "url": "https://snugs.ai/og/snugs-og.jpg"}},
@@ -40,57 +40,213 @@
   }
   </script>
   <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#EA580C">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'display': ['"Crimson Pro"', 'Georgia', 'serif'],
+            'sans': ['"DM Sans"', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes blob {
+      0%, 100% {
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        transform: rotate(0deg) scale(1);
+      }
+      25% {
+        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+        transform: rotate(90deg) scale(1.05);
+      }
+      50% {
+        border-radius: 50% 60% 30% 60% / 30% 50% 70% 40%;
+        transform: rotate(180deg) scale(1);
+      }
+      75% {
+        border-radius: 60% 40% 60% 30% / 70% 30% 60% 50%;
+        transform: rotate(270deg) scale(1.05);
+      }
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .animate-fadeInUp {
+      animation: fadeInUp 0.8s ease-out forwards;
+      opacity: 0;
+    }
+
+    .animate-fadeIn {
+      animation: fadeIn 0.6s ease-out forwards;
+      opacity: 0;
+    }
+
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+    }
+
+    .soft-shadow {
+      box-shadow:
+        0 2px 8px rgba(234, 88, 12, 0.04),
+        0 8px 24px rgba(234, 88, 12, 0.08),
+        0 16px 56px rgba(234, 88, 12, 0.08);
+    }
+
+    .gradient-warm {
+      background: linear-gradient(135deg,
+        #fff7ed 0%,
+        #ffedd5 25%,
+        #fed7aa 50%,
+        #ffedd5 75%,
+        #fff7ed 100%);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+    }
+
+    .blob-decoration {
+      position: absolute;
+      mix-blend-mode: multiply;
+      filter: blur(40px);
+      opacity: 0.3;
+      animation: blob 20s ease-in-out infinite;
+    }
+  </style>
 </head>
-<body class="bg-gradient-to-br from-orange-50 via-amber-50 to-orange-100 min-h-screen overflow-x-hidden">
-  <div class="container mx-auto px-4 py-8 md:py-16 max-w-3xl">
-    <nav class="text-sm text-gray-600 mb-4"><a href="/" class="hover:text-orange-700">Home</a> · <a href="/resources/" class="hover:text-orange-700">Resources</a> · Safe Swaddling</nav>
-    <article class="bg-white/80 backdrop-blur rounded-3xl shadow-xl p-6 md:p-10">
-      <header class="mb-4">
-        <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Safe Swaddling: When, How, and When to Stop</h1>
-        <p class="text-gray-500 text-sm">Follow safe sleep guidance; stop at first signs of rolling. Not medical advice.</p>
+<body class="gradient-warm min-h-screen overflow-x-hidden relative">
+
+  <!-- Decorative blobs -->
+  <div class="blob-decoration w-80 h-80 bg-orange-400 rounded-full" style="top: -10%; right: -5%; animation-delay: 0s;"></div>
+  <div class="blob-decoration w-64 h-64 bg-orange-300 rounded-full" style="bottom: 10%; left: -8%; animation-delay: 5s;"></div>
+
+  <div class="container mx-auto px-4 py-8 md:py-16 max-w-3xl relative z-10">
+    <nav class="text-sm text-gray-600 mb-6 animate-fadeIn">
+      <a href="/" class="hover:text-orange-700 transition-colors font-medium">Home</a>
+      <span class="mx-2">·</span>
+      <a href="/resources/" class="hover:text-orange-700 transition-colors font-medium">Resources</a>
+      <span class="mx-2">·</span>
+      <span class="text-gray-800">Safe Swaddling</span>
+    </nav>
+
+    <article class="glass-card rounded-[3rem] soft-shadow p-8 md:p-12 animate-fadeInUp delay-100">
+      <header class="mb-8">
+        <h1 class="text-3xl md:text-4xl font-display font-bold text-gray-800 mb-3">Safe Swaddling: When, How, and When to Stop</h1>
+        <p class="text-gray-600 text-sm">Follow safe sleep guidance; stop at first signs of rolling. Not medical advice.</p>
       </header>
 
-      <h2 class="text-xl font-semibold text-gray-800 mb-2">Safety Principles</h2>
-      <ul class="list-disc list-inside text-gray-800 mb-4 text-sm">
-        <li>Always place baby on back to sleep; firm, flat surface.</li>
-        <li>Hips free to move (hip‑healthy swaddle); avoid tight legs.</li>
-        <li>Keep face/uncovered; avoid overheating; check temperature.</li>
-        <li>Stop swaddling at first signs of rolling or escape.</li>
-      </ul>
+      <section class="mb-8">
+        <h2 class="text-2xl font-display font-semibold text-gray-800 mb-4">Safety Principles</h2>
+        <ul class="space-y-3 text-gray-800 text-sm">
+          <li class="flex items-start gap-3">
+            <span class="flex-shrink-0 w-6 h-6 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white text-xs font-bold">1</span>
+            <span>Always place baby on back to sleep; firm, flat surface.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="flex-shrink-0 w-6 h-6 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white text-xs font-bold">2</span>
+            <span>Hips free to move (hip‑healthy swaddle); avoid tight legs.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="flex-shrink-0 w-6 h-6 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white text-xs font-bold">3</span>
+            <span>Keep face uncovered; avoid overheating; check temperature.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="flex-shrink-0 w-6 h-6 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white text-xs font-bold">4</span>
+            <span>Stop swaddling at first signs of rolling or escape.</span>
+          </li>
+        </ul>
+      </section>
 
-      <h2 class="text-xl font-semibold text-gray-800 mb-2">How‑To (Basic Wrap)</h2>
-      <ol class="list-decimal list-inside text-gray-800 text-sm space-y-2">
-        <li>Lay blanket in a diamond; fold top corner down.</li>
-        <li>Place baby with shoulders at the fold; arms down at sides or hands to chest if preferred.</li>
-        <li>Wrap one side snugly across and under the body.</li>
-        <li>Fold up bottom allowing hip/leg movement.</li>
-        <li>Wrap the other side across and secure; ensure breathing is unobstructed.</li>
-      </ol>
+      <section class="mb-8">
+        <h2 class="text-2xl font-display font-semibold text-gray-800 mb-4">How‑To (Basic Wrap)</h2>
+        <ol class="space-y-3 text-gray-800 text-sm">
+          <li class="flex items-start gap-3">
+            <span class="flex-shrink-0 w-6 h-6 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white text-xs font-bold">1</span>
+            <span>Lay blanket in a diamond; fold top corner down.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="flex-shrink-0 w-6 h-6 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white text-xs font-bold">2</span>
+            <span>Place baby with shoulders at the fold; arms down at sides or hands to chest if preferred.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="flex-shrink-0 w-6 h-6 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white text-xs font-bold">3</span>
+            <span>Wrap one side snugly across and under the body.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="flex-shrink-0 w-6 h-6 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white text-xs font-bold">4</span>
+            <span>Fold up bottom allowing hip/leg movement.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="flex-shrink-0 w-6 h-6 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white text-xs font-bold">5</span>
+            <span>Wrap the other side across and secure; ensure breathing is unobstructed.</span>
+          </li>
+        </ol>
+      </section>
 
-      <h2 class="text-xl font-semibold text-gray-800 mt-6 mb-2">When to Stop</h2>
-      <p class="text-gray-700 text-sm">At first roll attempts, rolling to side, or repeated arm escapes. Transition to arms‑out or a sleep sack.</p>
+      <section class="bg-orange-50 border-2 border-orange-100 rounded-3xl p-6 text-gray-700 text-sm mb-8">
+        <h2 class="text-xl font-display font-semibold text-gray-800 mb-3">When to Stop</h2>
+        <p class="leading-relaxed">At first roll attempts, rolling to side, or repeated arm escapes. Transition to arms‑out or a sleep sack.</p>
+      </section>
 
-      <section class="mt-8">
-        <h2 class="text-xl font-semibold text-gray-800 mb-2">Related Guides</h2>
-        <ul class="list-disc list-inside text-gray-700">
-          <li><a href="/resources/newborn-sleep-schedule-weeks-1-12.html" class="text-orange-700 underline">Newborn Sleep Schedule: Weeks 1–12</a></li>
-          <li><a href="/resources/calm-a-crying-baby.html" class="text-orange-700 underline">Calm a Crying Baby: 7 Steps</a></li>
-          <li><a href="/resources/hunger-vs-tired-cues.html" class="text-orange-700 underline">Hunger vs. Tired Cues</a></li>
+      <section class="mt-10 pt-8 border-t-2 border-orange-100">
+        <h2 class="text-2xl font-display font-semibold text-gray-800 mb-4">Related Guides</h2>
+        <ul class="space-y-2 text-gray-700">
+          <li><a href="/resources/newborn-sleep-schedule-weeks-1-12.html" class="text-orange-700 underline hover:text-orange-800 font-medium transition-colors">Newborn Sleep Schedule: Weeks 1–12</a></li>
+          <li><a href="/resources/calm-a-crying-baby.html" class="text-orange-700 underline hover:text-orange-800 font-medium transition-colors">Calm a Crying Baby: 7 Steps</a></li>
+          <li><a href="/resources/hunger-vs-tired-cues.html" class="text-orange-700 underline hover:text-orange-800 font-medium transition-colors">Hunger vs. Tired Cues</a></li>
         </ul>
       </section>
     </article>
 
-    <footer class="text-center mt-12 text-gray-600">
-      <p class="mb-2">© 2025 Snugs.ai</p>
-      <div class="flex justify-center gap-6 text-sm">
-        <a href="/resources/" class="hover:text-orange-600 transition-colors">Resources</a>
-        <a href="/privacy.html" class="hover:text-orange-600 transition-colors">Privacy</a>
-        <a href="/terms.html" class="hover:text-orange-600 transition-colors">Terms</a>
-        <a href="/contact.html" class="hover:text-orange-600 transition-colors">Contact</a>
+    <footer class="text-center pt-12 pb-8 text-gray-600">
+      <p class="mb-4 text-base">© 2025 Snugs.ai — Powered by AI, Built with Love</p>
+      <div class="flex flex-wrap justify-center gap-6 text-sm">
+        <a href="/" class="hover:text-orange-600 transition-colors font-medium">Home</a>
+        <a href="/resources/" class="hover:text-orange-600 transition-colors font-medium">Resources</a>
+        <a href="/privacy.html" class="hover:text-orange-600 transition-colors font-medium">Privacy</a>
+        <a href="/terms.html" class="hover:text-orange-600 transition-colors font-medium">Terms</a>
+        <a href="/contact.html" class="hover:text-orange-600 transition-colors font-medium">Contact</a>
       </div>
     </footer>
   </div>

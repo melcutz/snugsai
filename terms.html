@@ -18,29 +18,175 @@
   <meta name="twitter:description" content="Read the Snugs.ai Terms of Service governing use of our site and services." />
   <meta name="twitter:image" content="https://snugs.ai/og/snugs-og.jpg" />
   <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#EA580C">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'display': ['"Crimson Pro"', 'Georgia', 'serif'],
+            'sans': ['"DM Sans"', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
   <style>
-    @keyframes slideUp { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: translateY(0);} }
-    .slide-up { animation: slideUp 0.6s ease-out forwards; opacity: 0; }
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes blob {
+      0%, 100% {
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        transform: rotate(0deg) scale(1);
+      }
+      25% {
+        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+        transform: rotate(90deg) scale(1.05);
+      }
+      50% {
+        border-radius: 50% 60% 30% 60% / 30% 50% 70% 40%;
+        transform: rotate(180deg) scale(1);
+      }
+      75% {
+        border-radius: 60% 40% 60% 30% / 70% 30% 60% 50%;
+        transform: rotate(270deg) scale(1.05);
+      }
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .animate-fadeInUp {
+      animation: fadeInUp 0.8s ease-out forwards;
+      opacity: 0;
+    }
+
+    .animate-fadeIn {
+      animation: fadeIn 0.6s ease-out forwards;
+      opacity: 0;
+    }
+
+    .delay-100 { animation-delay: 0.1s; }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+    }
+
+    .soft-shadow {
+      box-shadow:
+        0 2px 8px rgba(234, 88, 12, 0.04),
+        0 8px 24px rgba(234, 88, 12, 0.08),
+        0 16px 56px rgba(234, 88, 12, 0.08);
+    }
+
+    .gradient-warm {
+      background: linear-gradient(135deg,
+        #fff7ed 0%,
+        #ffedd5 25%,
+        #fed7aa 50%,
+        #ffedd5 75%,
+        #fff7ed 100%);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+    }
+
+    .blob-decoration {
+      position: absolute;
+      mix-blend-mode: multiply;
+      filter: blur(40px);
+      opacity: 0.3;
+      animation: blob 20s ease-in-out infinite;
+    }
+
+    .prose h3 {
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1f2937;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .prose p, .prose ul, .prose li {
+      color: #4b5563;
+      line-height: 1.75;
+      margin-bottom: 1rem;
+    }
+
+    .prose ul {
+      list-style-type: disc;
+      padding-left: 1.5rem;
+    }
+
+    .prose a {
+      color: #ea580c;
+      text-decoration: underline;
+      font-weight: 500;
+    }
+
+    .prose a:hover {
+      color: #c2410c;
+    }
+
+    .prose strong {
+      color: #374151;
+      font-weight: 600;
+    }
   </style>
 </head>
-<body class="bg-gradient-to-br from-orange-50 via-amber-50 to-orange-100 min-h-screen overflow-x-hidden">
-  <div class="container mx-auto px-4 py-8 md:py-16 max-w-4xl">
-    <header class="text-center mb-10 slide-up">
+<body class="gradient-warm min-h-screen overflow-x-hidden relative">
+
+  <!-- Decorative blobs -->
+  <div class="blob-decoration w-96 h-96 bg-orange-400 rounded-full" style="top: -10%; right: -5%; animation-delay: 0s;"></div>
+  <div class="blob-decoration w-72 h-72 bg-orange-300 rounded-full" style="bottom: 10%; left: -8%; animation-delay: 5s;"></div>
+
+  <div class="container mx-auto px-4 py-8 md:py-16 max-w-4xl relative z-10">
+    <header class="text-center mb-16 md:mb-20 animate-fadeIn">
       <a href="/" class="inline-block focus:outline-none focus:ring-4 focus:ring-orange-300 rounded">
-        <h1 class="text-4xl md:text-6xl font-bold text-orange-600 mb-1">Snugs<span class="text-orange-500">.ai</span></h1>
+        <h1 class="text-5xl md:text-7xl font-bold text-orange-600 mb-3 font-display">Snugs<span class="text-orange-500">.ai</span></h1>
       </a>
-      <p class="text-orange-700 text-sm md:text-base tracking-wider">TERMS OF SERVICE</p>
+      <div class="h-1 w-32 bg-gradient-to-r from-transparent via-orange-400 to-transparent mx-auto mb-3"></div>
+      <p class="text-orange-700 text-xs md:text-sm tracking-[0.3em] uppercase font-semibold">Terms of Service</p>
     </header>
 
-    <main class="bg-white/80 backdrop-blur rounded-3xl shadow-xl p-6 md:p-10 slide-up text-gray-800">
-      <h2 class="text-2xl md:text-3xl font-bold mb-4">Terms of Service</h2>
-      <p class="text-gray-600 mb-6">Effective date: November 8, 2025</p>
+    <main class="glass-card rounded-[3rem] soft-shadow p-8 md:p-12 animate-fadeInUp delay-100">
+      <h2 class="text-3xl md:text-4xl font-display font-bold text-gray-800 mb-2">Terms of Service</h2>
+      <p class="text-gray-600 mb-8">Effective date: November 8, 2025</p>
 
-      <section class="prose prose-orange max-w-none">
+      <section class="prose max-w-none">
         <h3>1. Acceptance of Terms</h3>
         <p>By accessing or using the Snugs.ai website (the "Site"), joining our waitlist, or interacting with any features we make available (collectively, the "Services"), you agree to be bound by these Terms of Service (the "Terms"). If you do not agree to these Terms, do not use the Services.</p>
 
@@ -60,13 +206,13 @@
         <p>If you submit feedback, ideas, or suggestions ("Feedback"), you grant Snugs.ai a perpetual, irrevocable, royalty‑free, worldwide license to use, reproduce, modify, and create derivative works from the Feedback without restriction or compensation.</p>
 
         <h3>7. Acceptable Use</h3>
-        <p>You agree not to: (a) misuse the Services; (b) reverse engineer or attempt to access non‑public areas or systems; (c) interfere with or disrupt the Services; (d) upload malware or harmful content; (e) use the Services to harass, threaten, or violate others’ rights; or (f) use the Services for illegal, harmful, or high‑risk activities.</p>
+        <p>You agree not to: (a) misuse the Services; (b) reverse engineer or attempt to access non‑public areas or systems; (c) interfere with or disrupt the Services; (d) upload malware or harmful content; (e) use the Services to harass, threaten, or violate others' rights; or (f) use the Services for illegal, harmful, or high‑risk activities.</p>
 
         <h3>8. Third‑Party Services and Links</h3>
         <p>The Services may rely on or link to third parties (e.g., Tailwind CDN, Google Apps Script, social platforms, icon CDNs). Snugs.ai does not control third‑party sites or services and is not responsible for their content, policies, or practices. Your use of third‑party services is governed by their terms.</p>
 
         <h3>9. Privacy</h3>
-        <p>We may collect limited information such as your email address to operate the waitlist or contact form. We use this information to communicate with you and improve the Services. By submitting information, you consent to our use and processing of that information for these purposes. Do not submit sensitive personal information. For more details, contact us at <a href="mailto:contact@snugs.ai" class="text-orange-700 underline">contact@snugs.ai</a>.</p>
+        <p>We may collect limited information such as your email address to operate the waitlist or contact form. We use this information to communicate with you and improve the Services. By submitting information, you consent to our use and processing of that information for these purposes. Do not submit sensitive personal information. For more details, contact us at <a href="mailto:contact@snugs.ai">contact@snugs.ai</a>.</p>
 
         <h3>10. Intellectual Property</h3>
         <p>The Site, including text, graphics, logos, and design elements, is owned by or licensed to Snugs.ai and protected by intellectual property laws. Except as expressly permitted, you may not copy, distribute, modify, or create derivative works from the Site or the Services.</p>
@@ -78,7 +224,7 @@
         <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, IN NO EVENT WILL SNUGS.AI OR ITS AFFILIATES, OFFICERS, EMPLOYEES, OR AGENTS BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS, REVENUE, DATA, OR USE, ARISING OUT OF OR RELATED TO YOUR USE OF THE SERVICES, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. OUR TOTAL LIABILITY FOR ANY CLAIMS RELATING TO THE SERVICES WILL NOT EXCEED ONE HUNDRED U.S. DOLLARS (US$100).</p>
 
         <h3>13. Indemnification</h3>
-        <p>You agree to defend, indemnify, and hold harmless Snugs.ai and its affiliates, officers, employees, and agents from and against any claims, liabilities, damages, losses, and expenses (including reasonable attorneys’ fees) arising from or related to your use of the Services or your violation of these Terms.</p>
+        <p>You agree to defend, indemnify, and hold harmless Snugs.ai and its affiliates, officers, employees, and agents from and against any claims, liabilities, damages, losses, and expenses (including reasonable attorneys' fees) arising from or related to your use of the Services or your violation of these Terms.</p>
 
         <h3>14. Changes to the Services and Terms</h3>
         <p>We may update the Services and these Terms from time to time. Material changes will be indicated by updating the Effective Date above or by reasonable notice. Your continued use after changes become effective constitutes acceptance of the revised Terms.</p>
@@ -90,18 +236,18 @@
         <p>These Terms are governed by the laws of the State of Washington, USA, without regard to its conflict‑of‑laws rules. You agree to the exclusive jurisdiction and venue of the state and federal courts located in King County, Washington, for any disputes arising out of or relating to these Terms or the Services.</p>
 
         <h3>17. Contact</h3>
-        <p>If you have questions about these Terms, contact us at <a href="mailto:contact@snugs.ai" class="text-orange-700 underline">contact@snugs.ai</a>.</p>
+        <p>If you have questions about these Terms, contact us at <a href="mailto:contact@snugs.ai">contact@snugs.ai</a>.</p>
       </section>
     </main>
 
-    <footer class="text-center mt-12 text-gray-600">
-      <p class="mb-2">© 2025 Snugs.ai</p>
-      <div class="flex justify-center gap-6 text-sm">
-        <a href="/" class="hover:text-orange-600 transition-colors">Home</a>
-        <a href="/resources/" class="hover:text-orange-600 transition-colors">Resources</a>
-        <a href="/privacy.html" class="hover:text-orange-600 transition-colors">Privacy</a>
-        <a href="/terms.html" class="hover:text-orange-600 transition-colors">Terms</a>
-        <a href="/contact.html" class="hover:text-orange-600 transition-colors">Contact</a>
+    <footer class="text-center pt-12 pb-8 text-gray-600">
+      <p class="mb-4 text-base">© 2025 Snugs.ai — Powered by AI, Built with Love</p>
+      <div class="flex flex-wrap justify-center gap-6 text-sm">
+        <a href="/" class="hover:text-orange-600 transition-colors font-medium">Home</a>
+        <a href="/resources/" class="hover:text-orange-600 transition-colors font-medium">Resources</a>
+        <a href="/privacy.html" class="hover:text-orange-600 transition-colors font-medium">Privacy</a>
+        <a href="/terms.html" class="hover:text-orange-600 transition-colors font-medium">Terms</a>
+        <a href="/contact.html" class="hover:text-orange-600 transition-colors font-medium">Contact</a>
       </div>
     </footer>
   </div>
