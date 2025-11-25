@@ -85,6 +85,20 @@
         }
     </script>
     <style>
+        /* Smooth scrolling for anchor links */
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape on iOS */
+        }
+
+        /* Ensure minimum touch target size on mobile */
+        @media (max-width: 768px) {
+            button, a, input[type="submit"], input[type="button"], .social-icon, [role="button"] {
+                min-height: 44px;
+                min-width: 44px;
+            }
+        }
+
         :root {
             --orange-50: #fff7ed;
             --orange-100: #ffedd5;
@@ -345,9 +359,9 @@
     <div class="container mx-auto px-4 py-8 md:py-16 max-w-7xl relative z-10">
 
         <!-- Header -->
-        <header class="text-center mb-16 md:mb-24 animate-fadeIn">
+        <header class="text-center mb-12 md:mb-16 lg:mb-24 animate-fadeIn">
             <div class="inline-block">
-                <h1 class="text-6xl md:text-8xl font-bold text-orange-600 mb-3 font-display">
+                <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-orange-600 mb-3 font-display">
                     Snugs<span class="text-orange-500">.ai</span>
                 </h1>
                 <div class="h-1 w-32 bg-gradient-to-r from-transparent via-orange-400 to-transparent mx-auto mb-3"></div>
@@ -367,13 +381,13 @@
                     </div>
                 </div>
 
-                <h2 class="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-gray-800 mb-6 leading-[1.1] animate-fadeInUp delay-200">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold text-gray-800 mb-6 leading-[1.1] animate-fadeInUp delay-200">
                     Your Baby Won't Sleep.<br/>
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 via-orange-500 to-orange-600">It's 3AM.</span><br/>
                     You Need Answers Now.
                 </h2>
 
-                <p class="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed animate-fadeInUp delay-300 font-light">
+                <p class="text-lg sm:text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed animate-fadeInUp delay-300 font-light">
                     Meet Snugs—the AI parenting advisor that actually knows your baby. Get personalized, source-backed advice 24/7. No judgment. No waiting. Just help when you need it most.
                 </p>
 
@@ -477,10 +491,10 @@
         </div>
 
         <!-- Outcomes Strip -->
-        <div class="mb-24 md:mb-32 animate-fadeInUp delay-600">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl md:text-5xl font-display font-bold text-gray-800 mb-4">Here's what changes</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Real results parents see with Snugs</p>
+        <div class="mb-16 md:mb-24 lg:mb-32 animate-fadeInUp delay-600">
+            <div class="text-center mb-8 md:mb-12">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-gray-800 mb-4">Here's what changes</h2>
+                <p class="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">Real results parents see with Snugs</p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
@@ -528,9 +542,9 @@
 
         <!-- Features Section -->
         <div class="mb-24 md:mb-32">
-            <div class="text-center mb-16 animate-fadeInUp delay-100">
-                <h2 class="text-4xl md:text-5xl font-display font-bold text-gray-800 mb-4">Everything You Need in One App</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">AI that knows YOUR baby + tracking + insights—all in one place</p>
+            <div class="text-center mb-12 md:mb-16 animate-fadeInUp delay-100">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-gray-800 mb-4">Everything You Need in One App</h2>
+                <p class="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">AI that knows YOUR baby + tracking + insights—all in one place</p>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -617,22 +631,22 @@
 
         <!-- Pricing Section -->
         <div class="mb-24 md:mb-32">
-            <div class="text-center mb-16 animate-fadeInUp delay-100">
-                <h2 class="text-4xl md:text-5xl font-display font-bold text-gray-800 mb-4">Simple, Transparent Pricing</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Start with a free trial. No surprises. No hidden fees.</p>
+            <div class="text-center mb-12 md:mb-16 animate-fadeInUp delay-100">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-gray-800 mb-4">Simple, Transparent Pricing</h2>
+                <p class="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">Start with a free trial. No surprises. No hidden fees.</p>
             </div>
 
             <!-- Free Trial Banner -->
             <div class="max-w-4xl mx-auto mb-12 animate-fadeInUp delay-200">
-                <div class="glass-card rounded-3xl p-8 md:p-10 soft-shadow text-center border-2 border-orange-200">
+                <div class="glass-card rounded-3xl p-6 md:p-8 lg:p-10 soft-shadow text-center border-2 border-orange-200">
                     <div class="inline-flex items-center gap-2 px-4 py-2 bg-orange-100 rounded-full mb-4">
                         <svg class="w-5 h-5 text-orange-600" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
                         </svg>
                         <span class="text-sm font-semibold text-orange-700">14-Day Free Trial</span>
                     </div>
-                    <h3 class="text-3xl font-display font-bold text-gray-800 mb-4">Start with zero risk</h3>
-                    <div class="grid md:grid-cols-4 gap-4 max-w-3xl mx-auto text-left">
+                    <h3 class="text-2xl sm:text-3xl font-display font-bold text-gray-800 mb-4">Start with zero risk</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 max-w-3xl mx-auto text-left text-sm md:text-base">
                         <div class="flex items-start gap-2">
                             <svg class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
@@ -746,11 +760,11 @@
 
             <!-- Referral Program -->
             <div class="max-w-4xl mx-auto mt-12 animate-fadeInUp delay-400">
-                <div class="glass-card rounded-3xl p-8 soft-shadow bg-gradient-to-br from-orange-50 to-amber-50 border-2 border-orange-200">
+                <div class="glass-card rounded-3xl p-6 md:p-8 soft-shadow bg-gradient-to-br from-orange-50 to-amber-50 border-2 border-orange-200">
                     <div class="text-center">
-                        <h3 class="text-2xl font-display font-semibold text-gray-800 mb-3">Refer Friends, Get Free Months</h3>
-                        <p class="text-gray-700 mb-6">Love Snugs? Share with other parents and get rewarded</p>
-                        <div class="grid md:grid-cols-4 gap-4 max-w-3xl mx-auto text-left">
+                        <h3 class="text-xl sm:text-2xl font-display font-semibold text-gray-800 mb-3">Refer Friends, Get Free Months</h3>
+                        <p class="text-sm sm:text-base text-gray-700 mb-6">Love Snugs? Share with other parents and get rewarded</p>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 max-w-3xl mx-auto text-left text-sm md:text-base">
                             <div class="flex items-start gap-2">
                                 <svg class="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
@@ -785,7 +799,7 @@
         <!-- CTA Section -->
         <div class="relative mb-16 animate-scaleIn delay-500">
             <div class="absolute inset-0 bg-gradient-to-br from-orange-500 via-orange-600 to-orange-700 rounded-[3rem] blur-xl opacity-20"></div>
-            <div class="relative bg-gradient-to-br from-orange-500 to-orange-600 rounded-[3rem] p-12 md:p-16 text-center text-white deep-shadow overflow-hidden">
+            <div class="relative bg-gradient-to-br from-orange-500 to-orange-600 rounded-[3rem] p-8 md:p-12 lg:p-16 text-center text-white deep-shadow overflow-hidden">
 
                 <!-- Decorative elements -->
                 <div class="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl opacity-10"></div>
@@ -800,8 +814,8 @@
                         <span class="text-sm font-semibold text-white">Join thousands of parents sleeping better</span>
                     </div>
 
-                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4">Ready to Sleep Better Tonight?</h2>
-                    <p class="text-xl md:text-2xl mb-8 text-orange-50 max-w-2xl mx-auto font-light">Start your 14-day free trial. No credit card required. Cancel anytime.</p>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4">Ready to Sleep Better Tonight?</h2>
+                    <p class="text-lg sm:text-xl md:text-2xl mb-8 text-orange-50 max-w-2xl mx-auto font-light">Start your 14-day free trial. No credit card required. Cancel anytime.</p>
 
                     <!-- Waitlist Form -->
                     <form id="waitlist-form" class="max-w-2xl mx-auto">
@@ -812,12 +826,12 @@
                                 id="email"
                                 placeholder="Enter your email address"
                                 required
-                                class="flex-1 px-8 py-5 rounded-full text-gray-800 text-lg focus:outline-none focus:ring-4 focus:ring-white/30 transition-all shadow-lg font-medium"
+                                class="flex-1 px-6 sm:px-8 py-4 sm:py-5 rounded-full text-gray-800 text-base sm:text-lg focus:outline-none focus:ring-4 focus:ring-white/30 transition-all shadow-lg font-medium"
                             >
                             <button
                                 type="submit"
                                 id="submit-btn"
-                                class="btn-primary px-10 py-5 bg-white text-orange-600 font-bold rounded-full hover:bg-orange-50 transition-all text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-white/30 whitespace-nowrap"
+                                class="btn-primary px-8 sm:px-10 py-4 sm:py-5 bg-white text-orange-600 font-bold rounded-full hover:bg-orange-50 transition-all text-base sm:text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-white/30 whitespace-nowrap min-h-[48px]"
                             >
                                 Start Free Trial
                             </button>
@@ -852,11 +866,11 @@
         </div>
 
         <!-- Share Section -->
-        <div class="mb-24 animate-fadeInUp delay-600">
-            <div class="glass-card rounded-[3rem] p-10 md:p-12 soft-shadow">
+        <div class="mb-16 md:mb-24 animate-fadeInUp delay-600">
+            <div class="glass-card rounded-[3rem] p-8 md:p-10 lg:p-12 soft-shadow">
                 <div class="text-center mb-8">
-                    <h3 class="text-2xl md:text-3xl font-display font-semibold text-gray-800 mb-3">Share the love</h3>
-                    <p class="text-gray-600 text-lg">Help other parents discover Snugs</p>
+                    <h3 class="text-2xl sm:text-3xl font-display font-semibold text-gray-800 mb-3">Share the love</h3>
+                    <p class="text-gray-600 text-base sm:text-lg">Help other parents discover Snugs</p>
                 </div>
 
                 <div class="flex flex-wrap items-center justify-center gap-4 mb-6">
@@ -909,97 +923,97 @@
         </div>
 
         <!-- FAQ Section -->
-        <section aria-labelledby="faq-heading" class="mb-24 animate-fadeInUp delay-700">
-            <div class="glass-card rounded-[3rem] p-10 md:p-12 soft-shadow">
-                <h2 id="faq-heading" class="text-3xl md:text-4xl font-display font-bold text-gray-800 mb-10 text-center">Frequently asked questions</h2>
+        <section aria-labelledby="faq-heading" class="mb-16 md:mb-24 animate-fadeInUp delay-700">
+            <div class="glass-card rounded-[3rem] p-6 md:p-8 lg:p-10 xl:p-12 soft-shadow">
+                <h2 id="faq-heading" class="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-gray-800 mb-8 md:mb-10 text-center">Frequently asked questions</h2>
 
-                <div class="space-y-5 max-w-3xl mx-auto">
-                    <details class="group border-2 border-orange-100 rounded-3xl p-6 hover:border-orange-200 transition-all bg-white/50">
-                        <summary class="cursor-pointer list-none flex items-center justify-between gap-4">
-                            <span class="text-lg md:text-xl font-semibold text-gray-800">Is Snugs safe for my baby?</span>
-                            <span class="text-orange-600 transition-transform group-open:rotate-180 text-2xl flex-shrink-0" aria-hidden="true">▾</span>
+                <div class="space-y-4 md:space-y-5 max-w-3xl mx-auto">
+                    <details class="group border-2 border-orange-100 rounded-2xl md:rounded-3xl p-5 md:p-6 hover:border-orange-200 transition-all bg-white/50">
+                        <summary class="cursor-pointer list-none flex items-center justify-between gap-3 md:gap-4">
+                            <span class="text-base sm:text-lg md:text-xl font-semibold text-gray-800">Is Snugs safe for my baby?</span>
+                            <span class="text-orange-600 transition-transform group-open:rotate-180 text-xl md:text-2xl flex-shrink-0" aria-hidden="true">▾</span>
                         </summary>
-                        <div class="mt-4 text-gray-600 leading-relaxed text-base md:text-lg">
+                        <div class="mt-4 text-gray-600 leading-relaxed text-sm sm:text-base md:text-lg">
                             Absolutely. Snugs provides parenting <em>advice</em>, not medical diagnosis. We cite credible sources and include prominent medical disclaimers. Your data is encrypted and private. For medical emergencies or health concerns, always consult your pediatrician.
                         </div>
                     </details>
 
-                    <details class="group border-2 border-orange-100 rounded-3xl p-6 hover:border-orange-200 transition-all bg-white/50">
-                        <summary class="cursor-pointer list-none flex items-center justify-between gap-4">
-                            <span class="text-lg md:text-xl font-semibold text-gray-800">Can AI really replace my pediatrician?</span>
-                            <span class="text-orange-600 transition-transform group-open:rotate-180 text-2xl flex-shrink-0" aria-hidden="true">▾</span>
+                    <details class="group border-2 border-orange-100 rounded-2xl md:rounded-3xl p-5 md:p-6 hover:border-orange-200 transition-all bg-white/50">
+                        <summary class="cursor-pointer list-none flex items-center justify-between gap-3 md:gap-4">
+                            <span class="text-base sm:text-lg md:text-xl font-semibold text-gray-800">Can AI really replace my pediatrician?</span>
+                            <span class="text-orange-600 transition-transform group-open:rotate-180 text-xl md:text-2xl flex-shrink-0" aria-hidden="true">▾</span>
                         </summary>
-                        <div class="mt-4 text-gray-600 leading-relaxed text-base md:text-lg">
+                        <div class="mt-4 text-gray-600 leading-relaxed text-sm sm:text-base md:text-lg">
                             No—and we'd never claim it can. Snugs is designed to <em>complement</em> your pediatrician, not replace them. Think of Snugs as your 24/7 parenting advisor for everyday questions ("Why won't my baby nap?") that don't require medical appointments. For health concerns, diagnosis, or emergencies, always see a real doctor.
                         </div>
                     </details>
 
-                    <details class="group border-2 border-orange-100 rounded-3xl p-6 hover:border-orange-200 transition-all bg-white/50">
-                        <summary class="cursor-pointer list-none flex items-center justify-between gap-4">
-                            <span class="text-lg md:text-xl font-semibold text-gray-800">Will Snugs work for MY baby?</span>
-                            <span class="text-orange-600 transition-transform group-open:rotate-180 text-2xl flex-shrink-0" aria-hidden="true">▾</span>
+                    <details class="group border-2 border-orange-100 rounded-2xl md:rounded-3xl p-5 md:p-6 hover:border-orange-200 transition-all bg-white/50">
+                        <summary class="cursor-pointer list-none flex items-center justify-between gap-3 md:gap-4">
+                            <span class="text-base sm:text-lg md:text-xl font-semibold text-gray-800">Will Snugs work for MY baby?</span>
+                            <span class="text-orange-600 transition-transform group-open:rotate-180 text-xl md:text-2xl flex-shrink-0" aria-hidden="true">▾</span>
                         </summary>
-                        <div class="mt-4 text-gray-600 leading-relaxed text-base md:text-lg">
+                        <div class="mt-4 text-gray-600 leading-relaxed text-sm sm:text-base md:text-lg">
                             Yes! Snugs is trained on child development from newborn to 15 years. Whether your baby is 3 days old or 3 years old, Snugs tailors advice to their exact age, temperament, feeding style, and developmental stage. Try the 14-day free trial to see for yourself—no credit card required.
                         </div>
                     </details>
 
-                    <details class="group border-2 border-orange-100 rounded-3xl p-6 hover:border-orange-200 transition-all bg-white/50">
-                        <summary class="cursor-pointer list-none flex items-center justify-between gap-4">
-                            <span class="text-lg md:text-xl font-semibold text-gray-800">What if I'm not tech-savvy?</span>
-                            <span class="text-orange-600 transition-transform group-open:rotate-180 text-2xl flex-shrink-0" aria-hidden="true">▾</span>
+                    <details class="group border-2 border-orange-100 rounded-2xl md:rounded-3xl p-5 md:p-6 hover:border-orange-200 transition-all bg-white/50">
+                        <summary class="cursor-pointer list-none flex items-center justify-between gap-3 md:gap-4">
+                            <span class="text-base sm:text-lg md:text-xl font-semibold text-gray-800">What if I'm not tech-savvy?</span>
+                            <span class="text-orange-600 transition-transform group-open:rotate-180 text-xl md:text-2xl flex-shrink-0" aria-hidden="true">▾</span>
                         </summary>
-                        <div class="mt-4 text-gray-600 leading-relaxed text-base md:text-lg">
+                        <div class="mt-4 text-gray-600 leading-relaxed text-sm sm:text-base md:text-lg">
                             Snugs is designed to be as simple as texting a friend. Just type (or speak) your question and get an answer. No complicated menus, no confusing settings. Our onboarding takes 2 minutes and walks you through everything. If you can send a text message, you can use Snugs.
                         </div>
                     </details>
 
-                    <details class="group border-2 border-orange-100 rounded-3xl p-6 hover:border-orange-200 transition-all bg-white/50">
-                        <summary class="cursor-pointer list-none flex items-center justify-between gap-4">
-                            <span class="text-lg md:text-xl font-semibold text-gray-800">How accurate are Snugs' answers?</span>
-                            <span class="text-orange-600 transition-transform group-open:rotate-180 text-2xl flex-shrink-0" aria-hidden="true">▾</span>
+                    <details class="group border-2 border-orange-100 rounded-2xl md:rounded-3xl p-5 md:p-6 hover:border-orange-200 transition-all bg-white/50">
+                        <summary class="cursor-pointer list-none flex items-center justify-between gap-3 md:gap-4">
+                            <span class="text-base sm:text-lg md:text-xl font-semibold text-gray-800">How accurate are Snugs' answers?</span>
+                            <span class="text-orange-600 transition-transform group-open:rotate-180 text-xl md:text-2xl flex-shrink-0" aria-hidden="true">▾</span>
                         </summary>
-                        <div class="mt-4 text-gray-600 leading-relaxed text-base md:text-lg">
+                        <div class="mt-4 text-gray-600 leading-relaxed text-sm sm:text-base md:text-lg">
                             Snugs uses Google's Gemini AI with "grounding technology"—which means answers are based on credible, real-world parenting sources (pediatric guidelines, child development research, trusted parenting experts). Snugs cites sources so you can verify. That said, AI can make mistakes, which is why we emphasize: use Snugs as a helpful guide, not a substitute for professional medical advice.
                         </div>
                     </details>
 
-                    <details class="group border-2 border-orange-100 rounded-3xl p-6 hover:border-orange-200 transition-all bg-white/50">
-                        <summary class="cursor-pointer list-none flex items-center justify-between gap-4">
-                            <span class="text-lg md:text-xl font-semibold text-gray-800">What happens to my data?</span>
-                            <span class="text-orange-600 transition-transform group-open:rotate-180 text-2xl flex-shrink-0" aria-hidden="true">▾</span>
+                    <details class="group border-2 border-orange-100 rounded-2xl md:rounded-3xl p-5 md:p-6 hover:border-orange-200 transition-all bg-white/50">
+                        <summary class="cursor-pointer list-none flex items-center justify-between gap-3 md:gap-4">
+                            <span class="text-base sm:text-lg md:text-xl font-semibold text-gray-800">What happens to my data?</span>
+                            <span class="text-orange-600 transition-transform group-open:rotate-180 text-xl md:text-2xl flex-shrink-0" aria-hidden="true">▾</span>
                         </summary>
-                        <div class="mt-4 text-gray-600 leading-relaxed text-base md:text-lg">
+                        <div class="mt-4 text-gray-600 leading-relaxed text-sm sm:text-base md:text-lg">
                             Your data is encrypted, stored securely on Cloudflare's infrastructure, and <strong>never sold or shared</strong> with third parties. You own your data—you can export it or delete your account anytime. We're GDPR-compliant and take privacy seriously. See our <a href="/privacy.html" class="text-orange-700 underline hover:text-orange-800 font-medium">Privacy Policy</a> for details.
                         </div>
                     </details>
 
-                    <details class="group border-2 border-orange-100 rounded-3xl p-6 hover:border-orange-200 transition-all bg-white/50">
-                        <summary class="cursor-pointer list-none flex items-center justify-between gap-4">
-                            <span class="text-lg md:text-xl font-semibold text-gray-800">Can I cancel anytime?</span>
-                            <span class="text-orange-600 transition-transform group-open:rotate-180 text-2xl flex-shrink-0" aria-hidden="true">▾</span>
+                    <details class="group border-2 border-orange-100 rounded-2xl md:rounded-3xl p-5 md:p-6 hover:border-orange-200 transition-all bg-white/50">
+                        <summary class="cursor-pointer list-none flex items-center justify-between gap-3 md:gap-4">
+                            <span class="text-base sm:text-lg md:text-xl font-semibold text-gray-800">Can I cancel anytime?</span>
+                            <span class="text-orange-600 transition-transform group-open:rotate-180 text-xl md:text-2xl flex-shrink-0" aria-hidden="true">▾</span>
                         </summary>
-                        <div class="mt-4 text-gray-600 leading-relaxed text-base md:text-lg">
+                        <div class="mt-4 text-gray-600 leading-relaxed text-sm sm:text-base md:text-lg">
                             Yes! Cancel anytime from your account settings. If you cancel during your trial, you won't be charged. If you cancel after subscribing, you'll keep access until the end of your billing period. No cancellation fees, no hassle.
                         </div>
                     </details>
 
-                    <details class="group border-2 border-orange-100 rounded-3xl p-6 hover:border-orange-200 transition-all bg-white/50">
-                        <summary class="cursor-pointer list-none flex items-center justify-between gap-4">
-                            <span class="text-lg md:text-xl font-semibold text-gray-800">Do you offer refunds?</span>
-                            <span class="text-orange-600 transition-transform group-open:rotate-180 text-2xl flex-shrink-0" aria-hidden="true">▾</span>
+                    <details class="group border-2 border-orange-100 rounded-2xl md:rounded-3xl p-5 md:p-6 hover:border-orange-200 transition-all bg-white/50">
+                        <summary class="cursor-pointer list-none flex items-center justify-between gap-3 md:gap-4">
+                            <span class="text-base sm:text-lg md:text-xl font-semibold text-gray-800">Do you offer refunds?</span>
+                            <span class="text-orange-600 transition-transform group-open:rotate-180 text-xl md:text-2xl flex-shrink-0" aria-hidden="true">▾</span>
                         </summary>
-                        <div class="mt-4 text-gray-600 leading-relaxed text-base md:text-lg">
+                        <div class="mt-4 text-gray-600 leading-relaxed text-sm sm:text-base md:text-lg">
                             We offer a 14-day free trial so you can try Snugs risk-free before paying. If you're not satisfied after subscribing, contact us at <a href="mailto:support@snugs.ai" class="text-orange-700 underline hover:text-orange-800 font-medium">support@snugs.ai</a> within 30 days for a full refund.
                         </div>
                     </details>
 
-                    <details class="group border-2 border-orange-100 rounded-3xl p-6 hover:border-orange-200 transition-all bg-white/50">
-                        <summary class="cursor-pointer list-none flex items-center justify-between gap-4">
-                            <span class="text-lg md:text-xl font-semibold text-gray-800">Can I use Snugs for multiple children?</span>
-                            <span class="text-orange-600 transition-transform group-open:rotate-180 text-2xl flex-shrink-0" aria-hidden="true">▾</span>
+                    <details class="group border-2 border-orange-100 rounded-2xl md:rounded-3xl p-5 md:p-6 hover:border-orange-200 transition-all bg-white/50">
+                        <summary class="cursor-pointer list-none flex items-center justify-between gap-3 md:gap-4">
+                            <span class="text-base sm:text-lg md:text-xl font-semibold text-gray-800">Can I use Snugs for multiple children?</span>
+                            <span class="text-orange-600 transition-transform group-open:rotate-180 text-xl md:text-2xl flex-shrink-0" aria-hidden="true">▾</span>
                         </summary>
-                        <div class="mt-4 text-gray-600 leading-relaxed text-base md:text-lg">
+                        <div class="mt-4 text-gray-600 leading-relaxed text-sm sm:text-base md:text-lg">
                             Yes! Create separate profiles for each child. Snugs will tailor advice to each baby's age and needs. Perfect for families with multiple kids or caregivers managing twins.
                         </div>
                     </details>
