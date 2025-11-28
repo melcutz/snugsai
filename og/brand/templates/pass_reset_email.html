@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Your Password</title>
+    <style>
+        <style type="text/css">
+       body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+        table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+        img { -ms-interpolation-mode: bicubic; }
+
+        /* General Styling */
+        body { margin: 0; padding: 0; background-color: #f7f3ed; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; color: #333333; }
+        a { text-decoration: none; color: #ff8c00; } /* Snugs Orange for links */
+
+       .container { max-width: 600px; margin: 0 auto; }
+        .header { padding: 20px; text-align: center; background-color: #ffffff; }
+        .content { padding: 30px; background-color: #ffffff; }
+        .footer { padding: 20px; text-align: center; font-size: 12px; color: #666666; }
+        .button {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #ff8c00; /* Snugs Orange */
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+       .heading { font-size: 24px; color: #333333; margin-bottom: 20px; }
+        .sub-heading { font-size: 18px; color: #555555; margin-bottom: 15px; }
+        .paragraph { font-size: 16px; line-height: 1.6; margin-bottom: 15px; }
+        .logo { width: 80px; height: auto; display: block; margin: 0 auto 10px; } /* Adjust size as needed */
+        .background-section {
+            background-image: url('https://snugs.ai/og/brand/background.png'); /* Replace with your background image URL */
+            background-size: cover;
+            background-position: center center;
+            padding: 40px 0;
+            text-align: center;
+        }
+        .background-section h1 {
+            color: #333333; /* Darker text for contrast */
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+        .background-section p {
+            color: #555555;
+            font-size: 18px;
+            margin-top: 0;
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="bear-avatar">
+                 <img src="https://snugs.ai/og/brand/snugs_logo1.png" alt="Snugs.ai Logo" class="logo" style="width: 150px; height: auto; display: block; margin: 0 auto 10px;">
+            </div>
+            <h1 style="font-size: 28px; color: #333333; margin: 0;">Snugs.ai</h1>
+            <p style="font-size: 14px; color: #666666; margin: 5px 0 0;">Your 24/7 AI Parenting Assistant</p>
+        </div>
+
+        <h1>Password Reset Request</h1>
+
+        <p>Hi {username},</p>
+
+        <p>We received a request to reset the password for your {app_name} account.</p>
+
+        <p>Click the button below to reset your password. This link will expire in <strong>1 hour</strong> for security reasons.</p>
+
+        <div style="text-align: center;">
+            <a href="{reset_url}" class="button">Reset My Password</a>
+        </div>
+
+        <p><small>If the button doesn't work, you can copy and paste this link into your browser:</small></p>
+        <p><small><a href="{reset_url}" class="link">{reset_url}</a></small></p>
+
+        <div class="warning-box">
+            <p><strong>⚠️ Security Notice:</strong></p>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+                <li>If you didn't request this password reset, you can safely ignore this email.</li>
+                <li>Your password won't change unless you click the link above and create a new one.</li>
+                <li>Never share your password or reset links with anyone.</li>
+            </ul>
+        </div>
+
+        <p>If you're having trouble accessing your account or didn't request this reset, please contact our support team immediately.</p>
+
+        <p>Stay safe,<br>The {app_name} Team 🔒</p>
+
+        <div class="footer">
+            <p>
+                This email was sent to you because a password reset was requested for your {app_name} account.<br>
+                If you didn't make this request, please contact support.
+            </p>
+            <p>
+                <a href="{app_url}" class="link">{app_name}</a> |
+                <a href="{app_url}/privacy" class="link">Privacy Policy</a> |
+                <a href="{app_url}/terms" class="link">Terms of Service</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

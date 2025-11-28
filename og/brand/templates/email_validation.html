@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to {app_name}</title>
+    <style type="text/css">
+       body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+        table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+        img { -ms-interpolation-mode: bicubic; }
+
+        /* General Styling */
+        body { margin: 0; padding: 0; background-color: #f7f3ed; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; color: #333333; }
+        a { text-decoration: none; color: #ff8c00; } /* Snugs Orange for links */
+
+       .container { max-width: 600px; margin: 0 auto; }
+        .header { padding: 20px; text-align: center; background-color: #ffffff; }
+        .content { padding: 30px; background-color: #ffffff; }
+        .footer { padding: 20px; text-align: center; font-size: 12px; color: #666666; }
+        .button {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #ff8c00; /* Snugs Orange */
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+       .heading { font-size: 24px; color: #333333; margin-bottom: 20px; }
+        .sub-heading { font-size: 18px; color: #555555; margin-bottom: 15px; }
+        .paragraph { font-size: 16px; line-height: 1.6; margin-bottom: 15px; }
+        .logo { width: 80px; height: auto; display: block; margin: 0 auto 10px; } /* Adjust size as needed */
+        .background-section {
+            background-image: url('https://snugs.ai/og/brand/background.png'); /* Replace with your background image URL */
+            background-size: cover;
+            background-position: center center;
+            padding: 40px 0;
+            text-align: center;
+        }
+        .background-section h1 {
+            color: #333333; /* Darker text for contrast */
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+        .background-section p {
+            color: #555555;
+            font-size: 18px;
+            margin-top: 0;
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .welcome-text {{
+            font-size: 18px;
+            color: #6b7280;
+            margin-bottom: 20px;
+        }}
+       
+        .features {{
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }}
+        .feature-item {{
+            margin: 10px 0;
+            padding-left: 20px;
+            position: relative;
+        }}
+        .footer {{
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            font-size: 14px;
+            color: #6b7280;
+            text-align: center;
+        }}
+        .link {{
+            color: #FF8755;
+            text-decoration: none;
+        }}
+        @media (max-width: 600px) {{
+            body {{
+                padding: 10px;
+            }}
+            .container {{
+                padding: 20px;
+            }}
+        }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="bear-avatar">
+                 <img src="https://snugs.ai/og/brand/snugs_logo1.png" alt="Snugs.ai Logo" class="logo" style="width: 150px; height: auto; display: block; margin: 0 auto 10px;">
+            </div>
+            <h1 style="font-size: 28px; color: #333333; margin: 0;">Snugs.ai</h1>
+            <p style="font-size: 14px; color: #666666; margin: 5px 0 0;">Your 24/7 AI Parenting Assistant</p>
+        </div>
+
+        <h1>Welcome {username}! 👋</h1>
+
+        <p>Thank you for joining Snugs.ai! We're excited to help you navigate the wonderful journey of parenthood with our AI-powered parenting assistant.</p>
+        <p>To get started and ensure the security of your account, please verify your email address by clicking the button below:</p>
+        <div style="text-align: center;">
+            <a href="{verification_url}" class="button" >Verify My Email Address</a>
+        </div>
+
+        <p><small>If the button doesn't work, you can copy and paste this link into your browser:</small></p>
+        <p><small><a href="{verification_url}" class="link">{verification_url}</a></small></p>
+
+        <div class="features">
+            <h3>Here's what you can do with {app_name}:</h3>   
+            <div class="feature-item">💬 <strong>24/7 Parenting Chat:</strong> Ask questions and get personalized advice anytime</div>
+            <div class="feature-item">🎥 <strong>AI-Powered Baby Monitoring:</strong> Get real-time insights about your baby's behavior and needs</div>
+            <div class="feature-item">📊 <strong>Growth Tracking:</strong> Monitor development milestones and growth patterns</div>
+            <div class="feature-item">📝 <strong>Activity Logging:</strong> Keep detailed records of feeding, sleep, and activities</div>
+            <div class="feature-item">🔒 <strong>Privacy First:</strong> Your data stays secure and private</div>
+            <div class="feature-item">📱 <strong>PWA Ready:</strong> Install as an app on your phone for the best experience</div>
+        </div>
+        <p>We're here to support you every step of the way. Whether you're a first-time parent or adding to your family, {app_name} adapts to your unique parenting journey.</p>
+
+        <p>If you have any questions or need help getting started, don't hesitate to reach out to our support team.</p>
+
+        <p>Welcome to the {app_name} family! 🍼✨</p>
+
+        <div class="footer">
+            <p>
+                This email was sent to you because you signed up for {app_name}.<br>
+                If you didn't create an account, you can safely ignore this email.
+            </p>
+            <p>
+                <a href="{app_url}" class="link">{app_name}</a> |
+                <a href="{app_url}/privacy" class="link">Privacy Policy</a> |
+                <a href="{app_url}/terms" class="link">Terms of Service</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
