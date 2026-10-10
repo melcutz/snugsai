@@ -166,7 +166,12 @@
 
     <main class="glass-card rounded-[3rem] soft-shadow p-8 md:p-12 animate-fadeInUp delay-100">
       <h2 class="text-3xl md:text-4xl font-display font-bold text-gray-800 mb-3">Contact Us</h2>
-      <p class="text-gray-600 mb-8">We'd love to hear from you. Fill out the form and we'll get back to you shortly.</p>
+      <p class="text-gray-600 mb-4">We'd love to hear from you. This form opens your email app so the message goes straight to us.</p>
+      <p class="mb-8">
+        <a href="https://app.snugs.ai/?utm_source=marketing_site&utm_medium=cta&utm_campaign=contact" data-cta="contact" class="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-full hover:from-orange-600 hover:to-orange-700 transition-all shadow-lg">
+          Start your 14-day free trial
+        </a>
+      </p>
 
       <form id="contact-form" class="grid grid-cols-1 gap-5" novalidate>
         <div>
@@ -207,7 +212,7 @@
     </main>
 
     <footer class="text-center pt-12 pb-8 text-gray-600">
-      <p class="mb-4 text-base">© 2025 Snugs.ai — Powered by AI, Built with Love</p>
+      <p class="mb-4 text-base">© 2026 Snugs.ai. Powered by AI, built with love</p>
       <div class="flex flex-wrap justify-center gap-6 text-sm">
         <a href="/" class="hover:text-orange-600 transition-colors font-medium">Home</a>
         <a href="/resources/" class="hover:text-orange-600 transition-colors font-medium">Resources</a>
@@ -220,8 +225,18 @@
   </div>
 
   <script>
-    const CONTACT_FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxSABJJar7RG9Dm0ovzzjJlxIHJ7cbU8T87K7aZ3zkCuAj9OMRJrU4wUjHeVVxeMFCa0Q/exec';
     const CONTACT_EMAIL = 'contact@snugs.ai';
+
+    document.querySelectorAll('[data-cta]').forEach(function(el) {
+      el.addEventListener('click', function() {
+        if (typeof gtag === 'function') {
+          gtag('event', 'cta_click', {
+            cta_id: el.getAttribute('data-cta'),
+            link_url: el.href
+          });
+        }
+      });
+    });
 
     const form = document.getElementById('contact-form');
     const submitBtn = document.getElementById('submit-btn');
@@ -252,34 +267,14 @@
       }
 
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending…';
+      submitBtn.textContent = 'Opening email...';
 
       try {
-        if (CONTACT_FORM_ENDPOINT) {
-          const fd = new FormData();
-          fd.append('name', name);
-          fd.append('email', email);
-          fd.append('replyto', email);
-          fd.append('_subject', subject);
-          fd.append('subject', subject);
-          fd.append('message', body);
-          fd.append('to', CONTACT_EMAIL);
-          fd.append('consentAcknowledged', (document.getElementById('contact-consent') && document.getElementById('contact-consent').checked) ? 'true' : 'false');
-
-          await fetch(CONTACT_FORM_ENDPOINT, {
-            method: 'POST',
-            body: fd,
-            mode: 'no-cors'
-          });
-
-          showMessage('Thanks! Your message has been sent.', 'success');
-          form.reset();
-        } else {
-          const mailBody = `From: ${name} <${email}>\n\n${body}`;
-          const url = buildMailtoUrl(CONTACT_EMAIL, subject, mailBody);
-          window.location.href = url;
-          showMessage('Opening your email client…', 'success');
-        }
+        const mailBody = `From: ${name} <${email}>\n\n${body}`;
+        const url = buildMailtoUrl(CONTACT_EMAIL, subject, mailBody);
+        window.location.href = url;
+        showMessage('Opening your email app with this message.', 'success');
+        form.reset();
       } catch (err) {
         showMessage('Sorry, something went wrong. Please try again or email us directly at contact@snugs.ai.', 'error');
       } finally {

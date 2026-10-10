@@ -903,8 +903,24 @@
     </section>
     </article>
 
-    <footer class="text-center pt-12 pb-8 text-gray-600">
-      <p class="mb-4 text-base">© 2025 Snugs.ai — Powered by AI, Built with Love</p>
+        <aside class="mt-10 text-center" aria-label="Start a free trial">
+      <p class="text-gray-700 mb-4">Snugs.ai is live. Start your 14-day free trial.</p>
+      <a href="https://app.snugs.ai/?utm_source=marketing_site&amp;utm_medium=cta&amp;utm_campaign=baby-safety-during-breastfeeding-addressing-suffocation-fears" data-cta="baby-safety-during-breastfeeding-addressing-suffocation-fears" class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-full hover:from-orange-600 hover:to-orange-700 transition-all shadow-lg">Start your 14-day free trial</a>
+    </aside>
+    <script>
+      document.querySelectorAll('[data-cta]').forEach(function(el) {
+        el.addEventListener('click', function() {
+          if (typeof gtag === 'function') {
+            gtag('event', 'cta_click', {
+              cta_id: el.getAttribute('data-cta'),
+              link_url: el.href
+            });
+          }
+        });
+      });
+    </script>
+<footer class="text-center pt-12 pb-8 text-gray-600">
+      <p class="mb-4 text-base">© 2026 Snugs.ai. Powered by AI, built with love</p>
       <div class="flex flex-wrap justify-center gap-6 text-sm">
         <a href="/" class="hover:text-orange-600 transition-colors font-medium">Home</a>
         <a href="/resources/" class="hover:text-orange-600 transition-colors font-medium">Resources</a>
