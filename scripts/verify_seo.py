@@ -127,10 +127,12 @@ def main():
         article = next((n for n in nodes if n.get("@type") == "Article"), None)
         if article is None:
             errors.append(f"NO ARTICLE NODE {c}")
-        elif article.get("author", {}).get("@type") != "Person":
-            errors.append(f"AUTHOR NOT PERSON {c}")
-        if "Claudiu Branzan" not in html:
-            errors.append(f"AUTHOR BOX MISSING {c}")
+        elif article.get("author", {}).get("@type") != "Organization":
+            errors.append(f"AUTHOR NOT ORGANIZATION {c}")
+        if "Claudiu Branzan" in html or "Claudiu" in html or "Branzan" in html:
+            errors.append(f"PERSONAL NAME FOUND {c}")
+        if "From the founder of Snugs.ai, a dad of a toddler building an AI parenting advisor for parents of 0-3 year olds." not in html:
+            errors.append(f"AUTHOR TEXT MISSING {c}")
         links = re.findall(r'aria-label="Continue reading".*?</nav>', html, re.S)
         if not links:
             errors.append(f"CONTINUE-READING MISSING {c}")

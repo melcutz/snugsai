@@ -5,9 +5,9 @@ For each core article:
   1. Insert 3-5 contextual internal links to other keep articles (a
      "Continue reading" nav block before the Related Guides section, or
      before </article> as fallback).
-  2. Append a short "Written by a dad" author box (Claudiu Branzan, founder
-     of Snugs.ai and dad of a toddler - factual, no invented credentials).
-  3. Extend the existing JSON-LD Article node: author as Person, plus
+  2. Append a short "Written by a dad" author box (from the founder of
+     Snugs.ai, a dad of a toddler - factual, no invented credentials).
+  3. Extend the existing JSON-LD Article node: author as Organization, plus
      datePublished/dateModified from git history and publisher Organization.
 
 Preserves all existing CTA markup, data-cta attributes, cta_click analytics,
@@ -25,10 +25,9 @@ from pathlib import Path
 BASE = Path(__file__).resolve().parent.parent
 SITE = "https://snugs.ai"
 
-AUTHOR_NAME = "Claudiu Branzan"
 AUTHOR_BOX = """<aside class="mt-10 rounded-3xl border border-orange-200 bg-orange-50/80 p-6" aria-label="About the author">
       <p class="font-semibold text-gray-800">Written by a dad</p>
-      <p class="text-gray-700 mt-2">Claudiu Branzan is the founder of Snugs.ai and a dad of a toddler, building an AI parenting advisor for parents of 0-3 year olds.</p>
+      <p class="text-gray-700 mt-2">From the founder of Snugs.ai, a dad of a toddler building an AI parenting advisor for parents of 0-3 year olds.</p>
     </aside>"""
 
 NAV_OPEN = """<nav class="mt-10 rounded-3xl border border-orange-200 bg-orange-50/80 p-6" aria-label="Continue reading">
@@ -295,7 +294,7 @@ def enrich(path: Path, related_slugs):
             html = html.replace("</article>", nav + "\n</article>", 1)
 
     # 2. author box (inside the article, at its end)
-    if 'aria-label="About the author"' not in html and AUTHOR_NAME not in html:
+    if 'aria-label="About the author"' not in html:
         if "</article>" in html:
             html = html.replace("</article>", AUTHOR_BOX + "\n</article>", 1)
         else:
@@ -314,9 +313,8 @@ def enrich(path: Path, related_slugs):
     assert article is not None, f"no Article node in {path}"
     published, modified = git_dates(str(path.relative_to(BASE)))
     article["author"] = {
-        "@type": "Person",
-        "name": AUTHOR_NAME,
-        "description": "Founder of Snugs.ai and dad of a toddler",
+        "@type": "Organization",
+        "name": "Snugs.ai",
     }
     article["datePublished"] = published
     article["dateModified"] = modified

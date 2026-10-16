@@ -55,8 +55,8 @@ by hand: no `noindex` row may contain core 0-3 terms in its title, every
   `robots.txt` already references `https://snugs.ai/sitemap.xml`.
 - `scripts/enrich_core30.py` – enriches the ~30 strongest 0-3 articles in
   `seo/core30.txt`: 3–5 contextual internal links to other keep articles, a
-  short "Written by a dad" author box (Claudiu Branzan, founder of Snugs.ai
-  and dad of a toddler), and Article-schema JSON-LD (author as Person,
+  short "Written by a dad" author box (from the founder of Snugs.ai, a dad
+  of a toddler), and Article-schema JSON-LD (author as Organization,
   datePublished/dateModified from git history, publisher Snugs.ai).
 - `scripts/verify_seo.py` – parses every HTML file, checks sitemap URLs
   resolve to indexable files, no `noindex` page is in the sitemap, redirect
