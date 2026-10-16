@@ -30,6 +30,12 @@ ROOT = Path(__file__).resolve().parent.parent
 RESOURCES = ROOT / "resources"
 
 
+def is_merge_stub(text: str) -> bool:
+    """SEO merge stubs (issue #8) are noindex meta-refresh redirect placeholders,
+    not real articles: no CTA surface, so the sticky checks don't apply."""
+    return 'http-equiv="refresh"' in text and "noindex" in text
+
+
 class StickyParser(HTMLParser):
     def __init__(self) -> None:
         super().__init__()
@@ -60,11 +66,17 @@ def main() -> int:
     articles = sorted(p for p in RESOURCES.glob("*.html") if p.name != "index.html")
     failures: list[str] = []
     sticky_pages = 0
+    skipped_stubs = 0
 
     for path in articles:
         text = path.read_text(encoding="utf-8")
         rel = str(path.relative_to(ROOT))
         slug = path.stem  # e.g. calm-a-crying-baby
+
+        # SEO merge stubs are redirect placeholders, not articles: exempt.
+        if is_merge_stub(text):
+            skipped_stubs += 1
+            continue
 
         # (1) sticky present
         if 'data-cta="sticky_mobile"' not in text:
@@ -147,6 +159,7 @@ def main() -> int:
 
     print(f"Article pages scanned : {len(articles)}")
     print(f"Pages with sticky     : {sticky_pages}")
+    print(f"Merge stubs skipped   : {skipped_stubs}")
     print(f"Failures              : {len(failures)}")
     for f in failures[:50]:
         print(f"  {f}")
