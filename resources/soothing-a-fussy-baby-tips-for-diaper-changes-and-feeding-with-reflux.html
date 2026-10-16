@@ -1003,7 +1003,8 @@ Remember that you are not alone, and this phase is temporary. Prioritize rest wh
           if (typeof gtag === 'function') {
             gtag('event', 'cta_click', {
               cta_id: el.getAttribute('data-cta'),
-              link_url: el.href
+              link_url: el.href,
+              link_domain: (function(){ try { return new URL(el.href).hostname; } catch(e){ return 'unknown'; } })()
             });
           }
         });
