@@ -187,7 +187,31 @@
       opacity: 0.3;
       animation: blob 20s ease-in-out infinite;
     }
-  </style>
+      /* Snugs sticky mobile CTA (#10): mobile-only, fixed, no CLS. Keep z-index 40 so cookie consent (50+) stays on top. */
+    .snugs-sticky-cta { display: none; }
+    @media (max-width: 767px) {
+      body { padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+      body.snugs-sticky-dismissed { padding-bottom: 0; }
+      .snugs-sticky-cta {
+        display: flex;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 40;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
+        background: rgba(255, 255, 255, 0.96);
+        border-top: 1px solid #fed7aa;
+        box-shadow: 0 -8px 24px rgba(234, 88, 12, 0.12);
+      }
+      .snugs-sticky-cta[hidden] { display: none; }
+    }
+    @media (min-width: 768px) {
+      .snugs-sticky-cta { display: none !important; }
+    }
+</style>
 </head>
 <body class="gradient-warm min-h-screen overflow-x-hidden relative">
 
@@ -848,13 +872,40 @@
       <p class="text-gray-700 mb-4">Snugs.ai is live. Start your 14-day free trial.</p>
       <a href="https://app.snugs.ai/?utm_source=marketing_site&amp;utm_medium=cta&amp;utm_campaign=balancing-extracurriculars-with-single-parenthood-when-enough-is-more-than-enough" data-cta="balancing-extracurriculars-with-single-parenthood-when-enough-is-more-than-enough" class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-full hover:from-orange-600 hover:to-orange-700 transition-all shadow-lg">Start your 14-day free trial</a>
     </aside>
+        <!-- Snugs sticky mobile CTA (#10): mobile-only via CSS, dismissible, reuses data-cta/cta_click (cta_id=sticky_mobile). Cookie consent should use z-index 50+. -->
+    <div class="snugs-sticky-cta" id="snugs-sticky-cta" role="region" aria-label="Ask Snugs trial">
+      <a href="https://app.snugs.ai/?utm_source=marketing_site&amp;utm_medium=cta&amp;utm_campaign=balancing-extracurriculars-with-single-parenthood-when-enough-is-more-than-enough" data-cta="sticky_mobile" class="flex-1 inline-flex items-center justify-center px-5 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-full hover:from-orange-600 hover:to-orange-700 transition-all shadow-lg text-sm">Ask Snugs &mdash; Start free trial</a>
+      <button type="button" class="snugs-sticky-dismiss flex-shrink-0 w-9 h-9 rounded-full border border-orange-200 bg-white text-gray-600 font-bold leading-none" aria-label="Dismiss trial banner">&times;</button>
+    </div>
     <script>
+      (function() {
+        var bar = document.getElementById('snugs-sticky-cta');
+        if (!bar) return;
+        try {
+          if (sessionStorage.getItem('snugs_sticky_dismissed') === '1') {
+            bar.setAttribute('hidden', '');
+            document.body.classList.add('snugs-sticky-dismissed');
+            return;
+          }
+        } catch (e) {}
+        var btn = bar.querySelector('.snugs-sticky-dismiss');
+        if (btn) {
+          btn.addEventListener('click', function() {
+            bar.setAttribute('hidden', '');
+            document.body.classList.add('snugs-sticky-dismissed');
+            try { sessionStorage.setItem('snugs_sticky_dismissed', '1'); } catch (e) {}
+          });
+        }
+      })();
+    </script>
+<script>
       document.querySelectorAll('[data-cta]').forEach(function(el) {
         el.addEventListener('click', function() {
           if (typeof gtag === 'function') {
             gtag('event', 'cta_click', {
               cta_id: el.getAttribute('data-cta'),
-              link_url: el.href
+              link_url: el.href,
+              link_domain: (function(){ try { return new URL(el.href).hostname; } catch(e){ return 'unknown'; } })()
             });
           }
         });
