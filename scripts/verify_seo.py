@@ -166,13 +166,16 @@ def main():
 
     # 6. Sitemap count equals indexable set (articles + top-level + tools + hubs)
     keep_articles = [r for r in rows if r["decision"] == "keep"]
+    # Prune-pass-2 cap targets resource articles only; batch-1 section pages
+    # (tools/, schedules/, sleep-regressions/) are structured, not articles.
+    keep_resource_articles = [r for r in keep_articles if r["path"].startswith("resources/")]
     expected_indexable = len(keep_articles) + 6 + 5  # 6 top-level + 5 hubs
     actual_sitemap = len(locs)
     if actual_sitemap != expected_indexable:
         errors.append(f"SITEMAP COUNT MISMATCH: expected {expected_indexable} (keep articles {len(keep_articles)} + 6 top-level + 5 hubs), got {actual_sitemap}")
-    if len(keep_articles) > 120:
-        errors.append(f"TOO MANY KEEP ARTICLES: {len(keep_articles)} > 120 target")
-    print(f"6. sitemap count ({actual_sitemap}) matches indexable set ({expected_indexable}) OK; keep articles: {len(keep_articles)} <= 120")
+    if len(keep_resource_articles) > 120:
+        errors.append(f"TOO MANY KEEP ARTICLES: {len(keep_resource_articles)} > 120 target")
+    print(f"6. sitemap count ({actual_sitemap}) matches indexable set ({expected_indexable}) OK; keep resource articles: {len(keep_resource_articles)} <= 120")
 
     # 7. No noindexed URL in resources index pages
     # Check resources/index.html
@@ -200,6 +203,8 @@ def main():
     
     for path in indexable_paths:
         full_path = BASE / path
+        if full_path.is_dir():
+            full_path = full_path / "index.html"
         if not full_path.exists():
             errors.append(f"INDEXABLE PAGE MISSING: {path}")
             continue
