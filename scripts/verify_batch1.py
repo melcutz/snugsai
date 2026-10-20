@@ -279,10 +279,11 @@ new_urls = [f"{SITE}/{url_path(p)}" for p in NEW_PAGES]
 try:
     tree = ElementTree.parse(ROOT / "sitemap.xml")
     locs = {
-        (e.text or "").strip(): (e.find("s:lastmod", NS).text or "").strip()
+        (e.find("s:loc", NS).text or "").strip(): (e.find("s:lastmod", NS).text or "").strip()
         if e.find("s:lastmod", NS) is not None
         else ""
         for e in tree.getroot().findall("s:url", NS)
+        if e.find("s:loc", NS) is not None
     }
 except Exception as e:  # noqa: BLE001
     fail(f"10 SITEMAP XML INVALID: {e}")
