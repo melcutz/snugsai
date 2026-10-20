@@ -70,16 +70,21 @@ def main():
             m = re.search(r"<title>(.*?)</title>", path.read_text(encoding="utf-8"))
             title = (m.group(1).split(" | ")[0] if m else target)[:150]
             path.write_text(redirect_stub(title, target_url), encoding="utf-8")
-            redirects.append((f"{SITE}/{r['path']}", target_url))
             n_merge += 1
+            redirects.append((f"{SITE}/{r['path']}", target_url))
+        # Always collect redirects for merge decisions to keep redirects-301.csv in sync
+        if r["decision"] == "merge":
+            target = r["merge_target"]
+            target_url = f"{SITE}/{target}"
+            redirects.append((f"{SITE}/{r['path']}", target_url))
 
     with open(BASE / "seo" / "redirects-301.csv", "w", newline="") as f:
         w = csv.writer(f)
         w.writerow(["from", "to"])
-        w.writerows(sorted(redirects))
+        w.writerows(sorted(set(redirects)))  # deduplicate
 
     print(f"noindex tags added: {n_noindex}, merge stubs written: {n_merge}")
-    print(f"redirects-301.csv rows: {len(redirects)}")
+    print(f"redirects-301.csv rows: {len(set(redirects))}")
 
 
 if __name__ == "__main__":

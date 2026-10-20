@@ -29,6 +29,14 @@ TOP_LEVEL = [
     ("tools/sleep-milestone-calculator.html", "monthly", "0.9"),
 ]
 
+HUB_PAGES = [
+    ("resources/pregnancy/", "monthly", "0.8"),
+    ("resources/newborn/", "monthly", "0.8"),
+    ("resources/baby/", "monthly", "0.8"),
+    ("resources/toddler/", "monthly", "0.8"),
+    ("resources/dads/", "monthly", "0.8"),
+]
+
 
 def git_lastmod(relpath: str) -> str:
     try:
@@ -50,6 +58,8 @@ def main():
     urls = []
     for rel, freq, prio in TOP_LEVEL:
         urls.append((f"{SITE}/{rel}", git_lastmod(rel or "."), freq, prio))
+    for rel, freq, prio in HUB_PAGES:
+        urls.append((f"{SITE}/{rel}", git_lastmod(rel), freq, prio))
     for rel in keep:
         urls.append((f"{SITE}/{rel}", git_lastmod(rel), "monthly", "0.8"))
 
@@ -78,7 +88,7 @@ def main():
         print("robots.txt: Sitemap reference already present")
 
     print(f"sitemap.xml: {len(urls)} URLs "
-          f"({len(TOP_LEVEL)} top-level + {len(keep)} keep articles)")
+          f"({len(TOP_LEVEL)} top-level + {len(HUB_PAGES)} hubs + {len(keep)} keep articles)")
 
 
 if __name__ == "__main__":

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify the SEO prune/consolidate work for issue #8.
+"""Verify the SEO prune/consolidate work for issue #20 (Prune Pass 2).
 
 Checks:
   1. Every HTML file still parses (html.parser).
@@ -7,14 +7,18 @@ Checks:
   3. No noindex page is in the sitemap.
   4. Every redirect target exists and is a keep page.
   5. The JSON-LD on the core 30 is valid JSON with an Article node.
-Prints the decision counts and sitemap URL count. Exits non-zero on failure.
+  6. Sitemap count equals indexable set (<=120 articles + tools + top-level).
+  7. No noindexed URL in sitemap or resources index pages.
+  8. Every 301 target exists locally (file present).
+  9. Every indexable page has a self-referencing canonical.
+  10. No off-audience indexable titles (AG1, Toniebox, dating, teen, shaving, etc.).
+  11. Sitemap.xml is valid XML with lastmod on every URL.
 """
 
 import csv
 import json
 import re
 import sys
-import urllib.request
 from collections import Counter
 from html.parser import HTMLParser
 from pathlib import Path
@@ -43,9 +47,10 @@ def main():
     by_path = {r["path"]: r for r in rows}
     counts = Counter(r["decision"] for r in rows)
 
-    # 1. every HTML file parses (resources + top-level + tools)
+    # 1. every HTML file parses (resources + top-level + tools + hubs)
     html_files = (
         list((BASE / "resources").glob("*.html"))
+        + list((BASE / "resources").rglob("*.html"))
         + [BASE / f for f in ("index.html", "contact.html", "privacy.html", "terms.html")]
         + list((BASE / "tools").glob("*.html"))
     )
@@ -67,10 +72,12 @@ def main():
                 if token not in html:
                     errors.append(f"MERGE STUB MISSING {token} {r['path']}")
 
-    # 2+3. sitemap checks
+    # 2+3+11. sitemap checks (valid XML, lastmod, no noindex)
     tree = ElementTree.parse(BASE / "sitemap.xml")
     locs = [e.text.strip() for e in tree.getroot().findall("s:url/s:loc", NS)]
+    lastmods = [e.text.strip() for e in tree.getroot().findall("s:url/s:lastmod", NS)]
     assert locs, "sitemap has no URLs"
+    assert len(locs) == len(lastmods), "every sitemap URL must have lastmod"
     for loc in locs:
         assert loc.startswith(SITE + "/"), f"sitemap URL off-site: {loc}"
         rel = loc[len(SITE) + 1:] or "index.html"
@@ -91,9 +98,9 @@ def main():
     for n in noindexed:
         if f"{SITE}/{n}" in locs:
             errors.append(f"NOINDEX PAGE IN SITEMAP {n}")
-    print(f"2/3. {len(locs)} sitemap URLs map to existing indexable files OK")
+    print(f"2/3/11. {len(locs)} sitemap URLs map to existing indexable files, all have lastmod, no noindex OK")
 
-    # 4. redirect targets
+    # 4+8. redirect targets exist locally and are keep
     r301 = list(csv.DictReader(open(BASE / "seo" / "redirects-301.csv")))
     for row in r301:
         for col in ("from", "to"):
@@ -106,7 +113,7 @@ def main():
             errors.append(f"REDIRECT TARGET NOT KEEP {row['to']}")
         if by_path.get(from_rel, {}).get("decision") != "merge":
             errors.append(f"REDIRECT SOURCE NOT MERGE {row['from']}")
-    print(f"4. {len(r301)} redirect targets exist and are keep OK")
+    print(f"4/8. {len(r301)} redirect targets exist locally and are keep OK")
 
     # 5. core-30 JSON-LD valid + Article node + author/links present
     core = [l.strip() for l in open(BASE / "seo" / "core30.txt") if l.strip()]
@@ -149,11 +156,91 @@ def main():
             errors.append(f"CTA MARKUP MISSING {c}")
     print(f"5. core-30 JSON-LD valid, {n_links} contextual internal links OK")
 
-    print(f"counts: {dict(counts)}; sitemap URLs: {len(locs)}; core: {len(core)}")
+    # 6. Sitemap count equals indexable set (articles + top-level + tools + hubs)
+    keep_articles = [r for r in rows if r["decision"] == "keep"]
+    expected_indexable = len(keep_articles) + 6 + 5  # 6 top-level + 5 hubs
+    actual_sitemap = len(locs)
+    if actual_sitemap != expected_indexable:
+        errors.append(f"SITEMAP COUNT MISMATCH: expected {expected_indexable} (keep articles {len(keep_articles)} + 6 top-level + 5 hubs), got {actual_sitemap}")
+    if len(keep_articles) > 120:
+        errors.append(f"TOO MANY KEEP ARTICLES: {len(keep_articles)} > 120 target")
+    print(f"6. sitemap count ({actual_sitemap}) matches indexable set ({expected_indexable}) OK; keep articles: {len(keep_articles)} <= 120")
+
+    # 7. No noindexed URL in resources index pages
+    # Check resources/index.html
+    resources_index = BASE / "resources" / "index.html"
+    if resources_index.exists():
+        html = resources_index.read_text(encoding="utf-8")
+        for n in noindexed:
+            if n.replace("resources/", "") in html:
+                errors.append(f"NOINDEX PAGE LINKED IN resources/index.html: {n}")
+    # Check topic hubs
+    for hub in ["pregnancy", "newborn", "baby", "toddler", "dads"]:
+        hub_index = BASE / "resources" / hub / "index.html"
+        if hub_index.exists():
+            html = hub_index.read_text(encoding="utf-8")
+            for n in noindexed:
+                if n.replace("resources/", "") in html:
+                    errors.append(f"NOINDEX PAGE LINKED IN resources/{hub}/index.html: {n}")
+    print(f"7. no noindexed URLs in resources index or topic hubs OK")
+
+    # 9. Every indexable page has self-referencing canonical
+    indexable_paths = [r["path"] for r in rows if r["decision"] == "keep"]
+    indexable_paths += ["index.html", "resources/index.html", "contact.html", "privacy.html", "terms.html", "tools/sleep-milestone-calculator.html"]
+    for hub in ["pregnancy", "newborn", "baby", "toddler", "dads"]:
+        indexable_paths.append(f"resources/{hub}/index.html")
+    
+    for path in indexable_paths:
+        full_path = BASE / path
+        if not full_path.exists():
+            errors.append(f"INDEXABLE PAGE MISSING: {path}")
+            continue
+        html = full_path.read_text(encoding="utf-8")
+        canonical_match = re.search(r'<link rel="canonical"\s+href="([^"]+)"', html)
+        if not canonical_match:
+            errors.append(f"MISSING CANONICAL: {path}")
+        else:
+            canonical = canonical_match.group(1)
+            # Verify it matches expected format
+            if path == "index.html":
+                expected = f"{SITE}/"
+            elif path.endswith("/index.html"):
+                expected = f"{SITE}/{path.replace('/index.html', '/')}"
+            else:
+                expected = f"{SITE}/{path}"
+            if canonical != expected:
+                errors.append(f"CANONICAL MISMATCH {path}: got {canonical}, expected {expected}")
+    print(f"9. {len(indexable_paths)} indexable pages have self-referencing canonical OK")
+
+    # 10. No off-audience indexable titles
+    off_audience_keywords = [
+        r"\bag1\b", r"\bgruns\b", r"\btoniebox\b", r"\byoto\b",
+        r"\bdating\b", r"\bteen\b", r"\bshaving\b",
+        r"\bspotify wrapped\b", r"\bxylophone\b",
+        r"\bmelissa.*doug\b", r"\bpocket knife\b",
+        r"\bwilly wonka\b", r"\bsludge metal\b",
+        r"\btattoo\b", r"\broblox\b",
+        r"\b529 account\b", r"hospital indemnity",
+        r"financial genius", r"ai education for kids",
+        r"gifted child", r"babysitter rates in denver",
+        r"minnesota", r"rediscover the 80s", r"8-bit christmas",
+        r"ultimate family fleet", r"pocket knives",
+    ]
+    for r in rows:
+        if r["decision"] == "keep":
+            text = f"{r['title']} {r['path']}".lower()
+            for pat in off_audience_keywords:
+                if re.search(pat, text):
+                    errors.append(f"OFF-AUDIENCE TITLE IN KEEP: {r['path']} - matched {pat}")
+    print(f"10. no off-audience titles in indexable pages OK")
+
+    print(f"\ncounts: {dict(counts)}; sitemap URLs: {len(locs)}; core: {len(core)}; keep articles: {len(keep_articles)}")
     if errors:
         print(f"\nFAILED ({len(errors)}):")
         for e in errors[:50]:
             print(" -", e)
+        if len(errors) > 50:
+            print(f"  ... and {len(errors) - 50} more")
         sys.exit(1)
     print("ALL CHECKS PASSED")
 
