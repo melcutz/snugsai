@@ -61,6 +61,9 @@ def main():
     # decisions present on disk
     for r in rows:
         p = BASE / r["path"]
+        if r["path"].endswith("/"):
+            # batch-1 section pages (#19) are directory indexes
+            p = p / "index.html"
         if not p.exists():
             errors.append(f"MISSING FILE {r['path']}")
             continue
@@ -103,14 +106,19 @@ def main():
     # 4+8. redirect targets exist locally and are keep
     r301 = list(csv.DictReader(open(BASE / "seo" / "redirects-301.csv")))
     for row in r301:
-        for col in ("from", "to"):
-            assert row[col].startswith(SITE + "/resources/"), row
+        # Sources stay resources articles; targets may also be the batch-1
+        # section hubs/pages (sleep-regressions/...), added in issue #19.
+        assert row["from"].startswith(SITE + "/resources/"), row
+        assert row["to"].startswith(SITE + "/"), row
         to_rel = row["to"][len(SITE) + 1:]
         from_rel = row["from"][len(SITE) + 1:]
         if not (BASE / to_rel).exists():
             errors.append(f"REDIRECT TARGET MISSING {row['to']}")
-        elif by_path.get(to_rel, {}).get("decision") != "keep":
+        elif to_rel.startswith("resources/") and by_path.get(to_rel, {}).get("decision") != "keep":
             errors.append(f"REDIRECT TARGET NOT KEEP {row['to']}")
+        elif to_rel not in by_path and not (BASE / to_rel).is_dir():
+            # non-resources targets must be real pages (dirs are their own index)
+            errors.append(f"REDIRECT TARGET NOT INDEXABLE {row['to']}")
         if by_path.get(from_rel, {}).get("decision") != "merge":
             errors.append(f"REDIRECT SOURCE NOT MERGE {row['from']}")
     print(f"4/8. {len(r301)} redirect targets exist locally and are keep OK")
@@ -158,13 +166,16 @@ def main():
 
     # 6. Sitemap count equals indexable set (articles + top-level + tools + hubs)
     keep_articles = [r for r in rows if r["decision"] == "keep"]
+    # Prune-pass-2 cap targets resource articles only; batch-1 section pages
+    # (tools/, schedules/, sleep-regressions/) are structured, not articles.
+    keep_resource_articles = [r for r in keep_articles if r["path"].startswith("resources/")]
     expected_indexable = len(keep_articles) + 6 + 5  # 6 top-level + 5 hubs
     actual_sitemap = len(locs)
     if actual_sitemap != expected_indexable:
         errors.append(f"SITEMAP COUNT MISMATCH: expected {expected_indexable} (keep articles {len(keep_articles)} + 6 top-level + 5 hubs), got {actual_sitemap}")
-    if len(keep_articles) > 120:
-        errors.append(f"TOO MANY KEEP ARTICLES: {len(keep_articles)} > 120 target")
-    print(f"6. sitemap count ({actual_sitemap}) matches indexable set ({expected_indexable}) OK; keep articles: {len(keep_articles)} <= 120")
+    if len(keep_resource_articles) > 120:
+        errors.append(f"TOO MANY KEEP ARTICLES: {len(keep_resource_articles)} > 120 target")
+    print(f"6. sitemap count ({actual_sitemap}) matches indexable set ({expected_indexable}) OK; keep resource articles: {len(keep_resource_articles)} <= 120")
 
     # 7. No noindexed URL in resources index pages
     # Check resources/index.html
@@ -192,6 +203,8 @@ def main():
     
     for path in indexable_paths:
         full_path = BASE / path
+        if full_path.is_dir():
+            full_path = full_path / "index.html"
         if not full_path.exists():
             errors.append(f"INDEXABLE PAGE MISSING: {path}")
             continue

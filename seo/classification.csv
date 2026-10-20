@@ -38,11 +38,11 @@ resources/christmas-assistance-and-resources-for-single-parents-in-georgia.html,
 resources/classroom-snack-donations-what-s-the-norm-for-parents.html,Classroom Snack Donations: What's the Norm for Parents? | Snugs.ai,noindex,,Not in curated core 0-3 allowlist
 resources/co-parenting-challenges-navigating-a-parent-s-international-move-with-children.html,Co-Parenting Challenges: Navigating a Parent's International Move with Children | Snugs.ai,noindex,,Not in curated core 0-3 allowlist
 resources/conceiving-naturally-after-45-possibilities-and-considerations.html,Conceiving Naturally After 45: Possibilities and Considerations | Snugs.ai,noindex,,Not in curated core 0-3 allowlist
-resources/conquering-sleep-battles-a-guide-for-parents-of-toddlers-who-fight-sleep.html,Conquering Sleep Battles: A Guide for Parents of Toddlers Who Fight Sleep | Snugs.ai,merge,resources/help-your-toddler-sleep-expert-tips-for-tired-parents.html,Near-duplicate; canonical: help-your-toddler-sleep-expert-tips-for-tired-parents
+resources/conquering-sleep-battles-a-guide-for-parents-of-toddlers-who-fight-sleep.html,Conquering Sleep Battles: A Guide for Parents of Toddlers Who Fight Sleep | Snugs.ai,merge,sleep-regressions/,Near-duplicate toddler sleep battle; canonical: sleep-regressions hub (#19)
 resources/conquering-the-laundry-mountain-tips-for-dads.html,Conquering the Laundry Mountain: Tips for Dads | Snugs.ai,keep,,Explicitly curated core 0-3 article
-resources/conquering-the-sleep-struggle-a-guide-for-parents-of-toddlers-who-fight-sleep.html,Conquering the Sleep Struggle: A Guide for Parents of Toddlers Who Fight Sleep | Snugs.ai,merge,resources/help-your-toddler-sleep-expert-tips-for-tired-parents.html,Near-duplicate; canonical: help-your-toddler-sleep-expert-tips-for-tired-parents
-resources/conquering-the-toddler-sleep-battle-strategies-for-exhausted-parents.html,Conquering the Toddler Sleep Battle: Strategies for Exhausted Parents | Snugs.ai,merge,resources/help-your-toddler-sleep-expert-tips-for-tired-parents.html,Near-duplicate; canonical: help-your-toddler-sleep-expert-tips-for-tired-parents
-resources/conquering-the-toddler-sleep-struggle-tips-for-exhausted-parents.html,Conquering the Toddler Sleep Struggle: Tips for Exhausted Parents | Snugs.ai,merge,resources/help-your-toddler-sleep-expert-tips-for-tired-parents.html,Near-duplicate; canonical: help-your-toddler-sleep-expert-tips-for-tired-parents
+resources/conquering-the-sleep-struggle-a-guide-for-parents-of-toddlers-who-fight-sleep.html,Conquering the Sleep Struggle: A Guide for Parents of Toddlers Who Fight Sleep | Snugs.ai,merge,sleep-regressions/,Near-duplicate toddler sleep battle; canonical: sleep-regressions hub (#19)
+resources/conquering-the-toddler-sleep-battle-strategies-for-exhausted-parents.html,Conquering the Toddler Sleep Battle: Strategies for Exhausted Parents | Snugs.ai,merge,sleep-regressions/,Near-duplicate toddler sleep battle; canonical: sleep-regressions hub (#19)
+resources/conquering-the-toddler-sleep-struggle-tips-for-exhausted-parents.html,Conquering the Toddler Sleep Struggle: Tips for Exhausted Parents | Snugs.ai,merge,sleep-regressions/,Near-duplicate toddler sleep battle; canonical: sleep-regressions hub (#19)
 resources/considering-a-fourth-child-age-family-dynamics-and-your-decision.html,"Considering a Fourth Child: Age, Family Dynamics, and Your Decision | Snugs.ai",noindex,,Not in curated core 0-3 allowlist
 resources/considering-a-fourth-child-navigating-age-family-size-and-the-future.html,"Considering a Fourth Child? Navigating Age, Family Size, and the Future | Snugs.ai",noindex,,Not in curated core 0-3 allowlist
 resources/considering-single-motherhood-a-guide-for-aspiring-solo-parents.html,Considering Single Motherhood: A Guide for Aspiring Solo Parents | Snugs.ai,noindex,,Not in curated core 0-3 allowlist
@@ -256,7 +256,7 @@ resources/navigating-teenage-loneliness-helping-your-introverted-child-find-thei
 resources/navigating-the-12-week-sleep-regression-tips-for-new-parents.html,Navigating the 12-Week Sleep Regression: Tips for New Parents | Snugs.ai,keep,,Explicitly curated core 0-3 article
 resources/navigating-the-18-month-sleep-regression-why-your-toddler-is-suddenly-clingy-and-how-to-help.html,Navigating the 18-Month Sleep Regression: Why Your Toddler is Suddenly Clingy and How to Help | Snugs.ai,keep,,Explicitly curated core 0-3 article
 resources/navigating-the-2-year-age-gap-success-stories-and-tips-for-parents.html,Navigating the 2-Year Age Gap: Success Stories and Tips for Parents | Snugs.ai,keep,,Explicitly curated core 0-3 article
-resources/navigating-the-4-month-sleep-regression-and-beyond-when-your-baby-cries-constantly.html,Navigating the 4-Month Sleep Regression and Beyond: When Your Baby Cries Constantly | Snugs.ai,merge,resources/navigating-the-4-month-sleep-regression-tips-for-new-parents.html,Near-duplicate; canonical: navigating-the-4-month-sleep-regression-tips-for-new-parents
+resources/navigating-the-4-month-sleep-regression-and-beyond-when-your-baby-cries-constantly.html,Navigating the 4-Month Sleep Regression and Beyond: When Your Baby Cries Constantly | Snugs.ai,merge,sleep-regressions/4-month-sleep-regression/,Duplicate 4-month regression article; canonical: sleep-regressions/4-month-sleep-regression (#19)
 resources/navigating-the-4-month-sleep-regression-tips-for-new-parents.html,Navigating the 4-Month Sleep Regression: Tips for New Parents | Snugs.ai,keep,,Explicitly curated core 0-3 article
 resources/navigating-the-ages-what-do-parents-consider-their-favorite-stage.html,Navigating the Ages: What Do Parents Consider Their Favorite Stage? | Snugs.ai,noindex,,Not in curated core 0-3 allowlist
 resources/navigating-the-bookworm-toddler-is-reading-all-day-normal-and-beneficial.html,Navigating the Bookworm Toddler: Is Reading All Day Normal and Beneficial? | Snugs.ai,noindex,,Not in curated core 0-3 allowlist
@@ -298,7 +298,7 @@ resources/navigating-the-world-of-noise-with-a-newborn-a-parent-s-guide.html,Nav
 resources/navigating-toddler-independence-when-privacy-and-potty-training-collide.html,Navigating Toddler Independence: When Privacy and Potty Training Collide | Snugs.ai,keep,,Explicitly curated core 0-3 article
 resources/navigating-toddler-overstimulation-what-to-do-when-fun-turns-overwhelming.html,Navigating Toddler Overstimulation: What to Do When Fun Turns Overwhelming | Snugs.ai,keep,,Explicitly curated core 0-3 article
 resources/navigating-toddler-preferences-tips-for-parents.html,Navigating Toddler Preferences: Tips for Parents | Snugs.ai,noindex,,Not in curated core 0-3 allowlist
-resources/navigating-toddler-sleep-struggles-strategies-for-peaceful-bedtimes.html,Navigating Toddler Sleep Struggles: Strategies for Peaceful Bedtimes | Snugs.ai,merge,resources/help-your-toddler-sleep-expert-tips-for-tired-parents.html,Near-duplicate; canonical: help-your-toddler-sleep-expert-tips-for-tired-parents
+resources/navigating-toddler-sleep-struggles-strategies-for-peaceful-bedtimes.html,Navigating Toddler Sleep Struggles: Strategies for Peaceful Bedtimes | Snugs.ai,merge,sleep-regressions/,Near-duplicate toddler sleep battle; canonical: sleep-regressions hub (#19)
 resources/navigating-toddler-tantrums-and-aggression-when-is-it-normal-and-how-to-help.html,"Navigating Toddler Tantrums and Aggression: When is it Normal, and How to Help? | Snugs.ai",keep,,Explicitly curated core 0-3 article
 resources/navigating-tween-christmas-lists-balancing-desire-and-value.html,Navigating Tween Christmas Lists: Balancing Desire and Value | Snugs.ai,noindex,,Not in curated core 0-3 allowlist
 resources/navigating-unexpected-accidents-and-guilt-a-parent-s-guide.html,Navigating Unexpected Accidents and Guilt: A Parent's Guide | Snugs.ai,noindex,,Not in curated core 0-3 allowlist
@@ -365,7 +365,7 @@ resources/surviving-the-toddler-music-loop-what-parents-listen-to-on-repeat.html
 resources/surviving-the-toddler-tornado-encouragement-for-exhausted-parents.html,Surviving the Toddler Tornado: Encouragement for Exhausted Parents | Snugs.ai,noindex,,Not in curated core 0-3 allowlist
 resources/taking-a-night-off-self-care-for-breastfeeding-mothers.html,Taking a Night Off: Self-Care for Breastfeeding Mothers | Snugs.ai,keep,,Explicitly curated core 0-3 article
 resources/talking-to-young-children-about-death-a-compassionate-guide-for-parents.html,Talking to Young Children About Death: A Compassionate Guide for Parents | Snugs.ai,noindex,,Not in curated core 0-3 allowlist
-resources/taming-the-bedtime-dragon-strategies-for-parents-of-needy-toddlers.html,Taming the Bedtime Dragon: Strategies for Parents of Needy Toddlers | Snugs.ai,merge,resources/help-your-toddler-sleep-expert-tips-for-tired-parents.html,Near-duplicate; canonical: help-your-toddler-sleep-expert-tips-for-tired-parents
+resources/taming-the-bedtime-dragon-strategies-for-parents-of-needy-toddlers.html,Taming the Bedtime Dragon: Strategies for Parents of Needy Toddlers | Snugs.ai,merge,sleep-regressions/,Near-duplicate toddler sleep battle; canonical: sleep-regressions hub (#19)
 resources/tap-vs-bottled-water-why-your-kids-might-be-picky-and-what-parents-can-do.html,Tap vs. Bottled Water: Why Your Kids Might Be Picky and What Parents Can Do | Snugs.ai,noindex,,Not in curated core 0-3 allowlist
 resources/tattooing-your-child-s-image-a-parent-s-love-and-potential-anxieties.html,Tattooing Your Child's Image: A Parent's Love and Potential Anxieties | Snugs.ai,noindex,,Not in curated core 0-3 allowlist
 resources/the-best-pocket-knives-for-dads-a-curated-selection.html,The Best Pocket Knives for Dads: A Curated Selection | Snugs.ai,noindex,,Not in curated core 0-3 allowlist
@@ -401,7 +401,7 @@ resources/the-power-of-the-dad-network-how-fathers-support-each-other-in-times-o
 resources/the-rising-cost-and-diminishing-value-of-kids-activities-a-parent-s-perspective.html,The Rising Cost and Diminishing Value of Kids' Activities: A Parent's Perspective | Snugs.ai,noindex,,Not in curated core 0-3 allowlist
 resources/the-shifting-sands-of-parenthood-how-many-kids-do-we-really-want.html,The Shifting Sands of Parenthood: How Many Kids Do We Really Want? | Snugs.ai,noindex,,Not in curated core 0-3 allowlist
 resources/the-single-parent-s-christmas-gifting-for-yourself-and-your-kids.html,The Single Parent's Christmas: Gifting for Yourself and Your Kids | Snugs.ai,noindex,,Not in curated core 0-3 allowlist
-resources/the-struggle-is-real-navigating-sleep-battles-with-your-child.html,The Struggle is Real: Navigating Sleep Battles with Your Child | Snugs.ai,merge,resources/help-your-toddler-sleep-expert-tips-for-tired-parents.html,Near-duplicate; canonical: help-your-toddler-sleep-expert-tips-for-tired-parents
+resources/the-struggle-is-real-navigating-sleep-battles-with-your-child.html,The Struggle is Real: Navigating Sleep Battles with Your Child | Snugs.ai,merge,sleep-regressions/,Near-duplicate toddler sleep battle; canonical: sleep-regressions hub (#19)
 resources/the-tough-love-dilemma-giving-financial-gifts-to-adult-children-with-varying-levels-of-responsibility.html,The Tough Love Dilemma: Giving Financial Gifts to Adult Children with Varying Levels of Responsibility | Snugs.ai,noindex,,Not in curated core 0-3 allowlist
 resources/the-ultimate-family-fleet-preparing-for-the-unexpected-with-your-pets.html,The Ultimate Family Fleet: Preparing for the Unexpected with Your Pets | Snugs.ai,noindex,,Not in curated core 0-3 allowlist
 resources/the-unspeakable-joy-of-new-parenthood-embracing-the-love-even-with-little-sleep.html,"The Unspeakable Joy of New Parenthood: Embracing the Love, Even with Little Sleep | Snugs.ai",keep,,Explicitly curated core 0-3 article
@@ -468,3 +468,37 @@ resources/why-does-my-child-act-out-and-then-get-upset-navigating-toddler-like-b
 resources/why-is-my-preschooler-stealing-understanding-and-addressing-kleptomania-in-young-children.html,Why is My Preschooler Stealing? Understanding and Addressing Kleptomania in Young Children | Snugs.ai,noindex,,Not in curated core 0-3 allowlist
 resources/why-your-favorite-children-s-artists-might-be-missing-from-spotify-wrapped-and-how-to-still-celebrate-your-listening-habits.html,Why Your Favorite Children's Artists Might Be Missing from Spotify Wrapped (and How to Still Celebrate Your Listening Habits) | Snugs.ai,noindex,,Not in curated core 0-3 allowlist
 resources/why-your-shy-5-year-old-can-t-ask-for-what-they-want-and-how-to-help.html,Why Your Shy 5-Year-Old Can't Ask for What They Want (and How to Help) | Snugs.ai,noindex,,Not in curated core 0-3 allowlist
+tools/,Free Sleep Tools for Babies & Toddlers,keep,,SEO batch 1 (#19)
+tools/wake-window-calculator/,Wake Window Calculator,keep,,SEO batch 1 (#19)
+tools/nap-transition-checker/,Nap Transition Checker,keep,,SEO batch 1 (#19)
+schedules/,Baby & Toddler Sleep Schedules by Month,keep,,SEO batch 1 (#19)
+sleep-regressions/,Baby & Toddler Sleep Regressions by Age,keep,,SEO batch 1 (#19)
+schedules/13-month-old-schedule/,13-month-old sleep schedule,keep,,SEO batch 1 (#19)
+schedules/14-month-old-schedule/,14-month-old sleep schedule,keep,,SEO batch 1 (#19)
+schedules/15-month-old-schedule/,15-month-old sleep schedule,keep,,SEO batch 1 (#19)
+schedules/16-month-old-schedule/,16-month-old sleep schedule,keep,,SEO batch 1 (#19)
+schedules/17-month-old-schedule/,17-month-old sleep schedule,keep,,SEO batch 1 (#19)
+schedules/18-month-old-schedule/,18-month-old sleep schedule,keep,,SEO batch 1 (#19)
+schedules/19-month-old-schedule/,19-month-old sleep schedule,keep,,SEO batch 1 (#19)
+schedules/20-month-old-schedule/,20-month-old sleep schedule,keep,,SEO batch 1 (#19)
+schedules/21-month-old-schedule/,21-month-old sleep schedule,keep,,SEO batch 1 (#19)
+schedules/22-month-old-schedule/,22-month-old sleep schedule,keep,,SEO batch 1 (#19)
+schedules/23-month-old-schedule/,23-month-old sleep schedule,keep,,SEO batch 1 (#19)
+schedules/24-month-old-schedule/,24-month-old sleep schedule,keep,,SEO batch 1 (#19)
+schedules/25-month-old-schedule/,25-month-old sleep schedule,keep,,SEO batch 1 (#19)
+schedules/26-month-old-schedule/,26-month-old sleep schedule,keep,,SEO batch 1 (#19)
+schedules/27-month-old-schedule/,27-month-old sleep schedule,keep,,SEO batch 1 (#19)
+schedules/28-month-old-schedule/,28-month-old sleep schedule,keep,,SEO batch 1 (#19)
+schedules/29-month-old-schedule/,29-month-old sleep schedule,keep,,SEO batch 1 (#19)
+schedules/30-month-old-schedule/,30-month-old sleep schedule,keep,,SEO batch 1 (#19)
+schedules/31-month-old-schedule/,31-month-old sleep schedule,keep,,SEO batch 1 (#19)
+schedules/32-month-old-schedule/,32-month-old sleep schedule,keep,,SEO batch 1 (#19)
+schedules/33-month-old-schedule/,33-month-old sleep schedule,keep,,SEO batch 1 (#19)
+schedules/34-month-old-schedule/,34-month-old sleep schedule,keep,,SEO batch 1 (#19)
+schedules/35-month-old-schedule/,35-month-old sleep schedule,keep,,SEO batch 1 (#19)
+schedules/36-month-old-schedule/,36-month-old sleep schedule,keep,,SEO batch 1 (#19)
+sleep-regressions/4-month-sleep-regression/,4-month sleep regression,keep,,SEO batch 1 (#19)
+sleep-regressions/8-month-sleep-regression/,8-month sleep regression,keep,,SEO batch 1 (#19)
+sleep-regressions/12-month-sleep-regression/,12-month sleep regression,keep,,SEO batch 1 (#19)
+sleep-regressions/18-month-sleep-regression/,18-month sleep regression,keep,,SEO batch 1 (#19)
+sleep-regressions/2-year-sleep-regression/,2-year sleep regression,keep,,SEO batch 1 (#19)

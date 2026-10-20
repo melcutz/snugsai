@@ -1,0 +1,1185 @@
+{
+  "months": [
+    {
+      "month": 13,
+      "answer": {
+        "wake": "7:00 AM",
+        "naps_phrase": "two naps at 9:45 AM and 2:15 PM",
+        "bed": "7:00 PM",
+        "ww": "3 to 3.75 hours",
+        "total": "11 to 14 hours"
+      },
+      "wake_windows": "2.75 – 3.75 hours",
+      "naps": "2 naps",
+      "total_sleep": "11 – 14 hours (10 – 12 at night + 2 naps)",
+      "whats_changing": "The 2-to-1 nap transition is usually starting: the second nap gets shorter, slips later, or vanishes some days. Morning wake windows stretch past three hours, and bedtime can jump earlier for a few nights while everything resettles.",
+      "sample_day": [
+        {
+          "event": "Wake up",
+          "time": "7:00 AM",
+          "note": ""
+        },
+        {
+          "event": "Nap 1",
+          "time": "9:45 – 11:00 AM",
+          "note": "2 hr 45 min awake"
+        },
+        {
+          "event": "Nap 2",
+          "time": "2:15 – 3:15 PM",
+          "note": "3 hours after nap 1 ends"
+        },
+        {
+          "event": "Bedtime",
+          "time": "7:00 – 7:30 PM",
+          "note": "3.75 hours after the last nap"
+        }
+      ],
+      "faqs": [
+        {
+          "q": "How much sleep does a 13-month-old need?",
+          "a": "The AAP and CDC recommend 11–14 hours in 24 hours for babies aged 1–2 years, and the National Sleep Foundation agrees for this age. At 13 months that usually means 10–12 hours at night plus about 2.5 hours of naps across the day."
+        },
+        {
+          "q": "What wake window does a 13-month-old need?",
+          "a": "About 3 hours before each nap and 3.5–4 hours before bedtime. If your 13-month-old rubs their eyes before the window ends, put them down early — an overtired toddler fights sleep harder."
+        },
+        {
+          "q": "Should I drop to one nap at 13 months?",
+          "a": "Not by the calendar. Most children move to one nap between 13 and 15 months. If the second nap is refused three days a week for two weeks, push the first nap later by 15 minutes every few days until it becomes the single nap."
+        },
+        {
+          "q": "Is there a sleep regression coming for a 13-month-old?",
+          "a": "The 12-month regression window can stretch to 15 months for some toddlers: sudden wakes, short naps and clinginess. It usually passes in 2–6 weeks — keep the schedule steady and expect gradual improvement."
+        }
+      ]
+    },
+    {
+      "month": 14,
+      "answer": {
+        "wake": "7:00 AM",
+        "naps_phrase": "one nap at 11:30 AM",
+        "bed": "6:45 PM",
+        "ww": "4 to 6 hours",
+        "total": "11 to 14 hours"
+      },
+      "wake_windows": "3.5 – 6 hours",
+      "naps": "1 nap",
+      "total_sleep": "11 – 14 hours (10 – 12 at night + 1 nap)",
+      "whats_changing": "Most 14-month-olds have landed on one nap, but the first weeks are wobbly: expect an earlier bedtime — even 30–60 minutes earlier — while the new rhythm settles. Protect the nap; even 45 minutes counts.",
+      "sample_day": [
+        {
+          "event": "Wake up",
+          "time": "7:00 AM",
+          "note": ""
+        },
+        {
+          "event": "Nap",
+          "time": "11:30 AM – 1:00 PM",
+          "note": "4.5 hours awake"
+        },
+        {
+          "event": "Bedtime",
+          "time": "6:45 – 7:15 PM",
+          "note": "5.5–6 hours after the nap"
+        }
+      ],
+      "faqs": [
+        {
+          "q": "How much sleep does a 14-month-old need?",
+          "a": "The AAP and CDC recommend 11–14 hours in 24 hours through age 2, and the National Sleep Foundation range matches it. A typical 14-month-old sleeps 10–12 hours at night plus one nap of 1–1.5 hours."
+        },
+        {
+          "q": "What wake window does a 14-month-old need?",
+          "a": "About 4–4.5 hours before the single nap, then 5.5–6 hours before bed. Wake windows now run long enough that a late morning sleep pushes the whole day, so keep the wake-up time fixed."
+        },
+        {
+          "q": "My 14-month-old refuses the second nap — now what?",
+          "a": "Three refusals in a row over two weeks usually means the transition has begun. Collapse to one nap roughly where the old second nap started, and add a temporary early bedtime while the schedule rebalances over 1–2 weeks."
+        },
+        {
+          "q": "Is there a sleep regression coming for a 14-month-old?",
+          "a": "The 12-month regression window can last until 15 months: sudden night waking, short naps and extra clinginess. Hold bedtime steady, keep responses brief, and expect it to settle within a few weeks."
+        }
+      ]
+    },
+    {
+      "month": 15,
+      "answer": {
+        "wake": "7:00 AM",
+        "naps_phrase": "one nap at 12:00 PM",
+        "bed": "7:00 PM",
+        "ww": "4 to 6 hours",
+        "total": "11 to 14 hours"
+      },
+      "wake_windows": "4 – 6 hours",
+      "naps": "1 nap",
+      "total_sleep": "11 – 14 hours (10 – 12 at night + 1 nap)",
+      "whats_changing": "The one-nap rhythm settles this month. Separation anxiety often peaks around 15 months, so nap-time clinginess can spike even when the timing is right. Keep the nap routine identical — same room, same song, same order.",
+      "sample_day": [
+        {
+          "event": "Wake up",
+          "time": "7:00 AM",
+          "note": ""
+        },
+        {
+          "event": "Nap",
+          "time": "12:00 – 1:30 PM",
+          "note": "5 hours awake"
+        },
+        {
+          "event": "Bedtime",
+          "time": "7:00 – 7:30 PM",
+          "note": "5.5 hours after the nap"
+        }
+      ],
+      "faqs": [
+        {
+          "q": "How much sleep does a 15-month-old need?",
+          "a": "The AAP and CDC guide is 11–14 hours across 24 hours for ages 1–2, with the National Sleep Foundation in the same range. At 15 months: about 10–12 hours at night plus one nap of 1–1.5 hours."
+        },
+        {
+          "q": "What wake window does a 15-month-old need?",
+          "a": "4–5 hours before the nap and about 5.5 hours before bed. The stretch before bed should be the longest of the day — if it is not, the nap probably ran too long or started too late."
+        },
+        {
+          "q": "Why is my 15-month-old suddenly fighting the nap?",
+          "a": "Usually separation anxiety, or a wake window that is too short. If they are not tired enough, move nap time 15–20 minutes later for a week; if they are melting down before it, start earlier. Keep the routine the same either way."
+        },
+        {
+          "q": "Is there a sleep regression coming for a 15-month-old?",
+          "a": "The 12-month regression window can run to 15 months; after that, the next classic window is the 18-month sleep regression. Both bring night wakes, short naps and clinginess, and both usually pass in a few weeks."
+        }
+      ]
+    },
+    {
+      "month": 16,
+      "answer": {
+        "wake": "7:00 AM",
+        "naps_phrase": "one nap at 12:15 PM",
+        "bed": "7:15 PM",
+        "ww": "4 to 6 hours",
+        "total": "11 to 14 hours"
+      },
+      "wake_windows": "4 – 6 hours",
+      "naps": "1 nap",
+      "total_sleep": "11 – 14 hours (10 – 12 at night + 1 nap)",
+      "whats_changing": "Walking and running now burn real energy, and overtiredness arrives fast if the morning stretches too long. Many 16-month-olds do best with a nap that starts no later than 12:30, no matter how grown-up they feel.",
+      "sample_day": [
+        {
+          "event": "Wake up",
+          "time": "7:00 AM",
+          "note": ""
+        },
+        {
+          "event": "Nap",
+          "time": "12:15 – 1:45 PM",
+          "note": "5.25 hours awake"
+        },
+        {
+          "event": "Bedtime",
+          "time": "7:15 – 7:45 PM",
+          "note": "5.5 hours after the nap"
+        }
+      ],
+      "faqs": [
+        {
+          "q": "How much sleep does a 16-month-old need?",
+          "a": "The AAP and CDC recommend 11–14 hours in 24 hours through age 2; the National Sleep Foundation range is the same. A 16-month-old typically takes 10–12 hours at night plus a 1–1.5 hour nap."
+        },
+        {
+          "q": "What wake window does a 16-month-old need?",
+          "a": "About 5 hours before the nap and 5.5 hours before bed. Watch sleepy cues at the end of the morning: yawning, eye rubbing or a sudden grumpy spell means the window has closed early today."
+        },
+        {
+          "q": "Is it normal for a 16-month-old to wake at night?",
+          "a": "Occasional wakes during developmental leaps are normal. If they repeat, check nap timing — a nap starting after 12:30 or a bedtime drifting past 8:00 both fragment the night. Persistent wakes deserve a pediatrician visit."
+        },
+        {
+          "q": "Is there a sleep regression coming for a 16-month-old?",
+          "a": "The next classic window is the 18-month sleep regression, often preceded by a quieter stretch now. Expect possible night wakes, nap refusal and clinginess; keep the schedule steady and it usually passes in 3–6 weeks."
+        }
+      ]
+    },
+    {
+      "month": 17,
+      "answer": {
+        "wake": "7:00 AM",
+        "naps_phrase": "one nap at 12:15 PM",
+        "bed": "7:15 PM",
+        "ww": "4 to 6 hours",
+        "total": "11 to 14 hours"
+      },
+      "wake_windows": "4 – 6 hours",
+      "naps": "1 nap",
+      "total_sleep": "11 – 14 hours (10 – 12 at night + 1 nap)",
+      "whats_changing": "Word explosions begin — your toddler now has opinions about everything, including sleep. Nap resistance usually means they still need the nap: offer quiet time in a dark room if they refuse to lie down, but keep the slot.",
+      "sample_day": [
+        {
+          "event": "Wake up",
+          "time": "7:00 AM",
+          "note": ""
+        },
+        {
+          "event": "Nap",
+          "time": "12:15 – 1:45 PM",
+          "note": "5.25 hours awake"
+        },
+        {
+          "event": "Bedtime",
+          "time": "7:15 – 7:45 PM",
+          "note": "5.5 hours after the nap"
+        }
+      ],
+      "faqs": [
+        {
+          "q": "How much sleep does a 17-month-old need?",
+          "a": "The AAP and CDC call for 11–14 hours in 24 hours at this age, and the National Sleep Foundation agrees. In practice: 10–12 hours overnight plus a single nap of about 90 minutes."
+        },
+        {
+          "q": "What wake window does a 17-month-old need?",
+          "a": "About 5 hours awake before the nap, then 5.5–6 hours before bed. Naps that start after 12:45 tend to eat the bedtime, so treat 12:30 as the outside edge."
+        },
+        {
+          "q": "Should a 17-month-old still nap?",
+          "a": "Yes. The AAP and National Sleep Foundation both budget for a daytime nap through age 3. Dropping it early usually backfires as earlier bedtimes, 5 AM wakes and a short fuse by dinner."
+        },
+        {
+          "q": "Is there a sleep regression coming for a 17-month-old?",
+          "a": "The 18-month sleep regression is the next one — sudden wakes, split nights, nap refusal and clinginess as language and independence surge. It typically lasts 3–6 weeks. Keep bedtime and nap time fixed while it runs."
+        }
+      ]
+    },
+    {
+      "month": 18,
+      "answer": {
+        "wake": "7:00 AM",
+        "naps_phrase": "one nap at 12:30 PM",
+        "bed": "7:30 PM",
+        "ww": "5 to 5.5 hours",
+        "total": "11 to 14 hours"
+      },
+      "wake_windows": "5 – 5.5 hours",
+      "naps": "1 nap",
+      "total_sleep": "11 – 14 hours (10 – 12 at night + 1 nap)",
+      "whats_changing": "The 18-month regression window (separation anxiety, walking, language bursts) hits many toddlers now: sudden night wakes, split nights and nap refusal. It usually passes in 3–6 weeks without dropping the nap.",
+      "sample_day": [
+        {
+          "event": "Wake up",
+          "time": "7:00 AM",
+          "note": ""
+        },
+        {
+          "event": "Nap",
+          "time": "12:30 – 2:30 PM",
+          "note": "5.5 hours awake"
+        },
+        {
+          "event": "Bedtime",
+          "time": "7:30 – 8:00 PM",
+          "note": "5 hours after the nap"
+        }
+      ],
+      "faqs": [
+        {
+          "q": "How much sleep does an 18-month-old need?",
+          "a": "The AAP and CDC recommend 11–14 hours in 24 hours through age 2, which is also the National Sleep Foundation range. An 18-month-old usually gets 10–12 hours at night plus a 1.5–2 hour nap."
+        },
+        {
+          "q": "What wake window does an 18-month-old need?",
+          "a": "About 5–5.5 hours before the nap and 5–5.5 hours after it. At this age the two windows even out, so the same nap time daily keeps bedtime from drifting."
+        },
+        {
+          "q": "Why is my 18-month-old waking at night suddenly?",
+          "a": "That pattern is the 18-month regression: separation anxiety plus rapid skill gains interrupts sleep. Respond briefly and boringly, keep the night dark and boring, and hold the schedule — most families see it settle within 3–6 weeks."
+        },
+        {
+          "q": "Is there a sleep regression coming for an 18-month-old?",
+          "a": "The 18-month window may be arriving now, and after it the next classic one is the 2-year sleep regression between 24 and 30 months. Both respond best to a steady schedule and brief, consistent responses."
+        }
+      ]
+    },
+    {
+      "month": 19,
+      "answer": {
+        "wake": "7:00 AM",
+        "naps_phrase": "one nap at 12:30 PM",
+        "bed": "7:30 PM",
+        "ww": "5 to 5.5 hours",
+        "total": "11 to 14 hours"
+      },
+      "wake_windows": "5 – 5.5 hours",
+      "naps": "1 nap",
+      "total_sleep": "11 – 14 hours (10 – 12 at night + 1 nap)",
+      "whats_changing": "Consistency beats the exact clock time: the same nap start every day keeps bedtime smooth. If naps wobble, look at bedtime first — a too-late night makes the next day's nap a fight.",
+      "sample_day": [
+        {
+          "event": "Wake up",
+          "time": "7:00 AM",
+          "note": ""
+        },
+        {
+          "event": "Nap",
+          "time": "12:30 – 2:00 PM",
+          "note": "5.5 hours awake"
+        },
+        {
+          "event": "Bedtime",
+          "time": "7:30 – 8:00 PM",
+          "note": "5.5 hours after the nap"
+        }
+      ],
+      "faqs": [
+        {
+          "q": "How much sleep does a 19-month-old need?",
+          "a": "The AAP and CDC say 11–14 hours in 24 hours at this age, matching the National Sleep Foundation range. Expect 10–12 hours overnight plus a nap of 1–1.5 hours."
+        },
+        {
+          "q": "What wake window does a 19-month-old need?",
+          "a": "Around 5.5 hours before the nap and 5.5 hours after it. If bedtime keeps creeping later, shorten the post-nap stretch by 15–20 minutes instead of moving the wake-up time."
+        },
+        {
+          "q": "Why does my 19-month-old only nap for an hour?",
+          "a": "One hour is enough for many toddlers once night sleep is solid. If the short nap wrecks the afternoon, move bedtime 15–30 minutes earlier rather than forcing a longer nap — pressure usually shortens it further."
+        },
+        {
+          "q": "Is there a sleep regression coming for a 19-month-old?",
+          "a": "The 18-month regression window can run through 20 months; after that, the next classic one is the 2-year sleep regression (24–30 months). Keep the schedule steady through both and expect gradual improvement."
+        }
+      ]
+    },
+    {
+      "month": 20,
+      "answer": {
+        "wake": "7:00 AM",
+        "naps_phrase": "one nap at 12:30 PM",
+        "bed": "7:30 PM",
+        "ww": "5 to 6 hours",
+        "total": "11 to 14 hours"
+      },
+      "wake_windows": "5 – 6 hours",
+      "naps": "1 nap",
+      "total_sleep": "11 – 14 hours (10 – 12 at night + 1 nap)",
+      "whats_changing": "Daycare or travel can make the nap disappear some days. Keep the anchors: same wake time, same wind-down before nap, and an earlier bedtime after any missed nap so the debt does not compound.",
+      "sample_day": [
+        {
+          "event": "Wake up",
+          "time": "7:00 AM",
+          "note": ""
+        },
+        {
+          "event": "Nap",
+          "time": "12:30 – 2:00 PM",
+          "note": "5.5 hours awake"
+        },
+        {
+          "event": "Bedtime",
+          "time": "7:30 – 8:00 PM",
+          "note": "5.5 hours after the nap"
+        }
+      ],
+      "faqs": [
+        {
+          "q": "How much sleep does a 20-month-old need?",
+          "a": "The AAP and CDC recommendation for ages 1–2 is 11–14 hours in 24 hours, the same as the National Sleep Foundation range. A 20-month-old typically sleeps 10–12 hours at night plus a 1–1.5 hour nap."
+        },
+        {
+          "q": "What wake window does a 20-month-old need?",
+          "a": "About 5.5 hours before the nap and 5.5 hours after it. On days sleep was broken — illness, travel, a late night — shorten both windows by 15–30 minutes rather than pushing through."
+        },
+        {
+          "q": "How do I handle nap skipping at 20 months?",
+          "a": "Offer nap time daily even when it fails, keep the room dark and boring, and treat a skipped nap as a signal for bedtime 30–60 minutes earlier — not for a later bedtime, which only makes tomorrow harder."
+        },
+        {
+          "q": "Is there a sleep regression coming for a 20-month-old?",
+          "a": "The 18-month window can stretch to 20 months; the next classic regression is the 2-year sleep regression between 24 and 30 months. Both bring night wakes and nap strikes and usually pass within a few weeks."
+        }
+      ]
+    },
+    {
+      "month": 21,
+      "answer": {
+        "wake": "7:00 AM",
+        "naps_phrase": "one nap at 12:30 PM",
+        "bed": "7:30 PM",
+        "ww": "5 to 6 hours",
+        "total": "11 to 14 hours"
+      },
+      "wake_windows": "5 – 6 hours",
+      "naps": "1 nap",
+      "total_sleep": "11 – 14 hours (10 – 12 at night + 1 nap)",
+      "whats_changing": "Potty training can wreck sleep if it starts too early, because night dryness is hormonal, not learned. Keep daytime training separate from nights and leave pull-ups alone until your toddler stays dry through a nap.",
+      "sample_day": [
+        {
+          "event": "Wake up",
+          "time": "7:00 AM",
+          "note": ""
+        },
+        {
+          "event": "Nap",
+          "time": "12:30 – 2:00 PM",
+          "note": "5.5 hours awake"
+        },
+        {
+          "event": "Bedtime",
+          "time": "7:30 – 8:00 PM",
+          "note": "5.5 hours after the nap"
+        }
+      ],
+      "faqs": [
+        {
+          "q": "How much sleep does a 21-month-old need?",
+          "a": "The AAP and CDC guide of 11–14 hours in 24 hours still applies through age 2, consistent with the National Sleep Foundation. Most 21-month-olds: 10–12 hours at night plus a 1–1.5 hour nap."
+        },
+        {
+          "q": "What wake window does a 21-month-old need?",
+          "a": "About 5.5 hours on both sides of the nap. The pre-bed stretch should stay at least as long as the morning one — a short final window is the most common cause of bedtime battles at this age."
+        },
+        {
+          "q": "Does potty training affect sleep at 21 months?",
+          "a": "It can if you night-train. Toddler night dryness depends on hormones that mature on their own, so daytime progress says nothing about nights. Train days, keep pull-ups at night, and skip fluids within an hour of bed."
+        },
+        {
+          "q": "Is there a sleep regression coming for a 21-month-old?",
+          "a": "After the 18-month window, the next classic regression is the 2-year sleep regression between 24 and 30 months. Expect it to touch naps and nights; steady timing and brief responses are the defense."
+        }
+      ]
+    },
+    {
+      "month": 22,
+      "answer": {
+        "wake": "7:00 AM",
+        "naps_phrase": "one nap at 12:45 PM",
+        "bed": "7:30 PM",
+        "ww": "5 to 6 hours",
+        "total": "11 to 14 hours"
+      },
+      "wake_windows": "5 – 6 hours",
+      "naps": "1 nap",
+      "total_sleep": "11 – 14 hours (10 – 12 at night + 1 nap)",
+      "whats_changing": "Imagination ramps up, and so do bedtime stalling and night fears. A boring, repeatable bedtime routine — same book, same song, lights out at the same minute — outperforms any single sleep trick at this age.",
+      "sample_day": [
+        {
+          "event": "Wake up",
+          "time": "7:00 AM",
+          "note": ""
+        },
+        {
+          "event": "Nap",
+          "time": "12:45 – 2:15 PM",
+          "note": "5.75 hours awake"
+        },
+        {
+          "event": "Bedtime",
+          "time": "7:30 – 8:00 PM",
+          "note": "5.25 hours after the nap"
+        }
+      ],
+      "faqs": [
+        {
+          "q": "How much sleep does a 22-month-old need?",
+          "a": "The AAP and CDC recommend 11–14 hours in 24 hours through age 2, matching the National Sleep Foundation range. That usually means 10–12 hours overnight plus one nap of 1–1.5 hours."
+        },
+        {
+          "q": "What wake window does a 22-month-old need?",
+          "a": "About 5.5–6 hours before the nap and 5–5.5 hours after it. Nightmares that start around now are developmentally normal — a quick reassurance, same room, no long negotiation keeps them small."
+        },
+        {
+          "q": "How do I stop bedtime stalling at 22 months?",
+          "a": "Offer two fixed choices inside the routine (two books, which song), then close the door with the same phrase every night. Answer one scheduled check-in, then wait — stalling survives on new content."
+        },
+        {
+          "q": "Is there a sleep regression coming for a 22-month-old?",
+          "a": "The next classic window is the 2-year sleep regression, typically 24–30 months. It often arrives with nap strikes and night wakes; keep bedtime and nap time fixed now so the schedule can absorb it."
+        }
+      ]
+    },
+    {
+      "month": 23,
+      "answer": {
+        "wake": "7:00 AM",
+        "naps_phrase": "one nap at 12:45 PM",
+        "bed": "7:30 PM",
+        "ww": "5 to 6 hours",
+        "total": "11 to 14 hours"
+      },
+      "wake_windows": "5 – 6 hours",
+      "naps": "1 nap",
+      "total_sleep": "11 – 14 hours (10 – 12 at night + 1 nap)",
+      "whats_changing": "The 2-year regression is around the corner and nap questions resurface. Keep wake windows age-right — about 5.5 hours before the nap and 5–5.5 before bed — so the schedule heads into the 2-year window on solid footing.",
+      "sample_day": [
+        {
+          "event": "Wake up",
+          "time": "7:00 AM",
+          "note": ""
+        },
+        {
+          "event": "Nap",
+          "time": "12:45 – 2:15 PM",
+          "note": "5.75 hours awake"
+        },
+        {
+          "event": "Bedtime",
+          "time": "7:30 – 8:00 PM",
+          "note": "5.25 hours after the nap"
+        }
+      ],
+      "faqs": [
+        {
+          "q": "How much sleep does a 23-month-old need?",
+          "a": "The AAP and CDC recommendation for ages 1–2 is 11–14 hours in 24 hours, the same as the National Sleep Foundation range: about 10–12 hours at night plus a 1–1.5 hour nap."
+        },
+        {
+          "q": "What wake window does a 23-month-old need?",
+          "a": "5.5–6 hours before the nap, 5–5.5 hours after it. As the second birthday nears, total sleep creeps toward the low end of the range — that is normal, not a problem to fix."
+        },
+        {
+          "q": "Is my 23-month-old about to drop the nap?",
+          "a": "Usually not yet — most keep one nap until around 3. The readiness pattern is nap refusal three days a week for two weeks, with an easy bedtime and crash-free afternoons. Our nap transition checker scores it in five questions."
+        },
+        {
+          "q": "Is there a sleep regression coming for a 23-month-old?",
+          "a": "Yes — the 2-year sleep regression, typically between 24 and 30 months, is the next classic window. Sudden night wakes, nap strikes and bedtime refusal are the usual signs; it usually clears in 3–6 weeks."
+        }
+      ]
+    },
+    {
+      "month": 24,
+      "answer": {
+        "wake": "7:00 AM",
+        "naps_phrase": "one nap at 12:30 PM",
+        "bed": "7:30 PM",
+        "ww": "5 to 5.5 hours",
+        "total": "11 to 13 hours"
+      },
+      "wake_windows": "5 – 5.5 hours",
+      "naps": "1 nap",
+      "total_sleep": "11 – 13 hours (10 – 11 at night + 1 nap)",
+      "whats_changing": "The 2-year regression window (24–30 months) arrives with newfound independence: 'big kid' refusal, night wakes, nap strikes. It passes — hold the schedule, keep responses brief and consistent, and pick your battles outside sleep.",
+      "sample_day": [
+        {
+          "event": "Wake up",
+          "time": "7:00 AM",
+          "note": ""
+        },
+        {
+          "event": "Nap",
+          "time": "12:30 – 2:00 PM",
+          "note": "5.5 hours awake"
+        },
+        {
+          "event": "Bedtime",
+          "time": "7:30 – 8:00 PM",
+          "note": "5.5 hours after the nap"
+        }
+      ],
+      "faqs": [
+        {
+          "q": "How much sleep does a 2-year-old need?",
+          "a": "The AAP and CDC recommend 11–14 hours in 24 hours through age 2; the National Sleep Foundation puts ages 3–5 at 10–13. At 24 months, plan on 10–11 hours at night plus a 1–1.5 hour nap."
+        },
+        {
+          "q": "What wake window does a 24-month-old need?",
+          "a": "About 5.5 hours before the nap and 5.5 hours after it. Two-year-olds need slightly less day sleep than babies, so guard the bedtime: an over-tired preschooler wakes more, not less."
+        },
+        {
+          "q": "How long does the 2-year sleep regression last?",
+          "a": "Typically 3–6 weeks. It tracks a skill leap — language, potty learning, independence — so keep bedtime fixed, protect the nap unless refusal lasts over two weeks, and expect week-by-week improvement."
+        },
+        {
+          "q": "Is there a sleep regression coming for a 24-month-old?",
+          "a": "The 2-year regression window (24–30 months) is likely under way now. Sudden wakes, split nights and nap strikes are the classic signs. Consistency is the cure; the next window after this one is much quieter."
+        }
+      ]
+    },
+    {
+      "month": 25,
+      "answer": {
+        "wake": "7:15 AM",
+        "naps_phrase": "one nap at 12:45 PM",
+        "bed": "7:45 PM",
+        "ww": "5.5 to 6 hours",
+        "total": "11 to 13 hours"
+      },
+      "wake_windows": "5.5 – 6 hours",
+      "naps": "1 nap",
+      "total_sleep": "11 – 13 hours (10 – 11 at night + 1 nap)",
+      "whats_changing": "Naps still matter but may shorten to 60–90 minutes. Occasional skips are normal; a daily pattern of skipped naps plus a happy evening means the nap is close to finished — try quiet time before dropping anything.",
+      "sample_day": [
+        {
+          "event": "Wake up",
+          "time": "7:15 AM",
+          "note": ""
+        },
+        {
+          "event": "Nap",
+          "time": "12:45 – 2:00 PM",
+          "note": "5.5 hours awake"
+        },
+        {
+          "event": "Bedtime",
+          "time": "7:45 – 8:15 PM",
+          "note": "5.75 hours after the nap"
+        }
+      ],
+      "faqs": [
+        {
+          "q": "How much sleep does a 25-month-old need?",
+          "a": "The AAP and CDC keep 11–14 hours in 24 hours through age 2, and the National Sleep Foundation range for 3-year-olds is 10–13. At 25 months: 10–11 hours at night plus a 1–1.5 hour nap."
+        },
+        {
+          "q": "What wake window does a 25-month-old need?",
+          "a": "About 5.5–6 hours before the nap and 5.5–6 hours after it. Longer than that and the nap eats bedtime; shorter and they bounce off the bed at 8 PM."
+        },
+        {
+          "q": "Can I drop the nap at 25 months?",
+          "a": "You can, but you usually shouldn't — most children need a nap until about 3. If you do drop it, keep a 60–90 minute quiet time and move bedtime 30–45 minutes earlier for the transition."
+        },
+        {
+          "q": "Is there a sleep regression coming for a 25-month-old?",
+          "a": "The 2-year sleep regression window runs 24–30 months, so you may be in it. Expect night wakes and nap refusal that come and go; hold the routine and expect it to lift by about 30 months."
+        }
+      ]
+    },
+    {
+      "month": 26,
+      "answer": {
+        "wake": "7:15 AM",
+        "naps_phrase": "one nap at 1:00 PM",
+        "bed": "7:45 PM",
+        "ww": "5.5 to 6 hours",
+        "total": "11 to 13 hours"
+      },
+      "wake_windows": "5.5 – 6 hours",
+      "naps": "1 nap",
+      "total_sleep": "11 – 13 hours (10 – 11 at night + 1 nap)",
+      "whats_changing": "Bedtime resistance grows with vocabulary: one more story, one more water. Keep the wind-down boring and predictable — an overtired 26-month-old sleeps worse, not better, and the stalling feeds on new content.",
+      "sample_day": [
+        {
+          "event": "Wake up",
+          "time": "7:15 AM",
+          "note": ""
+        },
+        {
+          "event": "Nap",
+          "time": "1:00 – 2:15 PM",
+          "note": "5.75 hours awake"
+        },
+        {
+          "event": "Bedtime",
+          "time": "7:45 – 8:15 PM",
+          "note": "5.5 hours after the nap"
+        }
+      ],
+      "faqs": [
+        {
+          "q": "How much sleep does a 26-month-old need?",
+          "a": "The AAP and CDC range through age 2 is 11–14 hours in 24 hours; the National Sleep Foundation puts 3–5-year-olds at 10–13. At 26 months, 10–11 hours at night plus a 1–1.5 hour nap fits both."
+        },
+        {
+          "q": "What wake window does a 26-month-old need?",
+          "a": "Roughly 5.75 hours before the nap and 5.5 hours after it. Keep wake-up fixed — the wake window is a tool to protect bedtime, not a reason to let mornings drift later."
+        },
+        {
+          "q": "What bedtime for a 26-month-old?",
+          "a": "About 7:45–8:15 after one nap ending by 2:15. The exact minute matters less than the same minute daily: identical routine, identical lights-out, seven nights a week."
+        },
+        {
+          "q": "Is there a sleep regression coming for a 26-month-old?",
+          "a": "The 2-year regression window (24–30 months) may already be here. Its hallmark is a child who 'forgets' how to settle. Hold the line with brief, boring responses and it usually resolves by 30 months."
+        }
+      ]
+    },
+    {
+      "month": 27,
+      "answer": {
+        "wake": "7:15 AM",
+        "naps_phrase": "one nap at 1:00 PM",
+        "bed": "7:45 PM",
+        "ww": "5.5 to 6 hours",
+        "total": "11 to 13 hours"
+      },
+      "wake_windows": "5.5 – 6 hours",
+      "naps": "1 nap",
+      "total_sleep": "11 – 13 hours (10 – 11 at night + 1 nap)",
+      "whats_changing": "Night sleep consolidates while naps shorten. Watch total sleep: if bedtime drifts past 8:30 or mornings get earlier, shorten the nap rather than stretching the evening — the night is the foundation at this age.",
+      "sample_day": [
+        {
+          "event": "Wake up",
+          "time": "7:15 AM",
+          "note": ""
+        },
+        {
+          "event": "Nap",
+          "time": "1:00 – 2:15 PM",
+          "note": "5.75 hours awake"
+        },
+        {
+          "event": "Bedtime",
+          "time": "7:45 – 8:15 PM",
+          "note": "5.5 hours after the nap"
+        }
+      ],
+      "faqs": [
+        {
+          "q": "How much sleep does a 27-month-old need?",
+          "a": "The AAP and CDC recommend 11–14 hours in 24 hours through age 2; the National Sleep Foundation range for ages 3–5 is 10–13. A 27-month-old usually needs 10–11 hours at night plus a short nap."
+        },
+        {
+          "q": "What wake window does a 27-month-old need?",
+          "a": "About 6 hours before the nap and 5.5 hours after it. If either stretch runs long, look for the 5 PM slump — it means the post-nap window should shrink, not grow."
+        },
+        {
+          "q": "How long should a 27-month-old nap?",
+          "a": "60–90 minutes is the sweet spot. Longer naps can push bedtime past 8:30; cap it with a fixed end time (same alarm, same quiet wakeup) if nights are getting late."
+        },
+        {
+          "q": "Is there a sleep regression coming for a 27-month-old?",
+          "a": "You are inside the 2-year regression window (24–30 months). Night wakes and nap refusals come in waves; keep responses consistent and expect the waves to flatten toward 30 months."
+        }
+      ]
+    },
+    {
+      "month": 28,
+      "answer": {
+        "wake": "7:15 AM",
+        "naps_phrase": "one nap at 1:00 PM",
+        "bed": "7:45 PM",
+        "ww": "5.5 to 6 hours",
+        "total": "11 to 13 hours"
+      },
+      "wake_windows": "5.5 – 6 hours",
+      "naps": "1 nap",
+      "total_sleep": "11 – 13 hours (10 – 11 at night + 1 nap)",
+      "whats_changing": "If the nap collapses some weeks, keep daily quiet time and add an early bedtime on failed days. Sleep debt at this age shows up as 5 AM wakes — the fix is an earlier night, never a later one.",
+      "sample_day": [
+        {
+          "event": "Wake up",
+          "time": "7:15 AM",
+          "note": ""
+        },
+        {
+          "event": "Nap",
+          "time": "1:00 – 2:15 PM",
+          "note": "5.75 hours awake"
+        },
+        {
+          "event": "Bedtime",
+          "time": "7:45 – 8:15 PM",
+          "note": "5.5 hours after the nap"
+        }
+      ],
+      "faqs": [
+        {
+          "q": "How much sleep does a 28-month-old need?",
+          "a": "The AAP and CDC keep 11–14 hours in 24 hours through age 2, and the National Sleep Foundation range for the preschool years is 10–13. At 28 months: 10–11 hours at night plus a nap."
+        },
+        {
+          "q": "What wake window does a 28-month-old need?",
+          "a": "About 5.75 hours before the nap and 5.5 hours after it. Weekend wake-up times should stay within an hour of weekdays or Monday turns into a mini regression."
+        },
+        {
+          "q": "Why does my 28-month-old wake at 5 AM?",
+          "a": "Usually an undertimed day or a bedtime that drifted late. Move bedtime 20–30 minutes earlier for a week, keep wake-up fixed, and make sure the nap is not running past 2:30."
+        },
+        {
+          "q": "Is there a sleep regression coming for a 28-month-old?",
+          "a": "The 2-year regression window (24–30 months) covers now. Its endgame usually brings longer nights again; keep the nap offered and the routine unchanged through the last stretches."
+        }
+      ]
+    },
+    {
+      "month": 29,
+      "answer": {
+        "wake": "7:15 AM",
+        "naps_phrase": "one nap at 1:00 PM",
+        "bed": "8:00 PM",
+        "ww": "5.5 to 6 hours",
+        "total": "11 to 13 hours"
+      },
+      "wake_windows": "5.5 – 6 hours",
+      "naps": "1 nap",
+      "total_sleep": "11 – 13 hours (10 – 11 at night + 1 nap)",
+      "whats_changing": "Readiness to drop the nap starts showing: refusing nap three days a week while coping well without it. Don't act on it before age 3 unless your pediatrician agrees — quiet time is the cheaper experiment.",
+      "sample_day": [
+        {
+          "event": "Wake up",
+          "time": "7:15 AM",
+          "note": ""
+        },
+        {
+          "event": "Nap",
+          "time": "1:00 – 2:30 PM",
+          "note": "5.75 hours awake"
+        },
+        {
+          "event": "Bedtime",
+          "time": "8:00 – 8:30 PM",
+          "note": "5.5 hours after the nap"
+        }
+      ],
+      "faqs": [
+        {
+          "q": "How much sleep does a 29-month-old need?",
+          "a": "The AAP and CDC recommend 11–14 hours in 24 hours through age 2; the National Sleep Foundation puts ages 3–5 at 10–13. At 29 months, aim for 10–11 hours at night plus a 1–1.5 hour nap."
+        },
+        {
+          "q": "What wake window does a 29-month-old need?",
+          "a": "About 5.75–6 hours before the nap and 5.5 hours after it. As the wake window stretches, the nap must start later by clock time — don't move bedtime to compensate."
+        },
+        {
+          "q": "What are signs my 29-month-old is ready to drop the nap?",
+          "a": "Two weeks of nap refusal with easy bedtimes, crash-free afternoons and normal nights. Our nap transition checker scores the five-question pattern and gives a step-down plan if the answer is yes."
+        },
+        {
+          "q": "Is there a sleep regression coming for a 29-month-old?",
+          "a": "You are near the end of the 2-year regression window (24–30 months). If nap refusal now looks like readiness rather than regression, run the nap transition checker before changing anything."
+        }
+      ]
+    },
+    {
+      "month": 30,
+      "answer": {
+        "wake": "7:15 AM",
+        "naps_phrase": "one nap at 1:00 PM",
+        "bed": "8:00 PM",
+        "ww": "5.5 to 6 hours",
+        "total": "11 to 13 hours"
+      },
+      "wake_windows": "5.5 – 6 hours",
+      "naps": "1 nap (or quiet time)",
+      "total_sleep": "11 – 13 hours (10 – 11 at night + 1 nap)",
+      "whats_changing": "Some 30-month-olds begin the drop to no nap. Keep quiet time — books, puzzles, audiobooks — in the full nap slot, and go to bed earlier on no-nap days: overtiredness peaks at dusk, not at bedtime.",
+      "sample_day": [
+        {
+          "event": "Wake up",
+          "time": "7:15 AM",
+          "note": ""
+        },
+        {
+          "event": "Nap or quiet time",
+          "time": "1:00 – 2:15 PM",
+          "note": "5.75 hours awake"
+        },
+        {
+          "event": "Bedtime",
+          "time": "8:00 – 8:30 PM",
+          "note": "5.75 hours after the nap"
+        }
+      ],
+      "faqs": [
+        {
+          "q": "How much sleep does a 30-month-old need?",
+          "a": "The AAP and CDC keep 11–14 hours through age 2, and the National Sleep Foundation range for ages 3–5 is 10–13 hours. At 30 months: 10–11 hours at night plus a nap or a solid quiet time."
+        },
+        {
+          "q": "What wake window does a 30-month-old need?",
+          "a": "About 6 hours before the nap and 5.5–6 hours after it. If quiet time replaces the nap, keep the same clock slot so the day's structure — and bedtime — does not move."
+        },
+        {
+          "q": "Is 30 months too early to drop the nap?",
+          "a": "It's on the early side — most drop closer to 3–4. If your child refuses every nap for two weeks and melts down without one, drop gradually: quiet time five days a week, nap on the other two."
+        },
+        {
+          "q": "Is there a sleep regression coming for a 30-month-old?",
+          "a": "The 2-year regression window closes around 30 months; after it, the big event is the eventual nap drop (usually 3–4). Track nap refusals for two weeks before calling either one a regression."
+        }
+      ]
+    },
+    {
+      "month": 31,
+      "answer": {
+        "wake": "7:15 AM",
+        "naps_phrase": "one nap at 1:00 PM",
+        "bed": "8:00 PM",
+        "ww": "6 to 6.5 hours",
+        "total": "11 to 13 hours"
+      },
+      "wake_windows": "6 – 6.5 hours",
+      "naps": "1 nap",
+      "total_sleep": "11 – 13 hours (10 – 11 at night + 1 nap)",
+      "whats_changing": "Sleep need settles at 10–13 hours total and wake windows stretch to 6–6.5 hours. An occasional 6:30 AM wake becomes more common — fix it with a rock-solid lights-out, not with an earlier bedtime chase.",
+      "sample_day": [
+        {
+          "event": "Wake up",
+          "time": "7:15 AM",
+          "note": ""
+        },
+        {
+          "event": "Nap",
+          "time": "1:00 – 2:15 PM",
+          "note": "5.75 hours awake"
+        },
+        {
+          "event": "Bedtime",
+          "time": "8:00 – 8:30 PM",
+          "note": "5.75 hours after the nap"
+        }
+      ],
+      "faqs": [
+        {
+          "q": "How much sleep does a 31-month-old need?",
+          "a": "The National Sleep Foundation range for ages 3–5 is 10–13 hours, and the AAP's 11–14 hour guidance still covers early age 3. Plan on 10–11 hours at night plus a nap or quiet time."
+        },
+        {
+          "q": "What wake window does a 31-month-old need?",
+          "a": "About 6 hours before the nap and 5.75–6 hours after it. Keep the wake-up time within an hour on weekends; schedule drift is the most common cause of early wakes at this age."
+        },
+        {
+          "q": "Does a 31-month-old still need a nap?",
+          "a": "Many do. Dropping early often means earlier-than-wanted bedtimes and 5 AM wakes. Keep offering the nap or quiet time until your child refuses consistently for two weeks straight."
+        },
+        {
+          "q": "Is there a sleep regression coming for a 31-month-old?",
+          "a": "There is no classic regression at 31 months — the events ahead are the nap drop (3–4 years) and the occasional developmental wake storm. Protect the nap offer and keep bedtime consistent through both."
+        }
+      ]
+    },
+    {
+      "month": 32,
+      "answer": {
+        "wake": "7:15 AM",
+        "naps_phrase": "one nap at 1:00 PM",
+        "bed": "8:00 PM",
+        "ww": "6 to 6.5 hours",
+        "total": "11 to 13 hours"
+      },
+      "wake_windows": "6 – 6.5 hours",
+      "naps": "1 nap (or quiet time)",
+      "total_sleep": "11 – 13 hours (10 – 11 at night + 1 nap)",
+      "whats_changing": "Transition years approach: some days nap, some days quiet time, some weeks both. Mixed weeks are fine — anchor the day with lunch, a quiet-time slot and a fixed bedtime, and let the nap itself be flexible.",
+      "sample_day": [
+        {
+          "event": "Wake up",
+          "time": "7:15 AM",
+          "note": ""
+        },
+        {
+          "event": "Nap or quiet time",
+          "time": "1:00 – 2:15 PM",
+          "note": "5.75 hours awake"
+        },
+        {
+          "event": "Bedtime",
+          "time": "8:00 – 8:30 PM",
+          "note": "5.75 hours after the nap"
+        }
+      ],
+      "faqs": [
+        {
+          "q": "How much sleep does a 32-month-old need?",
+          "a": "The National Sleep Foundation range for ages 3–5 is 10–13 hours total, and the AAP guidance for age 3 stays in that neighborhood: roughly 10–11 hours at night plus a nap or quiet time."
+        },
+        {
+          "q": "What wake window does a 32-month-old need?",
+          "a": "About 6–6.5 hours on both sides of the nap. If the evening stretch runs past 6.5 hours, the 5 PM crash arrives — pull bedtime 15 minutes earlier rather than stretching the morning."
+        },
+        {
+          "q": "How do I switch from nap to quiet time at 32 months?",
+          "a": "Rename it, don't remove it: same time, dark corner, special audiobooks, 60–90 minutes, timer they control. Everything else about the day stays exactly like nap day."
+        },
+        {
+          "q": "Is there a sleep regression coming for a 32-month-old?",
+          "a": "No classic regression at this age; the disruption to plan for is the nap drop, usually between 3 and 4. Two consistent weeks of nap refusal with easy afternoons is the signal it has begun."
+        }
+      ]
+    },
+    {
+      "month": 33,
+      "answer": {
+        "wake": "7:15 AM",
+        "naps_phrase": "one nap at 1:00 PM",
+        "bed": "8:00 PM",
+        "ww": "6 to 6.5 hours",
+        "total": "11 to 13 hours"
+      },
+      "wake_windows": "6 – 6.5 hours",
+      "naps": "1 nap (or quiet time)",
+      "total_sleep": "11 – 13 hours (10 – 11 at night + 1 nap)",
+      "whats_changing": "The last-nap years are ending for many: refusal on some days, then most days. On no-nap days pull bedtime 30–45 minutes earlier so overtiredness never compounds into the next morning.",
+      "sample_day": [
+        {
+          "event": "Wake up",
+          "time": "7:15 AM",
+          "note": ""
+        },
+        {
+          "event": "Nap or quiet time",
+          "time": "1:00 – 2:00 PM",
+          "note": "5.75 hours awake"
+        },
+        {
+          "event": "Bedtime",
+          "time": "8:00 – 8:30 PM",
+          "note": "6 hours after the nap"
+        }
+      ],
+      "faqs": [
+        {
+          "q": "How much sleep does a 33-month-old need?",
+          "a": "The National Sleep Foundation recommends 10–13 hours for ages 3–5, which is what the AAP guidance converges to after age 2. That is 10–11 hours at night plus a nap or quiet time."
+        },
+        {
+          "q": "What wake window does a 33-month-old need?",
+          "a": "About 6 hours before the nap and 6 hours after it. Drop nap length before nap frequency: cap a marathon nap at 90 minutes instead of removing it outright."
+        },
+        {
+          "q": "What if my 33-month-old won't nap but is cranky?",
+          "a": "Keep quiet time anyway and move bedtime 30–45 minutes earlier; a 5 PM meltdown is sleep pressure, not a reason to fight. If the crankiness lasts all day, every day, ask your pediatrician."
+        },
+        {
+          "q": "Is there a sleep regression coming for a 33-month-old?",
+          "a": "No classic regression — expect the nap-drop transition instead, typically between 3 and 4 years. Two weeks of consistent refusal with easy afternoons marks the start; keep quiet time as the stand-in."
+        }
+      ]
+    },
+    {
+      "month": 34,
+      "answer": {
+        "wake": "7:15 AM",
+        "naps_phrase": "one nap at 1:00 PM",
+        "bed": "8:00 PM",
+        "ww": "6 to 6.5 hours",
+        "total": "11 to 13 hours"
+      },
+      "wake_windows": "6 – 6.5 hours",
+      "naps": "1 nap (or quiet time)",
+      "total_sleep": "11 – 13 hours (10 – 11 at night + 1 nap)",
+      "whats_changing": "Quiet time can be stubborn — try audiobooks or dim light instead of sleep and keep it daily. Bedtime may move to 8:00–8:30 as the wake window stretches past 6 hours; keep wake-up anchored all week.",
+      "sample_day": [
+        {
+          "event": "Wake up",
+          "time": "7:15 AM",
+          "note": ""
+        },
+        {
+          "event": "Nap or quiet time",
+          "time": "1:00 – 2:00 PM",
+          "note": "5.75 hours awake"
+        },
+        {
+          "event": "Bedtime",
+          "time": "8:00 – 8:30 PM",
+          "note": "6 hours after the nap"
+        }
+      ],
+      "faqs": [
+        {
+          "q": "How much sleep does a 34-month-old need?",
+          "a": "The National Sleep Foundation range for ages 3–5 is 10–13 hours: about 10–11 at night plus a nap or quiet time. Total sleep that stays below 10 hours at night is the cue to look at bedtime."
+        },
+        {
+          "q": "What wake window does a 34-month-old need?",
+          "a": "6–6.5 hours before the nap and the same after it. Keep both windows honest even on no-nap days: the quiet-time slot plays the nap's role in the day's architecture."
+        },
+        {
+          "q": "Why does my 34-month-old resist quiet time?",
+          "a": "Because it can feel like punishment for not sleeping. Make it attractive: audiobooks only during quiet time, a timer they control, and praise for staying put — and keep it 60–90 minutes regardless of sleep."
+        },
+        {
+          "q": "Is there a sleep regression coming for a 34-month-old?",
+          "a": "No classic regression at this age; the scheduled upheaval is the nap drop around 3–4. Some kids nap, some don't — mixed weeks are normal while the pattern resolves."
+        }
+      ]
+    },
+    {
+      "month": 35,
+      "answer": {
+        "wake": "7:15 AM",
+        "naps_phrase": "one nap at 1:00 PM",
+        "bed": "8:15 PM",
+        "ww": "6 to 6.5 hours",
+        "total": "11 to 13 hours"
+      },
+      "wake_windows": "6 – 6.5 hours",
+      "naps": "1 nap (or quiet time)",
+      "total_sleep": "11 – 13 hours (10 – 11 at night + 1 nap)",
+      "whats_changing": "Most 35-month-olds are down to one nap or quiet time most days, with 10–12 hours at night. Hold the 8:00–8:45 bedtime window steady — weekend shifts of more than an hour undo the whole week.",
+      "sample_day": [
+        {
+          "event": "Wake up",
+          "time": "7:15 AM",
+          "note": ""
+        },
+        {
+          "event": "Nap or quiet time",
+          "time": "1:00 – 2:00 PM",
+          "note": "5.75 hours awake"
+        },
+        {
+          "event": "Bedtime",
+          "time": "8:15 – 8:45 PM",
+          "note": "6.25 hours after the nap"
+        }
+      ],
+      "faqs": [
+        {
+          "q": "How much sleep does a 35-month-old need?",
+          "a": "The National Sleep Foundation range for ages 3–5 is 10–13 hours, the standard reference the AAP guidance aligns with after age 2. Expect 10–11 hours at night plus a nap or quiet time."
+        },
+        {
+          "q": "What wake window does a 35-month-old need?",
+          "a": "About 6–6.5 hours on both sides of the nap. The final stretch before bed is still the one to protect — it decides whether bedtime is calm or a negotiation."
+        },
+        {
+          "q": "Is it normal for a 35-month-old to stop napping?",
+          "a": "Yes — most children drop the daytime nap between 3 and 4, with stretches of refusal along the way. Keep quiet time, keep bedtime consistent, and expect the occasional rebound nap in the car."
+        },
+        {
+          "q": "Is there a sleep regression coming for a 35-month-old?",
+          "a": "There is no classic regression at 35 months; the transition ahead is the nap drop. Watch for two straight weeks of refusal with easy afternoons before treating it as the final drop."
+        }
+      ]
+    },
+    {
+      "month": 36,
+      "answer": {
+        "wake": "7:15 AM",
+        "naps_phrase": "one nap or quiet time at 1:00 PM",
+        "bed": "8:15 PM",
+        "ww": "6 to 6.5 hours",
+        "total": "10 to 13 hours"
+      },
+      "wake_windows": "6 – 6.5 hours (nap or quiet time)",
+      "naps": "1 nap (or quiet time)",
+      "total_sleep": "10 – 13 hours (10 – 12 at night + 1 nap or quiet time)",
+      "whats_changing": "Around age 3 many children drop the nap for good — but only when it is truly refused. Dropping early often brings 5 AM wakes and evening meltdowns, so keep quiet time as the stand-in either way.",
+      "sample_day": [
+        {
+          "event": "Wake up",
+          "time": "7:15 AM",
+          "note": ""
+        },
+        {
+          "event": "Nap or quiet time",
+          "time": "1:00 – 2:00 PM",
+          "note": "5.75 hours awake"
+        },
+        {
+          "event": "Bedtime",
+          "time": "8:15 – 8:45 PM",
+          "note": "6.25 hours after the nap"
+        }
+      ],
+      "faqs": [
+        {
+          "q": "How much sleep does a 3-year-old need?",
+          "a": "The National Sleep Foundation range for ages 3–5 is 10–13 hours, which is also where AAP guidance lands after age 2: about 10–12 hours at night plus a nap or quiet time at 36 months."
+        },
+        {
+          "q": "What wake window does a 3-year-old need?",
+          "a": "About 6–6.5 hours from wake-up to nap (or quiet time), and the same from the end of it to bedtime. By 3, the nap often becomes optional — the wake windows still structure the day."
+        },
+        {
+          "q": "When do most kids stop napping?",
+          "a": "Between 3 and 5, with most dropping the daytime nap around 3–4; the AAP keeps quiet time in the day until then. If your 3-year-old still naps well and sleeps at night, there is no reason to stop."
+        },
+        {
+          "q": "Is there a sleep regression at 3 years old?",
+          "a": "There is no classic regression at 36 months — the scheduled disruption is the nap drop itself. Refusal lasting two weeks with easy afternoons marks the transition; hold bedtime steady through it."
+        }
+      ]
+    }
+  ]
+}
