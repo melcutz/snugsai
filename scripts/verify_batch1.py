@@ -336,8 +336,8 @@ for p in ROOT.rglob("*.html"):
         elif path.endswith("/index.html"):
             all_hrefs.add(path[: -len("index.html")])
 for page in NEW_PAGES:
-    up = url_path(page)
-    if up == "/":
+    up = f"/{url_path(page)}"  # all_hrefs entries keep their leading slash
+    if up == "/index.html":
         continue
     if up not in all_hrefs:
         fail(f"13 ORPHAN PAGE (no inbound link) {page}")
