@@ -4,8 +4,10 @@
 Checks:
   a) Find all HTML files with data-cta / cta_click.
   b) Assert every cta_click payload includes link_domain.
-  c) Assert app.snugs.ai CTA hrefs include utm_source=marketing_site,
-     utm_medium=cta, and a non-empty utm_campaign.
+  c) Assert app.snugs.ai CTA hrefs carry one of the accepted UTM pairs
+     (legacy site CTAs: utm_source=marketing_site&utm_medium=cta; SEO
+     batch-1 pages (#19): utm_source=snugs.ai&utm_medium=seo) and a
+     non-empty utm_campaign.
   d) Print counts (pages patched, CTAs checked, failures).
 """
 
@@ -17,7 +19,10 @@ from urllib.parse import parse_qs, urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
 
-REQUIRED_UTM = {"utm_source": "marketing_site", "utm_medium": "cta"}
+ACCEPTED_UTM = (
+    {"utm_source": "marketing_site", "utm_medium": "cta"},
+    {"utm_source": "snugs.ai", "utm_medium": "seo"},
+)
 
 
 class CtaAnchorParser(HTMLParser):
@@ -69,17 +74,26 @@ def verify() -> int:
                 continue
             cta_app += 1
             params = parse_qs(parsed.query)
-            missing = [
-                f"{k}={v}"
-                for k, v in REQUIRED_UTM.items()
-                if params.get(k, [""])[0] != v
-            ]
+            matched = next(
+                (
+                    req
+                    for req in ACCEPTED_UTM
+                    if all(
+                        params.get(k, [""])[0] == v for k, v in req.items()
+                    )
+                ),
+                None,
+            )
+            if matched is None:
+                utm_failures.append(
+                    f"{path.relative_to(ROOT)}: {href}  ->  no accepted UTM "
+                    f"pair from {list(ACCEPTED_UTM)}"
+                )
+                continue
             campaign = params.get("utm_campaign", [""])[0]
             if not campaign:
-                missing.append("utm_campaign=<empty>")
-            if missing:
                 utm_failures.append(
-                    f"{path.relative_to(ROOT)}: {href}  ->  missing {', '.join(missing)}"
+                    f"{path.relative_to(ROOT)}: {href}  ->  utm_campaign=<empty>"
                 )
 
     failures = len(pages_missing_link_domain) + len(utm_failures)
