@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Cloudflare Web Analytics -->
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b844caf1ba764318811b28d1942bbaef"}'></script>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CLY78E6V4R"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CLY78E6V4R');
+  </script>
+  <!-- MSFT Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "uawbuyagyv");
+  </script>
+  <title>Wake Window Calculator by Age: Naps &amp; Bedtime | Snugs.ai</title>
+  <meta name="description" content="Free wake window calculator: enter age and wake time to get every wake window, nap time and bedtime for the day, plus a 0–36 month wake window chart." />
+  <link rel="canonical" href="https://snugs.ai/tools/wake-window-calculator/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Wake Window Calculator by Age: Naps &amp; Bedtime | Snugs.ai" />
+  <meta property="og:description" content="Free wake window calculator: enter age and wake time to get every wake window, nap time and bedtime for the day, plus a 0–36 month wake window chart." />
+  <meta property="og:url" content="https://snugs.ai/tools/wake-window-calculator/" />
+  <meta property="og:image" content="https://snugs.ai/og/snugs-og.jpg" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="1500" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Wake Window Calculator by Age: Naps &amp; Bedtime | Snugs.ai" />
+  <meta name="twitter:description" content="Free wake window calculator: enter age and wake time to get every wake window, nap time and bedtime for the day, plus a 0–36 month wake window chart." />
+  <meta name="twitter:image" content="https://snugs.ai/og/snugs-og.jpg" />
+  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/jpeg" href="/og/snugs-og.jpg" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#EA580C" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://snugs.ai/"},
+          {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://snugs.ai/tools/"},
+          {"@type": "ListItem", "position": 3, "name": "Wake Window Calculator", "item": "https://snugs.ai/tools/wake-window-calculator/"}
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Wake Window Calculator",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Any",
+        "description": "Free calculator that turns a child's age in months (0–36) and wake-up time into wake windows, nap times and a bedtime for the night.",
+        "url": "https://snugs.ai/tools/wake-window-calculator/",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do I use the wake window calculator?",
+            "acceptedAnswer": {"@type": "Answer", "text": "Set your child's age in months and their usual wake-up time. The calculator shows every wake window for the day, the nap start and end times, and the bedtime that follows the final wake window."}
+          },
+          {
+            "@type": "Question",
+            "name": "What is a wake window?",
+            "acceptedAnswer": {"@type": "Answer", "text": "A wake window is the stretch of time a baby can comfortably stay awake before their next sleep. It lengthens with age: roughly 45–90 minutes for a newborn and 5–6 hours by age three."}
+          },
+          {
+            "@type": "Question",
+            "name": "What if my baby's wake windows don't match the chart?",
+            "acceptedAnswer": {"@type": "Answer", "text": "Every child is different. Treat these as starting points, watch sleepy cues, and shift times by 15–30 minutes to fit your family. Ask your pediatrician if your baby is struggling with sleep."}
+          },
+          {
+            "@type": "Question",
+            "name": "Is this medical advice?",
+            "acceptedAnswer": {"@type": "Answer", "text": "No. The calculator shares typical ranges described by the AAP, CDC and National Sleep Foundation for planning purposes only. It is not medical advice — talk to your pediatrician about your child's sleep."}
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'display': ['"Crimson Pro"', 'Georgia', 'serif'],
+            'sans': ['"DM Sans"', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes blob {
+      0%, 100% {
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        transform: rotate(0deg) scale(1);
+      }
+      25% {
+        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+        transform: rotate(90deg) scale(1.05);
+      }
+      50% {
+        border-radius: 50% 60% 30% 60% / 30% 50% 70% 30%;
+        transform: rotate(180deg) scale(1);
+      }
+      75% {
+        border-radius: 60% 40% 60% 30% / 70% 30% 60% 40%;
+        transform: rotate(270deg) scale(1.05);
+      }
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .animate-fadeInUp {
+      animation: fadeInUp 0.8s ease-out forwards;
+      opacity: 0;
+    }
+
+    .animate-fadeIn {
+      animation: fadeIn 0.6s ease-out forwards;
+      opacity: 0;
+    }
+
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+    }
+
+    .soft-shadow {
+      box-shadow:
+        0 2px 8px rgba(234, 88, 12, 0.04),
+        0 8px 24px rgba(234, 88, 12, 0.08),
+        0 16px 56px rgba(234, 88, 12, 0.08);
+    }
+
+    .gradient-warm {
+      background: linear-gradient(135deg,
+        #fff7ed 0%,
+        #ffedd5 25%,
+        #fed7aa 50%,
+        #ffedd5 75%,
+        #fff7ed 100%);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+    }
+
+    .blob-decoration {
+      position: absolute;
+      mix-blend-mode: multiply;
+      filter: blur(40px);
+      opacity: 0.3;
+      animation: blob 20s ease-in-out infinite;
+    }
+
+    input[type="range"].age-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 10px;
+      border-radius: 9999px;
+      background: linear-gradient(to right, #fdba74, #ea580c);
+      outline: none;
+    }
+
+    input[type="range"].age-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 9999px;
+      background: #fff;
+      border: 4px solid #ea580c;
+      box-shadow: 0 2px 8px rgba(234, 88, 12, 0.35);
+      cursor: pointer;
+    }
+
+    input[type="range"].age-slider::-moz-range-thumb {
+      width: 28px;
+      height: 28px;
+      border-radius: 9999px;
+      background: #fff;
+      border: 4px solid #ea580c;
+      box-shadow: 0 2px 8px rgba(234, 88, 12, 0.35);
+      cursor: pointer;
+    }
+
+    /* Snugs sticky mobile CTA (#10): mobile-only, fixed, no CLS. Keep z-index 40 so cookie consent (50+) stays on top. */
+    .snugs-sticky-cta { display: none; }
+    @media (max-width: 767px) {
+      body { padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+      body.snugs-sticky-dismissed { padding-bottom: 0; }
+      .snugs-sticky-cta {
+        display: flex;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 40;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
+        background: rgba(255, 255, 255, 0.96);
+        border-top: 1px solid #fed7aa;
+        box-shadow: 0 -8px 24px rgba(234, 88, 12, 0.12);
+      }
+      .snugs-sticky-cta[hidden] { display: none; }
+    }
+    @media (min-width: 768px) {
+      .snugs-sticky-cta { display: none !important; }
+    }
+  </style>
+</head>
+<body class="gradient-warm min-h-screen overflow-x-hidden relative">
+
+  <!-- Decorative blobs -->
+  <div class="blob-decoration w-80 h-80 bg-orange-400 rounded-full" style="top: -10%; right: -5%; animation-delay: 0s;"></div>
+  <div class="blob-decoration w-64 h-64 bg-orange-300 rounded-full" style="bottom: 10%; left: -8%; animation-delay: 5s;"></div>
+
+  <div class="container mx-auto px-4 py-8 md:py-16 max-w-3xl relative z-10">
+    <nav class="text-sm text-gray-600 mb-6 animate-fadeIn" aria-label="Breadcrumb">
+      <a href="/" class="hover:text-orange-700 transition-colors font-medium">Home</a>
+      <span class="mx-2">·</span>
+      <a href="/tools/" class="hover:text-orange-700 transition-colors font-medium">Tools</a>
+      <span class="mx-2">·</span>
+      <span class="text-gray-800">Wake Window Calculator</span>
+    </nav>
+
+    <article class="glass-card rounded-[3rem] soft-shadow p-8 md:p-12 animate-fadeInUp delay-100">
+      <header class="mb-8 text-center">
+        <span class="inline-block px-4 py-1.5 bg-orange-100 text-orange-700 text-xs font-semibold tracking-widest uppercase rounded-full mb-4">Free tool · No sign-up</span>
+        <h1 class="text-3xl md:text-4xl font-display font-bold text-gray-800 mb-3">Wake Window Calculator</h1>
+      </header>
+
+      <p class="text-gray-700 leading-relaxed mb-4">
+        Enter your baby's age in months and the time they wake up, and this calculator returns every wake window, the nap times in between, and a sensible bedtime for the night. It covers newborns through 36 months using typical AAP, CDC and National Sleep Foundation ranges.
+      </p>
+      <p class="text-gray-600 text-sm mb-8">Not medical advice. For emergencies, call your local emergency number.</p>
+
+      <!-- ============ Calculator ============ -->
+      <section class="mb-10" aria-label="Wake window inputs">
+        <div class="mb-6">
+          <label for="age-slider" class="block text-sm font-semibold text-gray-700 mb-3">Your child's age</label>
+          <div class="flex items-center gap-4 mb-3">
+            <input id="age-slider" type="range" min="0" max="36" step="1" value="6" class="age-slider flex-1" aria-describedby="age-readout" />
+            <div class="text-right min-w-[7.5rem]">
+              <span id="age-readout" class="text-2xl font-bold text-orange-600 font-display">6 months</span>
+              <span id="age-years" class="block text-xs text-gray-500"></span>
+            </div>
+          </div>
+          <div class="flex justify-between text-xs text-gray-400 mt-1">
+            <span>0 months</span>
+            <span>36 months (3 yrs)</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <label for="wake-time" class="text-sm font-semibold text-gray-700 shrink-0">Usually wakes at</label>
+          <input id="wake-time" type="time" value="07:00" class="px-4 py-2 rounded-xl border border-orange-200 bg-white/90 text-gray-800 font-semibold focus:outline-none focus:ring-2 focus:ring-orange-300" />
+        </div>
+      </section>
+
+      <!-- ============ Schedule result ============ -->
+      <section id="schedule-section" class="mb-10" aria-live="polite" aria-label="Today's wake windows and naps">
+        <h2 class="text-xl font-display font-bold text-gray-800 mb-4">Your day — <span id="band-label" class="text-orange-600"></span></h2>
+        <div class="rounded-3xl border border-orange-200 bg-white/80 overflow-hidden soft-shadow mb-4">
+          <div class="grid grid-cols-1 divide-y divide-orange-100" id="schedule-rows"></div>
+        </div>
+        <div class="flex flex-wrap gap-3 text-sm">
+          <div class="px-4 py-2 rounded-full bg-orange-50 border border-orange-200 text-orange-800 font-semibold" id="ww-chip"></div>
+          <div class="px-4 py-2 rounded-full bg-orange-50 border border-orange-200 text-gray-700" id="naps-chip"></div>
+          <div class="px-4 py-2 rounded-full bg-orange-50 border border-orange-200 text-gray-700" id="total-chip"></div>
+        </div>
+        <p class="mt-4 text-sm text-gray-600 bg-amber-50 border border-amber-200 rounded-2xl px-4 py-3" id="band-note"></p>
+        <p class="mt-4 text-sm text-gray-600">Every child is different — these are typical ranges, not targets. Watch sleepy cues and shift times by 15–30 minutes to fit your family.</p>
+      </section>
+
+      <!-- ============ Age table ============ -->
+      <section class="mb-10" aria-label="Wake windows by age chart">
+        <h2 class="text-xl font-display font-bold text-gray-800 mb-4">Wake windows by age (0–36 months)</h2>
+        <div class="overflow-x-auto rounded-3xl border border-orange-200 bg-white/80 soft-shadow">
+          <table class="w-full text-sm text-left text-gray-700">
+            <thead class="bg-orange-50 text-orange-800 text-xs uppercase tracking-wide">
+              <tr>
+                <th scope="col" class="px-4 py-3 font-semibold">Age</th>
+                <th scope="col" class="px-4 py-3 font-semibold">Wake window</th>
+                <th scope="col" class="px-4 py-3 font-semibold">Naps/day</th>
+                <th scope="col" class="px-4 py-3 font-semibold">Nap length</th>
+                <th scope="col" class="px-4 py-3 font-semibold">Total sleep (24 h)</th>
+              </tr>
+            </thead>
+            <tbody id="age-table-body" class="divide-y divide-orange-100">
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">0 months (newborn)</th>
+                <td class="px-4 py-2">45–90 min</td>
+                <td class="px-4 py-2">3–4</td>
+                <td class="px-4 py-2">1–1.5 h</td>
+                <td class="px-4 py-2">14–17 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">1 month</th>
+                <td class="px-4 py-2">60–90 min</td>
+                <td class="px-4 py-2">4</td>
+                <td class="px-4 py-2">1–1.5 h</td>
+                <td class="px-4 py-2">14–16 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">2 months</th>
+                <td class="px-4 py-2">60–90 min</td>
+                <td class="px-4 py-2">3–4</td>
+                <td class="px-4 py-2">1–1.5 h</td>
+                <td class="px-4 py-2">14–15 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">3 months</th>
+                <td class="px-4 py-2">1.25–2 h</td>
+                <td class="px-4 py-2">3</td>
+                <td class="px-4 py-2">1–1.5 h</td>
+                <td class="px-4 py-2">14–15 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">4 months</th>
+                <td class="px-4 py-2">1.5–2 h</td>
+                <td class="px-4 py-2">3</td>
+                <td class="px-4 py-2">1–1.5 h</td>
+                <td class="px-4 py-2">12–15 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">5 months</th>
+                <td class="px-4 py-2">2–2.5 h</td>
+                <td class="px-4 py-2">2–3</td>
+                <td class="px-4 py-2">1–1.5 h</td>
+                <td class="px-4 py-2">12–14 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">6 months</th>
+                <td class="px-4 py-2">2.5–3 h</td>
+                <td class="px-4 py-2">2</td>
+                <td class="px-4 py-2">1–1.5 h</td>
+                <td class="px-4 py-2">12–14 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">7 months</th>
+                <td class="px-4 py-2">2.5–3 h</td>
+                <td class="px-4 py-2">2</td>
+                <td class="px-4 py-2">1–1.5 h</td>
+                <td class="px-4 py-2">12–14 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">8 months</th>
+                <td class="px-4 py-2">2.5–3 h</td>
+                <td class="px-4 py-2">2</td>
+                <td class="px-4 py-2">1–1.5 h</td>
+                <td class="px-4 py-2">12–14 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">9 months</th>
+                <td class="px-4 py-2">3–3.25 h</td>
+                <td class="px-4 py-2">2</td>
+                <td class="px-4 py-2">1–1.5 h</td>
+                <td class="px-4 py-2">12–14 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">10 months</th>
+                <td class="px-4 py-2">3–3.5 h</td>
+                <td class="px-4 py-2">2</td>
+                <td class="px-4 py-2">1–1.5 h</td>
+                <td class="px-4 py-2">12–14 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">11 months</th>
+                <td class="px-4 py-2">3–3.5 h</td>
+                <td class="px-4 py-2">2</td>
+                <td class="px-4 py-2">1–1.5 h</td>
+                <td class="px-4 py-2">12–14 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">12 months</th>
+                <td class="px-4 py-2">3–3.5 h</td>
+                <td class="px-4 py-2">2</td>
+                <td class="px-4 py-2">1–1.5 h</td>
+                <td class="px-4 py-2">12–14 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">13 months</th>
+                <td class="px-4 py-2">3.5–4 h</td>
+                <td class="px-4 py-2">2</td>
+                <td class="px-4 py-2">1–1.5 h</td>
+                <td class="px-4 py-2">11–14 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">14 months</th>
+                <td class="px-4 py-2">3.5–4 h</td>
+                <td class="px-4 py-2">1–2</td>
+                <td class="px-4 py-2">1–1.5 h</td>
+                <td class="px-4 py-2">11–14 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">15 months</th>
+                <td class="px-4 py-2">4–4.5 h</td>
+                <td class="px-4 py-2">1</td>
+                <td class="px-4 py-2">1.5–2 h</td>
+                <td class="px-4 py-2">11–14 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">16 months</th>
+                <td class="px-4 py-2">4–4.5 h</td>
+                <td class="px-4 py-2">1</td>
+                <td class="px-4 py-2">1.5–2 h</td>
+                <td class="px-4 py-2">11–14 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">17 months</th>
+                <td class="px-4 py-2">4–4.5 h</td>
+                <td class="px-4 py-2">1</td>
+                <td class="px-4 py-2">1.5–2 h</td>
+                <td class="px-4 py-2">11–14 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">18 months</th>
+                <td class="px-4 py-2">4.5–5 h</td>
+                <td class="px-4 py-2">1</td>
+                <td class="px-4 py-2">1.5–2 h</td>
+                <td class="px-4 py-2">11–14 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">19 months</th>
+                <td class="px-4 py-2">4.5–5 h</td>
+                <td class="px-4 py-2">1</td>
+                <td class="px-4 py-2">1.5–2 h</td>
+                <td class="px-4 py-2">11–14 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">20 months</th>
+                <td class="px-4 py-2">4.5–5 h</td>
+                <td class="px-4 py-2">1</td>
+                <td class="px-4 py-2">1.5–2 h</td>
+                <td class="px-4 py-2">11–14 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">21 months</th>
+                <td class="px-4 py-2">4.5–5 h</td>
+                <td class="px-4 py-2">1</td>
+                <td class="px-4 py-2">1.5–2 h</td>
+                <td class="px-4 py-2">11–14 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">22 months</th>
+                <td class="px-4 py-2">5–5.5 h</td>
+                <td class="px-4 py-2">1</td>
+                <td class="px-4 py-2">1.5–2 h</td>
+                <td class="px-4 py-2">11–14 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">23 months</th>
+                <td class="px-4 py-2">5–5.5 h</td>
+                <td class="px-4 py-2">1</td>
+                <td class="px-4 py-2">1.5–2 h</td>
+                <td class="px-4 py-2">11–14 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">24 months (2 years)</th>
+                <td class="px-4 py-2">5–6 h</td>
+                <td class="px-4 py-2">1</td>
+                <td class="px-4 py-2">1.5–2 h</td>
+                <td class="px-4 py-2">11–14 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">25 months</th>
+                <td class="px-4 py-2">5–6 h</td>
+                <td class="px-4 py-2">1</td>
+                <td class="px-4 py-2">1.5–2 h</td>
+                <td class="px-4 py-2">11–14 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">26 months</th>
+                <td class="px-4 py-2">5–6 h</td>
+                <td class="px-4 py-2">1</td>
+                <td class="px-4 py-2">1.5–2 h</td>
+                <td class="px-4 py-2">11–14 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">27 months</th>
+                <td class="px-4 py-2">5–6 h</td>
+                <td class="px-4 py-2">1</td>
+                <td class="px-4 py-2">1.5–2 h</td>
+                <td class="px-4 py-2">11–14 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">28 months</th>
+                <td class="px-4 py-2">5–6 h</td>
+                <td class="px-4 py-2">1</td>
+                <td class="px-4 py-2">1.5–2 h</td>
+                <td class="px-4 py-2">11–14 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">29 months</th>
+                <td class="px-4 py-2">5–6 h</td>
+                <td class="px-4 py-2">1</td>
+                <td class="px-4 py-2">1.5–2 h</td>
+                <td class="px-4 py-2">11–14 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">30 months</th>
+                <td class="px-4 py-2">5–6 h</td>
+                <td class="px-4 py-2">1</td>
+                <td class="px-4 py-2">1.5–2 h</td>
+                <td class="px-4 py-2">11–14 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">31 months</th>
+                <td class="px-4 py-2">5–6 h</td>
+                <td class="px-4 py-2">1</td>
+                <td class="px-4 py-2">1–1.5 h</td>
+                <td class="px-4 py-2">10–13 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">32 months</th>
+                <td class="px-4 py-2">5–6 h</td>
+                <td class="px-4 py-2">1</td>
+                <td class="px-4 py-2">1–1.5 h</td>
+                <td class="px-4 py-2">10–13 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">33 months</th>
+                <td class="px-4 py-2">5–6 h</td>
+                <td class="px-4 py-2">1</td>
+                <td class="px-4 py-2">1–1.5 h</td>
+                <td class="px-4 py-2">10–13 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">34 months</th>
+                <td class="px-4 py-2">5–6 h</td>
+                <td class="px-4 py-2">1</td>
+                <td class="px-4 py-2">1–1.5 h</td>
+                <td class="px-4 py-2">10–13 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">35 months</th>
+                <td class="px-4 py-2">5–6 h</td>
+                <td class="px-4 py-2">1</td>
+                <td class="px-4 py-2">1–1.5 h</td>
+                <td class="px-4 py-2">10–13 h</td>
+              </tr>
+              <tr>
+                <th scope="row" class="px-4 py-2 font-medium text-gray-800">36 months (3 years)</th>
+                <td class="px-4 py-2">5–6 h</td>
+                <td class="px-4 py-2">1</td>
+                <td class="px-4 py-2">1–1.5 h</td>
+                <td class="px-4 py-2">10–13 h</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-3 text-xs text-gray-500">Ranges follow typical guidance: the American Academy of Pediatrics (AAP) and CDC recommend 12–16 hours of sleep for babies aged 4–12 months and 11–14 hours for toddlers aged 1–2 years, and the National Sleep Foundation (NSF) lists 10–13 hours for three-year-olds.</p>
+      </section>
+
+      <!-- ============ FAQ ============ -->
+      <section class="mb-10" aria-label="Frequently asked questions">
+        <h2 class="text-xl font-display font-bold text-gray-800 mb-4">Frequently asked questions</h2>
+        <dl class="space-y-4">
+          <div>
+            <dt class="font-semibold text-gray-800">How do I use the wake window calculator?</dt>
+            <dd class="mt-1 text-gray-700">Set your child's age in months and their usual wake-up time. The calculator shows every wake window for the day, the nap start and end times, and the bedtime that follows the final wake window.</dd>
+          </div>
+          <div>
+            <dt class="font-semibold text-gray-800">What is a wake window?</dt>
+            <dd class="mt-1 text-gray-700">A wake window is the stretch of time a baby can comfortably stay awake before their next sleep. It lengthens with age: roughly 45–90 minutes for a newborn and 5–6 hours by age three.</dd>
+          </div>
+          <div>
+            <dt class="font-semibold text-gray-800">What if my baby's wake windows don't match the chart?</dt>
+            <dd class="mt-1 text-gray-700">Every child is different. Treat these as starting points, watch sleepy cues, and shift times by 15–30 minutes to fit your family. Ask your pediatrician if your baby is struggling with sleep.</dd>
+          </div>
+          <div>
+            <dt class="font-semibold text-gray-800">Is this medical advice?</dt>
+            <dd class="mt-1 text-gray-700">No. The calculator shares typical ranges described by the AAP, CDC and National Sleep Foundation for planning purposes only. It is not medical advice — talk to your pediatrician about your child's sleep.</dd>
+          </div>
+        </dl>
+      </section>
+
+      <aside class="mt-10 rounded-3xl border border-orange-200 bg-orange-50/80 p-6" aria-label="About the author">
+        <p class="font-semibold text-gray-800">Written by a dad</p>
+        <p class="text-gray-700 mt-2">From the founder of Snugs.ai, a dad of a toddler building an AI parenting advisor for parents of 0-3 year olds.</p>
+      </aside>
+
+      <aside class="mt-10 text-center" aria-label="Start a free trial">
+        <p class="text-gray-700 mb-4">Get a schedule tuned to <em>your</em> kid. Ask Snugs, free for 14 days.</p>
+        <a id="cta-trial" href="https://app.snugs.ai/?utm_source=snugs.ai&amp;utm_medium=seo&amp;utm_campaign=wake-window-calculator" data-cta="wake-window-calculator" class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-full hover:from-orange-600 hover:to-orange-700 transition-all shadow-lg">Start your 14-day free trial</a>
+      </aside>
+
+      <aside class="mt-6 text-center" aria-label="Related tools and guides">
+        <p class="text-sm font-semibold text-gray-700 mb-3">Keep reading</p>
+        <ul class="text-sm space-y-2">
+          <li><a href="/schedules/" class="text-orange-700 underline hover:text-orange-800 font-medium transition-colors">Sleep schedules by month (13–36 months)</a></li>
+          <li><a href="/tools/nap-transition-checker/" class="text-orange-700 underline hover:text-orange-800 font-medium transition-colors">Nap Transition Checker</a></li>
+          <li><a href="/sleep-regressions/18-month-sleep-regression/" class="text-orange-700 underline hover:text-orange-800 font-medium transition-colors">18-Month Sleep Regression</a></li>
+          <li><a href="/tools/sleep-milestone-calculator.html" class="text-orange-700 underline hover:text-orange-800 font-medium transition-colors">Sleep &amp; Milestone Calculator</a></li>
+        </ul>
+      </aside>
+    </article>
+
+    <!-- Snugs sticky mobile CTA (#10): mobile-only via CSS, dismissible, reuses data-cta/cta_click (cta_id=sticky_mobile). Cookie consent should use z-index 50+. -->
+    <div class="snugs-sticky-cta" id="snugs-sticky-cta" role="region" aria-label="Ask Snugs trial">
+      <a href="https://app.snugs.ai/?utm_source=snugs.ai&amp;utm_medium=seo&amp;utm_campaign=wake-window-calculator" data-cta="sticky_mobile" class="flex-1 inline-flex items-center justify-center px-5 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-full hover:from-orange-600 hover:to-orange-700 transition-all shadow-lg text-sm">Ask Snugs &mdash; Start free trial</a>
+      <button type="button" class="snugs-sticky-dismiss flex-shrink-0 w-9 h-9 rounded-full border border-orange-200 bg-white text-gray-600 font-bold leading-none" aria-label="Dismiss trial banner">&times;</button>
+    </div>
+    <script>
+      (function() {
+        var bar = document.getElementById('snugs-sticky-cta');
+        if (!bar) return;
+        try {
+          if (sessionStorage.getItem('snugs_sticky_dismissed') === '1') {
+            bar.setAttribute('hidden', '');
+            document.body.classList.add('snugs-sticky-dismissed');
+            return;
+          }
+        } catch (e) {}
+        var btn = bar.querySelector('.snugs-sticky-dismiss');
+        if (btn) {
+          btn.addEventListener('click', function() {
+            bar.setAttribute('hidden', '');
+            document.body.classList.add('snugs-sticky-dismissed');
+            try { sessionStorage.setItem('snugs_sticky_dismissed', '1'); } catch (e) {}
+          });
+        }
+      })();
+    </script>
+    <script>
+      document.querySelectorAll('[data-cta]').forEach(function(el) {
+        el.addEventListener('click', function() {
+          if (typeof gtag === 'function') {
+            gtag('event', 'cta_click', {
+              cta_id: el.getAttribute('data-cta'),
+              link_url: el.href,
+              link_domain: (function(){ try { return new URL(el.href).hostname; } catch(e){ return 'unknown'; } })()
+            });
+          }
+        });
+      });
+    </script>
+
+    <footer class="text-center pt-12 pb-8 text-gray-600">
+      <p class="mb-4 text-base">© 2026 Snugs.ai. Powered by AI, built with love</p>
+      <div class="flex flex-wrap justify-center gap-6 text-sm">
+        <a href="/" class="hover:text-orange-600 transition-colors font-medium">Home</a>
+        <a href="/resources/" class="hover:text-orange-600 transition-colors font-medium">Resources</a>
+        <a href="/privacy.html" class="hover:text-orange-600 transition-colors font-medium">Privacy</a>
+        <a href="/terms.html" class="hover:text-orange-600 transition-colors font-medium">Terms</a>
+        <a href="/contact.html" class="hover:text-orange-600 transition-colors font-medium">Contact</a>
+      </div>
+      <div class="mt-6 flex flex-wrap justify-center items-center gap-3 sm:gap-4" data-badge-row="footer">
+        <div class="flex justify-center w-40 sm:w-auto" data-badge="aiagentsdirectory">
+          <a href="https://aiagentsdirectory.com/agent/snugsai?utm_source=badge&amp;utm_medium=referral&amp;utm_campaign=free_listing&amp;utm_content=snugsai" target="_blank" rel="noopener noreferrer">
+            <img src="https://aiagentsdirectory.com/featured-badge.svg?v=2024" alt="Snugs.ai - Featured on AI Agents Directory" width="200" height="50" class="h-auto max-w-full" loading="lazy" decoding="async" />
+          </a>
+        </div>
+        <div class="flex justify-center w-40 sm:w-auto" data-badge="publishyoursaas">
+          <a href="https://publishyoursaas.com" target="_blank" rel="noopener noreferrer">
+            <img src="https://publishyoursaas.com/publishyoursaas-badge.svg" alt="Snugs.ai - Listed on PublishYourSaaS" width="200" height="50" class="h-auto max-w-full" loading="lazy" decoding="async" />
+          </a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    /* ============ Data: per month (0–36), baseline wake 7:00 AM ============
+       ww  : typical wake window range (chart)
+       ns  : nap start offsets in minutes after wake
+       d   : nap duration in minutes
+       bed : bedtime offset in minutes after wake
+       nt  : naps/day text, tt: total sleep text, dl: nap length text, note */
+    var AGE_DATA = [
+      {"ww": "45–90 min", "ns": [60, 210, 390, 600], "d": 60, "bed": 810, "nt": "3–4", "tt": "14–17 h"},
+      {"ww": "60–90 min", "ns": [75, 240, 420, 615], "d": 75, "bed": 810, "nt": "4", "tt": "14–16 h"},
+      {"ww": "60–90 min", "ns": [90, 300, 495, 660], "d": 75, "bed": 810, "nt": "3–4", "tt": "14–15 h"},
+      {"ww": "1.25–2 h", "ns": [105, 315, 540], "d": 90, "bed": 765, "nt": "3", "tt": "14–15 h"},
+      {"ww": "1.5–2 h", "ns": [120, 330, 570], "d": 90, "bed": 780, "nt": "3", "tt": "12–15 h"},
+      {"ww": "2–2.5 h", "ns": [135, 360, 540], "d": 75, "bed": 780, "nt": "2–3", "tt": "12–14 h"},
+      {"ww": "2.5–3 h", "ns": [150, 405], "d": 90, "bed": 705, "nt": "2", "tt": "12–14 h"},
+      {"ww": "2.5–3 h", "ns": [165, 420], "d": 90, "bed": 720, "nt": "2", "tt": "12–14 h"},
+      {"ww": "2.5–3 h", "ns": [180, 435], "d": 75, "bed": 735, "nt": "2", "tt": "12–14 h"},
+      {"ww": "3–3.25 h", "ns": [195, 450], "d": 75, "bed": 750, "nt": "2", "tt": "12–14 h"},
+      {"ww": "3–3.5 h", "ns": [210, 465], "d": 75, "bed": 765, "nt": "2", "tt": "12–14 h"},
+      {"ww": "3–3.5 h", "ns": [210, 465], "d": 75, "bed": 765, "nt": "2", "tt": "12–14 h"},
+      {"ww": "3–3.5 h", "ns": [195, 450], "d": 75, "bed": 750, "nt": "2", "tt": "12–14 h"},
+      {"ww": "3.5–4 h", "ns": [210, 465], "d": 75, "bed": 765, "nt": "2", "tt": "11–14 h"},
+      {"ww": "3.5–4 h", "ns": [240, 510], "d": 75, "bed": 780, "nt": "1–2", "tt": "11–14 h"},
+      {"ww": "4–4.5 h", "ns": [300], "d": 105, "bed": 750, "nt": "1", "tt": "11–14 h"},
+      {"ww": "4–4.5 h", "ns": [300], "d": 105, "bed": 765, "nt": "1", "tt": "11–14 h"},
+      {"ww": "4–4.5 h", "ns": [315], "d": 105, "bed": 765, "nt": "1", "tt": "11–14 h"},
+      {"ww": "4.5–5 h", "ns": [330], "d": 105, "bed": 765, "nt": "1", "tt": "11–14 h"},
+      {"ww": "4.5–5 h", "ns": [330], "d": 105, "bed": 780, "nt": "1", "tt": "11–14 h"},
+      {"ww": "4.5–5 h", "ns": [330], "d": 105, "bed": 780, "nt": "1", "tt": "11–14 h"},
+      {"ww": "4.5–5 h", "ns": [345], "d": 105, "bed": 780, "nt": "1", "tt": "11–14 h"},
+      {"ww": "5–5.5 h", "ns": [345], "d": 105, "bed": 780, "nt": "1", "tt": "11–14 h"},
+      {"ww": "5–5.5 h", "ns": [345], "d": 105, "bed": 780, "nt": "1", "tt": "11–14 h"},
+      {"ww": "5–6 h", "ns": [345], "d": 105, "bed": 795, "nt": "1", "tt": "11–14 h"},
+      {"ww": "5–6 h", "ns": [345], "d": 105, "bed": 795, "nt": "1", "tt": "11–14 h"},
+      {"ww": "5–6 h", "ns": [345], "d": 105, "bed": 795, "nt": "1", "tt": "11–14 h"},
+      {"ww": "5–6 h", "ns": [360], "d": 105, "bed": 795, "nt": "1", "tt": "11–14 h"},
+      {"ww": "5–6 h", "ns": [360], "d": 105, "bed": 795, "nt": "1", "tt": "11–14 h"},
+      {"ww": "5–6 h", "ns": [360], "d": 105, "bed": 795, "nt": "1", "tt": "11–14 h"},
+      {"ww": "5–6 h", "ns": [360], "d": 105, "bed": 810, "nt": "1", "tt": "11–14 h"},
+      {"ww": "5–6 h", "ns": [375], "d": 90, "bed": 810, "nt": "1", "tt": "10–13 h"},
+      {"ww": "5–6 h", "ns": [375], "d": 90, "bed": 810, "nt": "1", "tt": "10–13 h"},
+      {"ww": "5–6 h", "ns": [390], "d": 90, "bed": 810, "nt": "1", "tt": "10–13 h"},
+      {"ww": "5–6 h", "ns": [390], "d": 90, "bed": 810, "nt": "1", "tt": "10–13 h"},
+      {"ww": "5–6 h", "ns": [390], "d": 90, "bed": 810, "nt": "1", "tt": "10–13 h"},
+      {"ww": "5–6 h", "ns": [390], "d": 75, "bed": 810, "nt": "1", "tt": "10–13 h"}
+    ];
+
+    var NOTES = {
+      0: "Newborn days run on feed-and-sleep cycles, not a clock — treat this as a shape, not a schedule.",
+      4: "The 4-month sleep regression often lands around here and can shift nap times for a few weeks.",
+      5: "Most babies move from three naps to two between five and seven months.",
+      13: "The 2-to-1 nap transition usually starts between 13 and 15 months.",
+      14: "Expect nap-transition wobbles: keep two short naps before forcing one long one.",
+      15: "One nap a day now — keep the same nap start time daily.",
+      18: "The 18-month sleep regression can shake this up for a few weeks.",
+      24: "Age two still needs one afternoon nap for most toddlers.",
+      30: "Naps start to shorten near age three — protect a daily quiet time.",
+      36: "Many three-year-olds drop the nap; swap in quiet time with books or puzzles."
+    };
+
+    function fmt(mins) {
+      var m = ((mins % 1440) + 1440) % 1440;
+      var h = Math.floor(m / 60), mm = m % 60;
+      var ap = h >= 12 ? 'PM' : 'AM';
+      var hh = h % 12; if (hh === 0) hh = 12;
+      return hh + ':' + (mm < 10 ? '0' : '') + mm + ' ' + ap;
+    }
+
+    function win(mins) {
+      var h = Math.floor(mins / 60), mm = mins % 60;
+      if (h && mm) return h + ' h ' + mm + ' m';
+      if (h) return h + ' h';
+      return mm + ' m';
+    }
+
+    var slider = document.getElementById('age-slider');
+    var timeInput = document.getElementById('wake-time');
+    var ICONS = {
+      wake: '<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 18a5 5 0 0 0-10 0"/><line x1="12" y1="9" x2="12" y2="2"/><line x1="4.22" y1="10.22" x2="5.64" y2="11.64"/><line x1="1" y1="18" x2="3" y2="18"/><line x1="21" y1="18" x2="23" y2="18"/><line x1="18.36" y1="11.64" x2="19.78" y2="10.22"/><line x1="23" y1="22" x2="1" y2="22"/><polyline points="8 6 12 2 16 6"/></svg>',
+      nap: '<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>',
+      moon: '<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 5h3l-3 3h3"/><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" opacity="0.4"/></svg>'
+    };
+
+    function row(icon, title, time, note) {
+      return '<div class="flex items-center gap-4 px-5 py-4">' +
+        '<div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center shrink-0">' + ICONS[icon] + '</div>' +
+        '<div class="flex-1"><p class="font-semibold text-gray-800">' + title + '</p>' +
+        (note ? '<p class="text-xs text-gray-500">' + note + '</p>' : '') + '</div>' +
+        '<p class="font-bold text-orange-700 whitespace-nowrap max-md:whitespace-normal max-md:text-right max-md:text-sm">' + time + '</p></div>';
+    }
+
+    function render() {
+      var months = parseInt(slider.value, 10);
+      var d = AGE_DATA[months];
+      var t = timeInput.value || '07:00';
+      var parts = t.split(':');
+      var wake = (parseInt(parts[0], 10) || 7) * 60 + (parseInt(parts[1], 10) || 0);
+
+      document.getElementById('age-readout').textContent = months === 0 ? 'Newborn' : months + ' months';
+      var y = Math.floor(months / 12);
+      document.getElementById('age-years').textContent = y >= 1 ? '(' + y + (y === 1 ? ' year' : ' years') + ')' : '';
+      document.getElementById('band-label').textContent = months === 0 ? '0 months' : months + ' months';
+
+      var html = row('wake', 'Wake up', fmt(wake), 'start of the day');
+      var prevEnd = wake;
+      d.ns.forEach(function(s, i) {
+        var st = wake + s, en = st + d.d;
+        html += row('nap', 'Nap ' + (i + 1), fmt(st) + ' – ' + fmt(en), win(st - prevEnd) + ' awake first');
+        prevEnd = en;
+      });
+      html += row('moon', 'Bedtime', fmt(wake + d.bed), win(d.bed - (prevEnd - wake)) + ' awake before bed');
+      document.getElementById('schedule-rows').innerHTML = html;
+
+      document.getElementById('ww-chip').textContent = 'Wake windows: ' + d.ww;
+      document.getElementById('naps-chip').textContent = d.nt + (d.nt === '1' ? ' nap/day' : ' naps/day');
+      document.getElementById('total-chip').textContent = d.tt;
+      var note = NOTES[months] || '';
+      var noteEl = document.getElementById('band-note');
+      noteEl.textContent = note;
+      noteEl.style.display = note ? '' : 'none';
+    }
+
+    slider.addEventListener('input', render);
+    timeInput.addEventListener('input', render);
+    render();
+  </script>
+</body>
+</html>

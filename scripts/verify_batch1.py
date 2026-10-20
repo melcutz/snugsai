@@ -125,7 +125,7 @@ for p in ROOT.rglob("*.html"):
     text = p.read_text(encoding="utf-8", errors="ignore")
     m = re.search(r"<title>(.*?)</title>", text, re.S)
     if m:
-        titles[str(p.relative_to(ROOT))] = m.group(1).strip()
+        titles[str(p.relative_to(ROOT))] = html.unescape(m.group(1)).strip()
 title_values: dict[str, list[str]] = {}
 for rel, t in titles.items():
     title_values.setdefault(t, []).append(rel)
