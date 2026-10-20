@@ -16,7 +16,7 @@ Self-checks before writing (exit 1 on failure):
     and BreadcrumbList nodes
 
 Style/engine follows tools/sleep-milestone-calculator.html; CTA uses the
-issue #19 UTM set (utm_source=snugs.ai, utm_medium=seo, campaign=<slug>)
+issue #19 UTM set (utm_source=marketing_site, utm_medium=cta, campaign=<slug>)
 and the sticky mobile CTA from scripts/patch_sticky_mobile_cta.py.
 """
 
@@ -118,7 +118,7 @@ PAGE_STYLE = """  <style>
 # Sticky bar HTML (from scripts/patch_sticky_mobile_cta.py) — __CAMPAIGN__ replaced per page.
 STICKY_TEMPLATE = """    <!-- Snugs sticky mobile CTA (#10): mobile-only via CSS, dismissible, reuses data-cta/cta_click (cta_id=sticky_mobile). Cookie consent should use z-index 50+. -->
     <div class="snugs-sticky-cta" id="snugs-sticky-cta" role="region" aria-label="Ask Snugs trial">
-      <a href="https://app.snugs.ai/?utm_source=snugs.ai&amp;utm_medium=seo&amp;utm_campaign=__CAMPAIGN__" data-cta="sticky_mobile" class="flex-1 inline-flex items-center justify-center px-5 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-full hover:from-orange-600 hover:to-orange-700 transition-all shadow-lg text-sm">Ask Snugs &mdash; Start free trial</a>
+      <a href="https://app.snugs.ai/?utm_source=marketing_site&amp;utm_medium=cta&amp;utm_campaign=__CAMPAIGN__" data-cta="sticky_mobile" class="flex-1 inline-flex items-center justify-center px-5 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-full hover:from-orange-600 hover:to-orange-700 transition-all shadow-lg text-sm">Ask Snugs &mdash; Start free trial</a>
       <button type="button" class="snugs-sticky-dismiss flex-shrink-0 w-9 h-9 rounded-full border border-orange-200 bg-white text-gray-600 font-bold leading-none" aria-label="Dismiss trial banner">&times;</button>
     </div>
     <script>
@@ -325,7 +325,7 @@ def jsonld_hub() -> str:
 def cta_aside(slug: str, pitch: str) -> str:
     return f"""    <aside class="mt-10 text-center" aria-label="Start a free trial">
       <p class="text-gray-700 mb-4">{pitch}</p>
-      <a id="cta-trial" href="https://app.snugs.ai/?utm_source=snugs.ai&amp;utm_medium=seo&amp;utm_campaign={slug}" data-cta="{slug}" class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-full hover:from-orange-600 hover:to-orange-700 transition-all shadow-lg">Start your 14-day free trial</a>
+      <a id="cta-trial" href="https://app.snugs.ai/?utm_source=marketing_site&amp;utm_medium=cta&amp;utm_campaign={slug}" data-cta="{slug}" class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-full hover:from-orange-600 hover:to-orange-700 transition-all shadow-lg">Start your 14-day free trial</a>
     </aside>
 """
 

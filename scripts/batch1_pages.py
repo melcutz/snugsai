@@ -169,7 +169,7 @@ def esc(s: str) -> str:
 
 def cta_url(slug: str) -> str:
     return (
-        "https://app.snugs.ai/?utm_source=snugs.ai&amp;utm_medium=seo"
+        "https://app.snugs.ai/?utm_source=marketing_site&amp;utm_medium=cta"
         f"&amp;utm_campaign={slug}"
     )
 

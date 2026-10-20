@@ -15,8 +15,8 @@ Checks (all must pass; exit non-zero on any failure):
         tools hub -> FAQPage + BreadcrumbList + CollectionPage
         (hub ruling: a link hub is not an application, so no
          SoftwareApplication on /tools/ itself)
-  8.  Trial CTA: app.snugs.ai anchor(s) with utm_source=snugs.ai,
-      utm_medium=seo, utm_campaign=<page slug>; cta_click + link_domain
+  8.  Trial CTA: app.snugs.ai anchor(s) with utm_source=marketing_site,
+      utm_medium=cta, utm_campaign=<page slug>; cta_click + link_domain
       binder present; sticky mobile CTA on leaf pages (before the binder),
       no sticky on the tools hub (verify_sticky_mobile_cta.py rule).
   9.  Every site-absolute internal href on a new page resolves to an
@@ -228,8 +228,8 @@ for page, text in files.items():
         fail(f"8 NO app.snugs.ai CTA {page}")
     for h in app:
         checks = {
-            "utm_source": "snugs.ai",
-            "utm_medium": "seo",
+            "utm_source": "marketing_site",
+            "utm_medium": "cta",
             "utm_campaign": slug,
         }
         for k, v in checks.items():
