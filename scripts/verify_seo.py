@@ -226,6 +226,12 @@ def main():
     print(f"9. {len(indexable_paths)} indexable pages have self-referencing canonical OK")
 
     # 10. No off-audience indexable titles
+    # User-exempted paths (owner decision overrides the keyword rule):
+    exempt_paths = {
+        # 2026-10-29: best organic performer (Search Console pos 10, 16 impressions);
+        # exempted from the Oct 25 prune by owner decision.
+        "resources/toniebox-vs-yoto-player-which-audio-player-is-right-for-your-toddler.html",
+    }
     off_audience_keywords = [
         r"\bag1\b", r"\bgruns\b", r"\btoniebox\b", r"\byoto\b",
         r"\bdating\b", r"\bteen\b", r"\bshaving\b",
@@ -240,7 +246,7 @@ def main():
         r"ultimate family fleet", r"pocket knives",
     ]
     for r in rows:
-        if r["decision"] == "keep":
+        if r["decision"] == "keep" and r["path"] not in exempt_paths:
             text = f"{r['title']} {r['path']}".lower()
             for pat in off_audience_keywords:
                 if re.search(pat, text):
