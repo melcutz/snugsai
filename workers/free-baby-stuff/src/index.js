@@ -473,6 +473,15 @@ async function parseConfirmPostPayload(request, url) {
   return { token: token.trim(), csrf: csrf.trim() };
 }
 
+function logResendError(route, err) {
+  const op = err && typeof err.op === "string" ? err.op : "unknown";
+  const status =
+    err && (typeof err.status === "number" || typeof err.status === "string")
+      ? err.status
+      : "unknown";
+  console.error(`resend error route=${route} op=${op} status=${status}`);
+}
+
 export function createWorker(options = {}) {
   return {
     async fetch(request, env = {}, ctx) {
@@ -528,15 +537,23 @@ export function createWorker(options = {}) {
         const email = normalizeEmail(payload.email);
 
         try {
+          const segmentId = env.RESEND_AUDIENCE_ID;
           const resend = createResendClient({
             apiKey: env.RESEND_API_KEY,
-            audienceId: env.RESEND_AUDIENCE_ID,
+            audienceId: segmentId,
             fetchImpl,
           });
 
           const existing = await resend.getContact(email);
+          let inSegment = false;
+          if (existing) {
+            const segmentIds = segmentId
+              ? await resend.listContactSegments(email)
+              : [];
+            inSegment = !segmentId || segmentIds.includes(segmentId);
+          }
 
-          if (isContactConfirmed(existing)) {
+          if (existing && inSegment && isContactConfirmed(existing)) {
             return jsonResponse(
               { status: "already_subscribed" },
               200,
@@ -556,6 +573,11 @@ export function createWorker(options = {}) {
           });
 
           if (existing) {
+            if (!inSegment) {
+              await resend.sendEmail(emailMsg);
+              return jsonResponse({ status: "pending" }, 200, corsHeaders);
+            }
+
             if (hasConfirmedMarker(existing)) {
               await resend.updateContact(email, {
                 unsubscribed: true,
@@ -573,10 +595,12 @@ export function createWorker(options = {}) {
             email,
             unsubscribed: true,
             first_name: UNCONFIRMED_MARKER,
+            segmentId,
           });
           await resend.sendEmail(emailMsg);
           return jsonResponse({ status: "pending" }, 200, corsHeaders);
-        } catch {
+        } catch (err) {
+          logResendError("/subscribe", err);
           return jsonResponse(
             {
               status: "error",
@@ -622,25 +646,33 @@ export function createWorker(options = {}) {
           }
 
           try {
+            const segmentId = env.RESEND_AUDIENCE_ID;
             const resend = createResendClient({
               apiKey: env.RESEND_API_KEY,
-              audienceId: env.RESEND_AUDIENCE_ID,
+              audienceId: segmentId,
               fetchImpl,
             });
             const contact = await resend.getContact(verification.email);
             if (isContactConfirmed(contact)) {
-              return htmlResponse(
-                renderConfirmPage({
-                  title: "Already subscribed",
-                  heading: "You're already on the list",
-                  message:
-                    "Your email is already confirmed for Free Baby Stuff Weekly.",
-                  siteOrigin,
-                }),
-                200
-              );
+              const segmentIds = segmentId
+                ? await resend.listContactSegments(verification.email)
+                : [];
+              const inSegment = !segmentId || segmentIds.includes(segmentId);
+              if (inSegment) {
+                return htmlResponse(
+                  renderConfirmPage({
+                    title: "Already subscribed",
+                    heading: "You're already on the list",
+                    message:
+                      "Your email is already confirmed for Free Baby Stuff Weekly.",
+                    siteOrigin,
+                  }),
+                  200
+                );
+              }
             }
-          } catch {
+          } catch (err) {
+            logResendError("/confirm", err);
             // If read lookup fails transiently on GET, still render the confirm button
           }
 
@@ -726,30 +758,47 @@ export function createWorker(options = {}) {
           }
 
           try {
+            const segmentId = env.RESEND_AUDIENCE_ID;
             const resend = createResendClient({
               apiKey: env.RESEND_API_KEY,
-              audienceId: env.RESEND_AUDIENCE_ID,
+              audienceId: segmentId,
               fetchImpl,
             });
 
             const existing = await resend.getContact(verification.email);
-            if (isContactConfirmed(existing)) {
-              return htmlResponse(
-                renderConfirmPage({
-                  title: "Already subscribed",
-                  heading: "You're already on the list",
-                  message:
-                    "Your email is already confirmed for Free Baby Stuff Weekly.",
-                  siteOrigin,
-                }),
-                200
-              );
-            }
+            if (existing) {
+              const segmentIds = segmentId
+                ? await resend.listContactSegments(verification.email)
+                : [];
+              const inSegment = !segmentId || segmentIds.includes(segmentId);
+              if (inSegment && isContactConfirmed(existing)) {
+                return htmlResponse(
+                  renderConfirmPage({
+                    title: "Already subscribed",
+                    heading: "You're already on the list",
+                    message:
+                      "Your email is already confirmed for Free Baby Stuff Weekly.",
+                    siteOrigin,
+                  }),
+                  200
+                );
+              }
 
-            await resend.updateContact(verification.email, {
-              unsubscribed: false,
-              first_name: CONFIRMED_MARKER,
-            });
+              await resend.updateContact(verification.email, {
+                unsubscribed: false,
+                first_name: CONFIRMED_MARKER,
+              });
+              if (segmentId && !inSegment) {
+                await resend.addContactToSegment(verification.email, segmentId);
+              }
+            } else {
+              await resend.createContact({
+                email: verification.email,
+                unsubscribed: false,
+                first_name: CONFIRMED_MARKER,
+                segmentId,
+              });
+            }
 
             const welcomeMsg = buildWelcomeEmail({
               email: verification.email,
@@ -768,7 +817,8 @@ export function createWorker(options = {}) {
               }),
               200
             );
-          } catch {
+          } catch (err) {
+            logResendError("/confirm", err);
             return htmlResponse(
               renderConfirmPage({
                 title: "Error confirming subscription",

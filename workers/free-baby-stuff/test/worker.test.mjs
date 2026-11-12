@@ -9,11 +9,12 @@ import {
 import { CONFIRMED_MARKER, UNCONFIRMED_MARKER } from "../src/resend.js";
 
 const BASE_TIME = 1762900000000;
+const DEFAULT_SEGMENT_ID = "seg-free-baby-stuff";
 
 function createTestEnv(overrides = {}) {
   return {
     RESEND_API_KEY: "test-key-mock",
-    RESEND_AUDIENCE_ID: "aud-free-baby-stuff",
+    RESEND_AUDIENCE_ID: DEFAULT_SEGMENT_ID,
     TOKEN_SECRET: "test-hmac-secret-value-for-unit-tests",
     SITE_ORIGIN: "https://snugs.ai",
     FROM_EMAIL: "Snugs <hello@snugs.ai>",
@@ -22,9 +23,34 @@ function createTestEnv(overrides = {}) {
 }
 
 function createMockResend(initialContacts = {}) {
-  const contacts = new Map(Object.entries(initialContacts));
+  const contacts = new Map();
+  const segmentsByEmail = new Map();
   const calls = [];
   const emails = [];
+
+  function ensureSegmentSet(email) {
+    const norm = email.toLowerCase();
+    if (!segmentsByEmail.has(norm)) {
+      segmentsByEmail.set(norm, new Set());
+    }
+    return segmentsByEmail.get(norm);
+  }
+
+  for (const [rawEmail, info] of Object.entries(initialContacts)) {
+    const email = rawEmail.toLowerCase();
+    const { segments, ...contactFields } = info;
+    contacts.set(email, {
+      object: "contact",
+      ...contactFields,
+      email,
+    });
+    const segSet = ensureSegmentSet(email);
+    const initialSegments =
+      segments !== undefined ? segments : [DEFAULT_SEGMENT_ID];
+    for (const seg of initialSegments) {
+      segSet.add(seg);
+    }
+  }
 
   async function mockFetch(url, options = {}) {
     const method = (options.method || "GET").toUpperCase();
@@ -37,9 +63,8 @@ function createMockResend(initialContacts = {}) {
     });
 
     const u = new URL(url);
-    const contactsPrefix = "/audiences/aud-free-baby-stuff/contacts";
 
-    if (u.pathname === contactsPrefix && method === "POST") {
+    if (u.pathname === "/contacts" && method === "POST") {
       const email = parsedBody.email.toLowerCase();
       const record = {
         object: "contact",
@@ -49,16 +74,24 @@ function createMockResend(initialContacts = {}) {
         first_name: parsedBody.first_name ?? "",
       };
       contacts.set(email, record);
+      const segSet = ensureSegmentSet(email);
+      if (Array.isArray(parsedBody.segments)) {
+        for (const item of parsedBody.segments) {
+          const segId = typeof item === "string" ? item : item?.id;
+          if (segId) {
+            segSet.add(segId);
+          }
+        }
+      }
       return new Response(JSON.stringify(record), {
         status: 200,
         headers: { "Content-Type": "application/json" },
       });
     }
 
-    if (u.pathname.startsWith(`${contactsPrefix}/`)) {
-      const email = decodeURIComponent(
-        u.pathname.slice(`${contactsPrefix}/`.length)
-      ).toLowerCase();
+    const contactMatch = u.pathname.match(/^\/contacts\/([^/]+)$/);
+    if (contactMatch) {
+      const email = decodeURIComponent(contactMatch[1]).toLowerCase();
 
       if (method === "GET") {
         const existing = contacts.get(email);
@@ -75,11 +108,13 @@ function createMockResend(initialContacts = {}) {
       }
 
       if (method === "PATCH") {
-        const existing = contacts.get(email) || {
-          object: "contact",
-          id: `contact-${contacts.size + 1}`,
-          email,
-        };
+        const existing = contacts.get(email);
+        if (!existing) {
+          return new Response(
+            JSON.stringify({ message: "Contact not found" }),
+            { status: 404, headers: { "Content-Type": "application/json" } }
+          );
+        }
         const updated = {
           ...existing,
           ...parsedBody,
@@ -90,6 +125,56 @@ function createMockResend(initialContacts = {}) {
           headers: { "Content-Type": "application/json" },
         });
       }
+    }
+
+    const listSegmentsMatch = u.pathname.match(
+      /^\/contacts\/([^/]+)\/segments$/
+    );
+    if (listSegmentsMatch && method === "GET") {
+      const email = decodeURIComponent(listSegmentsMatch[1]).toLowerCase();
+      const existing = contacts.get(email);
+      if (!existing) {
+        return new Response(
+          JSON.stringify({ message: "Contact not found" }),
+          { status: 404, headers: { "Content-Type": "application/json" } }
+        );
+      }
+      const segSet = ensureSegmentSet(email);
+      return new Response(
+        JSON.stringify({
+          object: "list",
+          data: Array.from(segSet).map((id) => ({ id })),
+          has_more: false,
+        }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    const addSegmentMatch = u.pathname.match(
+      /^\/contacts\/([^/]+)\/segments\/([^/]+)$/
+    );
+    if (addSegmentMatch && method === "POST") {
+      const email = decodeURIComponent(addSegmentMatch[1]).toLowerCase();
+      const segId = decodeURIComponent(addSegmentMatch[2]);
+      const existing = contacts.get(email);
+      if (!existing) {
+        return new Response(
+          JSON.stringify({ message: "Contact not found" }),
+          { status: 404, headers: { "Content-Type": "application/json" } }
+        );
+      }
+      const segSet = ensureSegmentSet(email);
+      segSet.add(segId);
+      return new Response(
+        JSON.stringify({ object: "contact_segment", id: segId }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
     }
 
     if (u.pathname === "/emails" && method === "POST") {
@@ -110,10 +195,19 @@ function createMockResend(initialContacts = {}) {
     });
   }
 
-  return { mockFetch, contacts, calls, emails };
+  return {
+    mockFetch,
+    contacts,
+    segmentsByEmail,
+    calls,
+    emails,
+    getSegments(email) {
+      return ensureSegmentSet(email);
+    },
+  };
 }
 
-test("1. new subscribe creates unconfirmed contact (unsubscribed=true) and sends confirmation email", async () => {
+test("1. new subscribe creates unconfirmed contact (unsubscribed=true) in this segment and sends confirmation email", async () => {
   const mock = createMockResend();
   const env = createTestEnv();
   const worker = createWorker({ fetch: mock.mockFetch, now: () => BASE_TIME });
@@ -136,6 +230,16 @@ test("1. new subscribe creates unconfirmed contact (unsubscribed=true) and sends
   assert.ok(stored);
   assert.equal(stored.unsubscribed, true);
   assert.equal(stored.first_name, UNCONFIRMED_MARKER);
+  assert.equal(
+    mock.getSegments("parent@example.com").has(DEFAULT_SEGMENT_ID),
+    true
+  );
+
+  const createCall = mock.calls.find(
+    (c) => c.method === "POST" && c.url.endsWith("/contacts")
+  );
+  assert.ok(createCall);
+  assert.deepEqual(createCall.body.segments, [{ id: DEFAULT_SEGMENT_ID }]);
 
   assert.equal(mock.emails.length, 1);
   assert.deepEqual(mock.emails[0].to, ["parent@example.com"]);
@@ -172,22 +276,21 @@ test("2. duplicate subscribe for pending unconfirmed contact resends confirmatio
   assert.deepEqual(data, { status: "pending_resent" });
 
   const createCalls = mock.calls.filter(
-    (c) =>
-      c.method === "POST" &&
-      c.url.endsWith("/audiences/aud-free-baby-stuff/contacts")
+    (c) => c.method === "POST" && c.url.endsWith("/contacts")
   );
   assert.equal(createCalls.length, 0);
   assert.equal(mock.emails.length, 1);
   assert.match(mock.emails[0].subject, /Confirm/i);
 });
 
-test("3. already confirmed contact returns already_subscribed and sends no email", async () => {
+test("3. already confirmed contact in this segment returns already_subscribed and sends no email", async () => {
   const mock = createMockResend({
     "active@example.com": {
       id: "c-2",
       email: "active@example.com",
       unsubscribed: false,
       first_name: CONFIRMED_MARKER,
+      segments: [DEFAULT_SEGMENT_ID],
     },
   });
   const env = createTestEnv();
@@ -204,8 +307,10 @@ test("3. already confirmed contact returns already_subscribed and sends no email
   const data = await res.json();
   assert.deepEqual(data, { status: "already_subscribed" });
   assert.equal(mock.emails.length, 0);
-  assert.equal(mock.calls.length, 1);
+  assert.equal(mock.calls.length, 2);
   assert.equal(mock.calls[0].method, "GET");
+  assert.equal(mock.calls[1].method, "GET");
+  assert.match(mock.calls[1].url, /\/contacts\/active%40example\.com\/segments$/);
 });
 
 test("4. honeypot website field filled returns 200 pending and makes no Resend calls", async () => {
@@ -284,39 +389,74 @@ test("6. GET /confirm with valid token shows Confirm my email button and makes n
   assert.equal(mock.contacts.get("reader@example.com").unsubscribed, true);
 });
 
-test("7. GET /confirm for already confirmed contact shows You're already on the list", async () => {
+test("7. GET /confirm shows You're already on the list only when confirmed and in this segment", async () => {
   const mock = createMockResend({
     "confirmed@example.com": {
       id: "c-4",
       email: "confirmed@example.com",
       unsubscribed: false,
       first_name: CONFIRMED_MARKER,
+      segments: [DEFAULT_SEGMENT_ID],
+    },
+    "otherseg@example.com": {
+      id: "c-4b",
+      email: "otherseg@example.com",
+      unsubscribed: false,
+      first_name: CONFIRMED_MARKER,
+      segments: ["seg-other-list"],
     },
   });
   const env = createTestEnv();
   const worker = createWorker({ fetch: mock.mockFetch, now: () => BASE_TIME });
-  const token = await createToken("confirmed@example.com", env.TOKEN_SECRET, {
-    now: BASE_TIME,
-  });
 
-  const req = new Request(
-    `https://snugs.ai/confirm?token=${encodeURIComponent(token)}`,
-    { method: "GET" }
+  const tokenConfirmed = await createToken(
+    "confirmed@example.com",
+    env.TOKEN_SECRET,
+    { now: BASE_TIME }
   );
-  const res = await worker.fetch(req, env);
-  assert.equal(res.status, 200);
-  const html = await res.text();
-  assert.match(html, /You&#39;re already on the list|You're already on the list/);
-  assert.doesNotMatch(html, /<button[^>]*>Confirm my email<\/button>/);
+  const resConfirmed = await worker.fetch(
+    new Request(
+      `https://snugs.ai/confirm?token=${encodeURIComponent(tokenConfirmed)}`,
+      { method: "GET" }
+    ),
+    env
+  );
+  assert.equal(resConfirmed.status, 200);
+  const htmlConfirmed = await resConfirmed.text();
+  assert.match(
+    htmlConfirmed,
+    /You&#39;re already on the list|You're already on the list/
+  );
+  assert.doesNotMatch(
+    htmlConfirmed,
+    /<button[^>]*>Confirm my email<\/button>/
+  );
+
+  const tokenOther = await createToken(
+    "otherseg@example.com",
+    env.TOKEN_SECRET,
+    { now: BASE_TIME }
+  );
+  const resOther = await worker.fetch(
+    new Request(
+      `https://snugs.ai/confirm?token=${encodeURIComponent(tokenOther)}`,
+      { method: "GET" }
+    ),
+    env
+  );
+  assert.equal(resOther.status, 200);
+  const htmlOther = await resOther.text();
+  assert.match(htmlOther, /<button[^>]*>Confirm my email<\/button>/);
 });
 
-test("8. POST /confirm flips contact to unsubscribed=false once and sends one welcome email", async () => {
+test("8. POST /confirm flips contact to unsubscribed=false once, ensures segment membership, and sends one welcome email", async () => {
   const mock = createMockResend({
     "newparent@example.com": {
       id: "c-5",
       email: "newparent@example.com",
       unsubscribed: true,
       first_name: UNCONFIRMED_MARKER,
+      segments: [],
     },
   });
   const env = createTestEnv();
@@ -343,6 +483,10 @@ test("8. POST /confirm flips contact to unsubscribed=false once and sends one we
   const updated = mock.contacts.get("newparent@example.com");
   assert.equal(updated.unsubscribed, false);
   assert.equal(updated.first_name, CONFIRMED_MARKER);
+  assert.equal(
+    mock.getSegments("newparent@example.com").has(DEFAULT_SEGMENT_ID),
+    true
+  );
 
   assert.equal(mock.emails.length, 1);
   assert.deepEqual(mock.emails[0].to, ["newparent@example.com"]);
@@ -681,23 +825,150 @@ test("16. POST /confirm accepts worker's own preview host and rejects tampered C
   assert.equal(mock.contacts.get("preview@example.com").unsubscribed, false);
 });
 
-test("17. upstream Resend failure never leaks RESEND_API_KEY in response", async () => {
+test("17. upstream Resend failure logs HTTP status without email or key and never leaks RESEND_API_KEY in response", async () => {
   const secretKey = "secret-api-key-value-never-leak";
+  const targetEmail = "private-parent@example.com";
   const env = createTestEnv({ RESEND_API_KEY: secretKey });
   const failingFetch = async () =>
-    new Response(JSON.stringify({ message: "Internal error" }), { status: 500 });
+    new Response(JSON.stringify({ message: "Service unavailable" }), {
+      status: 503,
+    });
   const worker = createWorker({ fetch: failingFetch, now: () => BASE_TIME });
 
-  const res = await worker.fetch(
+  const errorLogs = [];
+  const origError = console.error;
+  console.error = (...args) => {
+    errorLogs.push(args.join(" "));
+  };
+
+  try {
+    const res = await worker.fetch(
+      new Request("https://snugs.ai/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: targetEmail, website: "" }),
+      }),
+      env
+    );
+    assert.equal(res.status, 502);
+    const text = await res.text();
+    assert.equal(text.includes(secretKey), false);
+    assert.equal(text.includes(targetEmail), false);
+
+    assert.equal(errorLogs.length, 1);
+    assert.match(errorLogs[0], /resend/i);
+    assert.match(errorLogs[0], /503/);
+    assert.equal(errorLogs[0].includes(secretKey), false);
+    assert.equal(errorLogs[0].toLowerCase().includes(targetEmail), false);
+    assert.equal(errorLogs[0].toLowerCase().includes("private-parent"), false);
+  } finally {
+    console.error = origError;
+  }
+});
+
+test("18. global contact from another segment is not already_subscribed, stays globally subscribed, and is added to this segment only on POST /confirm", async () => {
+  const mock = createMockResend({
+    "otherlist@example.com": {
+      id: "c-10",
+      email: "otherlist@example.com",
+      unsubscribed: false,
+      first_name: CONFIRMED_MARKER,
+      segments: ["seg-other-newsletter"],
+    },
+  });
+  const env = createTestEnv();
+  const worker = createWorker({ fetch: mock.mockFetch, now: () => BASE_TIME });
+
+  const subRes = await worker.fetch(
     new Request("https://snugs.ai/subscribe", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: "parent@example.com", website: "" }),
+      headers: {
+        "Content-Type": "application/json",
+        Origin: "https://snugs.ai",
+      },
+      body: JSON.stringify({ email: "otherlist@example.com", website: "" }),
     }),
     env
   );
-  assert.equal(res.status, 502);
-  const text = await res.text();
-  assert.equal(text.includes(secretKey), false);
+  assert.equal(subRes.status, 200);
+  const subBody = await subRes.json();
+  assert.deepEqual(subBody, { status: "pending" });
+
+  // Global contact stays subscribed to its existing list and is not added to this segment before confirmation
+  assert.equal(mock.contacts.get("otherlist@example.com").unsubscribed, false);
+  assert.equal(
+    mock.getSegments("otherlist@example.com").has("seg-other-newsletter"),
+    true
+  );
+  assert.equal(
+    mock.getSegments("otherlist@example.com").has(DEFAULT_SEGMENT_ID),
+    false
+  );
+  assert.equal(mock.emails.length, 1);
+
+  const token = await createToken("otherlist@example.com", env.TOKEN_SECRET, {
+    now: BASE_TIME,
+  });
+  const csrf = await createCsrfToken(token, env.TOKEN_SECRET);
+
+  const confirmRes = await worker.fetch(
+    new Request("https://snugs.ai/confirm", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Origin: "https://snugs.ai",
+      },
+      body: new URLSearchParams({ token, csrf }).toString(),
+    }),
+    env
+  );
+  assert.equal(confirmRes.status, 200);
+  assert.equal(mock.contacts.get("otherlist@example.com").unsubscribed, false);
+  assert.equal(
+    mock.getSegments("otherlist@example.com").has("seg-other-newsletter"),
+    true
+  );
+  assert.equal(
+    mock.getSegments("otherlist@example.com").has(DEFAULT_SEGMENT_ID),
+    true
+  );
+  assert.equal(mock.emails.length, 2);
+
+  for (const call of mock.calls) {
+    const pathname = new URL(call.url).pathname;
+    assert.match(pathname, /^\/(contacts|emails)(\/|$)/);
+  }
 });
 
+test("19. POST /confirm creates contact in this segment if missing at confirm time", async () => {
+  const mock = createMockResend();
+  const env = createTestEnv();
+  const worker = createWorker({ fetch: mock.mockFetch, now: () => BASE_TIME });
+
+  const token = await createToken("freshconfirm@example.com", env.TOKEN_SECRET, {
+    now: BASE_TIME,
+  });
+  const csrf = await createCsrfToken(token, env.TOKEN_SECRET);
+
+  const res = await worker.fetch(
+    new Request("https://snugs.ai/confirm", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Origin: "https://snugs.ai",
+      },
+      body: new URLSearchParams({ token, csrf }).toString(),
+    }),
+    env
+  );
+  assert.equal(res.status, 200);
+  const created = mock.contacts.get("freshconfirm@example.com");
+  assert.ok(created);
+  assert.equal(created.unsubscribed, false);
+  assert.equal(created.first_name, CONFIRMED_MARKER);
+  assert.equal(
+    mock.getSegments("freshconfirm@example.com").has(DEFAULT_SEGMENT_ID),
+    true
+  );
+  assert.equal(mock.emails.length, 1);
+});

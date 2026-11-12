@@ -17,6 +17,13 @@ export function isContactConfirmed(contact) {
   return contact.unsubscribed === false && hasConfirmedMarker(contact);
 }
 
+function createResendError(op, status) {
+  const err = new Error(`Resend ${op} failed with status ${status}`);
+  err.op = op;
+  err.status = status;
+  return err;
+}
+
 export function createResendClient({
   apiKey,
   audienceId,
@@ -28,9 +35,7 @@ export function createResendClient({
   }
 
   const normalizedBase = baseUrl.replace(/\/+$/, "");
-  const contactsPath = audienceId
-    ? `${normalizedBase}/audiences/${encodeURIComponent(audienceId)}/contacts`
-    : `${normalizedBase}/contacts`;
+  const contactsPath = `${normalizedBase}/contacts`;
 
   async function request(url, options = {}) {
     const res = await fetchImpl(url, {
@@ -52,7 +57,7 @@ export function createResendClient({
         return null;
       }
       if (!res.ok) {
-        throw new Error(`Resend getContact failed with status ${res.status}`);
+        throw createResendError("getContact", res.status);
       }
       const data = await res.json();
       return data && typeof data.data === "object" ? data.data : data;
@@ -63,6 +68,8 @@ export function createResendClient({
       unsubscribed = true,
       first_name = UNCONFIRMED_MARKER,
       last_name,
+      segmentId,
+      segments,
     }) {
       const payload = {
         email,
@@ -72,12 +79,21 @@ export function createResendClient({
       if (last_name !== undefined) {
         payload.last_name = last_name;
       }
+      const resolvedSegmentId =
+        segmentId !== undefined ? segmentId : audienceId;
+      if (Array.isArray(segments) && segments.length > 0) {
+        payload.segments = segments.map((s) =>
+          typeof s === "string" ? { id: s } : { id: s.id }
+        );
+      } else if (resolvedSegmentId) {
+        payload.segments = [{ id: resolvedSegmentId }];
+      }
       const res = await request(contactsPath, {
         method: "POST",
         body: JSON.stringify(payload),
       });
       if (!res.ok) {
-        throw new Error(`Resend createContact failed with status ${res.status}`);
+        throw createResendError("createContact", res.status);
       }
       const data = await res.json();
       return data && typeof data.data === "object" ? data.data : data;
@@ -90,7 +106,37 @@ export function createResendClient({
         body: JSON.stringify(updates),
       });
       if (!res.ok) {
-        throw new Error(`Resend updateContact failed with status ${res.status}`);
+        throw createResendError("updateContact", res.status);
+      }
+      const data = await res.json();
+      return data && typeof data.data === "object" ? data.data : data;
+    },
+
+    async listContactSegments(emailOrId) {
+      const url = `${contactsPath}/${encodeURIComponent(emailOrId)}/segments`;
+      const res = await request(url, { method: "GET" });
+      if (res.status === 404) {
+        return [];
+      }
+      if (!res.ok) {
+        throw createResendError("listContactSegments", res.status);
+      }
+      const body = await res.json();
+      const items = Array.isArray(body?.data)
+        ? body.data
+        : Array.isArray(body)
+          ? body
+          : [];
+      return items
+        .map((item) => (typeof item === "string" ? item : item?.id))
+        .filter(Boolean);
+    },
+
+    async addContactToSegment(emailOrId, segmentId = audienceId) {
+      const url = `${contactsPath}/${encodeURIComponent(emailOrId)}/segments/${encodeURIComponent(segmentId)}`;
+      const res = await request(url, { method: "POST" });
+      if (!res.ok) {
+        throw createResendError("addContactToSegment", res.status);
       }
       const data = await res.json();
       return data && typeof data.data === "object" ? data.data : data;
@@ -112,7 +158,7 @@ export function createResendClient({
         body: JSON.stringify(payload),
       });
       if (!res.ok) {
-        throw new Error(`Resend sendEmail failed with status ${res.status}`);
+        throw createResendError("sendEmail", res.status);
       }
       return res.json();
     },

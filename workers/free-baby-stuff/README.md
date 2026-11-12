@@ -8,16 +8,16 @@ Turnstile omitted; honeypot only (`website` field on `POST /subscribe`).
 
 ## Routes
 
-- `POST /subscribe` - JSON `{ "email": "...", "website": "" }`. Validates the email, ignores bot submissions where `website` is non-empty, checks the Resend audience contact, and sends a 48-hour HMAC-signed confirmation link.
-- `GET /confirm?token=...` - Non-mutating confirmation landing page in Snugs styling. Renders a "Confirm my email" form button (with CSRF field) for valid tokens, "You're already on the list" if already confirmed, or an expired/invalid notice linking back to `https://snugs.ai/free-baby-stuff/`.
-- `POST /confirm` - Requires same-origin (`Origin` or `Referer` matching `SITE_ORIGIN` or the Worker host) and a valid token. Flips the Resend contact to `unsubscribed: false` once, sends a single welcome email, and renders "You're on the list". Reloading or re-posting renders "You're already on the list" without sending another welcome email.
+- `POST /subscribe` - JSON `{ "email": "...", "website": "" }`. Validates the email, ignores bot submissions where `website` is non-empty, checks the global Resend contact and segment membership, and sends a 48-hour HMAC-signed confirmation link.
+- `GET /confirm?token=...` - Non-mutating confirmation landing page in Snugs styling. Renders a "Confirm my email" form button (with CSRF field) for valid tokens, "You're already on the list" if already confirmed in the segment, or an expired/invalid notice linking back to `https://snugs.ai/free-baby-stuff/`.
+- `POST /confirm` - Requires same-origin (`Origin` or `Referer` matching `SITE_ORIGIN` or the Worker host) and a valid token. Flips the global Resend contact to `unsubscribed: false` once, ensures membership in the `RESEND_AUDIENCE_ID` segment, sends a single welcome email, and renders "You're on the list". Reloading or re-posting renders "You're already on the list" without sending another welcome email.
 - All other paths/methods return `404`.
 
 ## Configuration & Secrets
 
 Non-secret configuration lives in `wrangler.toml` under `[vars]`:
 
-- `RESEND_AUDIENCE_ID`: ID of the `Free Baby Stuff Weekly` audience in Resend (placeholder `""` in repo; set by Pete before deploy).
+- `RESEND_AUDIENCE_ID`: ID of the `Free Baby Stuff Weekly` segment in Resend (contacts are global in Resend and membership is via the Resend segment whose id is `RESEND_AUDIENCE_ID`; placeholder `""` in repo, set by Pete before deploy).
 - `SITE_ORIGIN`: `"https://snugs.ai"`
 - `FROM_EMAIL`: `"Snugs <hello@snugs.ai>"`
 
