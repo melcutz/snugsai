@@ -79,6 +79,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://snugs.ai/resources/4-month-sleep-regression-survival-guide.html</loc>
+    <lastmod>2026-10-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://snugs.ai/resources/are-girls-really-early-talkers-exploring-language-development-in-toddlers.html</loc>
     <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
@@ -615,6 +621,12 @@
   <url>
     <loc>https://snugs.ai/resources/smart-sleep-coach-closing-what-to-use-next.html</loc>
     <lastmod>2026-11-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://snugs.ai/resources/snoo-vs-cradlewise-smart-bassinet-comparison.html</loc>
+    <lastmod>2026-10-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
