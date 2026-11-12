@@ -142,6 +142,23 @@ export function createResendClient({
       return data && typeof data.data === "object" ? data.data : data;
     },
 
+    async removeContactFromSegment(emailOrId, segmentId = audienceId) {
+      const url = `${contactsPath}/${encodeURIComponent(emailOrId)}/segments/${encodeURIComponent(segmentId)}`;
+      const res = await request(url, { method: "DELETE" });
+      if (res.status === 404) {
+        return null;
+      }
+      if (!res.ok) {
+        throw createResendError("removeContactFromSegment", res.status);
+      }
+      const text = await res.text();
+      if (!text) {
+        return null;
+      }
+      const data = JSON.parse(text);
+      return data && typeof data.data === "object" ? data.data : data;
+    },
+
     async sendEmail({ from, to, subject, text, html, headers }) {
       const payload = {
         from,

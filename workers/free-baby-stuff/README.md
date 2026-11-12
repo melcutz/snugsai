@@ -11,9 +11,14 @@ Turnstile omitted; honeypot only (`website` field on `POST /subscribe`).
 - `POST /subscribe` - JSON `{ "email": "...", "website": "" }`. Validates the email, ignores bot submissions where `website` is non-empty, checks the global Resend contact and segment membership, and sends a 48-hour HMAC-signed confirmation link.
 - `GET /confirm?token=...` - Non-mutating confirmation landing page in Snugs styling. Renders a "Confirm my email" form button (with CSRF field) for valid tokens, "You're already on the list" if already confirmed in the segment, or an expired/invalid notice linking back to `https://snugs.ai/free-baby-stuff/`.
 - `POST /confirm` - Requires same-origin (`Origin` or `Referer` matching `SITE_ORIGIN` or the Worker host) and a valid token. Flips the global Resend contact to `unsubscribed: false` once, ensures membership in the `RESEND_AUDIENCE_ID` segment, sends a single welcome email, and renders "You're on the list". Reloading or re-posting renders "You're already on the list" without sending another welcome email.
+- `GET /unsubscribe?token=...` - Read-only unsubscribe landing page (makes no Resend API calls). Validates the AES-GCM encrypted unsubscribe token and renders a `POST /unsubscribe` confirmation form, or a `400` invalid-link page.
+- `POST /unsubscribe` - Accepts the encrypted unsubscribe token via query string or `token` form field (supports RFC 8058 one-click `List-Unsubscribe=One-Click` POSTs without `Origin`/`Referer`/CSRF). Removes the contact from the `RESEND_AUDIENCE_ID` segment and sets `unsubscribed: true` only when no other segments remain on the contact.
+- Transactional confirmation and welcome emails include a signed/encrypted `${SITE_ORIGIN}/unsubscribe?token=...` link along with `List-Unsubscribe` and `List-Unsubscribe-Post: List-Unsubscribe=One-Click` headers.
 - All other paths/methods return `404`.
 
 ## Configuration & Secrets
+
+Worker observability is enabled in `wrangler.toml` (`[observability]` with `enabled = true`), and upstream errors are logged with sanitized messages that redact emails, tokens, and API keys.
 
 Non-secret configuration lives in `wrangler.toml` under `[vars]`:
 

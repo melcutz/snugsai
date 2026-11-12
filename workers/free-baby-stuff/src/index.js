@@ -14,6 +14,8 @@ const PRIVACY_PROMISE =
 
 const encoder = new TextEncoder();
 const decoder = new TextDecoder();
+const UNSUB_HKDF_SALT = encoder.encode("snugs-fbs-unsubscribe-salt-v1");
+const UNSUB_HKDF_INFO = encoder.encode("snugs-fbs-unsubscribe-v1");
 
 function toBase64Url(bytes) {
   let binary = "";
@@ -29,12 +31,18 @@ function fromBase64Url(str) {
     return null;
   }
   const padLen = (4 - (str.length % 4)) % 4;
+  if (padLen === 3) {
+    return null;
+  }
   const base64 = str.replace(/-/g, "+").replace(/_/g, "/") + "=".repeat(padLen);
   try {
     const binary = atob(base64);
     const bytes = new Uint8Array(binary.length);
     for (let i = 0; i < binary.length; i++) {
       bytes[i] = binary.charCodeAt(i);
+    }
+    if (toBase64Url(bytes) !== str) {
+      return null;
     }
     return bytes;
   } catch {
@@ -125,6 +133,7 @@ export async function verifyToken(token, secret, { now = Date.now() } = {}) {
 
   if (
     !payload ||
+    payload.p !== undefined ||
     typeof payload.email !== "string" ||
     !isValidEmail(payload.email) ||
     typeof payload.exp !== "number" ||
@@ -138,6 +147,86 @@ export async function verifyToken(token, secret, { now = Date.now() } = {}) {
   }
 
   return { valid: true, email: normalizeEmail(payload.email), exp: payload.exp };
+}
+
+async function deriveUnsubscribeKey(secret) {
+  const baseKey = await crypto.subtle.importKey(
+    "raw",
+    encoder.encode(secret),
+    "HKDF",
+    false,
+    ["deriveKey"]
+  );
+  return crypto.subtle.deriveKey(
+    {
+      name: "HKDF",
+      hash: "SHA-256",
+      salt: UNSUB_HKDF_SALT,
+      info: UNSUB_HKDF_INFO,
+    },
+    baseKey,
+    { name: "AES-GCM", length: 256 },
+    false,
+    ["encrypt", "decrypt"]
+  );
+}
+
+export async function createUnsubscribeToken(email, secret) {
+  if (!secret) {
+    throw new Error("Missing TOKEN_SECRET configuration");
+  }
+  const normalizedEmail = normalizeEmail(email);
+  const key = await deriveUnsubscribeKey(secret);
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const plaintext = encoder.encode(
+    JSON.stringify({ p: "unsub", email: normalizedEmail })
+  );
+  const ciphertext = await crypto.subtle.encrypt(
+    { name: "AES-GCM", iv },
+    key,
+    plaintext
+  );
+  return `${toBase64Url(iv)}.${toBase64Url(ciphertext)}`;
+}
+
+export async function verifyUnsubscribeToken(token, secret) {
+  if (!secret || typeof token !== "string" || !token.includes(".")) {
+    return { ok: false };
+  }
+  const parts = token.split(".");
+  if (parts.length !== 2) {
+    return { ok: false };
+  }
+  const [ivB64, ctB64] = parts;
+  if (!ivB64 || !ctB64) {
+    return { ok: false };
+  }
+  const iv = fromBase64Url(ivB64);
+  const ciphertext = fromBase64Url(ctB64);
+  if (!iv || iv.byteLength !== 12 || !ciphertext || ciphertext.byteLength <= 16) {
+    return { ok: false };
+  }
+  try {
+    const key = await deriveUnsubscribeKey(secret);
+    const decrypted = await crypto.subtle.decrypt(
+      { name: "AES-GCM", iv },
+      key,
+      ciphertext
+    );
+    const payload = JSON.parse(decoder.decode(decrypted));
+    if (
+      !payload ||
+      typeof payload !== "object" ||
+      payload.p !== "unsub" ||
+      typeof payload.email !== "string" ||
+      !isValidEmail(payload.email)
+    ) {
+      return { ok: false };
+    }
+    return { ok: true, email: normalizeEmail(payload.email) };
+  } catch {
+    return { ok: false };
+  }
 }
 
 export function normalizeEmail(raw) {
@@ -311,7 +400,13 @@ function renderConfirmPage({ title, heading, message, siteOrigin, formHtml = "" 
 </html>`;
 }
 
-function buildConfirmationEmail({ email, confirmUrl, siteOrigin, fromEmail }) {
+function buildConfirmationEmail({
+  email,
+  confirmUrl,
+  unsubscribeUrl,
+  siteOrigin,
+  fromEmail,
+}) {
   const hubUrl = getHubUrl(siteOrigin);
   const subject = "Confirm your Free Baby Stuff Weekly subscription";
   const text = [
@@ -323,7 +418,7 @@ function buildConfirmationEmail({ email, confirmUrl, siteOrigin, fromEmail }) {
     "",
     `Hub: ${hubUrl}`,
     "If you did not ask for this email, you can ignore it.",
-    "Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}} or email hello@snugs.ai",
+    `Unsubscribe: ${unsubscribeUrl} or email hello@snugs.ai`,
   ].join("\n");
 
   const html = `<div style="font-family: system-ui, -apple-system, sans-serif; color: #1C1917; max-width: 520px; line-height: 1.6;">
@@ -331,7 +426,7 @@ function buildConfirmationEmail({ email, confirmUrl, siteOrigin, fromEmail }) {
   <p><a href="${escapeHtml(confirmUrl)}" style="display: inline-block; background: #EA580C; color: #FFFFFF; padding: 12px 22px; border-radius: 9999px; text-decoration: none; font-weight: 600;">Confirm my email</a></p>
   <p style="font-size: 14px; color: #57534E;">${escapeHtml(PRIVACY_PROMISE)}</p>
   <hr style="border: none; border-top: 1px solid #E7E5E4; margin: 24px 0;" />
-  <p style="font-size: 12px; color: #78716C;">If you did not request this email, you can ignore it. You can <a href="{{{RESEND_UNSUBSCRIBE_URL}}}">unsubscribe</a> at any time or email <a href="mailto:hello@snugs.ai?subject=Unsubscribe">hello@snugs.ai</a>.</p>
+  <p style="font-size: 12px; color: #78716C;">If you did not request this email, you can ignore it. You can <a href="${escapeHtml(unsubscribeUrl)}">unsubscribe</a> at any time or email <a href="mailto:hello@snugs.ai?subject=Unsubscribe">hello@snugs.ai</a>.</p>
 </div>`;
 
   return {
@@ -341,12 +436,13 @@ function buildConfirmationEmail({ email, confirmUrl, siteOrigin, fromEmail }) {
     text,
     html,
     headers: {
-      "List-Unsubscribe": "<mailto:hello@snugs.ai?subject=unsubscribe>",
+      "List-Unsubscribe": `<${unsubscribeUrl}>, <mailto:hello@snugs.ai?subject=unsubscribe>`,
+      "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
     },
   };
 }
 
-function buildWelcomeEmail({ email, siteOrigin, fromEmail }) {
+function buildWelcomeEmail({ email, unsubscribeUrl, siteOrigin, fromEmail }) {
   const hubUrl = getHubUrl(siteOrigin);
   const subject = "You're on the Free Baby Stuff Weekly list";
   const text = [
@@ -356,7 +452,7 @@ function buildWelcomeEmail({ email, siteOrigin, fromEmail }) {
     "",
     `Browse all verified offers anytime: ${hubUrl}`,
     "",
-    "Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}} or email hello@snugs.ai",
+    `Unsubscribe: ${unsubscribeUrl} or email hello@snugs.ai`,
   ].join("\n");
 
   const html = `<div style="font-family: system-ui, -apple-system, sans-serif; color: #1C1917; max-width: 520px; line-height: 1.6;">
@@ -364,7 +460,7 @@ function buildWelcomeEmail({ email, siteOrigin, fromEmail }) {
   <p>${escapeHtml(PRIVACY_PROMISE)}</p>
   <p><a href="${escapeHtml(hubUrl)}" style="color: #EA580C; font-weight: 600;">Browse Free Baby Stuff on Snugs</a></p>
   <hr style="border: none; border-top: 1px solid #E7E5E4; margin: 24px 0;" />
-  <p style="font-size: 12px; color: #78716C;">You can <a href="{{{RESEND_UNSUBSCRIBE_URL}}}">unsubscribe</a> at any time using the link in every weekly roundup, or by emailing <a href="mailto:hello@snugs.ai?subject=Unsubscribe">hello@snugs.ai</a>.</p>
+  <p style="font-size: 12px; color: #78716C;">You can <a href="${escapeHtml(unsubscribeUrl)}">unsubscribe</a> at any time using the link in every weekly roundup, or by emailing <a href="mailto:hello@snugs.ai?subject=Unsubscribe">hello@snugs.ai</a>.</p>
 </div>`;
 
   return {
@@ -374,7 +470,8 @@ function buildWelcomeEmail({ email, siteOrigin, fromEmail }) {
     text,
     html,
     headers: {
-      "List-Unsubscribe": "<mailto:hello@snugs.ai?subject=unsubscribe>",
+      "List-Unsubscribe": `<${unsubscribeUrl}>, <mailto:hello@snugs.ai?subject=unsubscribe>`,
+      "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
     },
   };
 }
@@ -473,13 +570,75 @@ async function parseConfirmPostPayload(request, url) {
   return { token: token.trim(), csrf: csrf.trim() };
 }
 
-function logResendError(route, err) {
+async function parseUnsubscribePostPayload(request, url) {
+  let token = url.searchParams.get("token") || "";
+
+  const contentType = (request.headers.get("Content-Type") || "").toLowerCase();
+  if (contentType.includes("application/json")) {
+    try {
+      const body = await request.json();
+      if (body && typeof body === "object" && typeof body.token === "string") {
+        token = body.token;
+      }
+    } catch {
+      // Fall back to query token if body is empty
+    }
+  } else {
+    try {
+      const text = await request.text();
+      if (text) {
+        const params = new URLSearchParams(text);
+        if (params.has("token")) {
+          token = params.get("token") || "";
+        }
+      }
+    } catch {
+      // Fall back to query token
+    }
+  }
+
+  return { token: token.trim() };
+}
+
+function sanitizeErrorMessage(err, env = {}) {
+  const name =
+    err && typeof err.name === "string" && err.name ? err.name : "Error";
+  const rawMessage =
+    err && typeof err.message === "string" ? err.message : String(err ?? "");
+  let text = `${name}: ${rawMessage}`;
+
+  for (const secret of [env?.RESEND_API_KEY, env?.TOKEN_SECRET]) {
+    if (typeof secret === "string" && secret.length > 0) {
+      text = text.replaceAll(secret, "[redacted]");
+    }
+  }
+
+  text = text
+    .replace(/Bearer\s+\S+/gi, "[redacted]")
+    .replace(/re_[A-Za-z0-9_]+/g, "[redacted]")
+    .replace(/[A-Za-z0-9._%+-]+(?:@|%40)[A-Za-z0-9.-]+\.[A-Za-z]{2,}/gi, "[email]")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  if (text.length > 200) {
+    text = text.slice(0, 200);
+  }
+  return text;
+}
+
+function logResendError(route, err, env = {}) {
   const op = err && typeof err.op === "string" ? err.op : "unknown";
-  const status =
-    err && (typeof err.status === "number" || typeof err.status === "string")
-      ? err.status
-      : "unknown";
-  console.error(`resend error route=${route} op=${op} status=${status}`);
+  const hasStatus =
+    err && (typeof err.status === "number" || typeof err.status === "string");
+  const status = hasStatus ? err.status : "unknown";
+  if (hasStatus) {
+    console.error(`resend error route=${route} op=${op} status=${status}`);
+    return;
+  }
+  const sanitized = sanitizeErrorMessage(err, env);
+  console.error(
+    `resend error route=${route} op=${op} status=${status} error=${sanitized}`
+  );
 }
 
 export function createWorker(options = {}) {
@@ -564,10 +723,16 @@ export function createWorker(options = {}) {
           const token = await createToken(email, env.TOKEN_SECRET, {
             now: nowFn(),
           });
+          const unsubToken = await createUnsubscribeToken(
+            email,
+            env.TOKEN_SECRET
+          );
           const confirmUrl = `${siteOrigin}/confirm?token=${encodeURIComponent(token)}`;
+          const unsubscribeUrl = `${siteOrigin}/unsubscribe?token=${encodeURIComponent(unsubToken)}`;
           const emailMsg = buildConfirmationEmail({
             email,
             confirmUrl,
+            unsubscribeUrl,
             siteOrigin,
             fromEmail,
           });
@@ -600,7 +765,7 @@ export function createWorker(options = {}) {
           await resend.sendEmail(emailMsg);
           return jsonResponse({ status: "pending" }, 200, corsHeaders);
         } catch (err) {
-          logResendError("/subscribe", err);
+          logResendError("/subscribe", err, env);
           return jsonResponse(
             {
               status: "error",
@@ -672,7 +837,7 @@ export function createWorker(options = {}) {
               }
             }
           } catch (err) {
-            logResendError("/confirm", err);
+            logResendError("/confirm", err, env);
             // If read lookup fails transiently on GET, still render the confirm button
           }
 
@@ -800,8 +965,14 @@ export function createWorker(options = {}) {
               });
             }
 
+            const unsubToken = await createUnsubscribeToken(
+              verification.email,
+              env.TOKEN_SECRET
+            );
+            const unsubscribeUrl = `${siteOrigin}/unsubscribe?token=${encodeURIComponent(unsubToken)}`;
             const welcomeMsg = buildWelcomeEmail({
               email: verification.email,
+              unsubscribeUrl,
               siteOrigin,
               fromEmail,
             });
@@ -818,13 +989,126 @@ export function createWorker(options = {}) {
               200
             );
           } catch (err) {
-            logResendError("/confirm", err);
+            logResendError("/confirm", err, env);
             return htmlResponse(
               renderConfirmPage({
                 title: "Error confirming subscription",
                 heading: "Something went wrong",
                 message:
                   "We could not complete your confirmation right now. Please try clicking the link in your email again in a moment.",
+                siteOrigin,
+              }),
+              502
+            );
+          }
+        }
+      }
+
+      if (pathname === "/unsubscribe") {
+        if (method === "GET") {
+          const token = (url.searchParams.get("token") || "").trim();
+          const verification = await verifyUnsubscribeToken(
+            token,
+            env.TOKEN_SECRET
+          );
+
+          if (!verification.ok) {
+            return htmlResponse(
+              renderConfirmPage({
+                title: "Invalid unsubscribe link",
+                heading: "Invalid unsubscribe link",
+                message:
+                  "This unsubscribe link is invalid or incomplete. Please email hello@snugs.ai and we will remove you right away.",
+                siteOrigin,
+              }),
+              400
+            );
+          }
+
+          const formHtml = `<form method="POST" action="/unsubscribe">
+      <input type="hidden" name="token" value="${escapeHtml(token)}" />
+      <button type="submit" class="btn">Unsubscribe</button>
+    </form>`;
+
+          return htmlResponse(
+            renderConfirmPage({
+              title: "Unsubscribe",
+              heading: "Unsubscribe",
+              message: "Unsubscribe from Free Baby Stuff Weekly?",
+              siteOrigin,
+              formHtml,
+            }),
+            200
+          );
+        }
+
+        if (method === "POST") {
+          const { token } = await parseUnsubscribePostPayload(request, url);
+          const verification = await verifyUnsubscribeToken(
+            token,
+            env.TOKEN_SECRET
+          );
+
+          if (!verification.ok) {
+            return htmlResponse(
+              renderConfirmPage({
+                title: "Invalid unsubscribe link",
+                heading: "Invalid unsubscribe link",
+                message:
+                  "This unsubscribe link is invalid or incomplete. Please email hello@snugs.ai and we will remove you right away.",
+                siteOrigin,
+              }),
+              400
+            );
+          }
+
+          try {
+            const segmentId = env.RESEND_AUDIENCE_ID;
+            const resend = createResendClient({
+              apiKey: env.RESEND_API_KEY,
+              audienceId: segmentId,
+              fetchImpl,
+            });
+
+            const existing = await resend.getContact(verification.email);
+            if (existing) {
+              if (segmentId) {
+                await resend.removeContactFromSegment(
+                  verification.email,
+                  segmentId
+                );
+                const remainingSegments = await resend.listContactSegments(
+                  verification.email
+                );
+                if (remainingSegments.length === 0) {
+                  await resend.updateContact(verification.email, {
+                    unsubscribed: true,
+                  });
+                }
+              } else {
+                await resend.updateContact(verification.email, {
+                  unsubscribed: true,
+                });
+              }
+            }
+
+            return htmlResponse(
+              renderConfirmPage({
+                title: "You're unsubscribed",
+                heading: "You're unsubscribed",
+                message: `You will not get Free Baby Stuff Weekly anymore. You can rejoin anytime at ${getHubUrl(siteOrigin)}.`,
+                siteOrigin,
+              }),
+              200
+            );
+          } catch (err) {
+            logResendError("/unsubscribe", err, env);
+            return htmlResponse(
+              renderConfirmPage({
+                title: "Error unsubscribing",
+                heading: "Something went wrong",
+                message:
+                  "We could not complete your unsubscribe request right now. Please try again in a moment or email hello@snugs.ai.",
                 siteOrigin,
               }),
               502

@@ -4,7 +4,10 @@ import {
   TOKEN_TTL_MS,
   createCsrfToken,
   createToken,
+  createUnsubscribeToken,
   createWorker,
+  verifyToken,
+  verifyUnsubscribeToken,
 } from "../src/index.js";
 import { CONFIRMED_MARKER, UNCONFIRMED_MARKER } from "../src/resend.js";
 
@@ -153,12 +156,12 @@ function createMockResend(initialContacts = {}) {
       );
     }
 
-    const addSegmentMatch = u.pathname.match(
+    const segmentMatch = u.pathname.match(
       /^\/contacts\/([^/]+)\/segments\/([^/]+)$/
     );
-    if (addSegmentMatch && method === "POST") {
-      const email = decodeURIComponent(addSegmentMatch[1]).toLowerCase();
-      const segId = decodeURIComponent(addSegmentMatch[2]);
+    if (segmentMatch && (method === "POST" || method === "DELETE")) {
+      const email = decodeURIComponent(segmentMatch[1]).toLowerCase();
+      const segId = decodeURIComponent(segmentMatch[2]);
       const existing = contacts.get(email);
       if (!existing) {
         return new Response(
@@ -167,9 +170,19 @@ function createMockResend(initialContacts = {}) {
         );
       }
       const segSet = ensureSegmentSet(email);
-      segSet.add(segId);
+      if (method === "POST") {
+        segSet.add(segId);
+        return new Response(
+          JSON.stringify({ object: "contact_segment", id: segId }),
+          {
+            status: 200,
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+      }
+      segSet.delete(segId);
       return new Response(
-        JSON.stringify({ object: "contact_segment", id: segId }),
+        JSON.stringify({ object: "contact_segment", id: segId, deleted: true }),
         {
           status: 200,
           headers: { "Content-Type": "application/json" },
@@ -249,7 +262,20 @@ test("1. new subscribe creates unconfirmed contact (unsubscribed=true) in this s
     mock.emails[0].text,
     /One short email a week, the roundup\. Nothing else\. Unsubscribe anytime\./
   );
-  assert.match(mock.emails[0].text, /RESEND_UNSUBSCRIBE_URL/);
+  assert.match(mock.emails[0].text, /https:\/\/snugs\.ai\/unsubscribe\?token=/);
+  assert.match(mock.emails[0].html, /https:\/\/snugs\.ai\/unsubscribe\?token=/);
+  assert.equal(mock.emails[0].text.includes("RESEND_UNSUBSCRIBE_URL"), false);
+  assert.equal(mock.emails[0].html.includes("RESEND_UNSUBSCRIBE_URL"), false);
+  assert.equal(mock.emails[0].text.includes("{{{"), false);
+  assert.equal(mock.emails[0].html.includes("{{{"), false);
+  assert.match(
+    mock.emails[0].headers["List-Unsubscribe"],
+    /<https:\/\/snugs\.ai\/unsubscribe\?token=[^>]+>, <mailto:hello@snugs\.ai\?subject=unsubscribe>/
+  );
+  assert.equal(
+    mock.emails[0].headers["List-Unsubscribe-Post"],
+    "List-Unsubscribe=One-Click"
+  );
 });
 
 test("2. duplicate subscribe for pending unconfirmed contact resends confirmation without creating duplicate contact", async () => {
@@ -971,4 +997,449 @@ test("19. POST /confirm creates contact in this segment if missing at confirm ti
     true
   );
   assert.equal(mock.emails.length, 1);
+});
+
+test("20. welcome email contains real unsubscribe link and List-Unsubscribe-Post header without RESEND_UNSUBSCRIBE_URL or {{{", async () => {
+  const mock = createMockResend({
+    "welcomecheck@example.com": {
+      id: "c-20",
+      email: "welcomecheck@example.com",
+      unsubscribed: true,
+      first_name: UNCONFIRMED_MARKER,
+    },
+  });
+  const env = createTestEnv();
+  const worker = createWorker({ fetch: mock.mockFetch, now: () => BASE_TIME });
+  const token = await createToken(
+    "welcomecheck@example.com",
+    env.TOKEN_SECRET,
+    { now: BASE_TIME }
+  );
+  const csrf = await createCsrfToken(token, env.TOKEN_SECRET);
+
+  const res = await worker.fetch(
+    new Request("https://snugs.ai/confirm", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Origin: "https://snugs.ai",
+      },
+      body: new URLSearchParams({ token, csrf }).toString(),
+    }),
+    env
+  );
+  assert.equal(res.status, 200);
+  assert.equal(mock.emails.length, 1);
+  const msg = mock.emails[0];
+  assert.match(msg.text, /https:\/\/snugs\.ai\/unsubscribe\?token=/);
+  assert.match(msg.html, /https:\/\/snugs\.ai\/unsubscribe\?token=/);
+  assert.equal(msg.text.includes("RESEND_UNSUBSCRIBE_URL"), false);
+  assert.equal(msg.html.includes("RESEND_UNSUBSCRIBE_URL"), false);
+  assert.equal(msg.text.includes("{{{"), false);
+  assert.equal(msg.html.includes("{{{"), false);
+  assert.match(
+    msg.headers["List-Unsubscribe"],
+    /<https:\/\/snugs\.ai\/unsubscribe\?token=[^>]+>, <mailto:hello@snugs\.ai\?subject=unsubscribe>/
+  );
+  assert.equal(
+    msg.headers["List-Unsubscribe-Post"],
+    "List-Unsubscribe=One-Click"
+  );
+});
+
+test("21. unsubscribe token is AES-GCM encrypted, does not reveal email, and enforces purpose separation", async () => {
+  const secret = "test-hmac-secret-value-for-unit-tests";
+  const email = "secret-parent+tag@example.com";
+  const unsubToken = await createUnsubscribeToken(email, secret);
+
+  assert.equal(unsubToken.toLowerCase().includes("secret-parent"), false);
+  assert.equal(unsubToken.toLowerCase().includes("example.com"), false);
+  for (const part of unsubToken.split(".")) {
+    const padded =
+      part.replace(/-/g, "+").replace(/_/g, "/") +
+      "=".repeat((4 - (part.length % 4)) % 4);
+    const decoded = Buffer.from(padded, "base64").toString("utf8");
+    assert.equal(decoded.toLowerCase().includes("secret-parent"), false);
+    assert.equal(decoded.toLowerCase().includes("example.com"), false);
+  }
+
+  const verified = await verifyUnsubscribeToken(unsubToken, secret);
+  assert.deepEqual(verified, { ok: true, email });
+
+  // Confirm token fails verifyUnsubscribeToken, and unsub token fails verifyToken
+  const confirmToken = await createToken(email, secret, { now: BASE_TIME });
+  assert.deepEqual(await verifyUnsubscribeToken(confirmToken, secret), {
+    ok: false,
+  });
+  const confirmCheck = await verifyToken(unsubToken, secret, {
+    now: BASE_TIME,
+  });
+  assert.equal(confirmCheck.valid, false);
+
+  // Garbage inputs never throw
+  for (const garbage of ["", null, undefined, "not-a-token", "a.b.c", "..", "!!!.???"]) {
+    assert.deepEqual(await verifyUnsubscribeToken(garbage, secret), {
+      ok: false,
+    });
+  }
+});
+
+test("22. GET /unsubscribe is read-only (zero Resend calls) and renders confirmation form", async () => {
+  const mock = createMockResend({
+    "reader-unsub@example.com": {
+      id: "c-22",
+      email: "reader-unsub@example.com",
+      unsubscribed: false,
+      first_name: CONFIRMED_MARKER,
+      segments: [DEFAULT_SEGMENT_ID],
+    },
+  });
+  const env = createTestEnv();
+  const worker = createWorker({ fetch: mock.mockFetch, now: () => BASE_TIME });
+  const unsubToken = await createUnsubscribeToken(
+    "reader-unsub@example.com",
+    env.TOKEN_SECRET
+  );
+
+  const res = await worker.fetch(
+    new Request(
+      `https://snugs.ai/unsubscribe?token=${encodeURIComponent(unsubToken)}`,
+      { method: "GET" }
+    ),
+    env
+  );
+  assert.equal(res.status, 200);
+  const html = await res.text();
+  assert.match(html, /Unsubscribe from Free Baby Stuff Weekly\?/);
+  assert.match(html, /<form method="POST" action="\/unsubscribe">/);
+  assert.match(html, /name="token"/);
+  assert.equal(mock.calls.length, 0);
+  assert.equal(mock.contacts.get("reader-unsub@example.com").unsubscribed, false);
+});
+
+test("23. POST /unsubscribe one-click (no Origin) and form submit remove segment, set unsubscribed=true when no segments remain, and allow resubscribe", async () => {
+  const email = "oneclick@example.com";
+  const mock = createMockResend({
+    [email]: {
+      id: "c-23",
+      email,
+      unsubscribed: false,
+      first_name: CONFIRMED_MARKER,
+      segments: [DEFAULT_SEGMENT_ID],
+    },
+  });
+  const env = createTestEnv();
+  const worker = createWorker({ fetch: mock.mockFetch, now: () => BASE_TIME });
+  const unsubToken = await createUnsubscribeToken(email, env.TOKEN_SECRET);
+
+  // One-click POST without Origin or Referer
+  const res1 = await worker.fetch(
+    new Request(
+      `https://snugs.ai/unsubscribe?token=${encodeURIComponent(unsubToken)}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: "List-Unsubscribe=One-Click",
+      }
+    ),
+    env
+  );
+  assert.equal(res1.status, 200);
+  const html1 = await res1.text();
+  assert.match(html1, /You&#39;re unsubscribed|You're unsubscribed/);
+  assert.equal(mock.getSegments(email).has(DEFAULT_SEGMENT_ID), false);
+  assert.equal(mock.contacts.get(email).unsubscribed, true);
+  assert.equal(mock.emails.length, 0);
+
+  // Repeat POST via form field is idempotent
+  const res2 = await worker.fetch(
+    new Request("https://snugs.ai/unsubscribe", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({ token: unsubToken }).toString(),
+    }),
+    env
+  );
+  assert.equal(res2.status, 200);
+  assert.equal(mock.emails.length, 0);
+
+  // Resubscribe after unsubscribe goes through pending -> confirm -> back in segment
+  const subRes = await worker.fetch(
+    new Request("https://snugs.ai/subscribe", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Origin: "https://snugs.ai",
+      },
+      body: JSON.stringify({ email, website: "" }),
+    }),
+    env
+  );
+  assert.equal(subRes.status, 200);
+  assert.deepEqual(await subRes.json(), { status: "pending" });
+  assert.equal(mock.emails.length, 1);
+
+  const confirmToken = await createToken(email, env.TOKEN_SECRET, {
+    now: BASE_TIME,
+  });
+  const csrf = await createCsrfToken(confirmToken, env.TOKEN_SECRET);
+  const confirmRes = await worker.fetch(
+    new Request("https://snugs.ai/confirm", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Origin: "https://snugs.ai",
+      },
+      body: new URLSearchParams({ token: confirmToken, csrf }).toString(),
+    }),
+    env
+  );
+  assert.equal(confirmRes.status, 200);
+  assert.equal(mock.getSegments(email).has(DEFAULT_SEGMENT_ID), true);
+  assert.equal(mock.contacts.get(email).unsubscribed, false);
+});
+
+test("24. POST /unsubscribe for multi-segment contact keeps other segment and leaves unsubscribed=false", async () => {
+  const email = "multilist@example.com";
+  const mock = createMockResend({
+    [email]: {
+      id: "c-24",
+      email,
+      unsubscribed: false,
+      first_name: CONFIRMED_MARKER,
+      segments: [DEFAULT_SEGMENT_ID, "seg-other-list"],
+    },
+  });
+  const env = createTestEnv();
+  const worker = createWorker({ fetch: mock.mockFetch, now: () => BASE_TIME });
+  const unsubToken = await createUnsubscribeToken(email, env.TOKEN_SECRET);
+
+  const res = await worker.fetch(
+    new Request(
+      `https://snugs.ai/unsubscribe?token=${encodeURIComponent(unsubToken)}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: "List-Unsubscribe=One-Click",
+      }
+    ),
+    env
+  );
+  assert.equal(res.status, 200);
+  assert.equal(mock.getSegments(email).has(DEFAULT_SEGMENT_ID), false);
+  assert.equal(mock.getSegments(email).has("seg-other-list"), true);
+  assert.equal(mock.contacts.get(email).unsubscribed, false);
+  assert.equal(mock.contacts.get(email).first_name, CONFIRMED_MARKER);
+});
+
+test("25. POST /unsubscribe handles pending contact and missing contact", async () => {
+  const pendingEmail = "pending-unsub@example.com";
+  const missingEmail = "missing-unsub@example.com";
+  const mock = createMockResend({
+    [pendingEmail]: {
+      id: "c-25",
+      email: pendingEmail,
+      unsubscribed: true,
+      first_name: UNCONFIRMED_MARKER,
+      segments: [DEFAULT_SEGMENT_ID],
+    },
+  });
+  const env = createTestEnv();
+  const worker = createWorker({ fetch: mock.mockFetch, now: () => BASE_TIME });
+
+  const pendingToken = await createUnsubscribeToken(
+    pendingEmail,
+    env.TOKEN_SECRET
+  );
+  const resPending = await worker.fetch(
+    new Request(
+      `https://snugs.ai/unsubscribe?token=${encodeURIComponent(pendingToken)}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: "List-Unsubscribe=One-Click",
+      }
+    ),
+    env
+  );
+  assert.equal(resPending.status, 200);
+  assert.equal(mock.getSegments(pendingEmail).has(DEFAULT_SEGMENT_ID), false);
+  assert.equal(mock.contacts.get(pendingEmail).unsubscribed, true);
+
+  const missingToken = await createUnsubscribeToken(
+    missingEmail,
+    env.TOKEN_SECRET
+  );
+  const resMissing = await worker.fetch(
+    new Request(
+      `https://snugs.ai/unsubscribe?token=${encodeURIComponent(missingToken)}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: "List-Unsubscribe=One-Click",
+      }
+    ),
+    env
+  );
+  assert.equal(resMissing.status, 200);
+  const htmlMissing = await resMissing.text();
+  assert.match(htmlMissing, /You&#39;re unsubscribed|You're unsubscribed/);
+});
+
+test("26. /unsubscribe rejects bad, tampered, missing, and confirm tokens with 400 and /confirm rejects unsub token", async () => {
+  const email = "token-checks@example.com";
+  const mock = createMockResend({
+    [email]: {
+      id: "c-26",
+      email,
+      unsubscribed: false,
+      first_name: CONFIRMED_MARKER,
+      segments: [DEFAULT_SEGMENT_ID],
+    },
+  });
+  const env = createTestEnv();
+  const worker = createWorker({ fetch: mock.mockFetch, now: () => BASE_TIME });
+
+  const validUnsub = await createUnsubscribeToken(email, env.TOKEN_SECRET);
+  const tamperedUnsub =
+    validUnsub.slice(0, -1) + (validUnsub.endsWith("A") ? "B" : "A");
+  const confirmToken = await createToken(email, env.TOKEN_SECRET, {
+    now: BASE_TIME,
+  });
+
+  for (const bad of ["", "bad", tamperedUnsub, confirmToken]) {
+    const query = bad ? `?token=${encodeURIComponent(bad)}` : "";
+    const getRes = await worker.fetch(
+      new Request(`https://snugs.ai/unsubscribe${query}`, { method: "GET" }),
+      env
+    );
+    assert.equal(getRes.status, 400);
+    const getHtml = await getRes.text();
+    assert.match(getHtml, /Invalid unsubscribe link/);
+
+    const postRes = await worker.fetch(
+      new Request(`https://snugs.ai/unsubscribe${query}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: "List-Unsubscribe=One-Click",
+      }),
+      env
+    );
+    assert.equal(postRes.status, 400);
+  }
+
+  // Unsub token rejected on GET and POST /confirm
+  const getConfirmRes = await worker.fetch(
+    new Request(
+      `https://snugs.ai/confirm?token=${encodeURIComponent(validUnsub)}`,
+      { method: "GET" }
+    ),
+    env
+  );
+  assert.equal(getConfirmRes.status, 400);
+
+  const csrf = await createCsrfToken(validUnsub, env.TOKEN_SECRET);
+  const postConfirmRes = await worker.fetch(
+    new Request("https://snugs.ai/confirm", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Origin: "https://snugs.ai",
+      },
+      body: new URLSearchParams({ token: validUnsub, csrf }).toString(),
+    }),
+    env
+  );
+  assert.equal(postConfirmRes.status, 400);
+
+  // Disallowed method on /unsubscribe returns 404
+  const putRes = await worker.fetch(
+    new Request("https://snugs.ai/unsubscribe", { method: "PUT" }),
+    env
+  );
+  assert.equal(putRes.status, 404);
+
+  assert.equal(mock.calls.length, 0);
+});
+
+test("27. non-HTTP error logs sanitized message without email, key, or secret, and 503 on /unsubscribe logs status", async () => {
+  const apiKey = "custom-api-key-val";
+  const tokenSecret = "custom-token-secret-val";
+  const resendStyleKey = "re_" + "abc123xyz";
+  const email = "leak-test+qa@example.com";
+  const env = createTestEnv({
+    RESEND_API_KEY: apiKey,
+    TOKEN_SECRET: tokenSecret,
+  });
+
+  const errorLogs = [];
+  const origError = console.error;
+  console.error = (...args) => {
+    errorLogs.push(args.join(" "));
+  };
+
+  try {
+    const throwingWorker = createWorker({
+      fetch: async () => {
+        throw new TypeError(
+          `fetch failed for ${email} with ${apiKey} and ${tokenSecret} and ${resendStyleKey} and Bearer tok123`
+        );
+      },
+      now: () => BASE_TIME,
+    });
+
+    const res1 = await throwingWorker.fetch(
+      new Request("https://snugs.ai/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, website: "" }),
+      }),
+      env
+    );
+    assert.equal(res1.status, 502);
+    assert.equal(errorLogs.length, 1);
+    assert.match(
+      errorLogs[0],
+      /resend error route=\/subscribe op=unknown status=unknown error=TypeError: fetch failed/
+    );
+    assert.equal(errorLogs[0].includes("leak-test"), false);
+    assert.equal(errorLogs[0].includes("@example.com"), false);
+    assert.equal(errorLogs[0].includes(apiKey), false);
+    assert.equal(errorLogs[0].includes(tokenSecret), false);
+    assert.equal(errorLogs[0].includes(resendStyleKey), false);
+    assert.equal(errorLogs[0].includes("tok123"), false);
+    assert.match(errorLogs[0], /\[email\]/);
+    assert.match(errorLogs[0], /\[redacted\]/);
+
+    errorLogs.length = 0;
+    const unsubToken = await createUnsubscribeToken(email, tokenSecret);
+    const worker503 = createWorker({
+      fetch: async () =>
+        new Response(JSON.stringify({ message: "unavailable" }), {
+          status: 503,
+        }),
+      now: () => BASE_TIME,
+    });
+    const res2 = await worker503.fetch(
+      new Request(
+        `https://snugs.ai/unsubscribe?token=${encodeURIComponent(unsubToken)}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: "List-Unsubscribe=One-Click",
+        }
+      ),
+      env
+    );
+    assert.equal(res2.status, 502);
+    assert.equal(errorLogs.length, 1);
+    assert.match(
+      errorLogs[0],
+      /resend error route=\/unsubscribe op=getContact status=503/
+    );
+    assert.equal(errorLogs[0].includes("leak-test"), false);
+    assert.equal(errorLogs[0].includes(apiKey), false);
+  } finally {
+    console.error = origError;
+  }
 });
