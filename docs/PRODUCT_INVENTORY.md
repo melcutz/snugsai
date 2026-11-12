@@ -5,6 +5,8 @@ Generated: 2026-10-20
 | Path | Purpose | Indexable |
 |------|---------|-----------|
 | contact.html | Contact page | Yes |
+| free-baby-stuff/index.html | Free Baby Stuff hub | Yes |
+| free-baby-stuff/roundup-1/index.html | Free Baby Stuff Weekly Roundup #1 | Yes |
 | index.html | Homepage | Yes |
 | privacy.html | Privacy policy | Yes |
 | resources/a-dad-s-guide-to-preparing-for-parenthood.html | A Dad's Guide to Preparing for Parenthood | No |
@@ -485,6 +487,6 @@ Generated: 2026-10-20
 | terms.html | Terms of service | Yes |
 | tools/sleep-milestone-calculator.html | Sleep milestone calculator tool | Yes |
 
-**Total pages:** 480  
-**Indexable pages:** 126  
+**Total pages:** 482  
+**Indexable pages:** 128  
 **Noindex/merge/remove pages:** 354  
