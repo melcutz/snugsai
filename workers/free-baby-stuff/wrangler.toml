@@ -1,0 +1,9 @@
+name = "snugs-free-baby-stuff"
+main = "src/index.js"
+compatibility_date = "2026-11-01"
+workers_dev = true
+
+[vars]
+RESEND_AUDIENCE_ID = ""
+SITE_ORIGIN = "https://snugs.ai"
+FROM_EMAIL = "Snugs <hello@snugs.ai>"

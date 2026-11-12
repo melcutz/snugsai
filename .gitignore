@@ -2,3 +2,6 @@
 AGENTS.md
 *.md
 !docs/PRODUCT_INVENTORY.md
+!workers/free-baby-stuff/README.md
+
+node_modules/
