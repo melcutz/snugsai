@@ -1,5 +1,5 @@
 path,title,decision,merge_target,reason
-resources/4-month-sleep-regression-survival-guide.html,4-Month Sleep Regression: A Survival Guide | Snugs.ai,keep,,New 0-3 SEO hit page targeting "4 month sleep regression"
+resources/4-month-sleep-regression-survival-guide.html,4-Month Sleep Regression: A Survival Guide | Snugs.ai,remove,,Superseded by sleep-regressions/4-month-sleep-regression/ to keep resource article cap at 120
 resources/a-dad-s-guide-to-preparing-for-parenthood.html,A Dad's Guide to Preparing for Parenthood | Snugs.ai,merge,resources/dad-s-guide-to-pregnancy-and-childbirth-essential-tips-for-expecting-fathers.html,Near-duplicate; canonical: dad-s-guide-to-pregnancy-and-childbirth-essential-tips-for-expecting-fathers
 resources/a-single-dad-s-guide-to-teaching-his-daughter-to-shave.html,A Single Dad's Guide to Teaching His Daughter to Shave | Snugs.ai,noindex,,Not in curated core 0-3 allowlist
 resources/ag1-vs-gruns-gummies-a-parent-s-guide-to-daily-nutrition.html,AG1 vs. Gruns Gummies: A Parent's Guide to Daily Nutrition | Snugs.ai,noindex,,Not in curated core 0-3 allowlist
@@ -357,7 +357,7 @@ resources/sleep-regression-and-milestones-is-there-a-link-for-your-3-month-old.h
 resources/smart-shopping-for-growing-kids-a-parent-s-guide-to-budget-friendly-wardrobes.html,Smart Shopping for Growing Kids: A Parent's Guide to Budget-Friendly Wardrobes | Snugs.ai,keep,,Explicitly curated core 0-3 article
 resources/smart-sleep-coach-closing-what-to-use-next.html,Smart Sleep Coach Is Closing Nov 30: What To Save and What To Use Next | Snugs.ai,keep,,New switcher page targeting "smart sleep coach closing" and "smart sleep coach alternative" ahead of the Nov 30 2026 shutdown
 resources/smart-strategies-for-buying-clothes-for-growing-kids-on-a-budget.html,Smart Strategies for Buying Clothes for Growing Kids on a Budget | Snugs.ai,merge,resources/smart-shopping-for-growing-kids-a-parent-s-guide-to-budget-friendly-wardrobes.html,Near-duplicate; canonical: smart-shopping-for-growing-kids-a-parent-s-guide-to-budget-friendly-wardrobes
-resources/snoo-vs-cradlewise-smart-bassinet-comparison.html,Snoo vs Cradlewise: Smart Bassinet Compared | Snugs.ai,keep,,New 0-3 SEO hit page targeting "snoo vs cradlewise"
+resources/snoo-vs-cradlewise-smart-bassinet-comparison.html,Snoo vs Cradlewise: Smart Bassinet Compared | Snugs.ai,remove,,Deferred from indexable resource cap (120 max)
 resources/snugs-pricing-promise.html,Our Pricing Promise: Your Baby's History Is Yours | Snugs.ai,keep,,New trust page: no retroactive paywalls grandfathering and export anytime; anchor for the switcher pages
 resources/soothing-a-fussy-baby-tips-for-diaper-changes-and-feeding-with-reflux.html,Soothing a Fussy Baby: Tips for Diaper Changes and Feeding with Reflux | Snugs.ai,keep,,Explicitly curated core 0-3 article
 resources/sudden-sleep-disruptions-in-6-month-olds-exploring-potential-causes-beyond-sleep-regression.html,Sudden Sleep Disruptions in 6-Month-Olds: Exploring Potential Causes Beyond Sleep Regression | Snugs.ai,noindex,,Not in curated core 0-3 allowlist
