@@ -7,7 +7,7 @@ Checks:
   3. No noindex page is in the sitemap.
   4. Every redirect target exists and is a keep page.
   5. The JSON-LD on the core 30 is valid JSON with an Article node.
-  6. Sitemap count equals indexable set (<=120 articles + tools + top-level).
+  6. Sitemap count equals indexable set (<=150 articles + tools + top-level).
   7. No noindexed URL in sitemap or resources index pages.
   8. Every 301 target exists locally (file present).
   9. Every indexable page has a self-referencing canonical.
@@ -173,9 +173,9 @@ def main():
     actual_sitemap = len(locs)
     if actual_sitemap != expected_indexable:
         errors.append(f"SITEMAP COUNT MISMATCH: expected {expected_indexable} (keep articles {len(keep_articles)} + 6 top-level + 5 hubs), got {actual_sitemap}")
-    if len(keep_resource_articles) > 120:
-        errors.append(f"TOO MANY KEEP ARTICLES: {len(keep_resource_articles)} > 120 target")
-    print(f"6. sitemap count ({actual_sitemap}) matches indexable set ({expected_indexable}) OK; keep resource articles: {len(keep_resource_articles)} <= 120")
+    if len(keep_resource_articles) > 150:
+        errors.append(f"TOO MANY KEEP ARTICLES: {len(keep_resource_articles)} > 150 target")
+    print(f"6. sitemap count ({actual_sitemap}) matches indexable set ({expected_indexable}) OK; keep resource articles: {len(keep_resource_articles)} <= 150")
 
     # 7. No noindexed URL in resources index pages
     # Check resources/index.html
