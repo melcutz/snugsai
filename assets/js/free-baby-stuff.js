@@ -10,8 +10,41 @@
   var UNAVAILABLE_MESSAGE = "Signup isn't open yet, please try again later";
   var SUBSCRIBE_ENDPOINT = "/subscribe";
 
-  // Copy is pending verification; populate with verified offer objects when copy files land.
   var OFFER_LISTINGS = [];
+
+  function mapCountryToken(raw) {
+    if (raw == null) return "";
+    var lower = String(raw).trim().toLowerCase();
+    if (!lower) return "";
+    if (lower === "all" || lower.indexOf("all ") === 0) return "All";
+    if (lower === "worldwide" || lower === "international") return "Worldwide";
+    if (lower === "us" || lower === "usa" || lower === "united states" || lower === "u.s." || lower === "u.s.a.") return "US";
+    if (
+      lower === "uk" ||
+      lower === "united kingdom" ||
+      lower === "great britain" ||
+      lower === "britain" ||
+      lower === "england" ||
+      lower === "scotland" ||
+      lower === "wales" ||
+      lower === "northern ireland"
+    ) {
+      return "UK";
+    }
+    if (lower === "canada" || lower === "ca") return "Canada";
+    if (
+      lower === "australia" ||
+      lower === "au" ||
+      lower === "new south wales" ||
+      lower === "nsw" ||
+      lower === "victoria"
+    ) {
+      return "Australia";
+    }
+    if (lower === "ireland" || lower === "republic of ireland" || lower === "ie") return "Ireland";
+    if (lower === "finland" || lower === "fi") return "Finland";
+    return String(raw).trim();
+  }
 
   function normalizeCountryFilter(value) {
     if (value == null) return "All";
@@ -27,9 +60,9 @@
     } catch (_) {}
     if (!clean) return "All";
 
-    var lower = clean.toLowerCase();
+    var mapped = mapCountryToken(clean);
     for (var i = 0; i < FILTER_COUNTRIES.length; i++) {
-      if (FILTER_COUNTRIES[i].toLowerCase() === lower) {
+      if (FILTER_COUNTRIES[i].toLowerCase() === mapped.toLowerCase()) {
         return FILTER_COUNTRIES[i];
       }
     }
@@ -50,15 +83,38 @@
     if (!card) return "";
     if (typeof card === "string") return card;
     if (typeof card.getAttribute === "function") {
-      return card.getAttribute("data-country") || "";
+      return (
+        card.getAttribute("data-country") ||
+        card.getAttribute("data-c") ||
+        card.getAttribute("data-countries") ||
+        card.getAttribute("data-offer-country") ||
+        ""
+      );
     }
-    if (card.dataset && typeof card.dataset.country === "string") {
-      return card.dataset.country;
+    if (card.dataset) {
+      if (typeof card.dataset.country === "string") return card.dataset.country;
+      if (typeof card.dataset.c === "string") return card.dataset.c;
+      if (typeof card.dataset.countries === "string") return card.dataset.countries;
     }
     if (typeof card.country === "string") {
       return card.country;
     }
     return "";
+  }
+
+  function parseCardCountryTokens(rawCountry) {
+    if (!rawCountry) return [];
+    var parts = String(rawCountry).indexOf(",") !== -1 || String(rawCountry).indexOf("|") !== -1 || String(rawCountry).indexOf("/") !== -1
+      ? String(rawCountry).split(/[,|/]+/)
+      : String(rawCountry).split(/\s+/);
+    var out = [];
+    for (var i = 0; i < parts.length; i++) {
+      var mapped = mapCountryToken(parts[i]);
+      if (mapped && out.indexOf(mapped) === -1) {
+        out.push(mapped);
+      }
+    }
+    return out;
   }
 
   function cardMatchesCountry(card, selectedCountry) {
@@ -68,20 +124,68 @@
     var rawCountry = extractCardCountry(card);
     if (!rawCountry) return false;
 
-    var target = selected.toLowerCase();
-    var tokens = String(rawCountry).split(/[,|/]+/);
-    for (var i = 0; i < tokens.length; i++) {
-      if (tokens[i].trim().toLowerCase() === target) {
-        return true;
+    var tokens = parseCardCountryTokens(rawCountry);
+    if (selected === "Worldwide") {
+      return tokens.indexOf("Worldwide") !== -1;
+    }
+    return tokens.indexOf(selected) !== -1 || tokens.indexOf("Worldwide") !== -1;
+  }
+
+  function setNodeVisibility(node, visible) {
+    if (!node || typeof node !== "object") return;
+    if ("hidden" in node) {
+      node.hidden = !visible;
+    }
+    if (node.style && typeof node.style === "object") {
+      node.style.display = visible ? "" : "none";
+    }
+    if (node.classList && typeof node.classList.add === "function" && typeof node.classList.remove === "function") {
+      if (visible) {
+        node.classList.remove("hidden");
+      } else {
+        node.classList.add("hidden");
       }
     }
+    if (typeof node.setAttribute === "function" && typeof node.removeAttribute === "function") {
+      if (visible) {
+        node.removeAttribute("hidden");
+      } else {
+        node.setAttribute("hidden", "");
+      }
+    }
+  }
+
+  function isSectionElement(el) {
+    if (!el || typeof el !== "object") return false;
+    if (typeof el.hasAttribute === "function" && el.hasAttribute("data-offer-section")) return true;
+    if (el.dataset && el.dataset.offerSection !== undefined) return true;
+    if (el.classList && typeof el.classList.contains === "function" && el.classList.contains("offer-section")) return true;
     return false;
   }
 
-  function filterCardsByCountry(cards, selectedCountry) {
+  function findCardSection(card) {
+    if (!card || typeof card !== "object") return null;
+    if (card.section && typeof card.section === "object") return card.section;
+    var curr = card.parentElement || card.parentNode || null;
+    while (curr) {
+      if (isSectionElement(curr)) return curr;
+      curr = curr.parentElement || curr.parentNode || null;
+    }
+    return null;
+  }
+
+  function filterCardsByCountry(cards, selectedCountry, sections) {
     var selected = normalizeCountryFilter(selectedCountry);
     var list = Array.isArray(cards) ? cards : Array.from(cards || []);
     var visibleCards = [];
+    var sectionMap = new Map();
+
+    if (sections) {
+      var secList = Array.isArray(sections) ? sections : Array.from(sections);
+      for (var s = 0; s < secList.length; s++) {
+        if (secList[s]) sectionMap.set(secList[s], 0);
+      }
+    }
 
     for (var i = 0; i < list.length; i++) {
       var card = list[i];
@@ -89,16 +193,32 @@
       if (matches) {
         visibleCards.push(card);
       }
-      if (card && typeof card === "object" && "hidden" in card) {
-        card.hidden = !matches;
+      setNodeVisibility(card, matches);
+
+      var sec = findCardSection(card);
+      if (sec) {
+        var prev = sectionMap.has(sec) ? sectionMap.get(sec) : 0;
+        sectionMap.set(sec, prev + (matches ? 1 : 0));
       }
     }
+
+    var visibleSections = [];
+    var hiddenSections = [];
+    sectionMap.forEach(function (count, sec) {
+      var secVisible = count > 0;
+      setNodeVisibility(sec, secVisible);
+      if (secVisible) {
+        visibleSections.push(sec);
+      } else {
+        hiddenSections.push(sec);
+      }
+    });
 
     var isEmpty = visibleCards.length === 0;
     var emptyMessage = "";
     if (isEmpty) {
       emptyMessage = selected === "All"
-        ? "Listings are being verified. Check back soon."
+        ? "No verified listings available right now."
         : "No verified listings match " + selected + " right now. Reset to All to view every listing.";
     }
 
@@ -107,13 +227,15 @@
       visibleCards: visibleCards,
       visibleCount: visibleCards.length,
       totalCount: list.length,
+      visibleSections: visibleSections,
+      hiddenSections: hiddenSections,
       isEmpty: isEmpty,
       emptyMessage: emptyMessage
     };
   }
 
-  function resetCountryFilter(cards) {
-    return filterCardsByCountry(cards, "All");
+  function resetCountryFilter(cards, sections) {
+    return filterCardsByCountry(cards, "All", sections);
   }
 
   function buildSubscribePayload(email, website) {
@@ -376,18 +498,32 @@
     var offersContainer = d.getElementById("offers-container");
     var cardTemplate = d.getElementById("offer-card-template");
 
-    if (offersContainer && OFFER_LISTINGS.length > 0) {
-      renderOfferCards(OFFER_LISTINGS, offersContainer, cardTemplate, d);
+    function getCardElements() {
+      var scope = offersContainer || d;
+      var found = Array.from(scope.querySelectorAll("[data-country]"));
+      if (found.length === 0 && scope !== d) {
+        found = Array.from(d.querySelectorAll("[data-country]"));
+      }
+      return found;
     }
 
-    function getCardElements() {
-      if (!offersContainer) return [];
-      return Array.from(offersContainer.querySelectorAll("[data-country]"));
+    function getSectionElements() {
+      var scope = offersContainer || d;
+      var found = Array.from(scope.querySelectorAll("[data-offer-section], .offer-section"));
+      if (found.length === 0 && scope !== d) {
+        found = Array.from(d.querySelectorAll("[data-offer-section], .offer-section"));
+      }
+      return found;
+    }
+
+    if (offersContainer && getCardElements().length === 0 && OFFER_LISTINGS.length > 0) {
+      renderOfferCards(OFFER_LISTINGS, offersContainer, cardTemplate, d);
     }
 
     function applyFilterToDom(requestedCountry, updateHash) {
       var cards = getCardElements();
-      var result = filterCardsByCountry(cards, requestedCountry);
+      var sections = getSectionElements();
+      var result = filterCardsByCountry(cards, requestedCountry, sections);
       var selected = result.selectedCountry;
 
       for (var i = 0; i < filterButtons.length; i++) {
@@ -396,10 +532,10 @@
         var isSelected = btnCountry === selected;
         btn.setAttribute("aria-pressed", isSelected ? "true" : "false");
         if (isSelected) {
-          btn.classList.add("bg-orange-600", "text-white", "border-orange-600");
+          btn.classList.add("bg-orange-600", "text-white", "border-orange-600", "on");
           btn.classList.remove("bg-white", "text-gray-700", "border-orange-200");
         } else {
-          btn.classList.remove("bg-orange-600", "text-white", "border-orange-600");
+          btn.classList.remove("bg-orange-600", "text-white", "border-orange-600", "on");
           btn.classList.add("bg-white", "text-gray-700", "border-orange-200");
         }
       }
@@ -465,116 +601,129 @@
       });
     }
 
-    // Email capture form handling
-    var form = d.getElementById("subscribe-form");
-    var emailInput = d.getElementById("subscribe-email");
-    var websiteInput = d.getElementById("subscribe-website");
-    var submitBtn = d.getElementById("subscribe-submit");
-    var statusBox = d.getElementById("subscribe-status");
-    var statusMsg = d.getElementById("subscribe-status-message");
-    var resendBtn = d.getElementById("subscribe-resend");
-    var dismissBtn = d.getElementById("subscribe-dismiss");
-    var lastSubmittedPayload = null;
-
-    function hideStatus() {
-      if (!statusBox) return;
-      statusBox.classList.add("hidden");
-      statusBox.hidden = true;
-      statusBox.removeAttribute("data-state");
-      if (statusMsg) statusMsg.textContent = "";
-      if (resendBtn) {
-        resendBtn.classList.add("hidden");
-        resendBtn.hidden = true;
-      }
-      if (dismissBtn) {
-        dismissBtn.classList.add("hidden");
-        dismissBtn.hidden = true;
+    // Email capture form handling (supports primary #subscribe-form and repeated footer form)
+    var forms = Array.from(d.querySelectorAll("form[data-subscribe-form], #subscribe-form"));
+    var seenForms = [];
+    for (var fIdx = 0; fIdx < forms.length; fIdx++) {
+      if (seenForms.indexOf(forms[fIdx]) === -1) {
+        seenForms.push(forms[fIdx]);
       }
     }
 
-    function renderSubscribeState(mapped) {
-      if (!statusBox || !statusMsg) return;
-      statusBox.classList.remove(
-        "hidden",
-        "bg-green-50",
-        "border-green-200",
-        "text-green-900",
-        "bg-amber-50",
-        "border-amber-200",
-        "text-amber-900",
-        "bg-red-50",
-        "border-red-200",
-        "text-red-900"
-      );
-      statusBox.hidden = false;
-      statusBox.setAttribute("data-state", mapped.state);
-      statusMsg.textContent = mapped.message;
+    function wireSubscribeForm(formEl) {
+      if (!formEl) return;
+      var wrapEl = formEl.parentElement || d;
+      var emailInput = formEl.querySelector('input[name="email"]') || d.getElementById("subscribe-email");
+      var websiteInput = formEl.querySelector('input[name="website"]') || d.getElementById("subscribe-website");
+      var submitBtn = formEl.querySelector('button[type="submit"]') || d.getElementById("subscribe-submit");
+      var statusBox = wrapEl.querySelector("[data-subscribe-status]") || d.getElementById("subscribe-status");
+      var statusMsg = wrapEl.querySelector("[data-subscribe-status-message]") || d.getElementById("subscribe-status-message");
+      var resendBtn = wrapEl.querySelector("[data-subscribe-resend]") || d.getElementById("subscribe-resend");
+      var dismissBtn = wrapEl.querySelector("[data-subscribe-dismiss]") || d.getElementById("subscribe-dismiss");
+      var lastSubmittedPayload = null;
 
-      if (mapped.state === "success" || mapped.state === "already_subscribed") {
-        statusBox.classList.add("bg-green-50", "border-green-200", "text-green-900");
-      } else if (mapped.state === "pending") {
-        statusBox.classList.add("bg-amber-50", "border-amber-200", "text-amber-900");
-      } else {
-        statusBox.classList.add("bg-red-50", "border-red-200", "text-red-900");
-      }
-
-      if (resendBtn) {
-        if (mapped.canResend) {
-          resendBtn.classList.remove("hidden");
-          resendBtn.hidden = false;
-        } else {
+      function hideStatus() {
+        if (!statusBox) return;
+        statusBox.classList.add("hidden");
+        statusBox.hidden = true;
+        statusBox.removeAttribute("data-state");
+        if (statusMsg) statusMsg.textContent = "";
+        if (resendBtn) {
           resendBtn.classList.add("hidden");
           resendBtn.hidden = true;
         }
-      }
-
-      if (dismissBtn) {
-        if (mapped.dismissible) {
-          dismissBtn.classList.remove("hidden");
-          dismissBtn.hidden = false;
-        } else {
+        if (dismissBtn) {
           dismissBtn.classList.add("hidden");
           dismissBtn.hidden = true;
         }
       }
-    }
 
-    async function handleSend(emailVal, websiteVal) {
-      if (submitBtn) submitBtn.disabled = true;
-      if (resendBtn) resendBtn.disabled = true;
-      lastSubmittedPayload = buildSubscribePayload(emailVal, websiteVal);
-      var result = await submitSubscribe({
-        email: lastSubmittedPayload.email,
-        website: lastSubmittedPayload.website,
-        endpoint: SUBSCRIBE_ENDPOINT
-      });
-      renderSubscribeState(result);
-      if (submitBtn) submitBtn.disabled = false;
-      if (resendBtn) resendBtn.disabled = false;
-      return result;
-    }
+      function renderSubscribeState(mapped) {
+        if (!statusBox || !statusMsg) return;
+        statusBox.classList.remove(
+          "hidden",
+          "bg-green-50",
+          "border-green-200",
+          "text-green-900",
+          "bg-amber-50",
+          "border-amber-200",
+          "text-amber-900",
+          "bg-red-50",
+          "border-red-200",
+          "text-red-900"
+        );
+        statusBox.hidden = false;
+        statusBox.setAttribute("data-state", mapped.state);
+        statusMsg.textContent = mapped.message;
 
-    if (form) {
-      form.addEventListener("submit", function (ev) {
+        if (mapped.state === "success" || mapped.state === "already_subscribed") {
+          statusBox.classList.add("bg-green-50", "border-green-200", "text-green-900");
+        } else if (mapped.state === "pending") {
+          statusBox.classList.add("bg-amber-50", "border-amber-200", "text-amber-900");
+        } else {
+          statusBox.classList.add("bg-red-50", "border-red-200", "text-red-900");
+        }
+
+        if (resendBtn) {
+          if (mapped.canResend) {
+            resendBtn.classList.remove("hidden");
+            resendBtn.hidden = false;
+          } else {
+            resendBtn.classList.add("hidden");
+            resendBtn.hidden = true;
+          }
+        }
+
+        if (dismissBtn) {
+          if (mapped.dismissible) {
+            dismissBtn.classList.remove("hidden");
+            dismissBtn.hidden = false;
+          } else {
+            dismissBtn.classList.add("hidden");
+            dismissBtn.hidden = true;
+          }
+        }
+      }
+
+      async function handleSend(emailVal, websiteVal) {
+        if (submitBtn) submitBtn.disabled = true;
+        if (resendBtn) resendBtn.disabled = true;
+        lastSubmittedPayload = buildSubscribePayload(emailVal, websiteVal);
+        var result = await submitSubscribe({
+          email: lastSubmittedPayload.email,
+          website: lastSubmittedPayload.website,
+          endpoint: SUBSCRIBE_ENDPOINT
+        });
+        renderSubscribeState(result);
+        if (submitBtn) submitBtn.disabled = false;
+        if (resendBtn) resendBtn.disabled = false;
+        return result;
+      }
+
+      formEl.addEventListener("submit", function (ev) {
         ev.preventDefault();
         var emailVal = emailInput ? emailInput.value : "";
         var websiteVal = websiteInput ? websiteInput.value : "";
         handleSend(emailVal, websiteVal);
       });
+
+      if (resendBtn) {
+        resendBtn.addEventListener("click", function () {
+          var emailVal = (lastSubmittedPayload && lastSubmittedPayload.email) || (emailInput ? emailInput.value : "");
+          var websiteVal = (lastSubmittedPayload && lastSubmittedPayload.website) || (websiteInput ? websiteInput.value : "");
+          handleSend(emailVal, websiteVal);
+        });
+      }
+
+      if (dismissBtn) {
+        dismissBtn.addEventListener("click", function () {
+          hideStatus();
+        });
+      }
     }
 
-    if (resendBtn) {
-      resendBtn.addEventListener("click", function () {
-        var emailVal = (lastSubmittedPayload && lastSubmittedPayload.email) || (emailInput ? emailInput.value : "");
-        var websiteVal = (lastSubmittedPayload && lastSubmittedPayload.website) || (websiteInput ? websiteInput.value : "");
-        handleSend(emailVal, websiteVal);
-      });
-    }
-
-    if (dismissBtn) {
-      dismissBtn.addEventListener("click", function () {
-        hideStatus();
-      });
+    for (var k = 0; k < seenForms.length; k++) {
+      wireSubscribeForm(seenForms[k]);
     }
   }
 

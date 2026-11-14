@@ -64,7 +64,7 @@
       },
       {
         "@type": "CollectionPage",
-        "name": "Free Baby Stuff: Verified Freebies and Parent Resources",
+        "name": "Free Baby Stuff, Verified: Samples, Welcome Boxes and Free Books for Your Baby",
         "url": "https://snugs.ai/free-baby-stuff/",
         "description": "Verified free baby resources, samples, and family programs with direct links to brands and every catch spelled out.",
         "isPartOf": {
@@ -141,23 +141,26 @@
     </header>
 
     <main>
-      <!-- 2. Hero with email capture above the fold -->
+      <!-- 2. Hero with Intro and Email Capture Block above the fold -->
       <section class="glass-card rounded-3xl soft-shadow p-5 sm:p-8 md:p-10 mb-6 animate-fadeInUp" aria-labelledby="hub-hero-heading">
         <div class="max-w-2xl mx-auto">
-          <span class="inline-block px-3.5 py-1 bg-orange-100 text-orange-700 text-xs font-semibold tracking-wider uppercase rounded-full mb-3">Free Baby Stuff Hub</span>
-          <h1 id="hub-hero-heading" class="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-gray-900 leading-tight mb-3">
-            Verified Free Baby Stuff, With Every Catch Spelled Out
+          <span class="inline-block px-3.5 py-1 bg-orange-100 text-orange-700 text-xs font-semibold tracking-wider uppercase rounded-full mb-3">Free Baby Stuff, Verified</span>
+          <h1 id="hub-hero-heading" class="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-gray-900 leading-tight mb-4">
+            Free Baby Stuff, Verified: Samples, Welcome Boxes and Free Books for Your Baby
           </h1>
-          <p class="text-base sm:text-lg text-gray-700 leading-relaxed mb-5">
-            Browse real freebies, welcome boxes, books, and family support programs across the US, UK, Canada, Australia, and beyond. Every link goes straight to the brand or public program.
+          <p class="text-base sm:text-lg text-gray-700 leading-relaxed mb-3">
+            Free baby stuff is real, but a lot of it comes with a catch that only shows up at checkout. So we do this differently. Every offer on this page was checked on the brand&#39;s own website, the catch is printed in the open next to each offer, and every offer carries the date we last verified it. We recheck the list every week and retire offers that die.
+          </p>
+          <p class="text-base sm:text-lg text-gray-700 leading-relaxed mb-6">
+            Snugs does not get paid to list these offers. There are no affiliate links here, just direct links to the brands.
           </p>
 
-          <!-- Email Capture Form (above the fold on mobile and desktop) -->
+          <!-- Email Capture Form (after intro) -->
           <div class="rounded-2xl bg-white/90 border border-orange-200 p-4 sm:p-5 soft-shadow">
-            <h2 class="text-lg font-display font-bold text-gray-900 mb-1">Get the Free Baby Stuff Weekly Roundup</h2>
-            <p class="text-sm text-gray-600 mb-3">New verified freebies and restocks checked every week.</p>
+            <h2 class="text-lg font-display font-bold text-gray-900 mb-1">The Free Baby Stuff Weekly</h2>
+            <p class="text-sm text-gray-600 mb-3">One short email a week: new free offers for parents, the ones about to expire, and a heads-up when a catch changes. Free, no spam, unsubscribe anytime.</p>
 
-            <form id="subscribe-form" action="/subscribe" method="POST" class="flex flex-col sm:flex-row gap-2.5" novalidate>
+            <form id="subscribe-form" data-subscribe-form="true" action="/subscribe" method="POST" class="flex flex-col sm:flex-row gap-2.5" novalidate>
               <label for="subscribe-email" class="sr-only">Email address</label>
               <input
                 id="subscribe-email"
@@ -187,25 +190,28 @@
                 type="submit"
                 class="px-6 py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold text-sm hover:from-orange-600 hover:to-orange-700 transition-all shadow-md whitespace-nowrap"
               >
-                Get the weekly roundup
+                Sign me up
               </button>
             </form>
 
-            <p class="text-xs text-gray-600 mt-2.5">One short email a week, the roundup. Nothing else. Unsubscribe anytime.</p>
+            <p class="text-xs text-gray-600 mt-2.5">Brought to you by Snugs, the baby sleep app. Your first roundup arrives this week.</p>
+            <p class="text-xs text-gray-500 mt-1">One short email a week, the roundup. Nothing else. Unsubscribe anytime.</p>
 
-            <!-- Subscribe status feedback (never persisted across reloads) -->
+            <!-- Subscribe status feedback -->
             <div
               id="subscribe-status"
+              data-subscribe-status="true"
               class="hidden mt-3 rounded-2xl border px-4 py-3 text-sm"
               role="status"
               aria-live="polite"
               hidden
             >
               <div class="flex flex-wrap items-center justify-between gap-2">
-                <p id="subscribe-status-message" class="font-medium"></p>
+                <p id="subscribe-status-message" data-subscribe-status-message="true" class="font-medium"></p>
                 <div class="flex items-center gap-2">
                   <button
                     id="subscribe-resend"
+                    data-subscribe-resend="true"
                     type="button"
                     class="hidden px-3.5 py-1.5 rounded-full bg-orange-600 text-white text-xs font-semibold hover:bg-orange-700 transition-colors"
                     hidden
@@ -214,8 +220,9 @@
                   </button>
                   <button
                     id="subscribe-dismiss"
+                    data-subscribe-dismiss="true"
                     type="button"
-                    class="hidden px-3 py-1 rounded-full border border-current text-xs font-semibold hover: opacity-80 transition-opacity"
+                    class="hidden px-3 py-1 rounded-full border border-current text-xs font-semibold hover:opacity-80 transition-opacity"
                     aria-label="Dismiss message"
                     hidden
                   >
@@ -233,19 +240,19 @@
         <ul class="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 text-xs sm:text-sm font-medium text-gray-700">
           <li class="px-4 py-2 rounded-full bg-white/85 border border-orange-200 soft-shadow flex items-center gap-2">
             <span class="w-2 h-2 rounded-full bg-orange-500" aria-hidden="true"></span>
-            <span>Direct links to brands</span>
+            <span>Checked on official sites</span>
           </li>
           <li class="px-4 py-2 rounded-full bg-white/85 border border-orange-200 soft-shadow flex items-center gap-2">
             <span class="w-2 h-2 rounded-full bg-orange-500" aria-hidden="true"></span>
-            <span>No affiliate links</span>
+            <span>Catches printed in the open</span>
           </li>
           <li class="px-4 py-2 rounded-full bg-white/85 border border-orange-200 soft-shadow flex items-center gap-2">
             <span class="w-2 h-2 rounded-full bg-orange-500" aria-hidden="true"></span>
-            <span>Checked by a parent</span>
+            <span>No credit card traps listed</span>
           </li>
           <li class="px-4 py-2 rounded-full bg-white/85 border border-orange-200 soft-shadow flex items-center gap-2">
             <span class="w-2 h-2 rounded-full bg-orange-500" aria-hidden="true"></span>
-            <span>Every catch spelled out</span>
+            <span>Country shown on every offer</span>
           </li>
         </ul>
       </section>
@@ -254,12 +261,14 @@
       <section class="glass-card rounded-3xl soft-shadow p-5 sm:p-6 mb-8 border border-orange-200" aria-labelledby="roundup-strip-heading">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <span class="inline-block px-3 py-0.5 bg-orange-100 text-orange-800 text-xs font-semibold uppercase tracking-wider rounded-full mb-1.5">Current Weekly Roundup</span>
+            <span class="inline-block px-3 py-0.5 bg-orange-100 text-orange-800 text-xs font-semibold uppercase tracking-wider rounded-full mb-1.5">This week &middot; Roundup #1</span>
             <h2 id="roundup-strip-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900">
-              Free Baby Stuff Weekly Roundup #1
+              <a href="/free-baby-stuff/roundup-1/" class="hover:text-orange-700 transition-colors">
+                Free Baby Stuff Weekly #1: a free book every month, sample boxes, and the registry box truth
+              </a>
             </h2>
             <p class="text-sm text-gray-700 mt-1">
-              Read this week's curated highlights and newly verified offers in one place.
+              Welcome to the first roundup. This week we checked eleven popular &quot;free baby stuff&quot; offers on the brands&#39; own websites. Four are genuinely free. Four are free only after you spend through a registry. Three did not make the list at all.
             </p>
           </div>
           <a
@@ -282,40 +291,46 @@
           </div>
 
           <!-- Country Filter Buttons -->
-          <div class="flex flex-wrap gap-2 mb-4" role="group" aria-label="Filter offers by country">
+          <div id="filters" class="filters flex flex-wrap gap-2 mb-4" role="group" aria-label="Filter offers by country">
             <button
               type="button"
               data-country-filter="All"
+              data-f="all"
               aria-pressed="true"
-              class="px-4 py-2 rounded-full border border-orange-600 bg-orange-600 text-white text-sm font-semibold transition-colors"
-            >All</button>
+              class="on px-4 py-2 rounded-full border border-orange-600 bg-orange-600 text-white text-sm font-semibold transition-colors"
+            >All 55 offers</button>
             <button
               type="button"
               data-country-filter="Worldwide"
+              data-f="worldwide"
               aria-pressed="false"
               class="px-4 py-2 rounded-full border border-orange-200 bg-white text-gray-700 text-sm font-semibold hover:border-orange-400 transition-colors"
             >Worldwide</button>
             <button
               type="button"
               data-country-filter="US"
+              data-f="us"
               aria-pressed="false"
               class="px-4 py-2 rounded-full border border-orange-200 bg-white text-gray-700 text-sm font-semibold hover:border-orange-400 transition-colors"
-            >US</button>
+            >United States</button>
             <button
               type="button"
               data-country-filter="UK"
+              data-f="uk"
               aria-pressed="false"
               class="px-4 py-2 rounded-full border border-orange-200 bg-white text-gray-700 text-sm font-semibold hover:border-orange-400 transition-colors"
-            >UK</button>
+            >United Kingdom</button>
             <button
               type="button"
               data-country-filter="Canada"
+              data-f="canada"
               aria-pressed="false"
               class="px-4 py-2 rounded-full border border-orange-200 bg-white text-gray-700 text-sm font-semibold hover:border-orange-400 transition-colors"
             >Canada</button>
             <button
               type="button"
               data-country-filter="Australia"
+              data-f="australia"
               aria-pressed="false"
               class="px-4 py-2 rounded-full border border-orange-200 bg-white text-gray-700 text-sm font-semibold hover:border-orange-400 transition-colors"
             >Australia</button>
@@ -357,19 +372,7 @@
             </button>
           </div>
 
-          <!-- Data-driven card container (populated by assets/js/free-baby-stuff.js when OFFER_LISTINGS has items) -->
-          <div id="offers-container" class="grid grid-cols-1 gap-4"></div>
-
-          <!--
-            Card anatomy template (used by renderOfferCards in assets/js/free-baby-stuff.js):
-            1. Badge: Truly free | Free with a catch | Free with conditions | Need-based
-            2. Title
-            3. What you get (two lines)
-            4. The catch (labelled line)
-            5. Country / Where line
-            6. Verified date
-            7. Direct link out (no affiliate or utm parameters)
-          -->
+          <!-- Card anatomy template -->
           <template id="offer-card-template">
             <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2" data-country="">
               <div class="flex flex-wrap items-center justify-between gap-2">
@@ -390,64 +393,736 @@
             </article>
           </template>
 
-          <!-- Offer section placeholders while batch 1, batch 2, and batch 3 copy files are pending -->
-          <div class="space-y-4 mt-2">
-            <section data-copy-pending="true" class="rounded-2xl border border-dashed border-orange-300 bg-white/80 p-5" aria-label="Batch 1 offers">
-              <h3 class="text-lg font-display font-bold text-gray-800 mb-1">Welcome Boxes, Samples &amp; Starter Bundles</h3>
-              <p class="text-sm text-gray-600">Listings are being verified. Check back soon.</p>
+          <!-- Verified Offer Sections (Sections 1-2, 4-12) -->
+          <div id="offers-container" class="space-y-6 mt-2">
+            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-1" aria-labelledby="section-1-heading">
+              <h3 id="section-1-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2">Section 1: Genuinely free, no purchase needed</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US, Canada, UK, Australia, Ireland">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">A free book for your child, every month until age 5</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed"><strong class="font-semibold text-gray-900">Dolly Parton's Imagination Library</strong></p>
+                  <p class="text-sm text-gray-700 leading-relaxed">One age-appropriate book mailed to your child every month, from birth until their fifth birthday, at no cost to your family. No card, no purchase, no shipping fee.</p>
+                  <p class="catch text-sm text-gray-800 bg-amber-50/80 border border-amber-200 rounded-xl px-3 py-2">The catch: the program only runs in areas where a local partner funds it, so coverage depends on your ZIP code. Check yours before you get excited.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: United States, Canada, United Kingdom, Republic of Ireland, Australia.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://imaginationlibrary.com/check-availability/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Check your ZIP and register</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Free formula samples and coupons by mail</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed"><strong class="font-semibold text-gray-900">Enfamil Family Beginnings</strong></p>
+                  <p class="text-sm text-gray-700 leading-relaxed">Free to join, no credit card, no purchase. Members can receive formula samples, coupons and formula checks by mail, worth up to $400 in gifts and savings according to Enfamil.</p>
+                  <p class="catch text-sm text-gray-800 bg-amber-50/80 border border-amber-200 rounded-xl px-3 py-2">The honest part: samples are not guaranteed. Enfamil says samples mostly go out through hospitals and doctors, and some members receive coupons instead of product. Join with that expectation and it is still worth the two minutes.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: United States.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.enfamil.com/baby-formula-coupons-samples-target/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Join Enfamil Family Beginnings</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Free sample boxes you build yourself</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed"><strong class="font-semibold text-gray-900">PINCHme</strong></p>
+                  <p class="text-sm text-gray-700 leading-relaxed">Free to join, no credit card required. You apply for samples, and when you qualify for four products you build a box and it ships free. Baby products show up regularly (lotions, food, care items), mixed in with beauty, food and household samples.</p>
+                  <p class="catch text-sm text-gray-800 bg-amber-50/80 border border-amber-200 rounded-xl px-3 py-2">The trade: your feedback. PINCHme expects a short review after you try each product, and your reviews unlock more offers.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: United States.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://pinchme.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Join PINCHme</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US, Canada">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Free seasonal sample boxes</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed"><strong class="font-semibold text-gray-900">SampleSource</strong></p>
+                  <p class="text-sm text-gray-700 leading-relaxed">A few times a year, SampleSource opens a sample drop: members with a matching profile order a box of samples and coupons, mailed free. No purchase, no card, one box per household.</p>
+                  <p class="catch text-sm text-gray-800 bg-amber-50/80 border border-amber-200 rounded-xl px-3 py-2">The catch: drops are seasonal (spring, summer, fall) and baby items appear in some waves, not all of them. Register your profile now so you are matched when a baby-friendly wave opens.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: United States and Canada.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.samplesource.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Join SampleSource</a></p>
+                </article>
+              </div>
             </section>
 
-            <section data-copy-pending="true" class="rounded-2xl border border-dashed border-orange-300 bg-white/80 p-5" aria-label="Batch 2 offers">
-              <h3 class="text-lg font-display font-bold text-gray-800 mb-1">Books, Feeding, Diapers &amp; Parent Support</h3>
-              <p class="text-sm text-gray-600">Listings are being verified. Check back soon.</p>
+            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-2" aria-labelledby="section-2-heading">
+              <h3 id="section-2-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2">Section 2: Free with a registry purchase (the catch, in the open)</h3>
+              <p class="text-sm text-gray-700 mb-4">Registry welcome boxes are marketed as free. They are not, quite: each one asks you to spend a set amount through that store's registry first. If you were going to buy those things anyway, the box is a genuine bonus. Here is exactly what each one costs you.</p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with a catch</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Amazon Baby Registry Welcome Box</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">A box of full-size, travel-size and sample products for parent and baby.</p>
+                  <p class="catch text-sm text-gray-800 bg-amber-50/80 border border-amber-200 rounded-xl px-3 py-2">What it takes: an active Amazon Prime membership, a baby registry, 10 items added from the registry checklist, and over $10 of purchases made from the registry (you or your gift-givers). US shipping only, one box per household at a time.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: United States.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.amazon.com/gp/help/customer/display.html?nodeId=T1TqJNUkJOJNkgs12j" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Amazon's welcome box terms</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with a catch</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Target Baby Box (Registry Welcome Kit)</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">Samples and coupons Target values at $100: diapers, wipes, bottles, pacifiers and more.</p>
+                  <p class="catch text-sm text-gray-800 bg-amber-50/80 border border-amber-200 rounded-xl px-3 py-2">What it takes: Target Circle (free to join), a baby registry, 10 items added, and over $10 of purchases from the registry. A coupon then appears on your registry dashboard within a day or two. One per year.</p>
+                  <p class="catch text-sm text-gray-800 bg-amber-50/80 border border-amber-200 rounded-xl px-3 py-2">One flag from us: some parents report a $6.99 shipping charge at claim time. We could not find that fee in Target's own product description, so budget for the possibility and tell us if you see it.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: United States.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.target.com/gift-registry/create-baby-registry" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Create a Target baby registry</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with a catch</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Walmart Baby Registry Welcome Box</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">A box of at least six product samples plus coupons.</p>
+                  <p class="catch text-sm text-gray-800 bg-amber-50/80 border border-amber-200 rounded-xl px-3 py-2">What it takes: a registry created after February 1, 2025, open for at least 7 days, with at least 20 items on it, and over $25 purchased from the registry through your registry link at Walmart. Boxes are first come, first served, so qualifying does not guarantee one, and delivery can take 10 to 12 weeks.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: United States.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.walmart.com/cp/baby-registry/1229485" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Walmart baby registry</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with a catch</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Babylist Hello Baby Box</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">Baby essentials Babylist values at $100, sized for newborn to 3 months: diapers, wipes, bottles, pacifiers, bibs and coupons.</p>
+                  <p class="catch text-sm text-gray-800 bg-amber-50/80 border border-amber-200 rounded-xl px-3 py-2">What it takes: a purchase of $30 or more from the Babylist Shop (a gift-giver can make it), then $8.95 plus tax for shipping. One box per household per year, US addresses only.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: United States.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.babylist.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Babylist</a></p>
+                </article>
+              </div>
             </section>
 
-            <section data-copy-pending="true" class="rounded-2xl border border-dashed border-orange-300 bg-white/80 p-5" aria-label="Batch 3 offers">
-              <h3 class="text-lg font-display font-bold text-gray-800 mb-1">Public Benefits, Community Programs &amp; Regional Resources</h3>
-              <p class="text-sm text-gray-600">Listings are being verified. Check back soon.</p>
+            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-4" aria-labelledby="section-4-heading">
+              <h3 id="section-4-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2">Section 4: Free books, stories and learning for kids</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Worldwide">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Khan Academy Kids</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">A full early learning app for ages 2 to 8: reading, phonics, maths, feelings and thousands of activities and books. Khan Academy states it plainly: 100% free, forever, no ads, no subscriptions.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: Worldwide (via the iOS and Android app stores).</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://en.khanacademy.org/kids" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Khan Academy Kids</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Worldwide">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Duolingo ABC</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">A learn-to-read app with 700+ short lessons: alphabet, phonics, sight words and handwriting, for preschool to early school years. No ads and no in-app purchases, so there is nothing for your child to accidentally buy and no premium tier waiting at the end.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: Worldwide (via app stores). Teaches reading in English.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://abc.duolingo.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Duolingo ABC</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Worldwide">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Storyline Online</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">More than 100 children's books read aloud on video by actors, each with a free activity guide. Streaming only, no account, no ads. Run by the SAG-AFTRA Foundation.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: Worldwide online.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.storylineonline.net" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Storyline Online</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Worldwide">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">StoryWeaver</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">An open library of 19,500+ illustrated storybooks you can read online, download, print or save for offline reading, all Creative Commons licensed. Books in 235+ languages, strongest in Indian and underserved languages. Run by Pratham Books, a nonprofit.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: Worldwide online.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://storyweaver.org.in" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">StoryWeaver</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Worldwide">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Oxford Owl free eBook library</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">Over 100 free eBooks for ages 3 to 11 from Oxford University Press (Oxford Reading Tree, Read Write Inc. and more), plus reading and maths advice for parents. You need a free parent account to open the eBooks. The stories follow England's phonics approach, which travels well.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: Worldwide online (UK publisher).</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.oxfordowl.co.uk/for-home/library-page" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Oxford Owl</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Sesame Street in Communities</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">Free videos, printable activities, articles and storybooks for parents and caregivers: school readiness, health, resilience, grief and hard family moments, in English and Spanish. Sesame Workshop offers them at no cost to families.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: United States program; the website is open to everyone.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://sesamestreetincommunities.org" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Sesame Street in Communities</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">PBS KIDS</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">280+ free learning games for ages 2 to 8, plus a video app with 600+ full episodes, no login needed.</p>
+                  <p class="catch text-sm text-gray-800 bg-amber-50/80 border border-amber-200 rounded-xl px-3 py-2">The catch is geography, in PBS's own words: PBS KIDS videos may only be viewed from within the United States. The games app is offered in many countries but not all. Worth it for US families; hit or miss elsewhere.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: United States (video strictly US only; games partially available internationally).</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://pbskids.org" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">PBS KIDS</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US, Canada, UK, Australia">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Libby: your library card becomes an app</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">Borrow ebooks, audiobooks and magazines from your public library, free, in the Libby app. No subscription, no in-app purchases, no late fees (loans simply expire).</p>
+                  <p class="catch text-sm text-gray-800 bg-amber-50/80 border border-amber-200 rounded-xl px-3 py-2">The catch: you need a library card from a library that uses OverDrive. Cards are usually free from your local library, but copies are limited, so popular books have waiting lists. Sending books to a Kindle works with US libraries only.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: Dozens of countries; strongest in North America, the UK, Australia and New Zealand. It depends on your local library taking part.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.overdrive.com/apps/libby" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Libby by OverDrive</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US, Canada, UK, Australia, Ireland">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Free books by post: the national schemes</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">Three countries run book-gifting schemes that mail or hand free books to babies and young children. They work the same way: a local partner funds your area, so coverage is patchy inside each country. Check before you promise your toddler anything.</p>
+                  <p class="text-sm text-gray-700 leading-relaxed"><strong class="font-semibold text-gray-900">Dolly Parton's Imagination Library.</strong> One free book a month from birth to age 5, where a local program partner operates. Where: United States, Canada, United Kingdom, Republic of Ireland, Australia. <a href="https://imaginationlibrary.com/check-availability/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Check your area</a></p>
+                  <p class="text-sm text-gray-700 leading-relaxed"><strong class="font-semibold text-gray-900">Bookstart (BookTrust).</strong> A free Baby pack (book, finger puppet, reading tips) for every baby, handed out by health visitors, libraries and registrars. You cannot order it by post. Where: England, Wales and Northern Ireland; baby under 12 months. <a href="https://www.booktrust.org.uk/how-we-help/programmes/bookstart-baby/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Bookstart</a></p>
+                  <p class="text-sm text-gray-700 leading-relaxed"><strong class="font-semibold text-gray-900">Bookbug (Scottish Book Trust).</strong> Four free bags of books per child, at set ages, via your health visitor, nursery and school, plus free song and rhyme sessions and a free app. Where: Scotland only. <a href="https://www.scottishbooktrust.com/about/our-programmes/bookbug/about-the-bookbug-bags/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Bookbug</a></p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">All three verified November 11, 2026.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026.</p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US, Canada">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">PJ Library</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">One free Jewish children's book (or music) mailed monthly per child, from about 6 months to age 8, for families raising Jewish children. PJ Our Way extends it to ages 9 to 12 with a free chapter book they choose themselves.</p>
+                  <p class="catch text-sm text-gray-800 bg-amber-50/80 border border-amber-200 rounded-xl px-3 py-2">The catch: your area needs a participating local community that funds it.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: United States and Canada (core program); local partners in 30+ more countries, terms vary.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://pjlibrary.org" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">PJ Library</a></p>
+                </article>
+              </div>
+            </section>
+
+            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-5" aria-labelledby="section-5-heading">
+              <h3 id="section-5-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2">Section 5: Free courses and know-how for parents</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Worldwide">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">OpenLearn (The Open University)</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">Over 900 free online courses, including early years courses parents actually ask about: supporting babies and toddlers, attachment in the early years, children's development and child psychology. No fees and no card. A free account gets you progress tracking and a statement of participation. No tutor and no formal qualification; these are self-paced courses built from degree material.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: Worldwide online.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.open.edu/openlearn/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">OpenLearn</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Worldwide">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">UNICEF Parenting</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">Expert articles, milestone guides and mini video master classes on feeding, discipline, play and development. No account, no paywall. UNICEF runs local parenting hubs in dozens of countries and languages, so you can often read it in your own language.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: Worldwide.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.unicef.org/parenting" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">UNICEF Parenting</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Australia">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Raising Children Network</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">A complete, ad-free parenting website from pregnancy to teens: articles, videos and picture guides, all evidence-based and funded by the Australian Government. No account needed. Service and school references are Australian; the parenting itself travels.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: Australia (content); website open worldwide.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://raisingchildren.net.au" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Raising Children Network</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Zero to Three</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">A large free library for parents of babies and toddlers: development explainers, tip sheets, play ideas and free downloadable activity curricula. The parent library is free; Zero to Three also sells a professional membership, which parents do not need. Content in English and Spanish.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: United States organisation; website open worldwide.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.zerotothree.org/resources/for-families/trending-and-recommended/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Zero to Three, for families</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Worldwide">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Vroom</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">Over 1,000 science-based brain building tips for children from birth to 5, in a completely free app with no in-app purchases, in English and Spanish. Small things you already do (bath time, shopping, laundry) turned into development moments.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: Worldwide (active in 80+ countries).</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.vroom.org" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Vroom</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="UK">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">BBC Tiny Happy People</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">Activities, tips and short films to build your baby's and toddler's speech and language, for ages 0 to 4, made with UK speech and language experts. A free website, no account.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: United Kingdom. The BBC does not state whether it works outside the UK, so we list it as a UK resource.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.bbc.co.uk/tiny-happy-people" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">BBC Tiny Happy People</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Worldwide">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">FutureLearn parenting courses</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">University short courses on parenting and child development with a free tier. Read the catch carefully: free access lasts only while the course runs, plus 14 days. Content is released weekly, and the free tier has no certificate and no tests. Keeping access after the course ends is a paid upgrade.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: Worldwide online.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.futurelearn.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">FutureLearn</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US, Australia">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Triple P Online (positive parenting courses)</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">Full evidence-based parenting courses online (baby, 0 to 12, teens, and a version for parents of children with disabilities). Whether it costs you anything depends entirely on your postcode.</p>
+                  <p class="text-sm text-gray-700 leading-relaxed">Australia: free nationwide for parents of children under 12, funded by the Australian Government.</p>
+                  <p class="text-sm text-gray-700 leading-relaxed">United States: free only where a state, county or health agency funds it (statewide in Ohio, for example). Everywhere else in the US it is a paid course, about US$96.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: Australia (free); United States (free in funded areas only); sold in 30+ countries.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.triplep-parenting.net.au" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Triple P Australia</a> · <a href="https://www.triplep-parenting.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Triple P US</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Bright by Text</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">A free text message program: 2 to 6 texts a week matched to your child's age, from pregnancy to age 8, with development tips, activities and local resources, in English or Spanish. Sign up needs a US mobile number, your ZIP code and your child's birthdate or due date. Your carrier's normal message and data rates may apply.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: United States.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://brightbytext.org" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Bright by Text</a></p>
+                </article>
+              </div>
+            </section>
+
+            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-6" aria-labelledby="section-6-heading">
+              <h3 id="section-6-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2">Section 6: Free help when money is tight</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Worldwide">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-slate-100 text-slate-800 border border-slate-300">Need-based</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">La Leche League: free breastfeeding help</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">Free mother-to-mother breastfeeding support from accredited volunteer Leaders: local group meetings (in person and online), one-to-one help by phone, email or online, and free information. Some regions also run free antenatal breastfeeding classes. Memberships and donations exist but are never required for help. Coverage depends on volunteers near you.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: International. Networks in the USA, Canada, Great Britain, a European network in 25+ languages, New Zealand, and 40+ more countries across Asia, Oceania, the Middle East, Africa and Latin America.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://llli.org/about-us/structure-of-llli/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">La Leche League International</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-slate-100 text-slate-800 border border-slate-300">Need-based</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">WIC: food support for mothers and young children</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">WIC provides a monthly package of nutritious foods (including infant formula and baby food), nutrition education, breastfeeding support and healthcare referrals. It is a US government program, and it does not cover diapers.</p>
+                  <p class="catch text-sm text-gray-800 bg-amber-50/80 border border-amber-200 rounded-xl px-3 py-2">You qualify only if all of these hold: you are pregnant, recently postpartum, or breastfeeding, or your child is under 5; your household income is at or below 185% of the federal poverty line (for example $61,050 a year for a family of four, on the table in force July 2026 to June 2027), or you already receive SNAP, Medicaid or TANF; you live in the state where you apply; and a health professional at the WIC clinic assesses a nutritional risk.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: United States (all states, DC and territories), via local WIC agencies.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.fns.usda.gov/wic" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">WIC, USDA</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-slate-100 text-slate-800 border border-slate-300">Need-based</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Free diapers: the National Diaper Bank Network</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">Over 240 community diaper banks across the US give free diapers to families who are struggling, usually through partner food pantries, clinics and shelters. There is no national eligibility rule: each local bank sets its own area, schedule and amounts, and amounts are a supplement, not a full month's supply. Stock is not guaranteed. You can also dial 211 to find help locally.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: United States.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://nationaldiaperbanknetwork.org/member-directory/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Find a diaper bank</a></p>
+                </article>
+              </div>
+            </section>
+
+            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-7" aria-labelledby="section-7-heading">
+              <h3 id="section-7-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2">Section 7: Free baby boxes from governments</h3>
+              <p class="text-sm text-gray-700 mb-4">Some governments simply hand new parents a box. No registry, no spending, no brand marketing. These are the real thing, and they put the store welcome boxes in Section 2 in perspective.</p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="UK">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Scotland's Baby Box</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">A box of essentials for your baby's first six months: clothes from newborn to 6 months, a play mat, books, a digital thermometer, a hooded towel, muslins, and a mattress with fitted sheets, because the box itself is designed as a safe sleep space.</p>
+                  <p class="catch text-sm text-gray-800 bg-amber-50/80 border border-amber-200 rounded-xl px-3 py-2">How it works: your midwife completes the registration card with you at your 18 to 20 week or 28 week appointment, and the box arrives about four weeks before your due date. No income test.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: Scotland, for babies born and living in Scotland to parents living permanently in Scotland.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.parentclub.scot/baby-box" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Scotland's Baby Box, Parent Club</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Finland">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Finland's Maternity Package</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">The original baby box, running since 1937. A package of baby clothes and care products, in a box with a mattress that works as a first bed, or the cash equivalent instead: 210 euros, tax-free. Expecting twins or more means multiple grants, and you can mix package and cash.</p>
+                  <p class="catch text-sm text-gray-800 bg-amber-50/80 border border-amber-200 rounded-xl px-3 py-2">The gates are timing and residency, not income: you must live permanently in Finland (or work there and be covered), have a medical examination before the end of the fourth month of pregnancy, and apply at least two months before your due date. Packages cannot be sent outside Finland.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: Finland.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.kela.fi/maternity-package-or-cash-benefit" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Kela: maternity package or cash benefit</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Australia">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">New South Wales Baby Bundle</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">A free bag worth about $329: a 0 to 6 month sleeping bag, change mat, muslin wrap, Australian picture books and a bath book, a first aid kit, a baby hat, a toothbrush, milestone cards and parenting resources. Not means-tested.</p>
+                  <p class="catch text-sm text-gray-800 bg-amber-50/80 border border-amber-200 rounded-xl px-3 py-2">The catch is residency, in the program's own fine print: it is for parents who live in NSW, and it is handed over when you leave hospital after the birth (home births get it free by delivery after registering the birth). One per baby.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: New South Wales, Australia.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.health.nsw.gov.au/kidsfamilies/MCFhealth/child/pages/baby-bundle.aspx" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">NSW Baby Bundle</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Australia">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Victorian Baby Bundle</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">A nappy bag with a growsuit, a safe sleeping bag, a cotton wrap, a teething toy, a first aid kit, a sun hat, a toothbrush and four picture books by Victorian authors, plus safe-sleeping information. Given in hospital at the birth.</p>
+                  <p class="catch text-sm text-gray-800 bg-amber-50/80 border border-amber-200 rounded-xl px-3 py-2">The catch: first-time parents only. First-time foster and adoptive parents of babies up to 3 months are included. If the birth was at home or interstate, ask your Maternal and Child Health nurse; bundles cannot be posted.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: Victoria, Australia.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.betterhealth.vic.gov.au/campaigns/babybundle" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Victorian Baby Bundle</a></p>
+                </article>
+              </div>
+            </section>
+
+            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-8" aria-labelledby="section-8-heading">
+              <h3 id="section-8-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2">Section 8: Free and funded childcare</h3>
+              <p class="text-sm text-gray-700 mb-4">The biggest money on this page. The rules are exact, so we print them exactly.</p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="UK">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with conditions</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">England: funded childcare hours</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">Two different offers, often confused:</p>
+                  <p class="text-sm text-gray-700 leading-relaxed">Every 3 and 4 year old in England gets 15 hours a week of funded childcare for 38 weeks a year, whatever the parents earn.</p>
+                  <p class="text-sm text-gray-700 leading-relaxed">Working parents can get 30 hours a week for 38 weeks, from the term after their child turns 9 months until school age. The gates: both parents (or a single parent) must be working or on qualifying leave, each expecting to earn at least about 16 hours a week at minimum or living wage over the next three months, and neither parent can have an adjusted net income over £100,000 a year. You apply from when your baby is 23 weeks old and reconfirm every three months. Providers may charge for meals, nappies and extras, but you can decline the extras and keep the hours.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: England (Scotland, Wales and Northern Ireland run different schemes).</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.gov.uk/free-childcare-if-working" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">GOV.UK: free childcare if working</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="UK">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with conditions</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Scotland: 1,140 hours of funded early learning</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">Every 3 and 4 year old in Scotland gets up to 1,140 hours a year of funded early learning and childcare: roughly 30 hours a week in term time, or about 22 hours spread across the year, at council nurseries, partner nurseries and childminders, with a free meal on attendance days. No work test and no income test.</p>
+                  <p class="text-sm text-gray-700 leading-relaxed">Some 2 year olds qualify too, mainly where a parent receives certain benefits (for example Universal Credit with monthly household take-home pay of £885 or less) or the child is care-experienced.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: Scotland.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.mygov.scot/childcare-costs-help/funded-early-learning-and-childcare" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">mygov.scot: funded early learning and childcare</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with conditions</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Head Start and Early Head Start (United States)</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">Free early learning and development for young children in low-income families: Early Head Start from birth to age 3 (many programs also support pregnant women), Head Start Preschool from 3 to 5, in centres, family childcare or your home, at no cost.</p>
+                  <p class="catch text-sm text-gray-800 bg-amber-50/80 border border-amber-200 rounded-xl px-3 py-2">Eligibility: household income at or below the federal poverty line, or automatic if your child is in foster care, your family is experiencing homelessness, or you receive TANF, SSI or SNAP. The hard truth to know before you apply: programs are officially oversubscribed, so waiting lists are normal. Apply through your local program.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: United States, all states and territories.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://headstart.gov/how-apply" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Head Start: how to apply</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Canada">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with conditions</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Not free, but worth knowing: Canada's $10-a-day childcare</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">Canada's federal childcare program is real and it does cut fees a lot, but it is a discount, not a freebie, so it does not get a free listing on this page. Fees now average $10 a day or less in 8 of 13 provinces and territories, for regulated childcare spaces for under-6s; other provinces average at least 50% off. Parents still pay roughly $200 or more a month for full-time care. If you are in Canada, it is still the first childcare scheme to look at.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: Canada.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.canada.ca/en/employment-social-development/campaigns/child-care.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Canada.ca: child care fee reductions</a></p>
+                </article>
+              </div>
+            </section>
+
+            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-9" aria-labelledby="section-9-heading">
+              <h3 id="section-9-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2">Section 9: Free days out</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with conditions</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Museums for All: museums from free to $5 with an EBT card</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">Show a SNAP/EBT card at more than 1,600 museums, children's museums, science centres, zoos, aquariums and gardens across the US and get in for free to $5 per person, up to four people per card, any normal operating day.</p>
+                  <p class="catch text-sm text-gray-800 bg-amber-50/80 border border-amber-200 rounded-xl px-3 py-2">The catch: it is only for SNAP/EBT holders, and each museum sets its own price inside the free to $5 range, so check your museum before you go.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: United States, all 50 states.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://museums4all.org/about/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Museums for All</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with conditions</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Every Kid Outdoors: a free national parks pass for 4th graders</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">Every US 4th grader (or home-school equivalent) can earn a pass covering entry to more than 2,000 federal lands and waters for their school year. At per-person sites it covers all children under 16 plus up to three adults; at per-vehicle sites it covers everyone in your car. Complete a short online activity, print the paper voucher, and bring the paper: photos of it are not accepted.</p>
+                  <p class="text-sm text-gray-700 leading-relaxed">The dates matter: the 2026 to 27 pass expires August 31, 2027. It does not cover parking, camping or state parks.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: United States, federal lands only.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.everykidoutdoors.gov/rules.htm" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Every Kid Outdoors</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with conditions</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Your library card may include free museum and zoo passes</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">Many public libraries run a culture pass scheme: reserve a pass with your library card and get free entry to local museums, zoos and gardens. New York's Culture Pass covers 100+ venues for NYPL, Brooklyn and Queens cardholders; Contra Costa County's Discover &amp; Go does the same in the San Francisco East Bay.</p>
+                  <p class="catch text-sm text-gray-800 bg-amber-50/80 border border-amber-200 rounded-xl px-3 py-2">The catches are local: it is city by city, not a national program, you usually need a full resident library card (eCards often do not count), passes are scarce and booked out fast, and some systems include low-cost as well as fully free passes. Search your own library's website for "culture pass" or "museum pass".</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: Many cities in the United States and elsewhere; terms set by each library system.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026 (two systems checked in detail). <a href="https://www.culturepass.nyc/faq" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">NYC Culture Pass</a> · <a href="https://ccclib.org/faqs/passes-discover-go/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Discover &amp; Go</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US, Canada">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with conditions</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Kids Bowl Free: two free games a day, all summer</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">Register your child at a participating bowling centre and they get two free games every day through the summer program. Centres take part across the US and Canada.</p>
+                  <p class="catch text-sm text-gray-800 bg-amber-50/80 border border-amber-200 rounded-xl px-3 py-2">The catches are per centre: each centre sets its own age limit, season dates, days and times, so check yours before promising anything. And shoes are not included: bowling shoes are mandatory and rental is at the normal rate (one centre we checked charges $4.75), so a visit is cheap, not zero.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: United States and Canada, at participating centres.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.kidsbowlfree.com/all_centers.php" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Kids Bowl Free</a></p>
+                </article>
+              </div>
+            </section>
+
+            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-10" aria-labelledby="section-10-heading">
+              <h3 id="section-10-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2">Section 10: Free health and safety</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">CDC Milestone Tracker app</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">The CDC's free app for tracking development from 2 months to 5 years: illustrated milestone checklists with photos and videos, tips, a summary you can save or email, and well-visit reminders, in English and Spanish. The CDC states it does not collect or share identifiable information. It is a tracker, not a medical screening; raise concerns with your child's doctor.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: United States (CDC); app in English and Spanish.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.cdc.gov/act-early/milestones-app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">CDC Milestone Tracker</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Vaccines for Children (VFC): free vaccines for eligible kids</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">Every recommended childhood vaccine, at no charge for the vaccine itself, for children 18 and under who are uninsured, Medicaid-eligible, American Indian or Alaska Native, or underinsured (underinsured children must use a federally qualified health centre, rural health clinic or deputized site). Around 37,000 providers take part.</p>
+                  <p class="catch text-sm text-gray-800 bg-amber-50/80 border border-amber-200 rounded-xl px-3 py-2">One nuance, printed because it matters: a provider may charge a state-capped administration fee, and office-visit fees can apply for non-Medicaid families, but a provider cannot refuse to vaccinate your child because you cannot pay the administration fee.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: United States and territories.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.cdc.gov/vaccines-for-children/vfc-information-for-parents/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">CDC: Vaccines for Children</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Reach Out and Read: a free book at every checkup</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">At participating pediatric clinics, your child gets a brand new book to take home at every well-child checkup from birth to age 5, more than a dozen books in total, in 38 languages. The program runs at 6,753 sites in all 50 states.</p>
+                  <p class="catch text-sm text-gray-800 bg-amber-50/80 border border-amber-200 rounded-xl px-3 py-2">The catch: the book comes with the checkup. There is no mail or walk-in route, and the checkup itself is ordinary pediatric care, billed as usual. The book is the free part.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: United States.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://reachoutandread.org/books/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Reach Out and Read</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US, UK">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Free smoke alarms, installed</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed"><strong class="font-semibold text-gray-900">United States:</strong> the Red Cross Sound the Alarm program sends volunteers to install free smoke alarms in your home, with escape planning and safety advice. Special alarms for Deaf and hard of hearing households are also free. Enter your ZIP on the Red Cross site to reach your local chapter; availability depends on where you live, and there is no national income test.</p>
+                  <p class="text-sm text-gray-700 leading-relaxed"><strong class="font-semibold text-gray-900">England:</strong> every fire and rescue service offers free home fire safety visits, and many will provide and fit free alarms during the visit. There is no single England rule: some services book for any resident (Essex), others prioritise people at higher risk (London, West Sussex), so check your local fire and rescue service.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: United States (Red Cross, by ZIP); England (by local fire service).</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.redcross.org/sound-the-alarm.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Red Cross Sound the Alarm</a> · <a href="https://www.essex-fire.gov.uk/book-home-safety-visit" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Essex Fire: book a home safety visit</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US, Canada">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Postpartum Support International: free help after birth</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">A free helpline (call or text 1-800-944-4773; Spanish text line 971-203-7773), more than 50 free online support groups in English and Spanish, a free app, and weekly expert calls. No diagnosis needed. It is not a crisis line: you leave a message and a trained volunteer calls or texts back the same day.</p>
+                  <p class="catch text-sm text-gray-800 bg-amber-50/80 border border-amber-200 rounded-xl px-3 py-2">One warning that has to ship with this entry: when you register for a group, the booking platform shows a payment page for its own unlimited plan. PSI's own instruction is to skip it. The groups are free.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: United States based; coordinators in Canada, Mexico and 40+ other countries; groups are online only.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://postpartum.net/get-help/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Postpartum Support International</a></p>
+                </article>
+              </div>
+            </section>
+
+            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-11" aria-labelledby="section-11-heading">
+              <h3 id="section-11-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2">Section 11: Free weekends and screen learning</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="UK, Australia, Ireland">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">parkrun: a free 5k in a park near you, every week</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">Free, weekly, timed 5k events where you can walk, jog, run, volunteer or watch, in 2,800 locations across 23 countries, under parkrun's own principle: free, for everyone, forever. Register once, free, for a barcode you can use at any parkrun in the world.</p>
+                  <p class="text-sm text-gray-700 leading-relaxed">Junior parkrun is a separate 2k event for ages 4 to 14, and it only runs in the United Kingdom, Ireland and Australia. Under-11s at any event must be with an adult.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: 5k in 23 countries; junior parkrun in the UK, Ireland and Australia only.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.parkrun.com/about/join-us/junior-parkrun/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">parkrun</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Worldwide">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Scratch: free coding for kids</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">MIT's free platform where children aged 8 to 16 build and share games, stories and animations with block coding, plus a free offline editor. Accounts are optional: without one you can create in the offline editor but cannot save and share online. New for 2026: under-16s need a parent or guardian to verify by email before they can share and comment.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: Worldwide (150+ countries, 40+ languages).</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://scratch.mit.edu/help/about/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Scratch</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Smithsonian Learning Lab</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">Millions of Smithsonian resources free online: images, recordings, texts, videos and 3D objects, plus thousands of ready-made collections, free for personal and educational use. Browsing needs no account; a free account lets you build and save your own collections. The Smithsonian states no country restriction; it also makes no worldwide promise, so we say what we know.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: United States provider; no country restriction stated.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://learninglab.si.edu" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Smithsonian Learning Lab</a></p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="UK">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">BBC Bitesize</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">The BBC's free study site: lessons, guides, games and quizzes for ages 3 to 16 and beyond, mapped to UK curricula (GCSE in England, Wales and Northern Ireland; National 4/5 and Highers in Scotland). Text lessons are readable internationally; some games and videos are UK-only.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: United Kingdom curricula; partial access elsewhere.</p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026. <a href="https://www.bbc.co.uk/bitesize" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">BBC Bitesize</a></p>
+                </article>
+              </div>
+            </section>
+
+            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-12" aria-labelledby="section-12-heading">
+              <h3 id="section-12-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2">Section 12: Money you might be missing</h3>
+              <p class="text-sm text-gray-700 mb-4">Free official tools that find money and help you are entitled to. None of them can approve anything; they point, you apply.</p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">USAGov Benefit Finder (United States)</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">The US government's official screening tool: answer questions and get a list of federal benefits you may qualify for, with how to apply for each. Note the name: the old Benefits.gov site has closed and this is its replacement. Screening only, no account needed.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: United States.</p>
+                  <p class="text-sm text-gray-700 leading-relaxed"><a href="https://www.usa.gov/benefit-finder" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">USAGov Benefit Finder</a></p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026.</p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="UK">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Turn2us (United Kingdom)</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">A charity-run Benefits Calculator (anonymous, no account, independent of the DWP) plus a Grants Search covering 1,400+ non-repayable charitable grants: cash, white goods and services. It covers all four UK nations. The calculator gives an estimate, not a guarantee.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: United Kingdom.</p>
+                  <p class="text-sm text-gray-700 leading-relaxed"><a href="https://www.turn2us.org.uk/about-us/about-turn2us" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Turn2us</a></p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026.</p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Canada">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Canada Benefits Finder (Canada)</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">The Government of Canada's own finder for federal benefits and financial help, filterable by your situation and province. The current tool shows federal benefits only, then links you to your province or territory's own finder. A result is a lead, not an approval.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: Canada.</p>
+                  <p class="text-sm text-gray-700 leading-relaxed"><a href="https://www.canada.ca/en/services/benefits/finder.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">Canada Benefits Finder</a></p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026.</p>
+                </article>
+                <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                  </div>
+                  <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">VITA and TCE: free tax preparation (United States)</h3>
+                  <p class="text-sm text-gray-700 leading-relaxed">IRS-certified volunteers prepare basic tax returns and e-file them free at VITA sites across the US. The IRS guideline is people who generally make about $70,244 or less, plus people with disabilities and limited-English speakers; the IRS sets no single national cap and individual sites may set their own limits, so check yours. TCE sites focus on taxpayers aged 60 and over, especially pension and retirement questions. Seasonal, and basic returns only.</p>
+                  <p class="text-xs font-medium text-gray-700" data-field="whereLine">Where: United States.</p>
+                  <p class="text-sm text-gray-700 leading-relaxed"><a href="https://www.irs.gov/individuals/free-tax-return-preparation-for-qualifying-taxpayers" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-orange-700 font-semibold hover:text-orange-900 underline">IRS: free tax return preparation</a></p>
+                  <p class="text-xs text-gray-600 pt-2 border-t border-orange-100 mt-auto">Verified November 11, 2026.</p>
+                </article>
+              </div>
+              <p class="text-xs text-gray-600 mt-3">All four verified November 11, 2026.</p>
             </section>
           </div>
         </div>
       </section>
 
-      <!-- 6. "Not listed, and why" Box -->
-      <section class="glass-card rounded-3xl soft-shadow p-5 sm:p-8 mb-10 border border-orange-200" aria-labelledby="not-listed-heading">
-        <h2 id="not-listed-heading" class="text-2xl font-display font-bold text-gray-900 mb-2">Not listed, and why</h2>
+      <!-- 6. Section 3: "Not listed here, and why" Box -->
+      <section class="notlisted glass-card rounded-3xl soft-shadow p-5 sm:p-8 mb-10 border border-dashed border-orange-300 bg-amber-50/70" aria-labelledby="not-listed-heading">
+        <h2 id="not-listed-heading" class="text-2xl font-display font-bold text-gray-900 mb-2">Section 3: Not listed here, and why</h2>
         <p class="text-sm text-gray-700 mb-4">
-          Popular baby freebies that are restricted, paused, or no longer offer direct free samples:
+          We leave offers off this page when they fail the honesty test:
         </p>
         <ul class="space-y-2.5 text-sm text-gray-800 mb-4">
           <li class="rounded-2xl bg-white/90 border border-orange-100 px-4 py-3">
-            <strong class="text-gray-900">Huggies:</strong> Canada only
+            <strong class="text-gray-900">Huggies free diaper box:</strong> genuinely free, but the current program is for Canada only. If a US version opens, we will list it.
           </li>
           <li class="rounded-2xl bg-white/90 border border-orange-100 px-4 py-3">
-            <strong class="text-gray-900">Pampers:</strong> no free sample program
+            <strong class="text-gray-900">Pampers samples:</strong> there is no free Pampers sample signup. Pampers Club rewards you for scanning codes inside packs you already bought, which makes it a loyalty program, not a freebie.
           </li>
           <li class="rounded-2xl bg-white/90 border border-orange-100 px-4 py-3">
-            <strong class="text-gray-900">Similac:</strong> program restructured
+            <strong class="text-gray-900">Similac samples:</strong> the old sample program has been replaced by MySimilac Rewards, and the new program does not promise free samples on signup. We will not repeat the old claim.
           </li>
         </ul>
-        <div data-copy-pending="true" class="rounded-2xl border border-dashed border-orange-200 bg-orange-50/60 px-4 py-3 text-xs text-gray-600">
-          Listings are being verified. Check back soon.
-        </div>
+        <p class="text-sm text-gray-700">
+          Spotted an offer that died, or a catch we missed? Tell us and we will recheck it the same week.
+        </p>
       </section>
 
-      <!-- 7. Exactly one soft Snugs trial block at the foot -->
-      <aside data-trial-block="true" class="glass-card rounded-3xl soft-shadow p-6 sm:p-8 text-center mb-10 border border-orange-200" aria-label="About Snugs.ai">
-        <p class="text-xs font-semibold uppercase tracking-widest text-orange-700 mb-2">From the makers of this guide</p>
+      <!-- 7. Exactly one soft Snugs trial block at the foot (above final email capture) -->
+      <aside data-trial-block="true" class="snugs glass-card rounded-3xl soft-shadow p-6 sm:p-8 text-center mb-8 border border-orange-200" aria-label="About Snugs.ai">
         <h2 class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2">
-          Need calm, source-backed answers at 3 AM?
+          While the samples are in the mail
         </h2>
         <p class="text-sm sm:text-base text-gray-700 max-w-xl mx-auto mb-5">
-          Snugs.ai is a 24/7 AI parenting advisor that helps you read your baby's cues, track sleep, and plan wake windows. Try every feature free for 14 days, with no credit card required.
+          The free stuff helps the budget. The sleep is the harder part. Snugs tracks your baby&#39;s sleep, spots the pattern, and tells you when the next nap window opens, so you are not guessing at 3 a.m.
         </p>
         <a
           href="https://app.snugs.ai/"
           class="inline-flex items-center justify-center px-7 py-3.5 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold text-sm hover:from-orange-600 hover:to-orange-700 transition-all shadow-md"
         >
-          Start your 14-day free trial
+          Start your free Snugs trial
         </a>
       </aside>
+
+      <!-- 8. Repeated Email Capture Block at page foot -->
+      <section class="glass-card rounded-3xl soft-shadow p-5 sm:p-8 mb-10 border border-orange-200" aria-labelledby="footer-capture-heading">
+        <div class="max-w-2xl mx-auto">
+          <div class="rounded-2xl bg-white/90 border border-orange-200 p-4 sm:p-5 soft-shadow">
+            <h2 id="footer-capture-heading" class="text-lg font-display font-bold text-gray-900 mb-1">The Free Baby Stuff Weekly</h2>
+            <p class="text-sm text-gray-600 mb-3">One short email a week: new free offers for parents, the ones about to expire, and a heads-up when a catch changes. Free, no spam, unsubscribe anytime.</p>
+
+            <form id="subscribe-form-footer" data-subscribe-form="true" action="/subscribe" method="POST" class="flex flex-col sm:flex-row gap-2.5" novalidate>
+              <label for="subscribe-email-footer" class="sr-only">Email address</label>
+              <input
+                id="subscribe-email-footer"
+                name="email"
+                type="email"
+                required
+                autocomplete="email"
+                placeholder="you@example.com"
+                class="flex-1 px-4 py-3 rounded-full border border-orange-200 bg-white text-gray-900 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+              />
+
+              <div class="honeypot-field" aria-hidden="true">
+                <label for="subscribe-website-footer">Website</label>
+                <input
+                  id="subscribe-website-footer"
+                  name="website"
+                  type="text"
+                  value=""
+                  tabindex="-1"
+                  autocomplete="off"
+                />
+              </div>
+
+              <button
+                id="subscribe-submit-footer"
+                type="submit"
+                class="px-6 py-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold text-sm hover:from-orange-600 hover:to-orange-700 transition-all shadow-md whitespace-nowrap"
+              >
+                Sign me up
+              </button>
+            </form>
+
+            <p class="text-xs text-gray-600 mt-2.5">Brought to you by Snugs, the baby sleep app. Your first roundup arrives this week.</p>
+
+            <div
+              id="subscribe-status-footer"
+              data-subscribe-status="true"
+              class="hidden mt-3 rounded-2xl border px-4 py-3 text-sm"
+              role="status"
+              aria-live="polite"
+              hidden
+            >
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <p id="subscribe-status-message-footer" data-subscribe-status-message="true" class="font-medium"></p>
+                <div class="flex items-center gap-2">
+                  <button
+                    id="subscribe-resend-footer"
+                    data-subscribe-resend="true"
+                    type="button"
+                    class="hidden px-3.5 py-1.5 rounded-full bg-orange-600 text-white text-xs font-semibold hover:bg-orange-700 transition-colors"
+                    hidden
+                  >
+                    Resend confirmation email
+                  </button>
+                  <button
+                    id="subscribe-dismiss-footer"
+                    data-subscribe-dismiss="true"
+                    type="button"
+                    class="hidden px-3 py-1 rounded-full border border-current text-xs font-semibold hover:opacity-80 transition-opacity"
+                    aria-label="Dismiss message"
+                    hidden
+                  >
+                    Dismiss
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <!-- Footer -->
