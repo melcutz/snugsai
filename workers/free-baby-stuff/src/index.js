@@ -11,6 +11,8 @@ const DEFAULT_SITE_ORIGIN = "https://snugs.ai";
 const DEFAULT_FROM_EMAIL = "Snugs <hello@snugs.ai>";
 const PRIVACY_PROMISE =
   "One short email a week, the roundup. Nothing else. Unsubscribe anytime.";
+const EXPIRED_OR_INVALID_MESSAGE =
+  "That confirmation link has expired or already been used. If you are already confirmed, you are all set. If not, sign up again on the hub and we will send a fresh link.";
 
 const encoder = new TextEncoder();
 const decoder = new TextDecoder();
@@ -301,8 +303,17 @@ function htmlResponse(html, status = 200) {
   });
 }
 
-function renderConfirmPage({ title, heading, message, siteOrigin, formHtml = "" }) {
+function renderConfirmPage({
+  title,
+  heading,
+  message,
+  messageHtml,
+  siteOrigin,
+  formHtml = "",
+}) {
   const hubUrl = escapeHtml(getHubUrl(siteOrigin));
+  const bodyMessageHtml =
+    messageHtml !== undefined ? messageHtml : escapeHtml(message);
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -391,7 +402,7 @@ function renderConfirmPage({ title, heading, message, siteOrigin, formHtml = "" 
   <main class="card">
     <a class="brand" href="${escapeHtml(siteOrigin)}">Snugs</a>
     <h1>${escapeHtml(heading)}</h1>
-    <p>${escapeHtml(message)}</p>
+    <p>${bodyMessageHtml}</p>
     ${formHtml}
     <p class="promise">${escapeHtml(PRIVACY_PROMISE)}</p>
     <a class="back-link" href="${hubUrl}">Back to Free Baby Stuff</a>
@@ -404,29 +415,34 @@ function buildConfirmationEmail({
   email,
   confirmUrl,
   unsubscribeUrl,
-  siteOrigin,
   fromEmail,
 }) {
-  const hubUrl = getHubUrl(siteOrigin);
-  const subject = "Confirm your Free Baby Stuff Weekly subscription";
+  const subject = "Confirm your signup for Free Baby Stuff Weekly";
   const text = [
-    "Please confirm your email to join Free Baby Stuff Weekly from Snugs.",
+    "Hi, and thanks for signing up.",
+    "",
+    "You asked to join Free Baby Stuff Weekly, the Snugs roundup of free baby stuff that we verify on the official sites before we list it. One click confirms it is really you:",
     "",
     `Confirm my email: ${confirmUrl}`,
     "",
-    PRIVACY_PROMISE,
+    "After you confirm, you get one short email a week: new verified free offers for parents, the ones about to expire, and a note when a catch changes. Nothing else.",
     "",
-    `Hub: ${hubUrl}`,
-    "If you did not ask for this email, you can ignore it.",
-    `Unsubscribe: ${unsubscribeUrl} or email hello@snugs.ai`,
+    "If you did not sign up, ignore this email. The address will not be added and you will not hear from us again.",
+    "",
+    "The Snugs team",
+    "",
+    `Unsubscribe anytime: ${unsubscribeUrl}`,
   ].join("\n");
 
   const html = `<div style="font-family: system-ui, -apple-system, sans-serif; color: #1C1917; max-width: 520px; line-height: 1.6;">
-  <p>Please confirm your email to join <strong>Free Baby Stuff Weekly</strong> from Snugs.</p>
+  <p>Hi, and thanks for signing up.</p>
+  <p>You asked to join Free Baby Stuff Weekly, the Snugs roundup of free baby stuff that we verify on the official sites before we list it. One click confirms it is really you:</p>
   <p><a href="${escapeHtml(confirmUrl)}" style="display: inline-block; background: #EA580C; color: #FFFFFF; padding: 12px 22px; border-radius: 9999px; text-decoration: none; font-weight: 600;">Confirm my email</a></p>
-  <p style="font-size: 14px; color: #57534E;">${escapeHtml(PRIVACY_PROMISE)}</p>
+  <p>After you confirm, you get one short email a week: new verified free offers for parents, the ones about to expire, and a note when a catch changes. Nothing else.</p>
+  <p>If you did not sign up, ignore this email. The address will not be added and you will not hear from us again.</p>
+  <p>The Snugs team</p>
   <hr style="border: none; border-top: 1px solid #E7E5E4; margin: 24px 0;" />
-  <p style="font-size: 12px; color: #78716C;">If you did not request this email, you can ignore it. You can <a href="${escapeHtml(unsubscribeUrl)}">unsubscribe</a> at any time or email <a href="mailto:hello@snugs.ai?subject=Unsubscribe">hello@snugs.ai</a>.</p>
+  <p style="font-size: 12px; color: #78716C;">Unsubscribe anytime: <a href="${escapeHtml(unsubscribeUrl)}">unsubscribe</a></p>
 </div>`;
 
   return {
@@ -444,23 +460,42 @@ function buildConfirmationEmail({
 
 function buildWelcomeEmail({ email, unsubscribeUrl, siteOrigin, fromEmail }) {
   const hubUrl = getHubUrl(siteOrigin);
-  const subject = "You're on the Free Baby Stuff Weekly list";
+  const subject = "You are on the list. Start with the free book.";
   const text = [
-    "You're on the list for Free Baby Stuff Weekly from Snugs.",
+    "Welcome to Free Baby Stuff Weekly.",
     "",
-    PRIVACY_PROMISE,
+    "Here is how this list works. Every week we check free offers for parents on the brands' and governments' own websites. If an offer needs a purchase or a card, we print that next to it, in the open. If an offer dies, we retire it. No affiliate links, so we never earn anything from what we list.",
     "",
-    `Browse all verified offers anytime: ${hubUrl}`,
+    "Three good places to start:",
     "",
-    `Unsubscribe: ${unsubscribeUrl} or email hello@snugs.ai`,
+    "1. A free book every month until age 5. Dolly Parton's Imagination Library mails your child a book monthly, free. The catch is geography: check whether your ZIP is covered.",
+    "2. The registry box truth. Amazon, Target, Walmart and Babylist all call their welcome boxes free. All four need registry spending first. The exact amounts are on the hub.",
+    "3. Sample boxes that are actually free. PINCHme and SampleSource ship free sample boxes with no card required.",
+    "",
+    `The full list, with the catches printed: Free Baby Stuff, Verified (${hubUrl})`,
+    "",
+    'One last thing, since this list is from Snugs. Snugs is our baby sleep app: it tracks your baby\'s sleep and tells you when the next nap window opens. It comes with a 14-day free trial, and trying it is the only "offer" of ours you will ever see in this email series, right here, once.',
+    "",
+    "See you next week,",
+    "The Snugs team",
+    "",
+    `Unsubscribe anytime: ${unsubscribeUrl}`,
   ].join("\n");
 
   const html = `<div style="font-family: system-ui, -apple-system, sans-serif; color: #1C1917; max-width: 520px; line-height: 1.6;">
-  <p><strong>You're on the list.</strong> Your email is confirmed for Free Baby Stuff Weekly from Snugs.</p>
-  <p>${escapeHtml(PRIVACY_PROMISE)}</p>
-  <p><a href="${escapeHtml(hubUrl)}" style="color: #EA580C; font-weight: 600;">Browse Free Baby Stuff on Snugs</a></p>
+  <p>Welcome to Free Baby Stuff Weekly.</p>
+  <p>Here is how this list works. Every week we check free offers for parents on the brands' and governments' own websites. If an offer needs a purchase or a card, we print that next to it, in the open. If an offer dies, we retire it. No affiliate links, so we never earn anything from what we list.</p>
+  <p>Three good places to start:</p>
+  <ol>
+    <li><strong>A free book every month until age 5.</strong> Dolly Parton's Imagination Library mails your child a book monthly, free. The catch is geography: check whether your ZIP is covered.</li>
+    <li><strong>The registry box truth.</strong> Amazon, Target, Walmart and Babylist all call their welcome boxes free. All four need registry spending first. The exact amounts are on the hub.</li>
+    <li><strong>Sample boxes that are actually free.</strong> PINCHme and SampleSource ship free sample boxes with no card required.</li>
+  </ol>
+  <p>The full list, with the catches printed: <a href="${escapeHtml(hubUrl)}" style="color: #EA580C; font-weight: 600;">Free Baby Stuff, Verified</a></p>
+  <p>One last thing, since this list is from Snugs. Snugs is our baby sleep app: it tracks your baby's sleep and tells you when the next nap window opens. It comes with a 14-day free trial, and trying it is the only &quot;offer&quot; of ours you will ever see in this email series, right here, once.</p>
+  <p>See you next week,<br />The Snugs team</p>
   <hr style="border: none; border-top: 1px solid #E7E5E4; margin: 24px 0;" />
-  <p style="font-size: 12px; color: #78716C;">You can <a href="${escapeHtml(unsubscribeUrl)}">unsubscribe</a> at any time using the link in every weekly roundup, or by emailing <a href="mailto:hello@snugs.ai?subject=Unsubscribe">hello@snugs.ai</a>.</p>
+  <p style="font-size: 12px; color: #78716C;">Unsubscribe anytime: <a href="${escapeHtml(unsubscribeUrl)}">unsubscribe</a></p>
 </div>`;
 
   return {
@@ -790,8 +825,7 @@ export function createWorker(options = {}) {
                 renderConfirmPage({
                   title: "Confirmation link expired",
                   heading: "This confirmation link has expired",
-                  message:
-                    "Confirmation links are valid for 48 hours. Please return to the Free Baby Stuff page and enter your email again to get a fresh link.",
+                  message: EXPIRED_OR_INVALID_MESSAGE,
                   siteOrigin,
                 }),
                 400
@@ -802,8 +836,7 @@ export function createWorker(options = {}) {
               renderConfirmPage({
                 title: "Invalid confirmation link",
                 heading: "Invalid confirmation link",
-                message:
-                  "This confirmation link is invalid or incomplete. Please return to the Free Baby Stuff page and enter your email again.",
+                message: EXPIRED_OR_INVALID_MESSAGE,
                 siteOrigin,
               }),
               400
@@ -886,8 +919,7 @@ export function createWorker(options = {}) {
                 renderConfirmPage({
                   title: "Confirmation link expired",
                   heading: "This confirmation link has expired",
-                  message:
-                    "Confirmation links are valid for 48 hours. Please return to the Free Baby Stuff page and enter your email again to get a fresh link.",
+                  message: EXPIRED_OR_INVALID_MESSAGE,
                   siteOrigin,
                 }),
                 400
@@ -898,8 +930,7 @@ export function createWorker(options = {}) {
               renderConfirmPage({
                 title: "Invalid confirmation link",
                 heading: "Invalid confirmation link",
-                message:
-                  "This confirmation link is invalid or incomplete. Please return to the Free Baby Stuff page and enter your email again.",
+                message: EXPIRED_OR_INVALID_MESSAGE,
                 siteOrigin,
               }),
               400
@@ -978,12 +1009,12 @@ export function createWorker(options = {}) {
             });
             await resend.sendEmail(welcomeMsg);
 
+            const hubUrl = escapeHtml(getHubUrl(siteOrigin));
             return htmlResponse(
               renderConfirmPage({
-                title: "You're on the list",
-                heading: "You're on the list",
-                message:
-                  "Your email is confirmed for Free Baby Stuff Weekly. We have sent a welcome email to your inbox.",
+                title: "You are on the list.",
+                heading: "You are on the list.",
+                messageHtml: `Your first roundup is on its way. Until then, the full verified list lives here: <a href="${hubUrl}" style="color: #EA580C; font-weight: 600;">Free Baby Stuff, Verified</a>`,
                 siteOrigin,
               }),
               200
@@ -1068,6 +1099,7 @@ export function createWorker(options = {}) {
               apiKey: env.RESEND_API_KEY,
               audienceId: segmentId,
               fetchImpl,
+              retryOn429: true,
             });
 
             const existing = await resend.getContact(verification.email);

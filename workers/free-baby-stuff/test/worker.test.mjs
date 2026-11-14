@@ -256,14 +256,29 @@ test("1. new subscribe creates unconfirmed contact (unsubscribed=true) in this s
 
   assert.equal(mock.emails.length, 1);
   assert.deepEqual(mock.emails[0].to, ["parent@example.com"]);
-  assert.match(mock.emails[0].subject, /Confirm/i);
+  assert.equal(
+    mock.emails[0].subject,
+    "Confirm your signup for Free Baby Stuff Weekly"
+  );
+  assert.match(mock.emails[0].text, /Hi, and thanks for signing up\./);
+  assert.match(
+    mock.emails[0].text,
+    /You asked to join Free Baby Stuff Weekly, the Snugs roundup of free baby stuff that we verify on the official sites before we list it\./
+  );
   assert.match(mock.emails[0].text, /https:\/\/snugs\.ai\/confirm\?token=/);
   assert.match(
     mock.emails[0].text,
-    /One short email a week, the roundup\. Nothing else\. Unsubscribe anytime\./
+    /After you confirm, you get one short email a week: new verified free offers for parents, the ones about to expire, and a note when a catch changes\. Nothing else\./
   );
+  assert.match(
+    mock.emails[0].text,
+    /If you did not sign up, ignore this email\. The address will not be added and you will not hear from us again\./
+  );
+  assert.match(mock.emails[0].html, /Hi, and thanks for signing up\./);
   assert.match(mock.emails[0].text, /https:\/\/snugs\.ai\/unsubscribe\?token=/);
   assert.match(mock.emails[0].html, /https:\/\/snugs\.ai\/unsubscribe\?token=/);
+  assert.equal(mock.emails[0].text.includes(String.fromCodePoint(0x2014)), false);
+  assert.equal(mock.emails[0].html.includes(String.fromCodePoint(0x2014)), false);
   assert.equal(mock.emails[0].text.includes("RESEND_UNSUBSCRIBE_URL"), false);
   assert.equal(mock.emails[0].html.includes("RESEND_UNSUBSCRIBE_URL"), false);
   assert.equal(mock.emails[0].text.includes("{{{"), false);
@@ -504,7 +519,12 @@ test("8. POST /confirm flips contact to unsubscribed=false once, ensures segment
   const res = await worker.fetch(req, env);
   assert.equal(res.status, 200);
   const html = await res.text();
-  assert.match(html, /You&#39;re on the list|You're on the list/);
+  assert.match(html, /You are on the list\./);
+  assert.match(html, /Your first roundup is on its way\./);
+  assert.match(html, /Free Baby Stuff, Verified/);
+  assert.match(html, /https:\/\/snugs\.ai\/free-baby-stuff\//);
+  assert.equal(html.includes("arrives this week"), false);
+  assert.equal(html.includes(String.fromCodePoint(0x2014)), false);
 
   const updated = mock.contacts.get("newparent@example.com");
   assert.equal(updated.unsubscribed, false);
@@ -516,10 +536,31 @@ test("8. POST /confirm flips contact to unsubscribed=false once, ensures segment
 
   assert.equal(mock.emails.length, 1);
   assert.deepEqual(mock.emails[0].to, ["newparent@example.com"]);
+  assert.equal(
+    mock.emails[0].subject,
+    "You are on the list. Start with the free book."
+  );
+  assert.match(mock.emails[0].text, /Welcome to Free Baby Stuff Weekly\./);
   assert.match(
     mock.emails[0].text,
-    /One short email a week, the roundup\. Nothing else\. Unsubscribe anytime\./
+    /The full list, with the catches printed:/
   );
+  assert.match(mock.emails[0].text, /It comes with a 14-day free trial,/);
+  assert.match(
+    mock.emails[0].html,
+    /The full list, with the catches printed:/
+  );
+  assert.match(mock.emails[0].html, /It comes with a 14-day free trial,/);
+  const stripToken = (s) =>
+    s.replace(/(\/unsubscribe\?token=)[^\s"&<>]+/g, "$1TOKEN");
+  assert.equal(stripToken(mock.emails[0].text).includes("55"), false);
+  assert.equal(stripToken(mock.emails[0].html).includes("55"), false);
+  assert.equal(mock.emails[0].text.includes("free to start"), false);
+  assert.equal(mock.emails[0].html.includes("free to start"), false);
+  assert.equal(mock.emails[0].text.includes("arrives this week"), false);
+  assert.equal(mock.emails[0].html.includes("arrives this week"), false);
+  assert.equal(mock.emails[0].text.includes(String.fromCodePoint(0x2014)), false);
+  assert.equal(mock.emails[0].html.includes(String.fromCodePoint(0x2014)), false);
 });
 
 test("9. second POST /confirm sends no second welcome email and renders already-on-list", async () => {
@@ -583,8 +624,12 @@ test("10. expired token (past 48h) is rejected on both GET and POST /confirm and
   );
   assert.equal(getRes.status, 400);
   const getHtml = await getRes.text();
-  assert.match(getHtml, /expired/i);
+  assert.match(
+    getHtml,
+    /That confirmation link has expired or already been used\. If you are already confirmed, you are all set\. If not, sign up again on the hub and we will send a fresh link\./
+  );
   assert.match(getHtml, /https:\/\/snugs\.ai\/free-baby-stuff\//);
+  assert.equal(getHtml.includes(String.fromCodePoint(0x2014)), false);
 
   const postRes = await worker.fetch(
     new Request("https://snugs.ai/confirm", {
@@ -599,8 +644,12 @@ test("10. expired token (past 48h) is rejected on both GET and POST /confirm and
   );
   assert.equal(postRes.status, 400);
   const postHtml = await postRes.text();
-  assert.match(postHtml, /expired/i);
+  assert.match(
+    postHtml,
+    /That confirmation link has expired or already been used\. If you are already confirmed, you are all set\. If not, sign up again on the hub and we will send a fresh link\./
+  );
   assert.match(postHtml, /https:\/\/snugs\.ai\/free-baby-stuff\//);
+  assert.equal(postHtml.includes(String.fromCodePoint(0x2014)), false);
   assert.equal(mock.calls.length, 0);
 });
 
@@ -622,8 +671,12 @@ test("11. tampered or invalid token is rejected on GET and POST /confirm", async
   );
   assert.equal(getRes.status, 400);
   const getHtml = await getRes.text();
-  assert.match(getHtml, /invalid/i);
+  assert.match(
+    getHtml,
+    /That confirmation link has expired or already been used\. If you are already confirmed, you are all set\. If not, sign up again on the hub and we will send a fresh link\./
+  );
   assert.match(getHtml, /https:\/\/snugs\.ai\/free-baby-stuff\//);
+  assert.equal(getHtml.includes(String.fromCodePoint(0x2014)), false);
 
   const postRes = await worker.fetch(
     new Request("https://snugs.ai/confirm", {
@@ -734,7 +787,10 @@ test("13. unsubscribe-then-resubscribe goes through double opt-in again", async 
     CONFIRMED_MARKER
   );
   assert.equal(mock.emails.length, 2);
-  assert.match(mock.emails[1].subject, /Free Baby Stuff Weekly list/i);
+  assert.equal(
+    mock.emails[1].subject,
+    "You are on the list. Start with the free book."
+  );
 });
 
 test("14. unknown routes and disallowed methods return 404", async () => {
@@ -1441,5 +1497,97 @@ test("27. non-HTTP error logs sanitized message without email, key, or secret, a
     assert.equal(errorLogs[0].includes(apiKey), false);
   } finally {
     console.error = origError;
+  }
+});
+
+test("28. POST /unsubscribe retries once on Resend HTTP 429 (honouring Retry-After) and returns error page after two 429s", async () => {
+  const email = "ratelimited@example.com";
+  const env = createTestEnv();
+  const unsubToken = await createUnsubscribeToken(email, env.TOKEN_SECRET);
+
+  // One 429 then success => 200 unsubscribe success page
+  {
+    const baseMock = createMockResend({
+      [email]: {
+        id: "c-28",
+        email,
+        unsubscribed: false,
+        first_name: CONFIRMED_MARKER,
+        segments: [DEFAULT_SEGMENT_ID],
+      },
+    });
+    let remaining429 = 1;
+    const fetchOnce429 = async (url, options) => {
+      if (remaining429 > 0) {
+        remaining429 -= 1;
+        baseMock.calls.push({
+          method: (options?.method || "GET").toUpperCase(),
+          url: String(url),
+        });
+        return new Response(JSON.stringify({ message: "Too many requests" }), {
+          status: 429,
+          headers: {
+            "Content-Type": "application/json",
+            "Retry-After": "0",
+          },
+        });
+      }
+      return baseMock.mockFetch(url, options);
+    };
+
+    const worker = createWorker({ fetch: fetchOnce429, now: () => BASE_TIME });
+    const res = await worker.fetch(
+      new Request(
+        `https://snugs.ai/unsubscribe?token=${encodeURIComponent(unsubToken)}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: "List-Unsubscribe=One-Click",
+        }
+      ),
+      env
+    );
+    assert.equal(res.status, 200);
+    const html = await res.text();
+    assert.match(html, /You&#39;re unsubscribed|You're unsubscribed/);
+    assert.equal(baseMock.contacts.get(email).unsubscribed, true);
+    const getCalls = baseMock.calls.filter(
+      (c) =>
+        c.method === "GET" &&
+        c.url.endsWith(`/contacts/${encodeURIComponent(email)}`)
+    );
+    assert.equal(getCalls.length, 2);
+  }
+
+  // Two 429s => 502 try-again error page
+  {
+    let attempts = 0;
+    const fetchTwo429 = async () => {
+      attempts += 1;
+      return new Response(JSON.stringify({ message: "Too many requests" }), {
+        status: 429,
+        headers: {
+          "Content-Type": "application/json",
+          "Retry-After": "0",
+        },
+      });
+    };
+
+    const worker = createWorker({ fetch: fetchTwo429, now: () => BASE_TIME });
+    const res = await worker.fetch(
+      new Request(
+        `https://snugs.ai/unsubscribe?token=${encodeURIComponent(unsubToken)}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: "List-Unsubscribe=One-Click",
+        }
+      ),
+      env
+    );
+    assert.equal(res.status, 502);
+    const html = await res.text();
+    assert.match(html, /Please try again in a moment/);
+    assert.equal(attempts, 2);
   }
 });

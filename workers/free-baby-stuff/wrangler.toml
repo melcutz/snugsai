@@ -10,3 +10,20 @@ enabled = true
 RESEND_AUDIENCE_ID = ""
 SITE_ORIGIN = "https://snugs.ai"
 FROM_EMAIL = "Snugs <hello@snugs.ai>"
+
+[env.production]
+name = "snugs-free-baby-stuff"
+workers_dev = false
+routes = [
+  { pattern = "snugs.ai/subscribe", zone_name = "snugs.ai" },
+  { pattern = "snugs.ai/confirm*", zone_name = "snugs.ai" },
+  { pattern = "snugs.ai/unsubscribe*", zone_name = "snugs.ai" },
+]
+
+[env.production.observability]
+enabled = true
+
+[env.production.vars]
+RESEND_AUDIENCE_ID = ""
+SITE_ORIGIN = "https://snugs.ai"
+FROM_EMAIL = "Snugs <hello@snugs.ai>"

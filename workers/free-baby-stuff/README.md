@@ -26,14 +26,19 @@ Non-secret configuration lives in `wrangler.toml` under `[vars]`:
 - `SITE_ORIGIN`: `"https://snugs.ai"`
 - `FROM_EMAIL`: `"Snugs <hello@snugs.ai>"`
 
-Secrets are never stored in the repository. Set them via Wrangler before previewing or deploying:
+Secrets are never stored in the repository. Set them via Wrangler before previewing or deploying (names only, never commit values):
 
 ```bash
 cd workers/free-baby-stuff
+# Preview / default environment:
 wrangler secret put RESEND_API_KEY
 wrangler secret put TOKEN_SECRET
+
+# Production environment (--env production):
+wrangler secret put RESEND_API_KEY --env production
+wrangler secret put TOKEN_SECRET --env production
 # Optional if Turnstile is added in the future:
-# wrangler secret put TURNSTILE_SECRET
+# wrangler secret put TURNSTILE_SECRET --env production
 ```
 
 ## Local Tests & Preview
@@ -45,7 +50,7 @@ cd workers/free-baby-stuff
 npm test
 ```
 
-Run a local or preview Worker (`workers_dev = true` is enabled in `wrangler.toml`, with no production routes attached):
+Run a local or preview Worker (`workers_dev = true` is enabled at the top level of `wrangler.toml`, with no production routes attached):
 
 ```bash
 cd workers/free-baby-stuff
@@ -54,8 +59,33 @@ wrangler dev
 wrangler deploy
 ```
 
-## Attaching Production Routes (After Go-Live Approval)
+## Production Deploy & Rollback (After Go-Live Approval)
 
-Do not attach production routes on `snugs.ai` until Claudiu gives the go-live approval on issue #29.
+Do not deploy to production on `snugs.ai` until Claudiu gives explicit go-live approval.
 
-Once approved, Pete can attach the Worker routes on the `snugs.ai` Cloudflare zone either in the Cloudflare Dashboard (Workers Routes -> add routes for `snugs.ai/subscribe` and `snugs.ai/confirm*` pointing to `snugs-free-baby-stuff`) or by adding the zone route entries to `wrangler.toml` and running `wrangler deploy`.
+The `[env.production]` block in `wrangler.toml` sets `workers_dev = false`, enables observability, sets `SITE_ORIGIN = "https://snugs.ai"`, and attaches the `snugs.ai` zone routes (`snugs.ai/subscribe`, `snugs.ai/confirm*`, `snugs.ai/unsubscribe*`).
+
+### Production Deploy Steps
+
+1. Ensure `RESEND_AUDIENCE_ID` in `[env.production.vars]` is set to the production Resend segment ID.
+2. Ensure required secrets (`RESEND_API_KEY` and `TOKEN_SECRET`) are configured for `--env production`:
+   ```bash
+   cd workers/free-baby-stuff
+   wrangler secret put RESEND_API_KEY --env production
+   wrangler secret put TOKEN_SECRET --env production
+   ```
+3. Deploy the production environment:
+   ```bash
+   cd workers/free-baby-stuff
+   wrangler deploy --env production
+   ```
+
+### Rollback Steps
+
+To roll back a production deployment to the previous working version:
+
+```bash
+cd workers/free-baby-stuff
+wrangler deployments list --env production
+wrangler rollback --env production
+```

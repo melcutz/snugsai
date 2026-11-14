@@ -24,11 +24,22 @@ function createResendError(op, status) {
   return err;
 }
 
+function parseRetryAfterMs(headerValue, defaultMs = 1000, maxMs = 2000) {
+  if (headerValue !== null && headerValue !== undefined && String(headerValue).trim() !== "") {
+    const seconds = Number(String(headerValue).trim());
+    if (Number.isFinite(seconds) && seconds >= 0) {
+      return Math.min(Math.round(seconds * 1000), maxMs);
+    }
+  }
+  return defaultMs;
+}
+
 export function createResendClient({
   apiKey,
   audienceId,
   fetchImpl = globalThis.fetch,
   baseUrl = RESEND_BASE_URL,
+  retryOn429 = false,
 } = {}) {
   if (!apiKey) {
     throw new Error("Missing RESEND_API_KEY configuration");
@@ -38,14 +49,23 @@ export function createResendClient({
   const contactsPath = `${normalizedBase}/contacts`;
 
   async function request(url, options = {}) {
-    const res = await fetchImpl(url, {
+    const fetchOptions = {
       ...options,
       headers: {
         Authorization: `Bearer ${apiKey}`,
         ...(options.body ? { "Content-Type": "application/json" } : {}),
         ...(options.headers || {}),
       },
-    });
+    };
+    const res = await fetchImpl(url, fetchOptions);
+    if (res.status === 429 && retryOn429) {
+      const retryAfter = res.headers?.get?.("Retry-After");
+      const delayMs = parseRetryAfterMs(retryAfter);
+      if (delayMs > 0) {
+        await new Promise((resolve) => setTimeout(resolve, delayMs));
+      }
+      return fetchImpl(url, fetchOptions);
+    }
     return res;
   }
 
