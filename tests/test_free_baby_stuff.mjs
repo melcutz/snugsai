@@ -360,3 +360,14 @@ test("hub renders all 55 listing titles, Where lines, Verified dates, and clean 
   }
   assert.ok(extCount >= 55, `checked ${extCount} external offer links`);
 });
+
+test("hub and roundup clip horizontal overflow from decorative blobs (#27)", () => {
+  for (const relPath of ["free-baby-stuff/index.html", "free-baby-stuff/roundup-1/index.html"]) {
+    const html = fs.readFileSync(path.join(repoRoot, relPath), "utf8");
+    const styleMatch = html.match(/<style>([\s\S]*?)<\/style>/i);
+    assert.ok(styleMatch, `${relPath} has inline <style>`);
+    const css = styleMatch[1];
+    assert.match(css, /html\s*\{[^}]*overflow-x\s*:\s*(?:hidden|clip)/i, `${relPath} clips html overflow-x`);
+    assert.match(css, /body\s*\{[^}]*overflow-x\s*:\s*(?:hidden|clip)/i, `${relPath} clips body overflow-x`);
+  }
+});
