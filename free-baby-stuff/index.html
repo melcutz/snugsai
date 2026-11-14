@@ -120,8 +120,21 @@
       pointer-events: none !important;
     }
   </style>
+
+  <style id="hub-visuals">
+    .ic{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .offer-card{position:relative;overflow:hidden;transition:transform .25s ease,box-shadow .25s ease}
+    .offer-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--accent,#EA580C),rgba(255,255,255,0) 85%)}
+    .offer-card:hover{transform:translateY(-3px)}
+    .card-medallion{margin-left:auto;width:40px;height:40px;flex:none;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;color:var(--accent,#EA580C);background:linear-gradient(135deg,var(--tint,#FFF7ED),#ffffff);border:1px solid var(--tint,#FFEDD5)}
+    .sec-chip{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:10px;margin-right:10px;vertical-align:-8px;color:var(--accent,#EA580C);background:var(--tint,#FFF7ED);border:1px solid rgba(0,0,0,.05)}
+    .sec-chip .ic{width:19px;height:19px}
+    .cost-bar{height:100%;border-radius:9999px;background:linear-gradient(90deg,#F59E0B,#EA580C)}
+    @media (prefers-reduced-motion: reduce){.offer-card{transition:none}.offer-card:hover{transform:none}}
+  </style>
 </head>
 <body class="gradient-warm min-h-screen overflow-x-hidden relative text-gray-800">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></symbol><symbol id="i-book-open" viewBox="0 0 24 24"><path d="M2 4h6a4 4 0 0 1 4 4v12a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v12a3 3 0 0 1 3-3h7z"/></symbol><symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"/></symbol><symbol id="i-bottle" viewBox="0 0 24 24"><path d="M8 2h8"/><path d="M9 2v2.8L7 7.5V20a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V7.5L15 4.8V2"/><path d="M7 15h10"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4V8z"/></symbol><symbol id="i-cap" viewBox="0 0 24 24"><path d="M22 9 12 4 2 9l10 5 10-5z"/><path d="M6 11.5V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-4.5"/><path d="M22 9v5"/></symbol><symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol><symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.5-1.5 3-3.3 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.2 1.5 4 3 5.5l7 7z"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.7 9a.6.6 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1 1 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol><symbol id="i-ticket" viewBox="0 0 24 24"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2M13 17v2M13 11v2"/></symbol><symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22v-8h6v8"/></symbol><symbol id="i-coins" viewBox="0 0 24 24"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></symbol><symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol><symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></symbol><symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></symbol><symbol id="i-tree" viewBox="0 0 24 24"><path d="m12 2 5 6h-3l4 6H6l4-6H7z"/><path d="M12 14v8"/></symbol><symbol id="i-code" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m8.5 12.5 2.5 2.5 4.5-5"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3 3.4-4.5 6.5-4.5s5.7 1.5 6.5 4.5"/><path d="M16 5a3.5 3.5 0 0 1 0 7"/><path d="M18.5 15.7c1.7.6 2.7 1.9 3 4.3"/></symbol><symbol id="i-landmark" viewBox="0 0 24 24"><path d="M3 22h18"/><path d="M6 18v-7M10 18v-7M14 18v-7M18 18v-7"/><path d="m12 2 9 5H3z"/></symbol><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol></defs></svg>
   <div class="blob-decoration w-80 h-80 bg-orange-400 rounded-full" style="top: -8%; right: -5%;"></div>
   <div class="blob-decoration w-64 h-64 bg-orange-300 rounded-full" style="bottom: 10%; left: -8%;"></div>
 
@@ -154,6 +167,67 @@
           <p class="text-base sm:text-lg text-gray-700 leading-relaxed mb-6">
             Snugs does not get paid to list these offers. There are no affiliate links here, just direct links to the brands.
           </p>
+          <div class="mt-2 mb-1" aria-hidden="true">
+            <svg viewBox="0 0 680 230" class="w-full h-auto" role="img" aria-label="Illustration of a gift box, a stack of books, a baby bottle and a verified badge">
+              <defs>
+                <linearGradient id="heroSky" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#FFF7ED"/><stop offset="1" stop-color="#FFEDD5"/>
+                </linearGradient>
+                <mask id="mooncut"><rect width="680" height="230" fill="white"/><circle cx="560" cy="34" r="21" fill="black"/></mask>
+              </defs>
+              <rect x="2" y="2" width="676" height="226" rx="24" fill="url(#heroSky)"/>
+              <circle cx="542" cy="46" r="24" fill="#FBBF24" mask="url(#mooncut)"/>
+              <path d="M96 36l2.6 6.9L105.5 45.5l-6.9 2.6L96 55l-2.6-6.9L86.5 45.5l6.9-2.6z" fill="#F59E0B"/>
+              <path d="M616 96l2 5.2 5.2 2-5.2 2-2 5.2-2-5.2-5.2-2 5.2-2z" fill="#F59E0B"/>
+              <path d="M452 30l1.7 4.4 4.4 1.7-4.4 1.7L452 40.2l-1.7-4.4-4.4-1.7 4.4-1.7z" fill="#FB923C"/>
+              <ellipse cx="340" cy="208" rx="318" ry="10" fill="#FDBA74" opacity=".35"/>
+              <ellipse cx="118" cy="204" rx="74" ry="7" fill="#FDBA74" opacity=".5"/>
+              <rect x="66" y="122" width="112" height="78" rx="10" fill="#EA580C"/>
+              <rect x="56" y="104" width="132" height="24" rx="8" fill="#F97316"/>
+              <rect x="113" y="104" width="18" height="96" fill="#FDE68A"/>
+              <ellipse cx="104" cy="95" rx="16" ry="10" fill="#FBBF24" transform="rotate(-22 104 95)"/>
+              <ellipse cx="140" cy="95" rx="16" ry="10" fill="#FBBF24" transform="rotate(22 140 95)"/>
+              <rect x="252" y="170" width="122" height="27" rx="6" fill="#0D9488"/>
+              <rect x="259" y="176" width="108" height="4" rx="2" fill="#ffffff" opacity=".75"/>
+              <rect x="262" y="142" width="104" height="27" rx="6" fill="#0284C7" transform="rotate(-2 314 155)"/>
+              <rect x="269" y="148" width="90" height="4" rx="2" fill="#ffffff" opacity=".75" transform="rotate(-2 314 155)"/>
+              <rect x="276" y="115" width="80" height="25" rx="6" fill="#7C3AED" transform="rotate(2 316 127)"/>
+              <rect x="282" y="120" width="66" height="4" rx="2" fill="#ffffff" opacity=".75" transform="rotate(2 316 127)"/>
+              <rect x="424" y="120" width="46" height="80" rx="13" fill="#7DD3FC"/>
+              <rect x="432" y="103" width="30" height="19" rx="6" fill="#0284C7"/>
+              <path d="M435 142h24M435 158h24M435 174h24" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+              <circle cx="520" cy="182" r="21" fill="#E11D48"/>
+              <circle cx="513" cy="175" r="6" fill="#ffffff" opacity=".55"/>
+              <rect x="520" y="104" width="132" height="62" rx="14" fill="#ffffff" stroke="#FFEDD5"/>
+              <circle cx="545" cy="135" r="12" fill="#059669"/>
+              <path d="M539.5 135.5l4 4 7-7.5" stroke="#ffffff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="564" y="124" width="66" height="8" rx="4" fill="#E7E5E4"/>
+              <rect x="564" y="139" width="46" height="8" rx="4" fill="#F5F5F4"/>
+              <circle cx="214" cy="70" r="5" fill="#0D9488" opacity=".6"/>
+              <circle cx="238" cy="52" r="3.5" fill="#0284C7" opacity=".6"/>
+              <circle cx="404" cy="66" r="4.5" fill="#7C3AED" opacity=".55"/>
+              <circle cx="646" cy="182" r="4" fill="#EA580C" opacity=".5"/>
+            </svg>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-4 mb-6" aria-label="The hub in numbers">
+            <div class="rounded-2xl bg-white/90 border border-orange-100 px-3 py-3 text-center soft-shadow">
+              <span class="block font-display font-bold text-2xl text-orange-800 leading-none">55</span>
+              <span class="block text-xs text-gray-600 mt-1.5">verified offers</span>
+            </div>
+            <div class="rounded-2xl bg-white/90 border border-orange-100 px-3 py-3 text-center soft-shadow">
+              <span class="block font-display font-bold text-2xl text-emerald-700 leading-none">40</span>
+              <span class="block text-xs text-gray-600 mt-1.5">truly free, no purchase</span>
+            </div>
+            <div class="rounded-2xl bg-white/90 border border-orange-100 px-3 py-3 text-center soft-shadow">
+              <span class="block font-display font-bold text-2xl text-orange-800 leading-none">0</span>
+              <span class="block text-xs text-gray-600 mt-1.5">affiliate links</span>
+            </div>
+            <div class="rounded-2xl bg-white/90 border border-orange-100 px-3 py-3 text-center soft-shadow">
+              <span class="block font-display font-bold text-2xl text-orange-800 leading-none">Weekly</span>
+              <span class="block text-xs text-gray-600 mt-1.5">rechecked, dead offers retired</span>
+            </div>
+          </div>
+
 
           <!-- Email Capture Form (after intro) -->
           <div class="rounded-2xl bg-white/90 border border-orange-200 p-4 sm:p-5 soft-shadow">
@@ -376,7 +450,7 @@
           <template id="offer-card-template">
             <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2" data-country="">
               <div class="flex flex-wrap items-center justify-between gap-2">
-                <span data-field="badge" class="inline-block px-3 py-1 rounded-full bg-orange-100 text-orange-800 text-xs font-semibold"></span>
+                <span data-field="badge" class="inline-block px-3 py-1 rounded-full bg-orange-100 text-orange-800 text-xs font-semibold"></span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-sparkles"/></svg></span>
                 <span class="text-xs text-gray-500">Verified: <time data-field="verifiedDate"></time></span>
               </div>
               <h3 data-field="title" class="text-lg font-display font-bold text-gray-900"></h3>
@@ -395,12 +469,12 @@
 
           <!-- Verified Offer Sections (Sections 1-2, 4-12) -->
           <div id="offers-container" class="space-y-6 mt-2">
-            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-1" aria-labelledby="section-1-heading">
-              <h3 id="section-1-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2">Section 1: Genuinely free, no purchase needed</h3>
+            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-1" style="--accent:#059669;--tint:#ECFDF5" aria-labelledby="section-1-heading">
+              <h3 id="section-1-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2"><span class="sec-chip" aria-hidden="true"><svg class="ic"><use href="#i-sparkles"/></svg></span>Section 1: Genuinely free, no purchase needed</h3>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US, Canada, UK, Australia, Ireland">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-book"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">A free book for your child, every month until age 5</h3>
                   <p class="text-sm text-gray-700 leading-relaxed"><strong class="font-semibold text-gray-900">Dolly Parton's Imagination Library</strong></p>
@@ -411,7 +485,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-bottle"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Free formula samples and coupons by mail</h3>
                   <p class="text-sm text-gray-700 leading-relaxed"><strong class="font-semibold text-gray-900">Enfamil Family Beginnings</strong></p>
@@ -422,7 +496,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-gift"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Free sample boxes you build yourself</h3>
                   <p class="text-sm text-gray-700 leading-relaxed"><strong class="font-semibold text-gray-900">PINCHme</strong></p>
@@ -433,7 +507,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US, Canada">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-gift"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Free seasonal sample boxes</h3>
                   <p class="text-sm text-gray-700 leading-relaxed"><strong class="font-semibold text-gray-900">SampleSource</strong></p>
@@ -445,13 +519,19 @@
               </div>
             </section>
 
-            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-2" aria-labelledby="section-2-heading">
-              <h3 id="section-2-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2">Section 2: Free with a registry purchase (the catch, in the open)</h3>
+            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-2" style="--accent:#D97706;--tint:#FFFBEB" aria-labelledby="section-2-heading">
+              <h3 id="section-2-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2"><span class="sec-chip" aria-hidden="true"><svg class="ic"><use href="#i-gift"/></svg></span>Section 2: Free with a registry purchase (the catch, in the open)</h3>
               <p class="text-sm text-gray-700 mb-4">Registry welcome boxes are marketed as free. They are not, quite: each one asks you to spend a set amount through that store's registry first. If you were going to buy those things anyway, the box is a genuine bonus. Here is exactly what each one costs you.</p>
+              <div class="mt-4 mb-2 rounded-2xl border border-amber-200 bg-white/90 p-4 sm:p-5" role="img" aria-label="Bar chart of the minimum registry spend that unlocks each welcome box: Amazon 10 dollars, Target 10 dollars, Walmart 25 dollars, Babylist 38 dollars and 95 cents including shipping.">
+                <p class="text-sm font-semibold text-gray-900">What &quot;free&quot; actually costs: minimum spend to unlock each box</p>
+              <div class="flex items-center gap-3 mt-2.5"><span class="w-20 flex-none text-xs font-semibold text-gray-700">Amazon</span><div class="flex-1 h-5 rounded-full bg-amber-50 border border-amber-100 overflow-hidden"><div class="cost-bar" style="width:26%"></div></div><span class="w-14 flex-none text-right text-sm font-bold text-gray-900">$10</span></div>              <div class="flex items-center gap-3 mt-2.5"><span class="w-20 flex-none text-xs font-semibold text-gray-700">Target</span><div class="flex-1 h-5 rounded-full bg-amber-50 border border-amber-100 overflow-hidden"><div class="cost-bar" style="width:26%"></div></div><span class="w-14 flex-none text-right text-sm font-bold text-gray-900">$10</span></div>              <div class="flex items-center gap-3 mt-2.5"><span class="w-20 flex-none text-xs font-semibold text-gray-700">Walmart</span><div class="flex-1 h-5 rounded-full bg-amber-50 border border-amber-100 overflow-hidden"><div class="cost-bar" style="width:64%"></div></div><span class="w-14 flex-none text-right text-sm font-bold text-gray-900">$25</span></div>              <div class="flex items-center gap-3 mt-2.5"><span class="w-20 flex-none text-xs font-semibold text-gray-700">Babylist</span><div class="flex-1 h-5 rounded-full bg-amber-50 border border-amber-100 overflow-hidden"><div class="cost-bar" style="width:100%"></div></div><span class="w-14 flex-none text-right text-sm font-bold text-gray-900">$38.95</span></div>
+                <p class="text-xs text-gray-600 mt-3">Babylist is $30 of purchases plus $8.95 shipping. Amazon also requires an active Prime membership. Amounts as verified on November 11, 2026; the full terms sit on each card below.</p>
+              </div>
+
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with a catch</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with a catch</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-gift"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Amazon Baby Registry Welcome Box</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">A box of full-size, travel-size and sample products for parent and baby.</p>
@@ -461,7 +541,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with a catch</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with a catch</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-gift"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Target Baby Box (Registry Welcome Kit)</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">Samples and coupons Target values at $100: diapers, wipes, bottles, pacifiers and more.</p>
@@ -472,7 +552,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with a catch</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with a catch</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-gift"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Walmart Baby Registry Welcome Box</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">A box of at least six product samples plus coupons.</p>
@@ -482,7 +562,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with a catch</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with a catch</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-gift"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Babylist Hello Baby Box</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">Baby essentials Babylist values at $100, sized for newborn to 3 months: diapers, wipes, bottles, pacifiers, bibs and coupons.</p>
@@ -493,12 +573,12 @@
               </div>
             </section>
 
-            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-4" aria-labelledby="section-4-heading">
-              <h3 id="section-4-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2">Section 4: Free books, stories and learning for kids</h3>
+            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-4" style="--accent:#0284C7;--tint:#F0F9FF" aria-labelledby="section-4-heading">
+              <h3 id="section-4-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2"><span class="sec-chip" aria-hidden="true"><svg class="ic"><use href="#i-book"/></svg></span>Section 4: Free books, stories and learning for kids</h3>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Worldwide">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-sparkles"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Khan Academy Kids</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">A full early learning app for ages 2 to 8: reading, phonics, maths, feelings and thousands of activities and books. Khan Academy states it plainly: 100% free, forever, no ads, no subscriptions.</p>
@@ -507,7 +587,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Worldwide">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-book"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Duolingo ABC</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">A learn-to-read app with 700+ short lessons: alphabet, phonics, sight words and handwriting, for preschool to early school years. No ads and no in-app purchases, so there is nothing for your child to accidentally buy and no premium tier waiting at the end.</p>
@@ -516,7 +596,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Worldwide">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-play"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Storyline Online</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">More than 100 children's books read aloud on video by actors, each with a free activity guide. Streaming only, no account, no ads. Run by the SAG-AFTRA Foundation.</p>
@@ -525,7 +605,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Worldwide">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-book-open"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">StoryWeaver</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">An open library of 19,500+ illustrated storybooks you can read online, download, print or save for offline reading, all Creative Commons licensed. Books in 235+ languages, strongest in Indian and underserved languages. Run by Pratham Books, a nonprofit.</p>
@@ -534,7 +614,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Worldwide">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-book-open"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Oxford Owl free eBook library</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">Over 100 free eBooks for ages 3 to 11 from Oxford University Press (Oxford Reading Tree, Read Write Inc. and more), plus reading and maths advice for parents. You need a free parent account to open the eBooks. The stories follow England's phonics approach, which travels well.</p>
@@ -543,7 +623,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-sun"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Sesame Street in Communities</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">Free videos, printable activities, articles and storybooks for parents and caregivers: school readiness, health, resilience, grief and hard family moments, in English and Spanish. Sesame Workshop offers them at no cost to families.</p>
@@ -552,7 +632,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-play"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">PBS KIDS</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">280+ free learning games for ages 2 to 8, plus a video app with 600+ full episodes, no login needed.</p>
@@ -562,7 +642,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US, Canada, UK, Australia">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-book"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Libby: your library card becomes an app</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">Borrow ebooks, audiobooks and magazines from your public library, free, in the Libby app. No subscription, no in-app purchases, no late fees (loans simply expire).</p>
@@ -572,7 +652,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US, Canada, UK, Australia, Ireland">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-mail"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Free books by post: the national schemes</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">Three countries run book-gifting schemes that mail or hand free books to babies and young children. They work the same way: a local partner funds your area, so coverage is patchy inside each country. Check before you promise your toddler anything.</p>
@@ -584,7 +664,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US, Canada">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-music"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">PJ Library</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">One free Jewish children's book (or music) mailed monthly per child, from about 6 months to age 8, for families raising Jewish children. PJ Our Way extends it to ages 9 to 12 with a free chapter book they choose themselves.</p>
@@ -595,12 +675,12 @@
               </div>
             </section>
 
-            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-5" aria-labelledby="section-5-heading">
-              <h3 id="section-5-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2">Section 5: Free courses and know-how for parents</h3>
+            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-5" style="--accent:#7C3AED;--tint:#F5F3FF" aria-labelledby="section-5-heading">
+              <h3 id="section-5-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2"><span class="sec-chip" aria-hidden="true"><svg class="ic"><use href="#i-cap"/></svg></span>Section 5: Free courses and know-how for parents</h3>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Worldwide">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-cap"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">OpenLearn (The Open University)</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">Over 900 free online courses, including early years courses parents actually ask about: supporting babies and toddlers, attachment in the early years, children's development and child psychology. No fees and no card. A free account gets you progress tracking and a statement of participation. No tutor and no formal qualification; these are self-paced courses built from degree material.</p>
@@ -609,7 +689,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Worldwide">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-globe"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">UNICEF Parenting</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">Expert articles, milestone guides and mini video master classes on feeding, discipline, play and development. No account, no paywall. UNICEF runs local parenting hubs in dozens of countries and languages, so you can often read it in your own language.</p>
@@ -618,7 +698,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Australia">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-users"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Raising Children Network</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">A complete, ad-free parenting website from pregnancy to teens: articles, videos and picture guides, all evidence-based and funded by the Australian Government. No account needed. Service and school references are Australian; the parenting itself travels.</p>
@@ -627,7 +707,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-users"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Zero to Three</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">A large free library for parents of babies and toddlers: development explainers, tip sheets, play ideas and free downloadable activity curricula. The parent library is free; Zero to Three also sells a professional membership, which parents do not need. Content in English and Spanish.</p>
@@ -636,7 +716,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Worldwide">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-sparkles"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Vroom</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">Over 1,000 science-based brain building tips for children from birth to 5, in a completely free app with no in-app purchases, in English and Spanish. Small things you already do (bath time, shopping, laundry) turned into development moments.</p>
@@ -645,7 +725,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="UK">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-chat"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">BBC Tiny Happy People</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">Activities, tips and short films to build your baby's and toddler's speech and language, for ages 0 to 4, made with UK speech and language experts. A free website, no account.</p>
@@ -654,7 +734,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Worldwide">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-cap"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">FutureLearn parenting courses</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">University short courses on parenting and child development with a free tier. Read the catch carefully: free access lasts only while the course runs, plus 14 days. Content is released weekly, and the free tier has no certificate and no tests. Keeping access after the course ends is a paid upgrade.</p>
@@ -663,7 +743,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US, Australia">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-users"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Triple P Online (positive parenting courses)</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">Full evidence-based parenting courses online (baby, 0 to 12, teens, and a version for parents of children with disabilities). Whether it costs you anything depends entirely on your postcode.</p>
@@ -674,7 +754,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-chat"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Bright by Text</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">A free text message program: 2 to 6 texts a week matched to your child's age, from pregnancy to age 8, with development tips, activities and local resources, in English or Spanish. Sign up needs a US mobile number, your ZIP code and your child's birthdate or due date. Your carrier's normal message and data rates may apply.</p>
@@ -684,12 +764,12 @@
               </div>
             </section>
 
-            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-6" aria-labelledby="section-6-heading">
-              <h3 id="section-6-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2">Section 6: Free help when money is tight</h3>
+            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-6" style="--accent:#E11D48;--tint:#FFF1F2" aria-labelledby="section-6-heading">
+              <h3 id="section-6-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2"><span class="sec-chip" aria-hidden="true"><svg class="ic"><use href="#i-heart"/></svg></span>Section 6: Free help when money is tight</h3>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Worldwide">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-slate-100 text-slate-800 border border-slate-300">Need-based</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-slate-100 text-slate-800 border border-slate-300">Need-based</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-heart"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">La Leche League: free breastfeeding help</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">Free mother-to-mother breastfeeding support from accredited volunteer Leaders: local group meetings (in person and online), one-to-one help by phone, email or online, and free information. Some regions also run free antenatal breastfeeding classes. Memberships and donations exist but are never required for help. Coverage depends on volunteers near you.</p>
@@ -698,7 +778,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-slate-100 text-slate-800 border border-slate-300">Need-based</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-slate-100 text-slate-800 border border-slate-300">Need-based</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-heart"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">WIC: food support for mothers and young children</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">WIC provides a monthly package of nutritious foods (including infant formula and baby food), nutrition education, breastfeeding support and healthcare referrals. It is a US government program, and it does not cover diapers.</p>
@@ -708,7 +788,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-slate-100 text-slate-800 border border-slate-300">Need-based</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-slate-100 text-slate-800 border border-slate-300">Need-based</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-gift"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Free diapers: the National Diaper Bank Network</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">Over 240 community diaper banks across the US give free diapers to families who are struggling, usually through partner food pantries, clinics and shelters. There is no national eligibility rule: each local bank sets its own area, schedule and amounts, and amounts are a supplement, not a full month's supply. Stock is not guaranteed. You can also dial 211 to find help locally.</p>
@@ -718,13 +798,13 @@
               </div>
             </section>
 
-            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-7" aria-labelledby="section-7-heading">
-              <h3 id="section-7-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2">Section 7: Free baby boxes from governments</h3>
+            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-7" style="--accent:#0D9488;--tint:#F0FDF9" aria-labelledby="section-7-heading">
+              <h3 id="section-7-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2"><span class="sec-chip" aria-hidden="true"><svg class="ic"><use href="#i-gift"/></svg></span>Section 7: Free baby boxes from governments</h3>
               <p class="text-sm text-gray-700 mb-4">Some governments simply hand new parents a box. No registry, no spending, no brand marketing. These are the real thing, and they put the store welcome boxes in Section 2 in perspective.</p>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="UK">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-gift"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Scotland's Baby Box</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">A box of essentials for your baby's first six months: clothes from newborn to 6 months, a play mat, books, a digital thermometer, a hooded towel, muslins, and a mattress with fitted sheets, because the box itself is designed as a safe sleep space.</p>
@@ -734,7 +814,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Finland">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-gift"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Finland's Maternity Package</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">The original baby box, running since 1937. A package of baby clothes and care products, in a box with a mattress that works as a first bed, or the cash equivalent instead: 210 euros, tax-free. Expecting twins or more means multiple grants, and you can mix package and cash.</p>
@@ -744,7 +824,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Australia">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-gift"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">New South Wales Baby Bundle</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">A free bag worth about $329: a 0 to 6 month sleeping bag, change mat, muslin wrap, Australian picture books and a bath book, a first aid kit, a baby hat, a toothbrush, milestone cards and parenting resources. Not means-tested.</p>
@@ -754,7 +834,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Australia">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-gift"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Victorian Baby Bundle</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">A nappy bag with a growsuit, a safe sleeping bag, a cotton wrap, a teething toy, a first aid kit, a sun hat, a toothbrush and four picture books by Victorian authors, plus safe-sleeping information. Given in hospital at the birth.</p>
@@ -765,13 +845,13 @@
               </div>
             </section>
 
-            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-8" aria-labelledby="section-8-heading">
-              <h3 id="section-8-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2">Section 8: Free and funded childcare</h3>
+            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-8" style="--accent:#4F46E5;--tint:#EEF2FF" aria-labelledby="section-8-heading">
+              <h3 id="section-8-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2"><span class="sec-chip" aria-hidden="true"><svg class="ic"><use href="#i-home"/></svg></span>Section 8: Free and funded childcare</h3>
               <p class="text-sm text-gray-700 mb-4">The biggest money on this page. The rules are exact, so we print them exactly.</p>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="UK">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with conditions</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with conditions</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-home"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">England: funded childcare hours</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">Two different offers, often confused:</p>
@@ -782,7 +862,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="UK">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with conditions</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with conditions</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-home"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Scotland: 1,140 hours of funded early learning</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">Every 3 and 4 year old in Scotland gets up to 1,140 hours a year of funded early learning and childcare: roughly 30 hours a week in term time, or about 22 hours spread across the year, at council nurseries, partner nurseries and childminders, with a free meal on attendance days. No work test and no income test.</p>
@@ -792,7 +872,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with conditions</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with conditions</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-cap"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Head Start and Early Head Start (United States)</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">Free early learning and development for young children in low-income families: Early Head Start from birth to age 3 (many programs also support pregnant women), Head Start Preschool from 3 to 5, in centres, family childcare or your home, at no cost.</p>
@@ -802,7 +882,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Canada">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with conditions</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with conditions</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-coins"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Not free, but worth knowing: Canada's $10-a-day childcare</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">Canada's federal childcare program is real and it does cut fees a lot, but it is a discount, not a freebie, so it does not get a free listing on this page. Fees now average $10 a day or less in 8 of 13 provinces and territories, for regulated childcare spaces for under-6s; other provinces average at least 50% off. Parents still pay roughly $200 or more a month for full-time care. If you are in Canada, it is still the first childcare scheme to look at.</p>
@@ -812,12 +892,12 @@
               </div>
             </section>
 
-            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-9" aria-labelledby="section-9-heading">
-              <h3 id="section-9-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2">Section 9: Free days out</h3>
+            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-9" style="--accent:#EA580C;--tint:#FFF7ED" aria-labelledby="section-9-heading">
+              <h3 id="section-9-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2"><span class="sec-chip" aria-hidden="true"><svg class="ic"><use href="#i-ticket"/></svg></span>Section 9: Free days out</h3>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with conditions</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with conditions</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-landmark"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Museums for All: museums from free to $5 with an EBT card</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">Show a SNAP/EBT card at more than 1,600 museums, children's museums, science centres, zoos, aquariums and gardens across the US and get in for free to $5 per person, up to four people per card, any normal operating day.</p>
@@ -827,7 +907,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with conditions</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with conditions</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-tree"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Every Kid Outdoors: a free national parks pass for 4th graders</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">Every US 4th grader (or home-school equivalent) can earn a pass covering entry to more than 2,000 federal lands and waters for their school year. At per-person sites it covers all children under 16 plus up to three adults; at per-vehicle sites it covers everyone in your car. Complete a short online activity, print the paper voucher, and bring the paper: photos of it are not accepted.</p>
@@ -837,7 +917,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with conditions</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with conditions</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-ticket"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Your library card may include free museum and zoo passes</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">Many public libraries run a culture pass scheme: reserve a pass with your library card and get free entry to local museums, zoos and gardens. New York's Culture Pass covers 100+ venues for NYPL, Brooklyn and Queens cardholders; Contra Costa County's Discover &amp; Go does the same in the San Francisco East Bay.</p>
@@ -847,7 +927,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US, Canada">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with conditions</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-900 border border-amber-300">Free with conditions</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-ticket"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Kids Bowl Free: two free games a day, all summer</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">Register your child at a participating bowling centre and they get two free games every day through the summer program. Centres take part across the US and Canada.</p>
@@ -858,12 +938,12 @@
               </div>
             </section>
 
-            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-10" aria-labelledby="section-10-heading">
-              <h3 id="section-10-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2">Section 10: Free health and safety</h3>
+            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-10" style="--accent:#0891B2;--tint:#ECFEFF" aria-labelledby="section-10-heading">
+              <h3 id="section-10-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2"><span class="sec-chip" aria-hidden="true"><svg class="ic"><use href="#i-shield"/></svg></span>Section 10: Free health and safety</h3>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-check"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">CDC Milestone Tracker app</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">The CDC's free app for tracking development from 2 months to 5 years: illustrated milestone checklists with photos and videos, tips, a summary you can save or email, and well-visit reminders, in English and Spanish. The CDC states it does not collect or share identifiable information. It is a tracker, not a medical screening; raise concerns with your child's doctor.</p>
@@ -872,7 +952,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-shield"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Vaccines for Children (VFC): free vaccines for eligible kids</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">Every recommended childhood vaccine, at no charge for the vaccine itself, for children 18 and under who are uninsured, Medicaid-eligible, American Indian or Alaska Native, or underinsured (underinsured children must use a federally qualified health centre, rural health clinic or deputized site). Around 37,000 providers take part.</p>
@@ -882,7 +962,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-book"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Reach Out and Read: a free book at every checkup</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">At participating pediatric clinics, your child gets a brand new book to take home at every well-child checkup from birth to age 5, more than a dozen books in total, in 38 languages. The program runs at 6,753 sites in all 50 states.</p>
@@ -892,7 +972,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US, UK">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-bell"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Free smoke alarms, installed</h3>
                   <p class="text-sm text-gray-700 leading-relaxed"><strong class="font-semibold text-gray-900">United States:</strong> the Red Cross Sound the Alarm program sends volunteers to install free smoke alarms in your home, with escape planning and safety advice. Special alarms for Deaf and hard of hearing households are also free. Enter your ZIP on the Red Cross site to reach your local chapter; availability depends on where you live, and there is no national income test.</p>
@@ -902,7 +982,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US, Canada">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-heart"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Postpartum Support International: free help after birth</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">A free helpline (call or text 1-800-944-4773; Spanish text line 971-203-7773), more than 50 free online support groups in English and Spanish, a free app, and weekly expert calls. No diagnosis needed. It is not a crisis line: you leave a message and a trained volunteer calls or texts back the same day.</p>
@@ -913,12 +993,12 @@
               </div>
             </section>
 
-            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-11" aria-labelledby="section-11-heading">
-              <h3 id="section-11-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2">Section 11: Free weekends and screen learning</h3>
+            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-11" style="--accent:#65A30D;--tint:#F7FEE7" aria-labelledby="section-11-heading">
+              <h3 id="section-11-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2"><span class="sec-chip" aria-hidden="true"><svg class="ic"><use href="#i-sun"/></svg></span>Section 11: Free weekends and screen learning</h3>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="UK, Australia, Ireland">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-tree"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">parkrun: a free 5k in a park near you, every week</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">Free, weekly, timed 5k events where you can walk, jog, run, volunteer or watch, in 2,800 locations across 23 countries, under parkrun's own principle: free, for everyone, forever. Register once, free, for a barcode you can use at any parkrun in the world.</p>
@@ -928,7 +1008,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Worldwide">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-code"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Scratch: free coding for kids</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">MIT's free platform where children aged 8 to 16 build and share games, stories and animations with block coding, plus a free offline editor. Accounts are optional: without one you can create in the offline editor but cannot save and share online. New for 2026: under-16s need a parent or guardian to verify by email before they can share and comment.</p>
@@ -937,7 +1017,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-landmark"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Smithsonian Learning Lab</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">Millions of Smithsonian resources free online: images, recordings, texts, videos and 3D objects, plus thousands of ready-made collections, free for personal and educational use. Browsing needs no account; a free account lets you build and save your own collections. The Smithsonian states no country restriction; it also makes no worldwide promise, so we say what we know.</p>
@@ -946,7 +1026,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="UK">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-play"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">BBC Bitesize</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">The BBC's free study site: lessons, guides, games and quizzes for ages 3 to 16 and beyond, mapped to UK curricula (GCSE in England, Wales and Northern Ireland; National 4/5 and Highers in Scotland). Text lessons are readable internationally; some games and videos are UK-only.</p>
@@ -956,13 +1036,13 @@
               </div>
             </section>
 
-            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-12" aria-labelledby="section-12-heading">
-              <h3 id="section-12-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2">Section 12: Money you might be missing</h3>
+            <section class="offer-section rounded-2xl border border-orange-200/80 bg-white/75 p-5 sm:p-6" data-offer-section="section-12" style="--accent:#A16207;--tint:#FEFCE8" aria-labelledby="section-12-heading">
+              <h3 id="section-12-heading" class="text-xl sm:text-2xl font-display font-bold text-gray-900 mb-2"><span class="sec-chip" aria-hidden="true"><svg class="ic"><use href="#i-coins"/></svg></span>Section 12: Money you might be missing</h3>
               <p class="text-sm text-gray-700 mb-4">Free official tools that find money and help you are entitled to. None of them can approve anything; they point, you apply.</p>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-coins"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">USAGov Benefit Finder (United States)</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">The US government's official screening tool: answer questions and get a list of federal benefits you may qualify for, with how to apply for each. Note the name: the old Benefits.gov site has closed and this is its replacement. Screening only, no account needed.</p>
@@ -972,7 +1052,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="UK">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-coins"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Turn2us (United Kingdom)</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">A charity-run Benefits Calculator (anonymous, no account, independent of the DWP) plus a Grants Search covering 1,400+ non-repayable charitable grants: cash, white goods and services. It covers all four UK nations. The calculator gives an estimate, not a guarantee.</p>
@@ -982,7 +1062,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="Canada">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-coins"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">Canada Benefits Finder (Canada)</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">The Government of Canada's own finder for federal benefits and financial help, filterable by your situation and province. The current tool shows federal benefits only, then links you to your province or territory's own finder. A result is a lead, not an approval.</p>
@@ -992,7 +1072,7 @@
                 </article>
                 <article class="offer-card rounded-2xl border border-orange-200 bg-white/95 p-5 soft-shadow flex flex-col gap-2.5" data-country="US">
                   <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span>
+                    <span data-field="badge" class="badge inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wide bg-emerald-700 text-white">Truly free</span><span class="card-medallion" aria-hidden="true"><svg class="ic"><use href="#i-coins"/></svg></span>
                   </div>
                   <h3 data-field="title" class="text-lg font-display font-bold text-gray-900 leading-snug">VITA and TCE: free tax preparation (United States)</h3>
                   <p class="text-sm text-gray-700 leading-relaxed">IRS-certified volunteers prepare basic tax returns and e-file them free at VITA sites across the US. The IRS guideline is people who generally make about $70,244 or less, plus people with disabilities and limited-English speakers; the IRS sets no single national cap and individual sites may set their own limits, so check yours. TCE sites focus on taxpayers aged 60 and over, especially pension and retirement questions. Seasonal, and basic returns only.</p>
