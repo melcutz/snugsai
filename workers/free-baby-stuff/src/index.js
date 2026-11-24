@@ -310,8 +310,9 @@ function renderConfirmPage({
   messageHtml,
   siteOrigin,
   formHtml = "",
+  hubUrl: customHubUrl,
 }) {
-  const hubUrl = escapeHtml(getHubUrl(siteOrigin));
+  const hubUrl = escapeHtml(customHubUrl || getHubUrl(siteOrigin));
   const bodyMessageHtml =
     messageHtml !== undefined ? messageHtml : escapeHtml(message);
   return `<!DOCTYPE html>
@@ -864,6 +865,7 @@ export function createWorker(options = {}) {
                     message:
                       "Your email is already confirmed for Free Baby Stuff Weekly.",
                     siteOrigin,
+                    hubUrl: `${getHubUrl(siteOrigin)}?status=already_subscribed`,
                   }),
                   200
                 );
@@ -975,6 +977,7 @@ export function createWorker(options = {}) {
                     message:
                       "Your email is already confirmed for Free Baby Stuff Weekly.",
                     siteOrigin,
+                    hubUrl: `${getHubUrl(siteOrigin)}?status=already_subscribed`,
                   }),
                   200
                 );
@@ -1009,13 +1012,15 @@ export function createWorker(options = {}) {
             });
             await resend.sendEmail(welcomeMsg);
 
-            const hubUrl = escapeHtml(getHubUrl(siteOrigin));
+            const hubSuccessUrl = `${getHubUrl(siteOrigin)}?confirmed=1`;
+            const hubUrl = escapeHtml(hubSuccessUrl);
             return htmlResponse(
               renderConfirmPage({
                 title: "You are on the list.",
                 heading: "You are on the list.",
                 messageHtml: `Your first roundup is on its way. Until then, the full verified list lives here: <a href="${hubUrl}" style="color: #EA580C; font-weight: 600;">Free Baby Stuff, Verified</a>`,
                 siteOrigin,
+                hubUrl: hubSuccessUrl,
               }),
               200
             );
