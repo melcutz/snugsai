@@ -3,7 +3,7 @@
 
 Includes:
   - top-level pages: /, /resources/, /contact.html, /privacy.html,
-    /terms.html, /tools/sleep-milestone-calculator.html
+    /terms.html, /tools/sleep-milestone-calculator/
   - every `keep` article from seo/classification.csv
 Excludes: noindex, merge and remove pages.
 lastmod comes from `git log` (last commit touching the file); files never
@@ -26,7 +26,7 @@ TOP_LEVEL = [
     ("contact.html", "monthly", "0.7"),
     ("privacy.html", "monthly", "0.7"),
     ("terms.html", "monthly", "0.7"),
-    ("tools/sleep-milestone-calculator.html", "monthly", "0.9"),
+    ("tools/sleep-milestone-calculator/", "monthly", "0.9"),
 ]
 
 HUB_PAGES = [
