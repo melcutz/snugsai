@@ -3,8 +3,6 @@ AGENTS.md
 *.md
 !docs/PRODUCT_INVENTORY.md
 !workers/free-baby-stuff/README.md
-!NOTES-33.md
-!APP-SNUGS-AI-CHANGES.md
 !NOTES-38.md
 
 node_modules/
