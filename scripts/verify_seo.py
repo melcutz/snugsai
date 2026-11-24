@@ -197,7 +197,7 @@ def main():
 
     # 9. Every indexable page has self-referencing canonical
     indexable_paths = [r["path"] for r in rows if r["decision"] == "keep"]
-    indexable_paths += ["index.html", "resources/index.html", "contact.html", "privacy.html", "terms.html", "tools/sleep-milestone-calculator.html"]
+    indexable_paths += ["index.html", "resources/index.html", "contact.html", "privacy.html", "terms.html", "tools/sleep-milestone-calculator/index.html"]
     for hub in ["pregnancy", "newborn", "baby", "toddler", "dads"]:
         indexable_paths.append(f"resources/{hub}/index.html")
     

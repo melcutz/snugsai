@@ -50,7 +50,7 @@ by hand: no `noindex` row may contain core 0-3 terms in its title, every
   `seo/redirects-301.csv` (`from,to` full URLs).
 - `scripts/build_sitemap.py` – regenerates `sitemap.xml` with the top-level
   pages (`/`, `/resources/`, contact, privacy, terms,
-  `/tools/sleep-milestone-calculator.html`) plus every `keep` article, with
+  `/tools/sleep-milestone-calculator/`) plus every `keep` article, with
   `lastmod` from `git log`. `noindex`/`merge`/`remove` pages are excluded.
   `robots.txt` already references `https://snugs.ai/sitemap.xml`.
 - `scripts/enrich_core30.py` – enriches the ~30 strongest 0-3 articles in

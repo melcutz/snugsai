@@ -50,7 +50,7 @@ top_level = [
     ("contact.html", f"{SITE}/contact.html"),
     ("privacy.html", f"{SITE}/privacy.html"),
     ("terms.html", f"{SITE}/terms.html"),
-    ("tools/sleep-milestone-calculator.html", f"{SITE}/tools/sleep-milestone-calculator.html"),
+    ("tools/sleep-milestone-calculator/index.html", f"{SITE}/tools/sleep-milestone-calculator/"),
 ]
 
 for rel_path, canonical_url in top_level:

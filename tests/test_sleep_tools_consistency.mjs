@@ -9,7 +9,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, "..");
 
 const wwPath = path.join(repoRoot, "tools/wake-window-calculator/index.html");
-const msPath = path.join(repoRoot, "tools/sleep-milestone-calculator.html");
+const msPath = fs.existsSync(path.join(repoRoot, "tools/sleep-milestone-calculator/index.html"))
+  ? path.join(repoRoot, "tools/sleep-milestone-calculator/index.html")
+  : path.join(repoRoot, "tools/sleep-milestone-calculator.html");
 
 const wwHtml = fs.readFileSync(wwPath, "utf8");
 const msHtml = fs.readFileSync(msPath, "utf8");
@@ -195,10 +197,10 @@ function runMilestoneRuntime(options = {}) {
 
   const windowMock = {
     location: {
-      href: options.url || "https://snugs.ai/tools/sleep-milestone-calculator.html",
+      href: options.url || "https://snugs.ai/tools/sleep-milestone-calculator/",
       search: options.search || "",
       origin: "https://snugs.ai",
-      pathname: "/tools/sleep-milestone-calculator.html"
+      pathname: "/tools/sleep-milestone-calculator/"
     },
     history: {
       replaceState(state, title, url) {
@@ -416,7 +418,11 @@ test("Wake Window Calculator state preservation: loads age from URL query param 
   assert.equal(rt4.elements["naps-chip"].textContent, "3 naps/day");
 
   // Cross-link to milestone calculator preserves age
-  assert.equal(rt4.elements["link-milestone-calc"].href, "/tools/sleep-milestone-calculator.html?age=4");
+  assert.ok(
+    rt4.elements["link-milestone-calc"].href === "/tools/sleep-milestone-calculator/?age=4" ||
+    rt4.elements["link-milestone-calc"].href === "/tools/sleep-milestone-calculator.html?age=4",
+    "Link to milestone calc preserves age=4"
+  );
 
   // Changing slider records state in sessionStorage and calls replaceState
   rt4.elements["age-slider"].value = "6";
@@ -427,7 +433,11 @@ test("Wake Window Calculator state preservation: loads age from URL query param 
   const lastHistory = rt4.historyCalls[rt4.historyCalls.length - 1];
   assert.equal(lastHistory.state.age, 6, "History state contains age 6");
   assert.match(lastHistory.url, /age=6/, "History URL updated with ?age=6");
-  assert.equal(rt4.elements["link-milestone-calc"].href, "/tools/sleep-milestone-calculator.html?age=6");
+  assert.ok(
+    rt4.elements["link-milestone-calc"].href === "/tools/sleep-milestone-calculator/?age=6" ||
+    rt4.elements["link-milestone-calc"].href === "/tools/sleep-milestone-calculator.html?age=6",
+    "Link to milestone calc preserves age=6"
+  );
 });
 
 test("Sleep Milestone Calculator state preservation: loads age from URL query param and syncs history (#35)", () => {
@@ -483,5 +493,9 @@ test("Sleep Milestone Calculator copy share link includes current entered age (#
   };
 
   rt.elements["copy-link"].dispatchEvent("click");
-  assert.equal(copiedUrl, "https://snugs.ai/tools/sleep-milestone-calculator.html?age=4", "Share link preserves entered age");
+  assert.ok(
+    copiedUrl === "https://snugs.ai/tools/sleep-milestone-calculator/?age=4" ||
+    copiedUrl === "https://snugs.ai/tools/sleep-milestone-calculator.html?age=4",
+    "Share link preserves entered age"
+  );
 });

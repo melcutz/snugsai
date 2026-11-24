@@ -20,7 +20,7 @@ top_level = [
     ("privacy.html", "Privacy policy", True),
     ("terms.html", "Terms of service", True),
     ("resources/index.html", "Resources hub (topic index)", True),
-    ("tools/sleep-milestone-calculator.html", "Sleep milestone calculator tool", True),
+    ("tools/sleep-milestone-calculator/index.html", "Sleep milestone calculator tool", True),
 ]
 
 for rel, purpose, indexable in top_level:

@@ -485,7 +485,7 @@ Generated: 2026-10-20
 | resources/why-your-favorite-children-s-artists-might-be-missing-from-spotify-wrapped-and-how-to-still-celebrate-your-listening-habits.html | Why Your Favorite Children's Artists Might Be Missing from Spotify Wrapped (and How to Still Celebrate Your Listening Habits) | No |
 | resources/why-your-shy-5-year-old-can-t-ask-for-what-they-want-and-how-to-help.html | Why Your Shy 5-Year-Old Can't Ask for What They Want (and How to Help) | No |
 | terms.html | Terms of service | Yes |
-| tools/sleep-milestone-calculator.html | Sleep milestone calculator tool | Yes |
+| tools/sleep-milestone-calculator/index.html | Sleep milestone calculator tool | Yes |
 
 **Total pages:** 482  
 **Indexable pages:** 128  
