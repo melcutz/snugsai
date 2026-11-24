@@ -491,7 +491,7 @@
     /* ============ Nap transition quiz ============ */
     var PLANS = {
       "3to2": {
-        transition: "3 naps -> 2 naps",
+        transition: "3 naps to 2 naps",
         typicalAge: "5-8 months",
         expect: "Most babies drop the third nap between 5 and 8 months. The middle wake window stretches first, and the late catnap fades on its own.",
         steps: [
@@ -502,7 +502,7 @@
         ]
       },
       "2to1": {
-        transition: "2 naps -> 1 nap",
+        transition: "2 naps to 1 nap",
         typicalAge: "8-15 months",
         expect: "Most toddlers move to one nap between 8 and 15 months. A few short or skipped naps mid-transition are normal.",
         steps: [
@@ -513,12 +513,12 @@
         ]
       },
       "1to0": {
-        transition: "1 nap -> none",
+        transition: "1 nap to none",
         typicalAge: "18-36 months",
         expect: "Most children drop the nap between 2.5 and 3.5 years, and many still nap at daycare or preschool. Expect an adjustment month.",
         steps: [
           "Confirm the signs: 3+ weeks of refusing the nap or taking 60+ minutes to fall asleep, while sleeping fine at night.",
-          "Replace the nap with a daily 60-90 minute quiet time: books, puzzles, calm play: at the same time each day.",
+          "Replace the nap with a daily 60-90 minute quiet time (books, puzzles, calm play) at the same time each day.",
           "Move bedtime 30-45 minutes earlier for the first month; the earlier bedtime is the nap.",
           "Keep quiet time even on days your toddler insists they are not tired."
         ]
@@ -572,7 +572,7 @@
       var previewEl = document.getElementById('result-preview');
 
       if (tooEarly) {
-        verdict = "Probably too early -- keep your current schedule.";
+        verdict = "Probably too early. Keep your current schedule.";
         note = "Your child's age is on the young side for this transition. Keep the current schedule and recheck around " + plan.typicalAge + " when signs persist.";
         expectText = "Your child is on the young side for dropping a nap. Keeping your current nap rhythm protects against overtiredness and night wakings.";
         headingText = "What to do now";
@@ -596,13 +596,13 @@
           '</div>';
       } else {
         if (signs >= 3) {
-          verdict = "Ready -- start the transition this week.";
+          verdict = "Ready. Start the transition this week.";
           note = "Multiple readiness signals have stuck around for 1-2 weeks. Start the plan below and expect 1-2 weeks of adjustment.";
         } else if (signs >= 1) {
-          verdict = "Getting close -- watch for another 1-2 weeks.";
+          verdict = "Getting close. Watch for another 1-2 weeks.";
           note = "One or two early signals are showing. Keep the current schedule, track the signs for another week or two, then start when they persist.";
         } else {
-          verdict = "Not yet -- your child still needs their current naps.";
+          verdict = "Not yet. Your child still needs their current naps.";
           note = "No strong readiness signals yet. Stay consistent with the current schedule and use the plan here when the signs appear.";
         }
         expectText = plan.expect;

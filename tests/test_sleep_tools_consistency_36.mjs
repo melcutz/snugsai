@@ -297,7 +297,7 @@ test("Nap Transition Checker: changing answers replaces previous result in-place
   // Result replaces previous result in-place
   assert.match(rt.elements["result-verdict"].textContent, /Ready/i);
   assert.equal(rt.elements["result-transition"].style.display, "");
-  assert.match(rt.elements["result-transition"].textContent, /Likely transition: 3 naps -> 2 naps/i);
+  assert.match(rt.elements["result-transition"].textContent, /Likely transition: 3 naps to 2 naps/i);
   assert.equal(rt.elements["result-plan-heading"].textContent, "Your plan");
 
   const steps = rt.elements["result-steps"].children.map((li) => li.textContent);
