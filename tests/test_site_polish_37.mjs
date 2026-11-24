@@ -161,6 +161,13 @@ test("3. Tool URLs and redirect stubs resolve with and without .html / trailing 
       stubContent.includes(`href="${targetUrl}"`) || stubContent.includes(`href="https://snugs.ai${targetUrl}"`),
       "Stub must contain fallback visible link"
     );
+    assert.ok(stubContent.includes("location.replace"), "Stub must use location.replace");
+    assert.ok(stubContent.includes("location.search"), "Stub must preserve location.search");
+    assert.ok(stubContent.includes("location.hash"), "Stub must preserve location.hash");
+    assert.ok(
+      stubContent.includes(`location.replace('${targetUrl}' + location.search + location.hash)`),
+      `Stub must preserve search and hash targeting ${targetUrl}`
+    );
 
     // Verify target of redirect exists and returns 200
     const targetRes = resolveUrl(targetUrl);
