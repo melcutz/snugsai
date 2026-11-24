@@ -379,10 +379,10 @@
               </tr>
               <tr>
                 <th scope="row" class="px-4 py-2 font-medium text-gray-800">6 months</th>
-                <td class="px-4 py-2">2.5–3 h</td>
-                <td class="px-4 py-2">2</td>
+                <td class="px-4 py-2">2–3 h</td>
+                <td class="px-4 py-2">2–3</td>
                 <td class="px-4 py-2">1–1.5 h</td>
-                <td class="px-4 py-2">12–14 h</td>
+                <td class="px-4 py-2">12–15 h</td>
               </tr>
               <tr>
                 <th scope="row" class="px-4 py-2 font-medium text-gray-800">7 months</th>
@@ -639,7 +639,7 @@
           <li><a href="/schedules/" class="text-orange-700 underline hover:text-orange-800 font-medium transition-colors">Sleep schedules by month (13–36 months)</a></li>
           <li><a href="/tools/nap-transition-checker/" class="text-orange-700 underline hover:text-orange-800 font-medium transition-colors">Nap Transition Checker</a></li>
           <li><a href="/sleep-regressions/18-month-sleep-regression/" class="text-orange-700 underline hover:text-orange-800 font-medium transition-colors">18-Month Sleep Regression</a></li>
-          <li><a href="/tools/sleep-milestone-calculator.html" class="text-orange-700 underline hover:text-orange-800 font-medium transition-colors">Sleep &amp; Milestone Calculator</a></li>
+          <li><a id="link-milestone-calc" href="/tools/sleep-milestone-calculator.html" class="text-orange-700 underline hover:text-orange-800 font-medium transition-colors">Sleep &amp; Milestone Calculator</a></li>
         </ul>
       </aside>
     </article>
@@ -722,7 +722,7 @@
       {"ww": "1.25–2 h", "ns": [105, 315, 540], "d": 90, "bed": 765, "nt": "3", "tt": "14–15 h"},
       {"ww": "1.5–2 h", "ns": [120, 330, 570], "d": 90, "bed": 780, "nt": "3", "tt": "12–15 h"},
       {"ww": "2–2.5 h", "ns": [135, 360, 540], "d": 75, "bed": 780, "nt": "2–3", "tt": "12–14 h"},
-      {"ww": "2.5–3 h", "ns": [150, 405], "d": 90, "bed": 705, "nt": "2", "tt": "12–14 h"},
+      {"ww": "2–3 h", "ns": [150, 405], "d": 90, "bed": 720, "nt": "2–3", "tt": "12–15 h"},
       {"ww": "2.5–3 h", "ns": [165, 420], "d": 90, "bed": 720, "nt": "2", "tt": "12–14 h"},
       {"ww": "2.5–3 h", "ns": [180, 435], "d": 75, "bed": 735, "nt": "2", "tt": "12–14 h"},
       {"ww": "3–3.25 h", "ns": [195, 450], "d": 75, "bed": 750, "nt": "2", "tt": "12–14 h"},
@@ -759,6 +759,7 @@
       0: "Newborn days run on feed-and-sleep cycles, not a clock — treat this as a shape, not a schedule.",
       4: "The 4-month sleep regression often lands around here and can shift nap times for a few weeks.",
       5: "Most babies move from three naps to two between five and seven months.",
+      6: "At 6 months, babies are in the 3-to-2 nap transition window (typically 12–15 hours total sleep, 2–3 naps). On 2-nap days, bedtime is around 7:00–7:30 PM with 2.5–3 h wake windows. If your baby still takes a third catnap, bedtime shifts to 7:30–8:00 PM with shorter 2–2.5 h wake windows.",
       13: "The 2-to-1 nap transition usually starts between 13 and 15 months.",
       14: "Expect nap-transition wobbles: keep two short naps before forcing one long one.",
       15: "One nap a day now — keep the same nap start time daily.",
@@ -828,10 +829,79 @@
       var noteEl = document.getElementById('band-note');
       noteEl.textContent = note;
       noteEl.style.display = note ? '' : 'none';
+
+      var msLink = document.getElementById('link-milestone-calc');
+      if (msLink) {
+        msLink.href = '/tools/sleep-milestone-calculator.html?age=' + months;
+      }
     }
 
-    slider.addEventListener('input', render);
-    timeInput.addEventListener('input', render);
+    function getInitialAge() {
+      try {
+        var params = new URLSearchParams(window.location.search);
+        var qAge = params.get('age');
+        if (qAge !== null && qAge !== '') {
+          var n = parseInt(qAge, 10);
+          if (!isNaN(n) && n >= 0 && n <= 36) return n;
+        }
+        var sAge = sessionStorage.getItem('snugs_tool_age');
+        if (sAge !== null && sAge !== '') {
+          var sn = parseInt(sAge, 10);
+          if (!isNaN(sn) && sn >= 0 && sn <= 36) return sn;
+        }
+      } catch (e) {}
+      return parseInt(slider.value, 10) || 6;
+    }
+
+    function getInitialWake() {
+      try {
+        var params = new URLSearchParams(window.location.search);
+        var qWake = params.get('wake') || params.get('time');
+        if (qWake && /^\d{1,2}:\d{2}$/.test(qWake)) return qWake;
+        var sWake = sessionStorage.getItem('snugs_wake_time');
+        if (sWake && /^\d{1,2}:\d{2}$/.test(sWake)) return sWake;
+      } catch (e) {}
+      return timeInput.value || '07:00';
+    }
+
+    function saveState(months, wakeTime) {
+      try {
+        sessionStorage.setItem('snugs_tool_age', String(months));
+        sessionStorage.setItem('snugs_wake_time', wakeTime);
+        var url = new URL(window.location.href);
+        url.searchParams.set('age', String(months));
+        if (wakeTime && wakeTime !== '07:00') {
+          url.searchParams.set('wake', wakeTime);
+        } else {
+          url.searchParams.delete('wake');
+        }
+        window.history.replaceState({ age: months, wake: wakeTime }, '', url.toString());
+      } catch (e) {}
+    }
+
+    slider.addEventListener('input', function() {
+      saveState(parseInt(slider.value, 10), timeInput.value || '07:00');
+      render();
+    });
+    timeInput.addEventListener('input', function() {
+      saveState(parseInt(slider.value, 10), timeInput.value || '07:00');
+      render();
+    });
+
+    window.addEventListener('popstate', function(e) {
+      var age = (e.state && typeof e.state.age === 'number') ? e.state.age : getInitialAge();
+      slider.value = age;
+      render();
+    });
+
+    window.addEventListener('pageshow', function() {
+      slider.value = getInitialAge();
+      timeInput.value = getInitialWake();
+      render();
+    });
+
+    slider.value = getInitialAge();
+    timeInput.value = getInitialWake();
     render();
   </script>
 </body>
