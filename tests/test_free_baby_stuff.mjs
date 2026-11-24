@@ -186,19 +186,19 @@ test("URL hash helpers parse and format country filters safely", () => {
   assert.equal(fbs.formatCountryHash("Australia"), "#country=Australia");
 });
 
-test("mapSubscribeResponse maps pending status to success check-email state with resend", () => {
+test("mapSubscribeResponse maps pending status to success check-email state with resend and dismissible", () => {
   const state = fbs.mapSubscribeResponse({
     ok: true,
     status: 200,
     body: JSON.stringify({ status: "pending" })
   });
   assert.equal(state.state, "success");
-  assert.match(state.message, /Check your email to confirm/i);
+  assert.match(state.message, /Check your email to confirm your subscription first, then the roundup follows/i);
   assert.equal(state.canResend, true);
-  assert.equal(state.dismissible, false);
+  assert.equal(state.dismissible, true);
 });
 
-test("mapSubscribeResponse maps already_subscribed status clearly", () => {
+test("mapSubscribeResponse maps already_subscribed status clearly and dismissible", () => {
   const state = fbs.mapSubscribeResponse({
     ok: true,
     status: 200,
@@ -207,9 +207,23 @@ test("mapSubscribeResponse maps already_subscribed status clearly", () => {
   assert.equal(state.state, "already_subscribed");
   assert.match(state.message, /already subscribed/i);
   assert.equal(state.canResend, false);
+  assert.equal(state.dismissible, true);
 });
 
-test("mapSubscribeResponse maps pending_resent and pending_confirmation with resend enabled", () => {
+test("mapSubscribeResponse maps confirmed status clearly with roundup promise after confirmation", () => {
+  const state = fbs.mapSubscribeResponse({
+    ok: true,
+    status: 200,
+    body: JSON.stringify({ status: "confirmed" })
+  });
+  assert.equal(state.state, "confirmed");
+  assert.match(state.message, /You are subscribed/i);
+  assert.match(state.message, /roundup will follow/i);
+  assert.equal(state.canResend, false);
+  assert.equal(state.dismissible, true);
+});
+
+test("mapSubscribeResponse maps pending_resent and pending_confirmation with resend enabled and dismissible", () => {
   const resent = fbs.mapSubscribeResponse({
     ok: true,
     status: 200,
@@ -217,7 +231,8 @@ test("mapSubscribeResponse maps pending_resent and pending_confirmation with res
   });
   assert.equal(resent.state, "pending");
   assert.equal(resent.canResend, true);
-  assert.match(resent.message, /Check your email to confirm/i);
+  assert.equal(resent.dismissible, true);
+  assert.match(resent.message, /Check your email to confirm first, then the roundup follows/i);
 });
 
 test("mapSubscribeResponse maps worker error status to dismissible error", () => {
