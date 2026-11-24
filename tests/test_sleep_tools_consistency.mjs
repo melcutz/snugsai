@@ -326,9 +326,9 @@ test("Wake Window Calculator covers 4-month-olds directly (#35)", () => {
   const d4 = AGE_DATA[4];
 
   assert.ok(d4, "AGE_DATA[4] exists");
-  assert.equal(d4.ww, "1.5–2 h", "4 months wake window is 1.5–2 h");
+  assert.equal(d4.ww, "1.5-2.5 h", "4 months wake window is 1.5-2.5 h");
   assert.equal(d4.nt, "3", "4 months nap count is 3");
-  assert.equal(d4.tt, "12–15 h", "4 months total sleep is 12–15 h");
+  assert.equal(d4.tt, "12-15 h", "4 months total sleep is 12-15 h");
   assert.equal(d4.bed, 780, "4 months bedtime is 780 min (8:00 PM baseline from 7:00 AM wake)");
 });
 
@@ -412,7 +412,7 @@ test("Wake Window Calculator state preservation: loads age from URL query param 
   const rt4 = runWakeWindowRuntime({ search: "?age=4" });
   assert.equal(rt4.elements["age-slider"].value, "4", "Wake window calculator sets slider to 4 from ?age=4");
   assert.equal(rt4.elements["age-readout"].textContent, "4 months");
-  assert.equal(rt4.elements["ww-chip"].textContent, "Wake windows: 1.5–2 h");
+  assert.equal(rt4.elements["ww-chip"].textContent, "Wake windows: 1.5-2.5 h");
   assert.equal(rt4.elements["naps-chip"].textContent, "3 naps/day");
 
   // Cross-link to milestone calculator preserves age
