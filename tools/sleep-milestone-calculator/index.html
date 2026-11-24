@@ -44,6 +44,8 @@
   <link rel="icon" type="image/jpeg" href="/og/snugs-og.jpg" />
   <link rel="manifest" href="/site.webmanifest" />
   <meta name="theme-color" content="#EA580C" />
+  <!-- CTA UTM Passthrough & First-Touch Attribution (#45) -->
+  <script defer src="/assets/js/cta-utm.js"></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -278,15 +280,34 @@
       <section class="mb-10" aria-label="Age input">
         <label for="age-slider" class="block text-sm font-semibold text-gray-700 mb-3">Your child's age</label>
         <div class="flex items-center gap-4 mb-3">
-          <input id="age-slider" type="range" min="6" max="60" step="1" value="24" class="age-slider flex-1" aria-describedby="age-readout" />
+          <input id="age-slider" type="range" min="0" max="60" step="1" value="24" class="age-slider flex-1" aria-describedby="age-readout" />
           <div class="text-right min-w-[7.5rem]">
             <span id="age-readout" class="text-2xl font-bold text-orange-600 font-display">24 months</span>
             <span id="age-years" class="block text-xs text-gray-500">(2 years)</span>
           </div>
         </div>
         <div class="flex justify-between text-xs text-gray-400 mt-1">
-          <span>6 months</span>
+          <span>0 months (newborn)</span>
           <span>60 months (5 yrs)</span>
+        </div>
+      </section>
+
+      <!-- ============ Under 6 months notice ============ -->
+      <section id="below-six-card" class="mb-10 rounded-3xl border border-orange-200 bg-orange-50/80 p-6 md:p-8 soft-shadow" style="display: none;" aria-live="polite" aria-label="Notice for babies under 6 months">
+        <div class="flex flex-col sm:flex-row items-start gap-4">
+          <div class="w-12 h-12 rounded-2xl bg-orange-100 flex items-center justify-center shrink-0 text-orange-600">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div class="flex-1">
+            <h2 class="text-xl font-display font-bold text-gray-800 mb-2">Sleep Milestone Calculator starts at 6 months</h2>
+            <p class="text-gray-700 leading-relaxed mb-4">
+              At <span id="below-six-age-text">4 months</span>, baby sleep follows wake windows and feeding rhythms rather than fixed by-the-clock schedules. Our Wake Window Calculator covers ages 0 to 36 months with nap rhythms and wake windows tailored to your baby's age.
+            </p>
+            <a id="below-six-link" href="/tools/wake-window-calculator/?age=4" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-full hover:from-orange-600 hover:to-orange-700 transition-all shadow-md text-sm text-center max-w-full">
+              <span>View Wake Windows for <span id="below-six-btn-age">4 months</span></span>
+              <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
         </div>
       </section>
 
@@ -305,7 +326,7 @@
       </section>
 
       <!-- ============ Milestone checklist ============ -->
-      <section class="mb-10" aria-label="Milestone checklist">
+      <section id="milestone-section" class="mb-10" aria-label="Milestone checklist">
         <div class="flex items-center justify-between mb-4">
           <h2 class="text-xl font-display font-bold text-gray-800">Milestone checklist</h2>
           <span id="milestone-progress-text" class="text-sm text-gray-500"></span>
@@ -354,6 +375,7 @@
         <aside class="mt-6 text-center" aria-label="Related articles">
       <p class="text-sm font-semibold text-gray-700 mb-3">Keep reading</p>
       <ul class="text-sm space-y-2">
+        <li><a id="keep-reading-ww" href="/tools/wake-window-calculator/" class="text-orange-700 underline hover:text-orange-800 font-medium transition-colors">Wake Window Calculator (0-36 months)</a></li>
         <li><a href="/resources/taming-the-bedtime-dragon-strategies-for-parents-of-needy-toddlers.html" class="text-orange-700 underline hover:text-orange-800 font-medium transition-colors">Taming the Bedtime Dragon: Strategies for Parents of Needy Toddlers</a></li>
         <li><a href="/resources/navigating-the-18-month-sleep-regression-why-your-toddler-is-suddenly-clingy-and-how-to-help.html" class="text-orange-700 underline hover:text-orange-800 font-medium transition-colors">Navigating the 18-Month Sleep Regression</a></li>
         <li><a href="/resources/navigating-your-baby-s-12-month-milestones-from-pulling-up-to-walking-and-beyond.html" class="text-orange-700 underline hover:text-orange-800 font-medium transition-colors">Your Baby's 12-Month Milestones</a></li>
@@ -413,20 +435,20 @@
     /* ================= Data: age bands (6-60 months) ================= */
     var BANDS = [
       {
-        min: 6, max: 9, label: '6-9 months',
+        min: 6, max: 9, label: '6\u20139 months',
         rows: [
           { icon: 'sunrise', title: 'Wake up', time: '7:00 AM', note: '' },
-          { icon: 'nap', title: 'Nap 1', time: '9:00 - 10:30 AM', note: '2 hrs after waking' },
-          { icon: 'nap', title: 'Nap 2', time: '12:30 - 2:00 PM', note: '2 hrs after nap 1 ends' },
-          { icon: 'nap', title: 'Nap 3 (catnap)', time: '4:30 - 5:15 PM', note: 'short 45-min bridge to bedtime' },
-          { icon: 'moon', title: 'Bedtime', time: '7:30 - 8:00 PM', note: '2.25 hrs awake after catnap' }
+          { icon: 'nap', title: 'Nap 1', time: '9:00 \u2013 10:30 AM', note: '2 hrs after waking' },
+          { icon: 'nap', title: 'Nap 2', time: '12:30 \u2013 2:00 PM', note: '2 hrs after nap 1 ends' },
+          { icon: 'nap', title: 'Nap 3 (catnap)', time: '4:30 \u2013 5:15 PM', note: '2.5 hrs after nap 2 \u00b7 short 45-min bridge' },
+          { icon: 'moon', title: 'Bedtime', time: '7:30 \u2013 8:00 PM', note: '2.25\u20132.75 hrs awake after catnap' }
         ],
-        total: '14-15 hours total (11-12 at night + 3 naps)',
-        note: '',
-        tip: 'Protect the first nap most :  it is usually the longest and most restorative. If your baby fights the third catnap, drop it and move bedtime 30 minutes earlier.',
+        total: '12\u201315 hours total (10\u201312 at night + 2\u20133 naps)',
+        note: '2\u20133 naps/day \u00b7 3-to-2 nap transition window',
+        tip: 'At 6\u20139 months, babies transition from 3 naps to 2. On 3-nap days, wake windows are 2\u20132.5 h with a 7:30\u20138:00 PM bedtime. If your baby drops the third catnap, stretch wake windows to 2.5\u20133 h and move bedtime earlier to 7:00\u20137:30 PM to prevent overtiredness.',
         milestones: [
           'Sits with support and reaches for toys',
-          'Babbles sounds like “mama” and “baba”',
+          'Babbles sounds like \u201cmama\u201d and \u201cbaba\u201d',
           'Responds to their own name',
           'Rolls over in both directions',
           'Passes toys from hand to hand',
@@ -434,14 +456,14 @@
         ]
       },
       {
-        min: 9, max: 12, label: '9-12 months',
+        min: 9, max: 12, label: '9\u201312 months',
         rows: [
           { icon: 'sunrise', title: 'Wake up', time: '7:00 AM', note: '' },
           { icon: 'nap', title: 'Nap 1', time: '10:00 - 11:30 AM', note: '3 hrs after waking' },
           { icon: 'nap', title: 'Nap 2', time: '1:30 - 3:00 PM', note: '2 hrs after nap 1 ends' },
           { icon: 'moon', title: 'Bedtime', time: '7:30 - 8:00 PM', note: '4.5 hrs awake after nap 2' }
         ],
-        total: '13-15 hours total (11-12 at night + 2 naps)',
+        total: '13\u201315 hours total (11\u201312 at night + 2 naps)',
         note: '',
         tip: 'Stretch wake windows gradually :  3 hrs before nap 1 and 3.5-4 hrs before bedtime works well for most.',
         milestones: [
@@ -453,14 +475,14 @@
         ]
       },
       {
-        min: 12, max: 15, label: '12-15 months',
+        min: 12, max: 15, label: '12\u201315 months',
         rows: [
           { icon: 'sunrise', title: 'Wake up', time: '7:00 AM', note: '' },
           { icon: 'nap', title: 'Nap 1', time: '10:15 - 11:45 AM', note: '3.25 hrs after waking' },
           { icon: 'nap', title: 'Nap 2', time: '2:00 - 3:30 PM', note: '2.25 hrs after nap 1 ends' },
           { icon: 'moon', title: 'Bedtime', time: '7:45 - 8:15 PM', note: '4.25 hrs awake after nap 2' }
         ],
-        total: '12-14 hours total (10-12 at night + 2 naps)',
+        total: '12\u201314 hours total (10\u201312 at night + 2 naps)',
         note: 'The 2-to-1 nap transition often starts here',
         tip: 'On rough days, keep two short naps rather than forcing one long one :  transition stress can backfire.',
         milestones: [
@@ -473,13 +495,13 @@
         ]
       },
       {
-        min: 15, max: 18, label: '15-18 months',
+        min: 15, max: 18, label: '15\u201318 months',
         rows: [
           { icon: 'sunrise', title: 'Wake up', time: '7:00 AM', note: '' },
           { icon: 'nap', title: 'Nap', time: '12:30 - 2:30 PM', note: '5.5 hrs after waking' },
           { icon: 'moon', title: 'Bedtime', time: '7:30 - 8:00 PM', note: '5 hrs awake after nap' }
         ],
-        total: '12-14 hours total (10-11 at night + 1 nap)',
+        total: '12\u201314 hours total (10\u201311 at night + 1 nap)',
         note: '',
         tip: 'A mid-morning snack and lunch by 11:30 help a tired toddler hold out until nap time.',
         milestones: [
@@ -492,13 +514,13 @@
         ]
       },
       {
-        min: 18, max: 24, label: '18-24 months',
+        min: 18, max: 24, label: '18\u201324 months',
         rows: [
           { icon: 'sunrise', title: 'Wake up', time: '7:00 AM', note: '' },
           { icon: 'nap', title: 'Nap', time: '1:00 - 3:00 PM', note: '6 hrs after waking' },
           { icon: 'moon', title: 'Bedtime', time: '7:30 - 8:00 PM', note: '4.5 hrs awake after nap' }
         ],
-        total: '11-14 hours total (10-11 at night + 1 nap)',
+        total: '11\u201314 hours total (10\u201311 at night + 1 nap)',
         note: '',
         tip: 'Consistency matters more than the exact clock time :  the same nap start every day keeps bedtime smooth.',
         milestones: [
@@ -511,13 +533,13 @@
         ]
       },
       {
-        min: 24, max: 30, label: '2-2.5 years',
+        min: 24, max: 30, label: '2\u20132.5 years',
         rows: [
           { icon: 'sunrise', title: 'Wake up', time: '7:00 AM', note: '' },
           { icon: 'nap', title: 'Nap', time: '1:00 - 3:00 PM', note: '6 hrs after waking' },
           { icon: 'moon', title: 'Bedtime', time: '8:00 - 8:30 PM', note: '5 hrs awake after nap' }
         ],
-        total: '11-13 hours total (10-11 at night + 1 nap)',
+        total: '11\u201313 hours total (10\u201311 at night + 1 nap)',
         note: '',
         tip: 'A firm nap routine :  same spot, same song :  shortens nap battles at this age.',
         milestones: [
@@ -528,13 +550,13 @@
         ]
       },
       {
-        min: 30, max: 36, label: '2.5-3 years',
+        min: 30, max: 36, label: '2.5\u20133 years',
         rows: [
           { icon: 'sunrise', title: 'Wake up', time: '7:00 AM', note: '' },
           { icon: 'nap', title: 'Nap', time: '1:30 - 3:00 PM', note: '6.5 hrs after waking' },
           { icon: 'moon', title: 'Bedtime', time: '8:30 - 9:00 PM', note: '5.5 hrs awake after nap' }
         ],
-        total: '11-13 hours total (10-11 at night + 1 nap)',
+        total: '11\u201313 hours total (10\u201311 at night + 1 nap)',
         note: 'Many toddlers drop the nap around age 3',
         tip: 'If naps stop happening, swap in quiet time with books or puzzles to protect night sleep.',
         milestones: [
@@ -546,13 +568,13 @@
         ]
       },
       {
-        min: 36, max: 48, label: '3-4 years',
+        min: 36, max: 48, label: '3\u20134 years',
         rows: [
           { icon: 'sunrise', title: 'Wake up', time: '7:00 AM', note: '' },
           { icon: 'quiet', title: 'Quiet time', time: '1:00 - 2:30 PM', note: 'nap dropped :  rest with books or toys' },
           { icon: 'moon', title: 'Bedtime', time: '8:30 - 9:00 PM', note: '' }
         ],
-        total: '10-13 hours total at night',
+        total: '10\u201313 hours total at night',
         note: 'Nap usually dropped by now',
         tip: 'Quiet time still counts :  it resets afternoon meltdowns and protects night sleep.',
         milestones: [
@@ -564,13 +586,13 @@
         ]
       },
       {
-        min: 48, max: 61, label: '4-5 years',
+        min: 48, max: 61, label: '4\u20135 years',
         rows: [
           { icon: 'sunrise', title: 'Wake up', time: '7:00 AM', note: '' },
           { icon: 'quiet', title: 'Quiet time (optional)', time: '1:00 - 2:00 PM', note: 'rest, puzzles, or audiobooks' },
           { icon: 'moon', title: 'Bedtime', time: '8:30 - 9:30 PM', note: '' }
         ],
-        total: '10-13 hours total at night',
+        total: '10\u201313 hours total at night',
         note: '',
         tip: 'Keep a calm pre-bed routine :  screens off 30-60 minutes before lights out.',
         milestones: [
@@ -604,6 +626,7 @@
     } catch (e) { checkedStore = {}; }
 
     function bandFor(months) {
+      if (months < BANDS[0].min) return BANDS[0];
       for (var i = 0; i < BANDS.length; i++) {
         if (months >= BANDS[i].min && months < BANDS[i].max) return BANDS[i];
       }
@@ -618,12 +641,46 @@
       return '(' + y + (y === 1 ? ' yr' : ' yrs') + ' ' + m + ' mo)';
     }
 
+    function updateCrossLinks(months) {
+      var wwLink = document.getElementById('keep-reading-ww');
+      if (wwLink) {
+        wwLink.href = '/tools/wake-window-calculator/?age=' + months;
+      }
+    }
+
     function render() {
       var months = parseInt(slider.value, 10);
+      if (isNaN(months)) months = 24;
+
+      readout.textContent = months === 0 ? '0 months (Newborn)' : months + (months === 1 ? ' month' : ' months');
+      yearsEl.textContent = yearsLabel(months);
+
+      var belowSixCard = document.getElementById('below-six-card');
+      var scheduleSec = document.getElementById('schedule-section');
+      var milestoneSec = document.getElementById('milestone-section');
+
+      if (months < 6) {
+        if (belowSixCard) {
+          belowSixCard.style.display = '';
+          var ageLabel = months === 0 ? 'newborns' : months + (months === 1 ? ' month' : ' months');
+          document.getElementById('below-six-age-text').textContent = ageLabel;
+          document.getElementById('below-six-btn-age').textContent = ageLabel;
+          document.getElementById('below-six-link').href = '/tools/wake-window-calculator/?age=' + months;
+        }
+        if (scheduleSec) scheduleSec.style.display = 'none';
+        if (milestoneSec) milestoneSec.style.display = 'none';
+        document.getElementById('schedule-rows').innerHTML = '';
+        document.getElementById('milestone-list').innerHTML = '';
+        updateCrossLinks(months);
+        return;
+      }
+
+      if (belowSixCard) belowSixCard.style.display = 'none';
+      if (scheduleSec) scheduleSec.style.display = '';
+      if (milestoneSec) milestoneSec.style.display = '';
+
       var band = bandFor(months);
 
-      readout.textContent = months + ' months';
-      yearsEl.textContent = yearsLabel(months);
       document.getElementById('band-label').textContent = band.label;
       document.getElementById('total-sleep').textContent = band.total;
       var noteEl = document.getElementById('band-note');
@@ -667,6 +724,7 @@
       });
 
       updateProgress();
+      updateCrossLinks(months);
     }
 
     function updateProgress() {
@@ -683,10 +741,51 @@
       document.getElementById('milestone-progress-text').textContent = done + ' of ' + total + ' checked';
     }
 
-    slider.addEventListener('input', render);
+    function getInitialAge() {
+      try {
+        var params = new URLSearchParams(window.location.search);
+        var qAge = params.get('age');
+        if (qAge !== null && qAge !== '') {
+          var n = parseInt(qAge, 10);
+          if (!isNaN(n) && n >= 0 && n <= 60) return n;
+        }
+        var sAge = sessionStorage.getItem('snugs_tool_age');
+        if (sAge !== null && sAge !== '') {
+          var sn = parseInt(sAge, 10);
+          if (!isNaN(sn) && sn >= 0 && sn <= 60) return sn;
+        }
+      } catch (e) {}
+      return parseInt(slider.value, 10) || 24;
+    }
+
+    function saveState(months) {
+      try {
+        sessionStorage.setItem('snugs_tool_age', String(months));
+        var url = new URL(window.location.href);
+        url.searchParams.set('age', String(months));
+        window.history.replaceState({ age: months }, '', url.toString());
+      } catch (e) {}
+    }
+
+    slider.addEventListener('input', function() {
+      saveState(parseInt(slider.value, 10));
+      render();
+    });
+
+    window.addEventListener('popstate', function(e) {
+      var age = (e.state && typeof e.state.age === 'number') ? e.state.age : getInitialAge();
+      slider.value = age;
+      render();
+    });
+
+    window.addEventListener('pageshow', function() {
+      slider.value = getInitialAge();
+      render();
+    });
 
     document.getElementById('copy-link').addEventListener('click', function () {
-      var url = window.location.origin + window.location.pathname;
+      var months = parseInt(slider.value, 10);
+      var url = window.location.origin + window.location.pathname + '?age=' + months;
       function done() { showToast('Share link copied'); }
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(url).then(done, function () { fallbackCopy(url); done(); });
@@ -707,6 +806,7 @@
       document.body.removeChild(ta);
     }
 
+    slider.value = getInitialAge();
     render();
   </script>
 </body>

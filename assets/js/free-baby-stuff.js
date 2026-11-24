@@ -311,12 +311,22 @@
       ? parsed.message.trim()
       : "";
 
+    if (workerStatus === "confirmed" || workerStatus === "subscribed") {
+      return {
+        state: "confirmed",
+        status: workerStatus,
+        message: customMsg || "You are subscribed to Free Baby Stuff Weekly. Your weekly roundup will follow.",
+        dismissible: true,
+        canResend: false
+      };
+    }
+
     if (workerStatus === "pending" || workerStatus === "success") {
       return {
         state: "success",
         status: workerStatus,
-        message: customMsg || "Check your email to confirm your subscription.",
-        dismissible: false,
+        message: customMsg || "Check your email to confirm your subscription first, then the roundup follows.",
+        dismissible: true,
         canResend: true
       };
     }
@@ -325,8 +335,8 @@
       return {
         state: "pending",
         status: workerStatus,
-        message: customMsg || "Check your email to confirm. Confirmation email sent.",
-        dismissible: false,
+        message: customMsg || "Confirmation email sent. Check your email to confirm first, then the roundup follows.",
+        dismissible: true,
         canResend: true
       };
     }
@@ -336,7 +346,7 @@
         state: "already_subscribed",
         status: "already_subscribed",
         message: customMsg || "You are already subscribed to the weekly roundup.",
-        dismissible: false,
+        dismissible: true,
         canResend: false
       };
     }
@@ -358,6 +368,80 @@
       dismissible: true,
       canResend: false
     };
+  }
+
+  function parseConfirmationQuery(search, hash) {
+    var s = String(search || "");
+    var h = String(hash || "");
+
+    var queryConfirmed = false;
+    var queryAlreadySubscribed = false;
+
+    if (s) {
+      var q = s.indexOf("?") === 0 ? s.slice(1) : s;
+      var pairs = q.split("&");
+      for (var i = 0; i < pairs.length; i++) {
+        var part = pairs[i];
+        if (!part) continue;
+        var eqIdx = part.indexOf("=");
+        var rawKey = eqIdx === -1 ? part : part.slice(0, eqIdx);
+        var rawVal = eqIdx === -1 ? "" : part.slice(eqIdx + 1);
+        var k = "";
+        var v = "";
+        try {
+          k = decodeURIComponent(rawKey).toLowerCase().trim();
+          v = decodeURIComponent(rawVal).toLowerCase().trim();
+        } catch (_) {
+          k = rawKey.toLowerCase().trim();
+          v = rawVal.toLowerCase().trim();
+        }
+
+        if (k === "confirmed" && (v === "" || v === "1" || v === "true" || v === "yes")) {
+          queryConfirmed = true;
+        } else if (k === "subscribed" && (v === "" || v === "1" || v === "true" || v === "yes")) {
+          queryConfirmed = true;
+        } else if (k === "subscription" && v === "confirmed") {
+          queryConfirmed = true;
+        } else if (k === "status") {
+          if (v === "confirmed" || v === "subscribed") {
+            queryConfirmed = true;
+          } else if (v === "already_subscribed" || v === "already-subscribed") {
+            queryAlreadySubscribed = true;
+          }
+        }
+      }
+    }
+
+    if (h) {
+      var hashClean = h.indexOf("#") === 0 ? h.slice(1).toLowerCase() : h.toLowerCase();
+      if (hashClean === "confirmed" || hashClean === "subscription-confirmed") {
+        queryConfirmed = true;
+      } else if (hashClean === "already-subscribed" || hashClean === "already_subscribed") {
+        queryAlreadySubscribed = true;
+      }
+    }
+
+    if (queryConfirmed) {
+      return {
+        state: "confirmed",
+        status: "confirmed",
+        message: "You are subscribed to Free Baby Stuff Weekly. Your weekly roundup will follow.",
+        dismissible: true,
+        canResend: false
+      };
+    }
+
+    if (queryAlreadySubscribed) {
+      return {
+        state: "already_subscribed",
+        status: "already_subscribed",
+        message: "You are already subscribed to Free Baby Stuff Weekly.",
+        dismissible: true,
+        canResend: false
+      };
+    }
+
+    return null;
   }
 
   async function submitSubscribe(options) {
@@ -610,6 +694,8 @@
       }
     }
 
+    var confirmState = w && w.location ? parseConfirmationQuery(w.location.search, w.location.hash) : null;
+
     function wireSubscribeForm(formEl) {
       if (!formEl) return;
       var wrapEl = formEl.parentElement || d;
@@ -636,6 +722,22 @@
           dismissBtn.classList.add("hidden");
           dismissBtn.hidden = true;
         }
+        if (w && w.history && typeof w.history.replaceState === "function" && w.location) {
+          var search = w.location.search || "";
+          if (/[?&](confirmed|status|subscription|subscribed)/i.test(search)) {
+            var newSearch = search
+              .replace(/[?&]confirmed(=[^&]*)?/gi, "")
+              .replace(/[?&]status(=[^&]*)?/gi, "")
+              .replace(/[?&]subscription(=[^&]*)?/gi, "")
+              .replace(/[?&]subscribed(=[^&]*)?/gi, "")
+              .replace(/^&/, "?");
+            if (newSearch === "?") newSearch = "";
+            var newUrl = w.location.pathname + newSearch + (w.location.hash || "");
+            try {
+              w.history.replaceState(null, "", newUrl);
+            } catch (_) {}
+          }
+        }
       }
 
       function renderSubscribeState(mapped) {
@@ -656,7 +758,7 @@
         statusBox.setAttribute("data-state", mapped.state);
         statusMsg.textContent = mapped.message;
 
-        if (mapped.state === "success" || mapped.state === "already_subscribed") {
+        if (mapped.state === "success" || mapped.state === "already_subscribed" || mapped.state === "confirmed") {
           statusBox.classList.add("bg-green-50", "border-green-200", "text-green-900");
         } else if (mapped.state === "pending") {
           statusBox.classList.add("bg-amber-50", "border-amber-200", "text-amber-900");
@@ -720,6 +822,10 @@
           hideStatus();
         });
       }
+
+      if (confirmState) {
+        renderSubscribeState(confirmState);
+      }
     }
 
     for (var k = 0; k < seenForms.length; k++) {
@@ -741,6 +847,7 @@
     resetCountryFilter: resetCountryFilter,
     buildSubscribePayload: buildSubscribePayload,
     mapSubscribeResponse: mapSubscribeResponse,
+    parseConfirmationQuery: parseConfirmationQuery,
     submitSubscribe: submitSubscribe,
     sanitizeDirectUrl: sanitizeDirectUrl,
     renderOfferCards: renderOfferCards,
