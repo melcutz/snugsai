@@ -1,5 +1,5 @@
+# Ignore agent docs and all Markdown
 AGENTS.md
-CLAUDE.md
 *.md
 !docs/PRODUCT_INVENTORY.md
 !workers/free-baby-stuff/README.md
