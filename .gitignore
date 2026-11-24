@@ -5,3 +5,6 @@ AGENTS.md
 !workers/free-baby-stuff/README.md
 
 node_modules/
+__pycache__/
+*.pyc
+.pytest_cache/
