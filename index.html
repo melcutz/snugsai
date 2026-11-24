@@ -396,7 +396,7 @@
     <div class="container mx-auto px-4 py-8 md:py-16 max-w-7xl relative z-10">
 
         <!-- Header -->
-        <header class="text-center mb-12 md:mb-16 lg:mb-24 animate-fadeIn">
+        <header class="text-center mb-8 md:mb-16 lg:mb-24 animate-fadeIn">
             <div class="inline-block">
                 <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-orange-600 mb-3 font-display">
                     Snugs<span class="text-orange-500">.ai</span>
@@ -407,7 +407,7 @@
         </header>
 
         <!-- Hero Section -->
-        <div class="grid lg:grid-cols-2 gap-16 items-center mb-24 md:mb-32">
+        <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center mb-16 md:mb-32">
 
             <!-- Hero Text -->
             <div class="order-2 lg:order-1">
@@ -423,6 +423,14 @@
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 via-orange-500 to-orange-600">It's 3AM.</span><br/>
                     You Need Answers Now.
                 </h2>
+
+                <!-- Mobile Hero CTA (visible on mobile, hidden on desktop to avoid duplicate) -->
+                <div class="block lg:hidden my-6 animate-fadeInUp delay-300">
+                    <a href="https://app.snugs.ai/?utm_source=marketing_site&utm_medium=cta&utm_campaign=home-hero" data-cta="home-hero" class="inline-flex items-center justify-center w-full px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-full hover:from-orange-600 hover:to-orange-700 transition-all shadow-xl hover:shadow-2xl text-center">
+                        Start your 14-day free trial
+                    </a>
+                    <p class="text-xs text-gray-500 mt-2 text-center">Full 14-day trial with every premium feature. No credit card required.</p>
+                </div>
 
                 <p class="text-lg sm:text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed animate-fadeInUp delay-300 font-light">
                     Meet Snugs, the AI parenting advisor that actually knows your baby. Point your camera at your baby and Snugs' AI reads their cries, sounds and body language in real time, then suggests what they might need. Works on iPhone, Android and desktop, no app install. Source-backed advice 24/7. No judgment.
@@ -454,26 +462,27 @@
                     </div>
                 </div>
 
-                <div class="animate-fadeInUp delay-500">
+                <!-- Desktop Hero CTA (hidden on mobile, visible on lg) -->
+                <div class="hidden lg:block animate-fadeInUp delay-500">
                     <a href="https://app.snugs.ai/?utm_source=marketing_site&utm_medium=cta&utm_campaign=home-hero" data-cta="home-hero" class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-full hover:from-orange-600 hover:to-orange-700 transition-all shadow-xl hover:shadow-2xl">
                         Start your 14-day free trial
                     </a>
-                    <p class="text-sm text-gray-500 mt-4">For moms and dads — the full 14-day trial with every premium feature. No credit card required.</p>
+                    <p class="text-sm text-gray-500 mt-4">For moms and dads: the full 14-day trial with every premium feature. No credit card required.</p>
                 </div>
             </div>
 
             <!-- Animated Teddy Bear -->
-            <div class="order-1 lg:order-2 relative flex items-center justify-center animate-scaleIn delay-300">
+            <div class="order-1 lg:order-2 relative flex items-center justify-center animate-scaleIn delay-300 mb-6 lg:mb-0">
                 <div class="absolute inset-0 flex items-center justify-center">
-                    <div class="w-64 h-64 md:w-80 md:h-80 bg-gradient-to-br from-orange-200 to-orange-300 rounded-full blur-3xl opacity-40 pulse-ring"></div>
+                    <div class="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 bg-gradient-to-br from-orange-200 to-orange-300 rounded-full blur-3xl opacity-40 pulse-ring"></div>
                 </div>
 
                 <div class="relative teddy-float">
                     <!-- Sparkle decorations -->
-                    <div class="absolute -top-8 -right-8 w-4 h-4 bg-orange-400 rounded-full animate-pulse" style="animation-delay: 0.3s;"></div>
-                    <div class="absolute -top-12 right-12 w-3 h-3 bg-orange-300 rounded-full animate-pulse" style="animation-delay: 0.6s;"></div>
-                    <div class="absolute -bottom-8 -left-8 w-5 h-5 bg-orange-500 rounded-full animate-pulse" style="animation-delay: 0.9s;"></div>
-                    <div class="absolute bottom-12 -left-12 w-3 h-3 bg-orange-200 rounded-full animate-pulse" style="animation-delay: 1.2s;"></div>
+                    <div class="absolute -top-6 -right-6 md:-top-8 md:-right-8 w-3 h-3 md:w-4 md:h-4 bg-orange-400 rounded-full animate-pulse" style="animation-delay: 0.3s;"></div>
+                    <div class="absolute -top-10 right-8 md:-top-12 md:right-12 w-2.5 h-2.5 md:w-3 md:h-3 bg-orange-300 rounded-full animate-pulse" style="animation-delay: 0.6s;"></div>
+                    <div class="absolute -bottom-6 -left-6 md:-bottom-8 md:-left-8 w-4 h-4 md:w-5 md:h-5 bg-orange-500 rounded-full animate-pulse" style="animation-delay: 0.9s;"></div>
+                    <div class="absolute bottom-8 -left-8 md:bottom-12 md:-left-12 w-2.5 h-2.5 md:w-3 md:h-3 bg-orange-200 rounded-full animate-pulse" style="animation-delay: 1.2s;"></div>
 
                     <!-- Teddy Bear PNG with enhanced styling -->
                     <div class="relative">
@@ -482,7 +491,7 @@
                             alt="Snugs AI Teddy Bear"
                             width="400"
                             height="400"
-                            class="drop-shadow-2xl"
+                            class="w-40 h-40 sm:w-56 sm:h-56 lg:w-[400px] lg:h-[400px] drop-shadow-2xl"
                             style="filter: drop-shadow(0 20px 40px rgba(234, 88, 12, 0.3));"
                             loading="eager"
                         />
@@ -890,19 +899,9 @@
                     </a>
                 </div>
 
-                <p class="text-sm text-gray-500 text-center mb-4">
+                <p class="text-sm text-gray-500 text-center mb-0">
                     Tip: Instagram and TikTok don't support pre-filled posts. We'll copy the text for you to paste.
                 </p>
-
-                <div class="flex justify-center">
-                    <a href="/og/snugs-og.jpg" download class="inline-flex items-center gap-3 rounded-full bg-orange-100 text-orange-700 px-6 py-3 text-sm font-semibold hover:bg-orange-200 transition-all soft-shadow hover:shadow-md">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path d="M8 2V11M8 11L5 8M8 11L11 8" stroke="#ea580c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M2 11V13C2 13.5523 2.44772 14 3 14H13C13.5523 14 14 13.5523 14 13V11" stroke="#ea580c" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                        <span>Download share image (1200×630)</span>
-                    </a>
-                </div>
             </div>
         </div>
 
