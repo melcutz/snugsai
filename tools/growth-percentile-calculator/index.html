@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Cloudflare Web Analytics -->
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b844caf1ba764318811b28d1942bbaef"}'></script>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CLY78E6V4R"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CLY78E6V4R');
+  </script>
+  <!-- MSFT Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "uawbuyagyv");
+  </script>
+  <title>Baby Growth Percentile Calculator: Weight, Length &amp; Head Size (WHO) | Snugs.ai</title>
+  <meta name="description" content="Free baby growth percentile calculator using WHO Child Growth Standards. Enter your baby's age, sex, weight, length and head circumference to see each growth percentile instantly." />
+  <link rel="canonical" href="https://snugs.ai/tools/growth-percentile-calculator/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Baby Growth Percentile Calculator: Weight, Length &amp; Head Size (WHO) | Snugs.ai" />
+  <meta property="og:description" content="Free baby growth percentile calculator using WHO Child Growth Standards. Enter your baby's age, sex, weight, length and head circumference to see each growth percentile instantly." />
+  <meta property="og:url" content="https://snugs.ai/tools/growth-percentile-calculator/" />
+  <meta property="og:image" content="https://snugs.ai/og/snugs-og.jpg" />
+  <meta property="og:image:width" content="1000" />
+  <meta property="og:image:height" content="1500" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Baby Growth Percentile Calculator: Weight, Length &amp; Head Size (WHO) | Snugs.ai" />
+  <meta name="twitter:description" content="Free baby growth percentile calculator using WHO Child Growth Standards. Enter your baby's age, sex, weight, length and head circumference to see each growth percentile instantly." />
+  <meta name="twitter:image" content="https://snugs.ai/og/snugs-og.jpg" />
+  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#EA580C" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://snugs.ai/"},
+          {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://snugs.ai/tools/"},
+          {"@type": "ListItem", "position": 3, "name": "Growth Percentile Calculator", "item": "https://snugs.ai/tools/growth-percentile-calculator/"}
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Baby Growth Percentile Calculator",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Any",
+        "description": "Free calculator that turns a baby's age (0-24 months), sex, weight, length and head circumference into WHO growth percentiles.",
+        "url": "https://snugs.ai/tools/growth-percentile-calculator/",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do I use this growth percentile calculator?",
+            "acceptedAnswer": {"@type": "Answer", "text": "Choose your baby's sex, set their age, pick metric or imperial units, and enter any measurements you have: weight, length and head circumference. Each percentile appears instantly. Leave a field blank if you do not have that measurement yet."}
+          },
+          {
+            "@type": "Question",
+            "name": "What does a growth percentile actually mean?",
+            "acceptedAnswer": {"@type": "Answer", "text": "A percentile compares your baby with the WHO reference group of babies of the same age and sex. A weight at the 40th percentile means about 40 of 100 babies weigh less and about 60 weigh more. It is a position in the group, not a grade and not a percentage of some target weight."}
+          },
+          {
+            "@type": "Question",
+            "name": "Is the 50th percentile the goal?",
+            "acceptedAnswer": {"@type": "Answer", "text": "No. The 50th percentile is simply the middle of the reference group. Healthy babies settle anywhere across a wide range, roughly the 3rd to the 97th percentile, and a baby tracking steadily along the 15th percentile is usually growing just as well as one tracking along the 85th."}
+          },
+          {
+            "@type": "Question",
+            "name": "Should I worry if my baby's percentile changes?",
+            "acceptedAnswer": {"@type": "Answer", "text": "Small moves up or down are common, especially in the first months while babies find their own curve. What pediatricians watch is the pattern over several visits. If a percentile drops or climbs across two or more chart lines between visits, or you are ever worried about feeding or growth, bring it up with your pediatrician."}
+          },
+          {
+            "@type": "Question",
+            "name": "Is this medical advice?",
+            "acceptedAnswer": {"@type": "Answer", "text": "No. This calculator is for general information only. It uses the WHO Child Growth Standards, the same reference the CDC and the American Academy of Pediatrics recommend for children under 2, but it cannot judge your baby's health. Always talk to your pediatrician about any concern."}
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'display': ['"Crimson Pro"', 'Georgia', 'serif'],
+            'sans': ['"DM Sans"', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes blob {
+      0%, 100% {
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        transform: rotate(0deg) scale(1);
+      }
+      25% {
+        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+        transform: rotate(90deg) scale(1.05);
+      }
+      50% {
+        border-radius: 50% 60% 30% 60% / 30% 50% 70% 30%;
+        transform: rotate(180deg) scale(1);
+      }
+      75% {
+        border-radius: 60% 40% 60% 30% / 70% 30% 60% 40%;
+        transform: rotate(270deg) scale(1.05);
+      }
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .animate-fadeInUp {
+      animation: fadeInUp 0.8s ease-out forwards;
+      opacity: 0;
+    }
+
+    .animate-fadeIn {
+      animation: fadeIn 0.6s ease-out forwards;
+      opacity: 0;
+    }
+
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+    }
+
+    .soft-shadow {
+      box-shadow:
+        0 2px 8px rgba(234, 88, 12, 0.04),
+        0 8px 24px rgba(234, 88, 12, 0.08),
+        0 16px 56px rgba(234, 88, 12, 0.08);
+    }
+
+    .gradient-warm {
+      background: linear-gradient(135deg,
+        #fff7ed 0%,
+        #ffedd5 25%,
+        #fed7aa 50%,
+        #ffedd5 75%,
+        #fff7ed 100%);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+    }
+
+    .blob-decoration {
+      position: absolute;
+      mix-blend-mode: multiply;
+      filter: blur(40px);
+      opacity: 0.3;
+      animation: blob 20s ease-in-out infinite;
+    }
+
+    input[type="range"].age-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 10px;
+      border-radius: 9999px;
+      background: linear-gradient(to right, #fdba74, #ea580c);
+      outline: none;
+    }
+
+    input[type="range"].age-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 9999px;
+      background: #fff;
+      border: 4px solid #ea580c;
+      box-shadow: 0 2px 8px rgba(234, 88, 12, 0.35);
+      cursor: pointer;
+    }
+
+    input[type="range"].age-slider::-moz-range-thumb {
+      width: 28px;
+      height: 28px;
+      border-radius: 9999px;
+      background: #fff;
+      border: 4px solid #ea580c;
+      box-shadow: 0 2px 8px rgba(234, 88, 12, 0.35);
+      cursor: pointer;
+    }
+
+    /* Segmented toggles (sex, units) */
+    .seg-btn {
+      padding: 0.55rem 1.1rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #9a3412;
+      background: transparent;
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+    .seg-btn[aria-pressed="true"] {
+      background: #ea580c;
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(234, 88, 12, 0.35);
+    }
+
+    /* Percentile position bar */
+    .pct-track {
+      position: relative;
+      height: 12px;
+      border-radius: 9999px;
+      background: linear-gradient(to right, #ffedd5, #fdba74 50%, #ffedd5);
+      border: 1px solid #fed7aa;
+    }
+    .pct-marker {
+      position: absolute;
+      top: 50%;
+      width: 22px;
+      height: 22px;
+      border-radius: 9999px;
+      background: #fff;
+      border: 5px solid #ea580c;
+      box-shadow: 0 2px 8px rgba(234, 88, 12, 0.4);
+      transform: translate(-50%, -50%);
+      transition: left 0.35s ease;
+    }
+
+    /* Snugs sticky mobile CTA: mobile-only, fixed, no CLS. Keep z-index 40 so cookie consent (50+) stays on top. */
+    .snugs-sticky-cta { display: none; }
+    @media (max-width: 767px) {
+      body { padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+      body.snugs-sticky-dismissed { padding-bottom: 0; }
+      .snugs-sticky-cta {
+        display: flex;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 40;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
+        background: rgba(255, 255, 255, 0.96);
+        border-top: 1px solid #fed7aa;
+        box-shadow: 0 -8px 24px rgba(234, 88, 12, 0.12);
+      }
+      .snugs-sticky-cta[hidden] { display: none; }
+    }
+    @media (min-width: 768px) {
+      .snugs-sticky-cta { display: none !important; }
+    }
+  </style>
+  <!-- CTA UTM Passthrough & First-Touch Attribution -->
+  <script defer src="/assets/js/cta-utm.js"></script>
+</head>
+<body class="gradient-warm min-h-screen overflow-x-hidden relative">
+
+  <!-- Decorative blobs -->
+  <div class="blob-decoration w-80 h-80 bg-orange-400 rounded-full" style="top: -10%; right: -5%; animation-delay: 0s;"></div>
+  <div class="blob-decoration w-64 h-64 bg-orange-300 rounded-full" style="bottom: 10%; left: -8%; animation-delay: 5s;"></div>
+
+  <div class="container mx-auto px-4 py-8 md:py-16 max-w-3xl relative z-10">
+    <nav class="text-sm text-gray-600 mb-6 animate-fadeIn" aria-label="Breadcrumb">
+      <a href="/" class="hover:text-orange-700 transition-colors font-medium">Home</a>
+      <span class="mx-2">·</span>
+      <a href="/tools/" class="hover:text-orange-700 transition-colors font-medium">Tools</a>
+      <span class="mx-2">·</span>
+      <span class="text-gray-800">Growth Percentile Calculator</span>
+    </nav>
+
+    <article class="glass-card rounded-[3rem] soft-shadow p-8 md:p-12 animate-fadeInUp delay-100">
+      <header class="mb-8 text-center">
+        <span class="inline-block px-4 py-1.5 bg-orange-100 text-orange-700 text-xs font-semibold tracking-widest uppercase rounded-full mb-4">Free tool · No sign-up</span>
+        <h1 class="text-3xl md:text-4xl font-display font-bold text-gray-800 mb-3">Baby Growth Percentile Calculator</h1>
+      </header>
+
+      <p class="text-gray-700 leading-relaxed mb-4">
+        Enter your baby's age, sex and measurements, and this calculator shows where their weight, length and head circumference sit compared with babies of the same age and sex. It uses the WHO Child Growth Standards, the reference the CDC and the American Academy of Pediatrics recommend for children under 2 years old.
+      </p>
+      <p class="text-gray-600 text-sm mb-8">For general information only, not medical advice. Talk to your pediatrician about any growth concern. For emergencies, call your local emergency number.</p>
+
+      <!-- ============ Calculator ============ -->
+      <section class="mb-10" aria-label="Growth percentile inputs">
+
+        <div class="flex flex-wrap items-end justify-between gap-4 mb-6">
+          <div>
+            <span class="block text-sm font-semibold text-gray-700 mb-2" id="sex-label">Baby's sex</span>
+            <div class="inline-flex rounded-full border border-orange-200 bg-white/80 p-1" role="group" aria-labelledby="sex-label">
+              <button type="button" id="sex-boy" class="seg-btn" aria-pressed="true">Boy</button>
+              <button type="button" id="sex-girl" class="seg-btn" aria-pressed="false">Girl</button>
+            </div>
+          </div>
+          <div>
+            <span class="block text-sm font-semibold text-gray-700 mb-2" id="units-label">Units</span>
+            <div class="inline-flex rounded-full border border-orange-200 bg-white/80 p-1" role="group" aria-labelledby="units-label">
+              <button type="button" id="unit-metric" class="seg-btn" aria-pressed="true">kg / cm</button>
+              <button type="button" id="unit-imperial" class="seg-btn" aria-pressed="false">lb / in</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-6">
+          <label for="age-slider" class="block text-sm font-semibold text-gray-700 mb-3">Your baby's age</label>
+          <div class="flex items-center gap-4 mb-3">
+            <input id="age-slider" type="range" min="0" max="24" step="0.25" value="6" class="age-slider flex-1" aria-describedby="age-readout" />
+            <div class="text-right min-w-[7.5rem]">
+              <span id="age-readout" class="text-2xl font-bold text-orange-600 font-display">6 months</span>
+              <span id="age-sub" class="block text-xs text-gray-500"></span>
+            </div>
+          </div>
+          <div class="flex justify-between text-xs text-gray-400 mt-1">
+            <span>Birth</span>
+            <span>12 months</span>
+            <span>24 months</span>
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-3 gap-4 mb-2">
+          <div>
+            <label for="in-weight" class="block text-sm font-semibold text-gray-700 mb-2">Weight <span class="font-normal text-gray-500" id="unit-weight">(kg)</span></label>
+            <input id="in-weight" type="number" inputmode="decimal" min="0" step="0.1" placeholder="e.g. 7.9" class="w-full px-4 py-3 rounded-xl border border-orange-200 bg-white/90 text-gray-800 font-semibold focus:outline-none focus:ring-2 focus:ring-orange-300" />
+          </div>
+          <div>
+            <label for="in-length" class="block text-sm font-semibold text-gray-700 mb-2">Length <span class="font-normal text-gray-500" id="unit-length">(cm)</span></label>
+            <input id="in-length" type="number" inputmode="decimal" min="0" step="0.1" placeholder="e.g. 67.6" class="w-full px-4 py-3 rounded-xl border border-orange-200 bg-white/90 text-gray-800 font-semibold focus:outline-none focus:ring-2 focus:ring-orange-300" />
+          </div>
+          <div>
+            <label for="in-head" class="block text-sm font-semibold text-gray-700 mb-2">Head circumference <span class="font-normal text-gray-500" id="unit-head">(cm)</span></label>
+            <input id="in-head" type="number" inputmode="decimal" min="0" step="0.1" placeholder="e.g. 43.3" class="w-full px-4 py-3 rounded-xl border border-orange-200 bg-white/90 text-gray-800 font-semibold focus:outline-none focus:ring-2 focus:ring-orange-300" />
+          </div>
+        </div>
+        <p class="text-xs text-gray-500">Fill in any one measurement, or all three. Results update as you type.</p>
+      </section>
+
+      <!-- ============ Results ============ -->
+      <section class="mb-10" aria-label="Growth percentile results" aria-live="polite">
+        <h2 class="text-xl font-display font-bold text-gray-800 mb-4">Your baby's percentiles</h2>
+
+        <div id="results-empty" class="rounded-3xl border border-dashed border-orange-300 bg-white/50 p-6 text-center text-gray-600">
+          Enter at least one measurement above and the percentiles appear here instantly.
+        </div>
+
+        <div id="card-weight" class="rounded-3xl border border-orange-200 bg-white/70 p-6 mb-4" hidden>
+          <div class="flex items-baseline justify-between gap-3 mb-1">
+            <h3 class="font-display font-bold text-lg text-gray-800">Weight</h3>
+            <span class="text-sm text-gray-500" id="echo-weight"></span>
+          </div>
+          <p class="mb-3"><span class="text-4xl font-bold text-orange-600 font-display" id="pct-weight"></span> <span class="text-gray-600" id="pct-weight-word"></span></p>
+          <div class="pct-track mb-1"><div class="pct-marker" id="marker-weight" style="left: 50%;"></div></div>
+          <div class="flex justify-between text-xs text-gray-400 mb-3"><span>0th</span><span>50th</span><span>100th</span></div>
+          <p class="text-gray-700 text-sm mb-2" id="sentence-weight"></p>
+          <p class="text-xs text-gray-500" id="median-weight"></p>
+          <p class="text-xs text-red-600 mt-2" id="warn-weight" hidden></p>
+        </div>
+
+        <div id="card-length" class="rounded-3xl border border-orange-200 bg-white/70 p-6 mb-4" hidden>
+          <div class="flex items-baseline justify-between gap-3 mb-1">
+            <h3 class="font-display font-bold text-lg text-gray-800">Length</h3>
+            <span class="text-sm text-gray-500" id="echo-length"></span>
+          </div>
+          <p class="mb-3"><span class="text-4xl font-bold text-orange-600 font-display" id="pct-length"></span> <span class="text-gray-600" id="pct-length-word"></span></p>
+          <div class="pct-track mb-1"><div class="pct-marker" id="marker-length" style="left: 50%;"></div></div>
+          <div class="flex justify-between text-xs text-gray-400 mb-3"><span>0th</span><span>50th</span><span>100th</span></div>
+          <p class="text-gray-700 text-sm mb-2" id="sentence-length"></p>
+          <p class="text-xs text-gray-500" id="median-length"></p>
+          <p class="text-xs text-red-600 mt-2" id="warn-length" hidden></p>
+        </div>
+
+        <div id="card-head" class="rounded-3xl border border-orange-200 bg-white/70 p-6" hidden>
+          <div class="flex items-baseline justify-between gap-3 mb-1">
+            <h3 class="font-display font-bold text-lg text-gray-800">Head circumference</h3>
+            <span class="text-sm text-gray-500" id="echo-head"></span>
+          </div>
+          <p class="mb-3"><span class="text-4xl font-bold text-orange-600 font-display" id="pct-head"></span> <span class="text-gray-600" id="pct-head-word"></span></p>
+          <div class="pct-track mb-1"><div class="pct-marker" id="marker-head" style="left: 50%;"></div></div>
+          <div class="flex justify-between text-xs text-gray-400 mb-3"><span>0th</span><span>50th</span><span>100th</span></div>
+          <p class="text-gray-700 text-sm mb-2" id="sentence-head"></p>
+          <p class="text-xs text-gray-500" id="median-head"></p>
+          <p class="text-xs text-red-600 mt-2" id="warn-head" hidden></p>
+        </div>
+
+        <p class="mt-4 text-xs text-gray-500">Percentiles are calculated from the WHO Child Growth Standards (World Health Organization, 2006). A single reading is a snapshot. What matters most is the pattern of growth over time, which is exactly what your pediatrician follows at each check-up.</p>
+      </section>
+
+      <!-- ============ What percentiles mean ============ -->
+      <section class="mb-10" aria-label="What growth percentiles mean">
+        <h2 class="text-xl font-display font-bold text-gray-800 mb-4">What a growth percentile means</h2>
+        <p class="text-gray-700 leading-relaxed mb-4">
+          A growth percentile places your baby in a line of 100 babies of the same age and sex, ordered by size. If your baby's weight is at the 30th percentile, about 30 of those babies weigh less and about 70 weigh more. The 50th percentile is the middle of the line. It is a position, not a score: there is no pass or fail, and a higher percentile is not better than a lower one.
+        </p>
+        <p class="text-gray-700 leading-relaxed mb-4">
+          The reference group behind this calculator comes from the WHO Child Growth Standards, a study of healthy, mostly breastfed babies raised in good conditions in six countries (Brazil, Ghana, India, Norway, Oman and the United States). Because the group describes how children grow when conditions are good, doctors treat it as a standard to compare against, not just an average of whoever happened to be measured.
+        </p>
+        <h3 class="font-semibold text-gray-800 mb-2">What a percentile does not mean</h3>
+        <ul class="list-disc pl-6 space-y-2 text-gray-700 mb-4">
+          <li><strong>It is not a grade.</strong> A baby at the 20th percentile is not doing worse than a baby at the 80th. Healthy babies settle at many different positions.</li>
+          <li><strong>It is not a target.</strong> Your baby does not need to reach or stay at the 50th percentile. Their own steady curve matters far more than any single line.</li>
+          <li><strong>Different measures, different percentiles.</strong> A baby can be at the 70th percentile for length and the 35th for weight. That mix is common and usually just reflects their build.</li>
+          <li><strong>One reading is a snapshot.</strong> A single measurement can be thrown off by a full tummy, a wiggly baby on the scale, or a tape measure held loosely. The pattern across several check-ups is what counts.</li>
+        </ul>
+        <p class="text-gray-700 leading-relaxed">
+          If a percentile sits below the 3rd or above the 97th, or your baby's curve crosses two or more percentile lines between visits, mention it at your next pediatrician appointment. It is often still normal, and it is exactly the kind of pattern a pediatrician is trained to judge in person.
+        </p>
+      </section>
+
+      <!-- ============ How it works ============ -->
+      <section class="mb-10" aria-label="How this calculator works">
+        <h2 class="text-xl font-display font-bold text-gray-800 mb-4">How this calculator works</h2>
+        <p class="text-gray-700 leading-relaxed mb-4">
+          For every age from birth to 24 months, the WHO publishes three numbers for each measurement and sex, known as the L, M and S values. M is the median, S describes the spread, and L adjusts for the natural skew in measurements like weight. Your baby's measurement is turned into a z-score with the standard LMS formula, and that z-score becomes a percentile. Ages between the published monthly values are interpolated, so a baby of 6 months and 2 weeks gets their own result rather than being rounded to a whole month.
+        </p>
+        <p class="text-gray-700 leading-relaxed">
+          For children under 2, the CDC and the American Academy of Pediatrics recommend plotting growth on these WHO standards rather than the older CDC charts. Source: <a href="https://www.who.int/tools/child-growth-standards" class="text-orange-700 underline hover:text-orange-800 font-medium transition-colors" target="_blank" rel="noopener noreferrer">WHO Child Growth Standards, World Health Organization</a>.
+        </p>
+      </section>
+
+      <!-- ============ Median reference tables ============ -->
+      <section class="mb-10" aria-label="WHO median measurements by age">
+        <h2 class="text-xl font-display font-bold text-gray-800 mb-4">The middle of the range: WHO medians by age</h2>
+        <p class="text-gray-700 leading-relaxed mb-4">These are the 50th percentile values from the WHO standards, the middle baby in the reference group at each age. Half of healthy babies measure less, half measure more.</p>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="overflow-x-auto rounded-2xl border border-orange-100">
+            <table class="w-full text-sm">
+              <caption class="bg-orange-50 text-orange-800 font-semibold text-left px-4 py-3">Weight (kg)</caption>
+              <thead class="bg-orange-50/60 text-orange-800 text-xs uppercase tracking-wide">
+                <tr>
+                  <th scope="col" class="px-4 py-2 font-semibold text-left">Age</th>
+                  <th scope="col" class="px-4 py-2 font-semibold text-left">Boys</th>
+                  <th scope="col" class="px-4 py-2 font-semibold text-left">Girls</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-orange-50">
+                <tr><th scope="row" class="px-4 py-2 font-medium text-gray-800 text-left">Birth</th><td class="px-4 py-2">3.3</td><td class="px-4 py-2">3.2</td></tr>
+                <tr><th scope="row" class="px-4 py-2 font-medium text-gray-800 text-left">3 months</th><td class="px-4 py-2">6.4</td><td class="px-4 py-2">5.8</td></tr>
+                <tr><th scope="row" class="px-4 py-2 font-medium text-gray-800 text-left">6 months</th><td class="px-4 py-2">7.9</td><td class="px-4 py-2">7.3</td></tr>
+                <tr><th scope="row" class="px-4 py-2 font-medium text-gray-800 text-left">9 months</th><td class="px-4 py-2">8.9</td><td class="px-4 py-2">8.2</td></tr>
+                <tr><th scope="row" class="px-4 py-2 font-medium text-gray-800 text-left">12 months</th><td class="px-4 py-2">9.6</td><td class="px-4 py-2">8.9</td></tr>
+                <tr><th scope="row" class="px-4 py-2 font-medium text-gray-800 text-left">18 months</th><td class="px-4 py-2">10.9</td><td class="px-4 py-2">10.2</td></tr>
+                <tr><th scope="row" class="px-4 py-2 font-medium text-gray-800 text-left">24 months</th><td class="px-4 py-2">12.1</td><td class="px-4 py-2">11.5</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="overflow-x-auto rounded-2xl border border-orange-100">
+            <table class="w-full text-sm">
+              <caption class="bg-orange-50 text-orange-800 font-semibold text-left px-4 py-3">Length (cm)</caption>
+              <thead class="bg-orange-50/60 text-orange-800 text-xs uppercase tracking-wide">
+                <tr>
+                  <th scope="col" class="px-4 py-2 font-semibold text-left">Age</th>
+                  <th scope="col" class="px-4 py-2 font-semibold text-left">Boys</th>
+                  <th scope="col" class="px-4 py-2 font-semibold text-left">Girls</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-orange-50">
+                <tr><th scope="row" class="px-4 py-2 font-medium text-gray-800 text-left">Birth</th><td class="px-4 py-2">49.9</td><td class="px-4 py-2">49.1</td></tr>
+                <tr><th scope="row" class="px-4 py-2 font-medium text-gray-800 text-left">3 months</th><td class="px-4 py-2">61.4</td><td class="px-4 py-2">59.8</td></tr>
+                <tr><th scope="row" class="px-4 py-2 font-medium text-gray-800 text-left">6 months</th><td class="px-4 py-2">67.6</td><td class="px-4 py-2">65.8</td></tr>
+                <tr><th scope="row" class="px-4 py-2 font-medium text-gray-800 text-left">9 months</th><td class="px-4 py-2">72.0</td><td class="px-4 py-2">70.1</td></tr>
+                <tr><th scope="row" class="px-4 py-2 font-medium text-gray-800 text-left">12 months</th><td class="px-4 py-2">75.7</td><td class="px-4 py-2">74.0</td></tr>
+                <tr><th scope="row" class="px-4 py-2 font-medium text-gray-800 text-left">18 months</th><td class="px-4 py-2">82.3</td><td class="px-4 py-2">80.7</td></tr>
+                <tr><th scope="row" class="px-4 py-2 font-medium text-gray-800 text-left">24 months</th><td class="px-4 py-2">87.8</td><td class="px-4 py-2">86.4</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="overflow-x-auto rounded-2xl border border-orange-100">
+            <table class="w-full text-sm">
+              <caption class="bg-orange-50 text-orange-800 font-semibold text-left px-4 py-3">Head circumference (cm)</caption>
+              <thead class="bg-orange-50/60 text-orange-800 text-xs uppercase tracking-wide">
+                <tr>
+                  <th scope="col" class="px-4 py-2 font-semibold text-left">Age</th>
+                  <th scope="col" class="px-4 py-2 font-semibold text-left">Boys</th>
+                  <th scope="col" class="px-4 py-2 font-semibold text-left">Girls</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-orange-50">
+                <tr><th scope="row" class="px-4 py-2 font-medium text-gray-800 text-left">Birth</th><td class="px-4 py-2">34.5</td><td class="px-4 py-2">33.9</td></tr>
+                <tr><th scope="row" class="px-4 py-2 font-medium text-gray-800 text-left">3 months</th><td class="px-4 py-2">40.5</td><td class="px-4 py-2">39.5</td></tr>
+                <tr><th scope="row" class="px-4 py-2 font-medium text-gray-800 text-left">6 months</th><td class="px-4 py-2">43.3</td><td class="px-4 py-2">42.2</td></tr>
+                <tr><th scope="row" class="px-4 py-2 font-medium text-gray-800 text-left">9 months</th><td class="px-4 py-2">45.0</td><td class="px-4 py-2">43.8</td></tr>
+                <tr><th scope="row" class="px-4 py-2 font-medium text-gray-800 text-left">12 months</th><td class="px-4 py-2">46.1</td><td class="px-4 py-2">44.9</td></tr>
+                <tr><th scope="row" class="px-4 py-2 font-medium text-gray-800 text-left">18 months</th><td class="px-4 py-2">47.4</td><td class="px-4 py-2">46.2</td></tr>
+                <tr><th scope="row" class="px-4 py-2 font-medium text-gray-800 text-left">24 months</th><td class="px-4 py-2">48.2</td><td class="px-4 py-2">47.2</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p class="mt-3 text-xs text-gray-500">Median values from the WHO Child Growth Standards (2006), rounded to one decimal place.</p>
+      </section>
+
+      <!-- ============ FAQ ============ -->
+      <section class="mb-10" aria-label="Frequently asked questions">
+        <h2 class="text-xl font-display font-bold text-gray-800 mb-4">Frequently asked questions</h2>
+        <dl class="space-y-4">
+          <div>
+            <dt class="font-semibold text-gray-800">How do I use this growth percentile calculator?</dt>
+            <dd class="mt-1 text-gray-700">Choose your baby's sex, set their age, pick metric or imperial units, and enter any measurements you have: weight, length and head circumference. Each percentile appears instantly. Leave a field blank if you do not have that measurement yet.</dd>
+          </div>
+          <div>
+            <dt class="font-semibold text-gray-800">What does a growth percentile actually mean?</dt>
+            <dd class="mt-1 text-gray-700">A percentile compares your baby with the WHO reference group of babies of the same age and sex. A weight at the 40th percentile means about 40 of 100 babies weigh less and about 60 weigh more. It is a position in the group, not a grade and not a percentage of some target weight.</dd>
+          </div>
+          <div>
+            <dt class="font-semibold text-gray-800">Is the 50th percentile the goal?</dt>
+            <dd class="mt-1 text-gray-700">No. The 50th percentile is simply the middle of the reference group. Healthy babies settle anywhere across a wide range, roughly the 3rd to the 97th percentile, and a baby tracking steadily along the 15th percentile is usually growing just as well as one tracking along the 85th.</dd>
+          </div>
+          <div>
+            <dt class="font-semibold text-gray-800">Should I worry if my baby's percentile changes?</dt>
+            <dd class="mt-1 text-gray-700">Small moves up or down are common, especially in the first months while babies find their own curve. What pediatricians watch is the pattern over several visits. If a percentile drops or climbs across two or more chart lines between visits, or you are ever worried about feeding or growth, bring it up with your pediatrician.</dd>
+          </div>
+          <div>
+            <dt class="font-semibold text-gray-800">Is this medical advice?</dt>
+            <dd class="mt-1 text-gray-700">No. This calculator is for general information only. It uses the WHO Child Growth Standards, the same reference the CDC and the American Academy of Pediatrics recommend for children under 2, but it cannot judge your baby's health. Always talk to your pediatrician about any concern.</dd>
+          </div>
+        </dl>
+      </section>
+
+      <aside class="mt-10 rounded-3xl border border-orange-200 bg-orange-50/80 p-6" aria-label="About the author">
+        <p class="font-semibold text-gray-800">Written by a dad</p>
+        <p class="text-gray-700 mt-2">From the founder of Snugs.ai, a dad of a toddler building an AI parenting advisor for parents of 0-3 year olds.</p>
+      </aside>
+
+      <aside class="mt-10 text-center" aria-label="Start a free trial">
+        <p class="text-gray-800 font-semibold mb-2">One measurement is a snapshot. Snugs keeps the whole chart.</p>
+        <p class="text-gray-700 mb-4">Log weight, length and head size in seconds, watch the growth charts build over time, and ask the parenting advisor that knows your baby anything, from growth spurts to feeding and sleep. Growth tracking is built into every Snugs plan.</p>
+        <a id="cta-trial" href="https://app.snugs.ai/?utm_source=marketing_site&amp;utm_medium=cta&amp;utm_campaign=growth-percentile-calculator" data-cta="growth-percentile-calculator" class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-full hover:from-orange-600 hover:to-orange-700 transition-all shadow-lg">Start your 14-day free trial</a>
+        <p class="text-xs text-gray-500 mt-3">Free for 14 days. No credit card required.</p>
+      </aside>
+
+      <aside class="mt-6 text-center" aria-label="Related tools and guides">
+        <p class="text-sm font-semibold text-gray-700 mb-3">More free tools</p>
+        <ul class="text-sm space-y-2">
+          <li><a href="/tools/wake-window-calculator/" class="text-orange-700 underline hover:text-orange-800 font-medium transition-colors">Wake Window Calculator</a></li>
+          <li><a href="/tools/sleep-schedule-builder/" class="text-orange-700 underline hover:text-orange-800 font-medium transition-colors">Baby Sleep Schedule Builder</a></li>
+          <li><a href="/tools/feeding-amount-calculator/" class="text-orange-700 underline hover:text-orange-800 font-medium transition-colors">Feeding Amount Calculator</a></li>
+          <li><a href="/tools/sleep-milestone-calculator/" class="text-orange-700 underline hover:text-orange-800 font-medium transition-colors">Sleep &amp; Milestone Calculator</a></li>
+          <li><a href="/tools/" class="text-orange-700 underline hover:text-orange-800 font-medium transition-colors">See all free Snugs.ai tools</a></li>
+        </ul>
+      </aside>
+    </article>
+
+    <!-- Snugs sticky mobile CTA: mobile-only via CSS, dismissible, reuses data-cta/cta_click (cta_id=sticky_mobile). Cookie consent should use z-index 50+. -->
+    <div class="snugs-sticky-cta" id="snugs-sticky-cta" role="region" aria-label="Ask Snugs trial">
+      <a href="https://app.snugs.ai/?utm_source=marketing_site&amp;utm_medium=cta&amp;utm_campaign=growth-percentile-calculator" data-cta="sticky_mobile" class="flex-1 inline-flex items-center justify-center px-5 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-full hover:from-orange-600 hover:to-orange-700 transition-all shadow-lg text-sm">Ask Snugs · Start free trial</a>
+      <button type="button" class="snugs-sticky-dismiss flex-shrink-0 w-9 h-9 rounded-full border border-orange-200 bg-white text-gray-600 font-bold leading-none" aria-label="Dismiss trial banner">&times;</button>
+    </div>
+    <script>
+      (function() {
+        var bar = document.getElementById('snugs-sticky-cta');
+        if (!bar) return;
+        try {
+          if (sessionStorage.getItem('snugs_sticky_dismissed') === '1') {
+            bar.setAttribute('hidden', '');
+            document.body.classList.add('snugs-sticky-dismissed');
+            return;
+          }
+        } catch (e) {}
+        var btn = bar.querySelector('.snugs-sticky-dismiss');
+        if (btn) {
+          btn.addEventListener('click', function() {
+            bar.setAttribute('hidden', '');
+            document.body.classList.add('snugs-sticky-dismissed');
+            try { sessionStorage.setItem('snugs_sticky_dismissed', '1'); } catch (e) {}
+          });
+        }
+      })();
+    </script>
+    <script>
+      document.querySelectorAll('[data-cta]').forEach(function(el) {
+        el.addEventListener('click', function() {
+          if (typeof gtag === 'function') {
+            gtag('event', 'cta_click', {
+              cta_id: el.getAttribute('data-cta'),
+              link_url: el.href,
+              link_domain: (function(){ try { return new URL(el.href).hostname; } catch(e){ return 'unknown'; } })()
+            });
+          }
+        });
+      });
+    </script>
+
+    <footer class="text-center pt-12 pb-8 text-gray-600">
+      <p class="mb-4 text-base">© 2026 Snugs.ai. Powered by AI, built with love</p>
+      <div class="flex flex-wrap justify-center gap-6 text-sm">
+        <a href="/" class="hover:text-orange-600 transition-colors font-medium">Home</a>
+        <a href="/resources/" class="hover:text-orange-600 transition-colors font-medium">Resources</a>
+        <a href="/privacy.html" class="hover:text-orange-600 transition-colors font-medium">Privacy</a>
+        <a href="/terms.html" class="hover:text-orange-600 transition-colors font-medium">Terms</a>
+        <a href="/contact.html" class="hover:text-orange-600 transition-colors font-medium">Contact</a>
+      </div>
+      <div class="mt-6 flex flex-wrap justify-center items-center gap-3 sm:gap-4" data-badge-row="footer">
+        <div class="flex justify-center w-40 sm:w-auto" data-badge="aiagentsdirectory">
+          <a href="https://aiagentsdirectory.com/agent/snugsai?utm_source=badge&amp;utm_medium=referral&amp;utm_campaign=free_listing&amp;utm_content=snugsai" target="_blank" rel="noopener noreferrer">
+            <img src="https://aiagentsdirectory.com/featured-badge.svg?v=2024" alt="Snugs.ai - Featured on AI Agents Directory" width="200" height="50" class="h-auto max-w-full" loading="lazy" decoding="async" />
+          </a>
+        </div>
+        <div class="flex justify-center w-40 sm:w-auto" data-badge="publishyoursaas">
+          <a href="https://publishyoursaas.com" target="_blank" rel="noopener noreferrer">
+            <img src="https://publishyoursaas.com/publishyoursaas-badge.svg" alt="Snugs.ai - Listed on PublishYourSaaS" width="200" height="50" class="h-auto max-w-full" loading="lazy" decoding="async" />
+          </a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    /* ============ WHO Child Growth Standards LMS data ============
+       Monthly L, M, S values (ages 0-24 months) from the WHO expanded
+       z-score tables (World Health Organization, 2006), sampled from the
+       official daily tables. weight = weight-for-age (kg),
+       length = length-for-age (cm), head = head-circumference-for-age (cm). */
+    var WHO = {"boy":{"weight":[[0.3487,3.3464,0.14602],[0.2303,4.4525,0.13413],[0.1969,5.5714,0.12382],[0.174,6.369,0.11732],[0.1551,7.0069,0.11313],[0.1396,7.5077,0.11081],[0.1256,7.9389,0.10957],[0.1134,8.2963,0.10902],[0.1019,8.62,0.10882],[0.0917,8.9019,0.10881],[0.0821,9.1618,0.1089],[0.0729,9.4136,0.10906],[0.0645,9.646,0.10925],[0.0563,9.8772,0.10949],[0.0487,10.0944,0.10976],[0.0412,10.3139,0.11008],[0.0343,10.5228,0.11041],[0.0276,10.7289,0.11078],[0.021,10.9393,0.1112],[0.0149,11.1409,0.11163],[0.0087,11.3478,0.11212],[0.0029,11.5474,0.11261],[-0.0029,11.7528,0.11315],[-0.0083,11.951,0.11369],[-0.0136,12.1482,0.11425]],"length":[[1.0,49.8842,0.03795],[1.0,54.6645,0.03559],[1.0,58.4384,0.03423],[1.0,61.4013,0.03329],[1.0,63.9041,0.03257],[1.0,65.8912,0.03204],[1.0,67.6435,0.03165],[1.0,69.1615,0.03139],[1.0,70.6224,0.03124],[1.0,71.9714,0.03117],[1.0,73.2653,0.03118],[1.0,74.5464,0.03125],[1.0,75.7391,0.03137],[1.0,76.9304,0.03154],[1.0,78.0451,0.03174],[1.0,79.1613,0.03197],[1.0,80.2113,0.03222],[1.0,81.234,0.03249],[1.0,82.2628,0.03279],[1.0,83.2318,0.0331],[1.0,84.2074,0.03342],[1.0,85.1291,0.03375],[1.0,86.0589,0.0341],[1.0,86.9392,0.03445],[1.0,87.8018,0.03479]],"head":[[1.0,34.4618,0.03686],[1.0,37.2435,0.03135],[1.0,39.1349,0.02997],[1.0,40.5008,0.02918],[1.0,41.6401,0.02868],[1.0,42.5524,0.02837],[1.0,43.3393,0.02817],[1.0,43.9791,0.02804],[1.0,44.5384,0.02796],[1.0,45.0007,0.02792],[1.0,45.4004,0.0279],[1.0,45.7593,0.02789],[1.0,46.0637,0.02789],[1.0,46.3421,0.02789],[1.0,46.5834,0.02791],[1.0,46.809,0.02792],[1.0,47.0088,0.02795],[1.0,47.1936,0.02797],[1.0,47.3718,0.028],[1.0,47.5341,0.02803],[1.0,47.6931,0.02806],[1.0,47.8399,0.0281],[1.0,47.985,0.02814],[1.0,48.1198,0.02817],[1.0,48.2494,0.02821]]},"girl":{"weight":[[0.3809,3.2322,0.14171],[0.1727,4.1716,0.13738],[0.0959,5.1315,0.12998],[0.0407,5.8393,0.12622],[-0.0053,6.428,0.12401],[-0.0428,6.8959,0.12274],[-0.0759,7.3016,0.12204],[-0.1039,7.6416,0.12178],[-0.1292,7.9534,0.12181],[-0.1507,8.2259,0.12199],[-0.1698,8.4769,0.12222],[-0.1873,8.7207,0.12247],[-0.2022,8.9462,0.12267],[-0.216,9.1722,0.12283],[-0.2277,9.3861,0.12294],[-0.2385,9.6038,0.12299],[-0.2478,9.8124,0.12303],[-0.2561,10.0196,0.12305],[-0.2637,10.2324,0.12309],[-0.2702,10.4372,0.12315],[-0.2763,10.6481,0.12324],[-0.2814,10.8521,0.12335],[-0.2862,11.0633,0.12351],[-0.2903,11.2684,0.12369],[-0.294,11.4741,0.12389]],"length":[[1.0,49.1477,0.0379],[1.0,53.6326,0.03641],[1.0,57.0796,0.03568],[1.0,59.7773,0.0352],[1.0,62.1071,0.03486],[1.0,64.019,0.03463],[1.0,65.751,0.03448],[1.0,67.2842,0.03441],[1.0,68.7732,0.0344],[1.0,70.1463,0.03444],[1.0,71.4656,0.03452],[1.0,72.7788,0.03464],[1.0,74.0049,0.03479],[1.0,75.2297,0.03496],[1.0,76.377,0.03514],[1.0,77.5258,0.03534],[1.0,78.6055,0.03555],[1.0,79.6559,0.03576],[1.0,80.7121,0.03598],[1.0,81.708,0.0362],[1.0,82.7116,0.03643],[1.0,83.6595,0.03665],[1.0,84.6154,0.03689],[1.0,85.5184,0.03711],[1.0,86.4008,0.03733]],"head":[[1.0,33.8787,0.03496],[1.0,36.5163,0.03211],[1.0,38.258,0.03168],[1.0,39.521,0.0314],[1.0,40.5895,0.03119],[1.0,41.454,0.03102],[1.0,42.2079,0.03087],[1.0,42.8278,0.03075],[1.0,43.3753,0.03063],[1.0,43.8309,0.03053],[1.0,44.2273,0.03044],[1.0,44.5865,0.03035],[1.0,44.894,0.03027],[1.0,45.1779,0.03019],[1.0,45.4255,0.03012],[1.0,45.6582,0.03005],[1.0,45.865,0.02999],[1.0,46.0571,0.02993],[1.0,46.2431,0.02987],[1.0,46.4135,0.02982],[1.0,46.5814,0.02977],[1.0,46.7375,0.02972],[1.0,46.8931,0.02967],[1.0,47.0388,0.02962],[1.0,47.1799,0.02958]]}};
+
+    var state = { sex: 'boy', units: 'metric' };
+
+    var MEASURES = {
+      weight: { series: 'weight', metricUnit: 'kg', imperialUnit: 'lb', min: 1.5, max: 30, kind: 'weight',
+                less: 'weigh less than your baby', more: 'weigh more than your baby' },
+      length: { series: 'length', metricUnit: 'cm', imperialUnit: 'in', min: 35, max: 115, kind: 'length',
+                less: 'are shorter than your baby', more: 'are longer than your baby' },
+      head:   { series: 'head', metricUnit: 'cm', imperialUnit: 'in', min: 28, max: 65, kind: 'head',
+                less: 'have a smaller head circumference than your baby', more: 'have a larger head circumference than your baby' }
+    };
+
+    function $(id) { return document.getElementById(id); }
+
+    /* Linear interpolation of L, M, S between the monthly rows. */
+    function lmsAt(series, ageMonths) {
+      var age = Math.max(0, Math.min(24, ageMonths));
+      var lo = Math.floor(age), hi = Math.ceil(age), f = age - lo;
+      var a = series[lo], b = series[hi];
+      return [
+        a[0] + (b[0] - a[0]) * f,
+        a[1] + (b[1] - a[1]) * f,
+        a[2] + (b[2] - a[2]) * f
+      ];
+    }
+
+    /* Standard normal CDF via the Abramowitz and Stegun erf approximation (7.1.26). */
+    function normCdf(z) {
+      var sign = z < 0 ? -1 : 1;
+      var x = Math.abs(z) / Math.SQRT2;
+      var t = 1 / (1 + 0.3275911 * x);
+      var y = 1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-x * x);
+      return 0.5 * (1 + sign * y);
+    }
+
+    function percentile(x, lms) {
+      var L = lms[0], M = lms[1], S = lms[2], z;
+      if (Math.abs(L) < 1e-9) { z = Math.log(x / M) / S; }
+      else { z = (Math.pow(x / M, L) - 1) / (L * S); }
+      return normCdf(z) * 100;
+    }
+
+    function ordinal(n) {
+      var s = ['th', 'st', 'nd', 'rd'], v = n % 100;
+      return n + (s[(v - 20) % 10] || s[v] || s[0]);
+    }
+
+    function ageInMonths() { return parseFloat($('age-slider').value); }
+
+    function ageLabel(v) {
+      var whole = Math.floor(v), weeks = Math.round((v - whole) * 4);
+      if (weeks === 4) { whole += 1; weeks = 0; }
+      if (whole === 0 && weeks === 0) return 'Newborn';
+      var parts = [];
+      if (whole > 0) parts.push(whole + (whole === 1 ? ' month' : ' months'));
+      if (weeks > 0) parts.push(weeks + (weeks === 1 ? ' week' : ' weeks'));
+      return parts.join(', ');
+    }
+
+    function toMetric(kind, value) {
+      if (state.units === 'metric') return value;
+      return kind === 'weight' ? value * 0.45359237 : value * 2.54;
+    }
+
+    function fromMetric(kind, value) {
+      if (state.units === 'metric') return value;
+      return kind === 'weight' ? value / 0.45359237 : value / 2.54;
+    }
+
+    function fmtValue(kind, metricValue) {
+      var v = fromMetric(kind, metricValue);
+      if (state.units === 'metric') {
+        return (kind === 'weight' ? v.toFixed(2).replace(/0$/, '') : v.toFixed(1)) + ' ' + (kind === 'weight' ? 'kg' : 'cm');
+      }
+      return v.toFixed(1) + ' ' + (kind === 'weight' ? 'lb' : 'in');
+    }
+
+    function updateMeasure(key) {
+      var cfg = MEASURES[key];
+      var raw = $('in-' + key).value.trim();
+      var card = $('card-' + key);
+      var warn = $('warn-' + key);
+      warn.hidden = true;
+      if (raw === '') { card.hidden = true; return false; }
+      var value = parseFloat(raw);
+      if (isNaN(value) || value <= 0) { card.hidden = true; return false; }
+      var metric = toMetric(cfg.kind, value);
+      if (metric < cfg.min || metric > cfg.max) {
+        card.hidden = false;
+        $('pct-' + key).textContent = '';
+        $('pct-' + key + '-word').textContent = '';
+        $('sentence-' + key).textContent = '';
+        $('median-' + key).textContent = '';
+        $('echo-' + key).textContent = '';
+        warn.textContent = 'That looks outside the usual range for a baby of 0 to 24 months. Check the number and the units, then try again.';
+        warn.hidden = false;
+        return true;
+      }
+      var age = ageInMonths();
+      var lms = lmsAt(WHO[state.sex][cfg.series], age);
+      var p = percentile(metric, lms);
+      var pRound = Math.round(p);
+      var sexWord = state.sex === 'boy' ? 'boys' : 'girls';
+      var bigEl = $('pct-' + key), wordEl = $('pct-' + key + '-word');
+      if (p <= 0.5) { bigEl.textContent = 'Below the 1st'; wordEl.textContent = 'percentile'; }
+      else if (p >= 99.5) { bigEl.textContent = 'Above the 99th'; wordEl.textContent = 'percentile'; }
+      else { bigEl.textContent = ordinal(pRound); wordEl.textContent = 'percentile'; }
+      $('marker-' + key).style.left = Math.max(1, Math.min(99, p)) + '%';
+      var lessN = Math.max(0, Math.min(100, pRound)), moreN = 100 - lessN;
+      $('sentence-' + key).textContent = 'About ' + lessN + ' of 100 ' + sexWord + ' the same age ' + cfg.less + ', and about ' + moreN + ' ' + cfg.more + '.';
+      $('median-' + key).textContent = 'Middle of the WHO range (50th percentile) at this age: ' + fmtValue(cfg.kind, lms[1]) + '.';
+      $('echo-' + key).textContent = 'You entered: ' + fmtValue(cfg.kind, metric);
+      card.hidden = false;
+      return true;
+    }
+
+    function update() {
+      var age = ageInMonths();
+      $('age-readout').textContent = ageLabel(age);
+      var whole = Math.floor(age);
+      $('age-sub').textContent = whole >= 12 ? '(' + (Math.floor(whole / 12)) + (whole >= 24 ? ' years' : ' year') + (whole % 12 ? ', ' + (whole % 12) + ' mo' : '') + ')' : '';
+      var any = false;
+      ['weight', 'length', 'head'].forEach(function(k) { if (updateMeasure(k)) any = true; });
+      $('results-empty').hidden = any;
+    }
+
+    function setPressed(btnOn, btnOff) {
+      btnOn.setAttribute('aria-pressed', 'true');
+      btnOff.setAttribute('aria-pressed', 'false');
+    }
+
+    $('sex-boy').addEventListener('click', function() { state.sex = 'boy'; setPressed($('sex-boy'), $('sex-girl')); update(); });
+    $('sex-girl').addEventListener('click', function() { state.sex = 'girl'; setPressed($('sex-girl'), $('sex-boy')); update(); });
+
+    function switchUnits(units) {
+      if (state.units === units) return;
+      var old = state.units;
+      ['weight', 'length', 'head'].forEach(function(k) {
+        var el = $('in-' + k);
+        var v = parseFloat(el.value);
+        if (!isNaN(v) && v > 0) {
+          var metric = old === 'metric' ? v : (MEASURES[k].kind === 'weight' ? v * 0.45359237 : v * 2.54);
+          var nv = units === 'metric' ? metric : (MEASURES[k].kind === 'weight' ? metric / 0.45359237 : metric / 2.54);
+          el.value = Math.round(nv * 10) / 10;
+        }
+      });
+      state.units = units;
+      $('unit-weight').textContent = units === 'metric' ? '(kg)' : '(lb)';
+      $('unit-length').textContent = units === 'metric' ? '(cm)' : '(in)';
+      $('unit-head').textContent = units === 'metric' ? '(cm)' : '(in)';
+      $('in-weight').placeholder = units === 'metric' ? 'e.g. 7.9' : 'e.g. 17.4';
+      $('in-length').placeholder = units === 'metric' ? 'e.g. 67.6' : 'e.g. 26.6';
+      $('in-head').placeholder = units === 'metric' ? 'e.g. 43.3' : 'e.g. 17.1';
+      setPressed(units === 'metric' ? $('unit-metric') : $('unit-imperial'), units === 'metric' ? $('unit-imperial') : $('unit-metric'));
+      update();
+    }
+    $('unit-metric').addEventListener('click', function() { switchUnits('metric'); });
+    $('unit-imperial').addEventListener('click', function() { switchUnits('imperial'); });
+
+    $('age-slider').addEventListener('input', update);
+    ['in-weight', 'in-length', 'in-head'].forEach(function(id) { $(id).addEventListener('input', update); });
+
+    update();
+  </script>
+</body>
+</html>
